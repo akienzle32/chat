@@ -3,6 +3,7 @@ const upperBox = {
 	height: 200,
 	overflowY: 'scroll',
 	width: 400,
+	borderRadius: 25,
 	border: '7px solid #5F9EA0',
 	padding: 50,
 	margin: 'auto'
@@ -14,6 +15,7 @@ const lowerBox = {
 	paddingBottom: 25,
 	paddingRight: 50,
 	paddingLeft: 50,
+	borderRadius: 25,
 	borderBottom: '7px solid #5F9EA0',
 	borderLeft: '7px solid #5F9EA0',
 	borderRight: '7px solid #5F9EA0',
@@ -28,7 +30,7 @@ const currentMessage = {
 	paddingBottom: 10, 
 	paddingTop: 10, 
 	margin: 0, 
-	border: '2px solid black', 
+	border: '2px solid #A9A9A9', 
 	borderRadius: 15
 }
 
@@ -41,7 +43,7 @@ export const Prompt = () => {
 			</div>
 			<div style={lowerBox}>
 				<div style={currentMessage}>
-					This is where current messages will be typed...
+					This is where current messages will be typed.
 				</div>	
 			</div>	
 		</body>	
