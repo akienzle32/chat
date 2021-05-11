@@ -1,5 +1,6 @@
 import React from 'react';
 const upperBox = {
+	backgroundColor: '#FDF5E6',
 	height: 200,
 	overflowY: 'scroll',
 	width: 400,
@@ -9,6 +10,7 @@ const upperBox = {
 	margin: 'auto'
 }
 const lowerBox = {
+	backgroundColor: '#FDF5E6',
 	height: 50,
 	width: 400,
 	paddingTop: 25,
@@ -22,6 +24,7 @@ const lowerBox = {
 	margin: 'auto'
 }
 const currentMessage = {
+	backgroundColor: 'white',
 	height: 20,
 	width: 385,
 	overflowY: 'scroll', 
@@ -43,7 +46,7 @@ export const Prompt = () => {
 			</div>
 			<div style={lowerBox}>
 				<div style={currentMessage}>
-					This is where current messages will be typed.
+					This is where the current message will be typed.
 				</div>	
 			</div>	
 		</body>	
