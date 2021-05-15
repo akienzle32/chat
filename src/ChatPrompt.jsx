@@ -33,8 +33,7 @@ const currentMessage = {
 	paddingBottom: 10, 
 	paddingTop: 10, 
 	margin: 0, 
-	border: '2px solid #A9A9A9', 
-	borderRadius: 15
+	fontSize: 16
 }
 
 export const Prompt = () => {
@@ -45,9 +44,7 @@ export const Prompt = () => {
 				<p style={{textAlign: 'left'}}>This is where previous messages will appear.</p>
 			</div>
 			<div style={lowerBox}>
-				<div style={currentMessage}>
-					This is where the current message will be typed.
-				</div>	
+					<input type="text" name="prompt" style={currentMessage} placeHolder="Text message..."></input>
 			</div>	
 		</body>	
 	);
