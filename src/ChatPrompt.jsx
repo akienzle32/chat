@@ -1,4 +1,5 @@
 import React from 'react';
+
 const upperBox = {
 	backgroundColor: '#FDF5E6',
 	height: 200,
@@ -36,15 +37,32 @@ const currentMessage = {
 	fontSize: 16
 }
 
+var i = 0;
+var messageLog = Array();
+
+function myInput(){
+ messageLog[i] = document.getElementById("chat-input").value;
+ i++;
+ document.getElementById("chat-input").value = "";
+
+   var lastMessage = "";   
+   for (var j=0; j < messageLog.length; j++)
+   {
+     lastMessage += messageLog[j] + "<br/><br/>";
+   }
+ 	document.getElementById("chat-log").innerHTML = lastMessage;
+}
+
 export const Prompt = () => {
 	return (
 		<body>
 			<h1 style={{textAlign: 'center'}}>Chat App</h1>	
 			<div style={upperBox}>
-				<p style={{textAlign: 'left'}}>This is where previous messages will appear.</p>
+				<div id="chat-log"></div>
 			</div>
 			<div style={lowerBox}>
-					<input type="text" name="prompt" style={currentMessage} placeHolder="Text message..."></input>
+				<input type="text" id="chat-input" style={currentMessage} placeHolder="Text message..."></input>
+				<button id="submit-btn" onClick={myInput}>Submit</button>
 			</div>	
 		</body>	
 	);
