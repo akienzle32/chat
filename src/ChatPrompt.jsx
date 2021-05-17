@@ -40,18 +40,19 @@ const currentMessage = {
 var i = 0;
 var messageLog = Array();
 
-function myInput(){
- messageLog[i] = document.getElementById("chat-input").value;
- i++;
- document.getElementById("chat-input").value = "";
+function myInput(e){
+	if (e.key==='Enter'){
+		messageLog[i] = document.getElementById("chat-input").value;
+ 		i++;
+ 		document.getElementById("chat-input").value = "";
 
-   var lastMessage = "";   
-   for (var j=0; j < messageLog.length; j++)
-   {
-     lastMessage += messageLog[j] + "<br/><br/>";
-   }
- 	document.getElementById("chat-log").innerHTML = lastMessage;
-}
+   			var lastMessage = "";   
+   			for (var j=0; j < messageLog.length; j++){
+     		lastMessage += messageLog[j] + "<br/><br/>";
+  			}
+ 			document.getElementById("chat-log").innerHTML = lastMessage;
+	}
+};	
 
 export const Prompt = () => {
 	return (
@@ -61,8 +62,7 @@ export const Prompt = () => {
 				<div id="chat-log"></div>
 			</div>
 			<div style={lowerBox}>
-				<input type="text" id="chat-input" style={currentMessage} placeHolder="Text message..."></input>
-				<button id="submit-btn" onClick={myInput}>Submit</button>
+				<input type="text" id="chat-input" style={currentMessage} onKeyUp={myInput} placeHolder="Text message..."></input>
 			</div>	
 		</body>	
 	);
