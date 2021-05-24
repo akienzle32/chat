@@ -6,6 +6,17 @@ p {
   background-color: white;
 }
 
+#chat-log {
+  background-color: #DCDCDC;
+  height: 200px;
+  overflow: scroll;
+  width: 400px;
+  border-radius: 25px;
+  border: 7px solid #4169E1;
+  padding: 50px;
+  margin: auto
+}
+
 #lower-box {
   background-color: #DCDCDC;
   height: 50px;
@@ -32,16 +43,5 @@ p {
   padding-top: 10px;
   margin: 0px;
   font-size: 16px
-}
-
-#chat-log {
-  background-color: #DCDCDC;
-  height: 200px;
-  overflow: scroll;
-  width: 400px;
-  border-radius: 25px;
-  border: 7px solid #4169E1;
-  padding: 50px;
-  margin: auto
 }
 
