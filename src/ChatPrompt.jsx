@@ -15,6 +15,7 @@ function myInput(enter){
      			lastMessage += "<p>" + messageLog[j] + "</p>";
   			}
  			document.getElementById("chat-log").innerHTML = lastMessage;
+ 			document.getElementById("chat-log").scrollTop = document.getElementById("chat-log").scrollHeight
 	}
 }
 
