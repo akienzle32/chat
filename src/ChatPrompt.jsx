@@ -2,7 +2,7 @@ import React from 'react';
 import './Chat.css';
 
 
-function fetchData() {fetch('http://127.0.0.1:8000/chat/')
+fetch('http://127.0.0.1:8000/chat/')
   .then(response => 
     response.json())
   .then(data => {
@@ -14,8 +14,6 @@ function fetchData() {fetch('http://127.0.0.1:8000/chat/')
     }).join("");
     document.getElementById('chat-log').insertAdjacentHTML('afterbegin', messageLog)
   });
-}
-
 //setInterval(fetchData, 5000);
 
 document.addEventListener('submit', function (event) {
