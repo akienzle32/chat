@@ -2,16 +2,19 @@ import React from 'react';
 import './Chat.css';
 
 
-fetch('http://127.0.0.1:8000/chat/')
+function fetchData() {fetch('http://127.0.0.1:8000/chat/')
   .then(response => 
     response.json())
   .then(data => {
     console.log(data);
+    //maybe add each incoming message to an array, only posting messages with a unique id
+    // or use if-None-Match
     var messageLog = data.map(message => {
       return '<p>' + message.content + '</p>'
     }).join("");
     document.getElementById('chat-log').insertAdjacentHTML('afterbegin', messageLog)
   });
+}
 
 //setInterval(fetchData, 5000);
 
