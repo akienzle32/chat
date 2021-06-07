@@ -2,7 +2,7 @@ import React from 'react';
 import './Chat.css';
 
 
-fetch('http://127.0.0.1:8000/chat/', {
+function fetchMessages() {fetch('http://127.0.0.1:8000/chat/', {
 	method: 'GET',
 	headers: {
 		'If-Modified-Since': 'Wed, 20 May 2021 5:58:00 GMT'
@@ -19,8 +19,11 @@ fetch('http://127.0.0.1:8000/chat/', {
     }).join("");
     document.getElementById('chat-log').insertAdjacentHTML('afterbegin', messageLog);
   });
+}
 
-//setInterval(fetchData, 5000);
+fetchMessages()
+
+//setInterval(fetchMessages, 5000);
 
 document.addEventListener('submit', function (event) {
 
