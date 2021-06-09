@@ -1,9 +1,16 @@
-p {
+#message {
   text-align: left;
-  padding: 8px;
+  padding: 5px;
   border: 2px solid #4169E1;
   border-radius: 5px;
   background-color: white;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#timestamp {
+  text-align: right;
+  margin-top: 5px;
 }
 
 #chat-log {

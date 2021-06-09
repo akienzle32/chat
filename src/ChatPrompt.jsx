@@ -2,26 +2,29 @@ import React from 'react';
 import './Chat.css';
 
 
-var map = new Map()
-
-function fetchMessages() {fetch('http://127.0.0.1:8000/chat/', {
+function fetchMessages() {
+	
+	fetch('http://127.0.0.1:8000/chat/', {	
 	method: 'GET',
 	headers: {
-		'If-Modified-Since': 'Tues, 8 June 2021 23:24:00 GMT'
+		'If-Modified-Since': new Date(Date.now() - 20000),
 	},
 })
   .then(response => 
     response.json())
   .then(data => {
-    console.log(data);  
+    console.log(data);
   	var messages = data.map(message => {
-  		return '<p>' + message.content + '</p>'	
+  		return message.author + '<br>' + '<p id=message>' + message.content + '</p><p id=timestamp>' + message.timestamp + '</p>'
   	}).join("");
     document.getElementById('chat-log').innerHTML = messages;
+    document.getElementById("chat-log").scrollTop = document.getElementById("chat-log").scrollHeight;
   });
 }
 
-setInterval(fetchMessages, 5000);
+fetchMessages();
+
+//setInterval(fetchMessages, 5000);
 
 document.addEventListener('submit', function (event) {
 
@@ -29,17 +32,19 @@ document.addEventListener('submit', function (event) {
 
 	let messageForm = event.target;
 	let formData = new FormData(messageForm);
+	let jsonData = JSON.stringify(Object.fromEntries(formData));
 
-	formData.append('author', 'alec')
+	//formData.append('author', 'Alec');
+
+
 
 	fetch('http://127.0.0.1:8000/chat/', {
 		method: 'POST',
-		body: formData,
+		body: jsonData
 	}).then(response => response.json())
 	.then(data => {console.log(data);
 	})
-	document.getElementById('message-form').reset();
-	//document.getElementById('chat-log').scrollTop = document.getElementById('chat-log').scrollHeight		
+	document.getElementById('message-form').reset();	
 });
 
 
