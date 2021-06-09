@@ -2,28 +2,26 @@ import React from 'react';
 import './Chat.css';
 
 
+var map = new Map()
+
 function fetchMessages() {fetch('http://127.0.0.1:8000/chat/', {
 	method: 'GET',
 	headers: {
-		'If-Modified-Since': 'Wed, 20 May 2021 5:58:00 GMT'
+		'If-Modified-Since': 'Tues, 8 June 2021 23:24:00 GMT'
 	},
 })
   .then(response => 
     response.json())
   .then(data => {
-    console.log(data);
-    //maybe add each incoming message to an array, only posting messages with a unique id
-    // or use if-None-Match
-    var messageLog = data.map(message => {
-      return '<p>' + message.content + '</p>'
-    }).join("");
-    document.getElementById('chat-log').insertAdjacentHTML('afterbegin', messageLog);
+    console.log(data);  
+  	var messages = data.map(message => {
+  		return '<p>' + message.content + '</p>'	
+  	}).join("");
+    document.getElementById('chat-log').innerHTML = messages;
   });
 }
 
-fetchMessages()
-
-//setInterval(fetchMessages, 5000);
+setInterval(fetchMessages, 5000);
 
 document.addEventListener('submit', function (event) {
 
