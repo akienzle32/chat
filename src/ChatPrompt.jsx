@@ -9,7 +9,7 @@ function fetchMessages() {
 	headers: {
 		'If-Modified-Since': new Date(Date.now() - 10000),
 	},
-	cache: 'force-cache',
+	//cache: 'force-cache',
 })
   .then(response => 
     response.json())
