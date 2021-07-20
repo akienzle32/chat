@@ -57,14 +57,16 @@ document.addEventListener('submit', function (event) {
 		},
 		credentials: 'include',
 		body: jsonData
-	}).then(response => {
+	})
+	.then(response => {
 		if (response.redirected){
 			window.location.href = response.url;
 			return;
 		} 
 		else 
 			response.json()
-	}).then(data => {console.log(data);
+	})
+	.then(data => {console.log(data);
 	})
 	document.getElementById('message-form').reset();	
 });
