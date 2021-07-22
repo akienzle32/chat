@@ -59,7 +59,7 @@ document.addEventListener('submit', function (event) {
 		body: jsonData
 	})
 	.then(response => {
-		// If the server returns a redirect, follow the redirect url. At this point, redirects only occur if the user
+		// If the server returns a redirect, follow the redirect url. At this point, a redirect only occurs if the user
 		// attempts to send a message but isn't logged in.  
 		if (response.redirected){
 			window.location.href = response.url;
