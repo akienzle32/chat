@@ -23,7 +23,7 @@ function fetchMessages() {
 
 setInterval(fetchMessages, 5000);
 
-//function provided by Django for adding csrf tokens to AJAX requests; see https://docs.djangoproject.com/en/3.2/ref/csrf/ for details
+// Function provided by Django for adding csrf tokens to AJAX requests; see https://docs.djangoproject.com/en/3.2/ref/csrf/ for details.
 function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -59,6 +59,8 @@ document.addEventListener('submit', function (event) {
 		body: jsonData
 	})
 	.then(response => {
+		// If the server returns a redirect, follow the redirect url. At this point, redirects only occur if the user
+		// attempts to send a message but isn't logged in.  
 		if (response.redirected){
 			window.location.href = response.url;
 			return;
