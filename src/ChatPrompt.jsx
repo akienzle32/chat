@@ -67,7 +67,8 @@ document.addEventListener('submit', function (event) {
 export const Prompt = () => {
 	return (
 		<body>
-			<h1 style={{textAlign: 'center'}}>Chat App</h1>	
+			<a style={{float: 'right'}} href="http://127.0.0.1:8000/accounts/logout"><b>Log out</b></a>
+			<h1 style={{textAlign: 'center'}}>Chat App</h1>
 			<div id="chat-log"></div>
 			<div id="lower-box">
 				<form id='message-form' >
