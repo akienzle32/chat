@@ -32,7 +32,7 @@ function fetchMessages() {
 })
   .then(response => {
   	if (response.status === 401){
-  		document.getElementById("chat-log").innerHTML = '<p>You need to log in!</p>';
+  		document.getElementById("chat-log").innerHTML = '<p id=login-message> You are not ' + '<b><a id=login href=http://127.0.0.1:8000/accounts/login/>logged in.</a></b></p>';
   		return;
   	}
   	else
