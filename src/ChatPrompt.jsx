@@ -1,28 +1,6 @@
 import React from 'react';
 import './Chat.css';
 
-function fetchMessages() {
-	
-	fetch('http://127.0.0.1:8000/chat/', {	
-	method: 'GET',
-	headers: {
-		'If-Modified-Since': new Date(Date.now() - 10000),
-	},
-})
-  .then(response => 
-    response.json())
-  .then(data => {
-    console.log(data);
-  	var messages = data.map(message => {
-  		return message.author + '<br><p id=message>' + message.content + '</p><p id=timestamp>' + message.timestamp + '</p>'
-  	}).join("");
-    document.getElementById('chat-log').innerHTML = messages;
-    document.getElementById("chat-log").scrollTop = document.getElementById("chat-log").scrollHeight;
-  });
-}
-
-setInterval(fetchMessages, 5000);
-
 // Function provided by Django for adding csrf tokens to AJAX requests; see https://docs.djangoproject.com/en/3.2/ref/csrf/ for details.
 function getCookie(name) {
     let cookieValue = null;
@@ -40,6 +18,39 @@ function getCookie(name) {
 }
 
 const csrftoken = getCookie('csrftoken');
+
+function fetchMessages() {
+	
+	fetch('http://127.0.0.1:8000/chat/', {	
+	method: 'GET',
+	mode: 'cors',
+	headers: {
+		'If-Modified-Since': new Date(Date.now() - 10000),
+		'X-CSRFToken': csrftoken,
+	},
+	credentials: 'include',
+})
+  .then(response => {
+  	if (response.status === 401){
+  		document.getElementById("chat-log").innerHTML = '<p>You need to log in!</p>';
+  		return;
+  	}
+  	else
+  		return response.json();
+  })
+  .then(data => {
+  	if (data){
+  		console.log(data);
+  		var messages = data.map(message => {
+  			return message.author + '<br><p id=message>' + message.content + '</p><p id=timestamp>' + message.timestamp + '</p>'
+  			}).join("");
+    	document.getElementById("chat-log").innerHTML = messages;
+    	document.getElementById("chat-log").scrollTop = document.getElementById("chat-log").scrollHeight;
+    }	
+  });
+}
+
+setInterval(fetchMessages, 5000);
 
 document.addEventListener('submit', function (event) {
 
