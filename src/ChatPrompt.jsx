@@ -31,11 +31,14 @@ function fetchMessages() {
 	credentials: 'include',
 })
   .then(response => {
+  	// If the server sends a 401 response because the user is not authenticated, display an alert message prompting
+  	// the user to log in.
   	if (response.status === 401){
   		document.getElementById("chat-log").innerHTML = '<p id=login-message> You are not ' + 
   		'<b><a id=login href=http://127.0.0.1:8000/accounts/login/>logged in.</a></b></p>';
   		return;
   	}
+  	// Otherwise, proceed as normal. 
   	else
   		return response.json();
   })
