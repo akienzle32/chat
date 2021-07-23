@@ -34,8 +34,8 @@ function fetchMessages() {
   	// If the server sends a 401 response because the user is not authenticated, display an alert message prompting
   	// the user to log in.
   	if (response.status === 401){
-  		document.getElementById("chat-log").innerHTML = '<p id=login-message> You are not ' + 
-  		'<b><a id=login href=http://127.0.0.1:8000/accounts/login/>logged in.</a></b></p>';
+  		document.getElementById("chat-log").innerHTML = '<p id=login-alert>Please ' + 
+  		'<b><a id=login-link href=http://127.0.0.1:8000/accounts/login/>log in</a></b> to view messages.</p>';
   		return;
   	}
   	// Otherwise, proceed as normal. 
@@ -92,7 +92,7 @@ document.addEventListener('submit', function (event) {
 export const Prompt = () => {
 	return (
 		<body>
-			<a style={{float: 'right'}} href="http://127.0.0.1:8000/accounts/logout"><b>Log out</b></a>
+			<a id="logout" style={{float: 'right'}} href="http://127.0.0.1:8000/accounts/logout"><b>Log out</b></a>
 			<h1 style={{textAlign: 'center'}}>Chat App</h1>
 			<div id="chat-log"></div>
 			<div id="lower-box">
