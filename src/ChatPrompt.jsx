@@ -35,7 +35,7 @@ function fetchMessages() {
   	// the user to log in.
   	if (response.status === 401){
   		document.getElementById("chat-log").innerHTML = '<p id=login-alert>Please ' + 
-  		'<b><a id=login-link href=http://127.0.0.1:8000/accounts/login/>log in</a></b> to view messages.</p>';
+  		'<b><a id=login-link href=http://127.0.0.1:8000/accounts/login/>log in</a></b> to receive messages.</p>';
   		return;
   	}
   	// Otherwise, proceed as normal. 
