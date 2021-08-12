@@ -53,16 +53,26 @@
   margin: 0px;
   font-size: 16px
 }
-
-h1 {
-  padding-left: 50px;
+#login-alert {
+  font-size: 18px;
+  text-align: center;
 }
 
-a {
+#login-link {
+  font-size: 18px;
+  color: black;
+  text-decoration: none;
+}
+
+#logout {
   font-size: 15px;
   color:  black;
   margin-right: 25px;
   text-decoration: none
+}
+
+h1 {
+  padding-left: 50px;
 }
 
 a:hover {
