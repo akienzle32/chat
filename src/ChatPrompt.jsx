@@ -54,6 +54,7 @@ function fetchMessages() {
   });
 }
 
+window.onload = fetchMessages;
 setInterval(fetchMessages, 5000);
 
 document.addEventListener('submit', function (event) {
