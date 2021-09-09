@@ -48,12 +48,14 @@ function fetchMessages() {
   		var messages = data.map(message => {
   			return message.author + '<br><p id=message>' + message.content + '</p><p id=timestamp>' + message.timestamp + '</p>'
   			}).join("");
-    	document.getElementById("chat-log").innerHTML = messages;
-    	document.getElementById("chat-log").scrollTop = document.getElementById("chat-log").scrollHeight;
+  		const chatLog = document.getElementById("chat-log");
+  		chatLog.innerHTML = messages;
+  		chatLog.scrollTop = chatLog.scrollHeight;
     }	
   });
 }
 
+window.onload = fetchMessages;
 setInterval(fetchMessages, 5000);
 
 document.addEventListener('submit', function (event) {
