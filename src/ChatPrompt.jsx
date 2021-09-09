@@ -19,6 +19,7 @@ function getCookie(name) {
 
 const csrftoken = getCookie('csrftoken');
 
+// Send GET request to retrieve messages in database. 
 function fetchMessages() {
 	
 	fetch('http://127.0.0.1:8000/chat/', {	
@@ -45,6 +46,7 @@ function fetchMessages() {
   .then(data => {
   	if (data){
   		console.log(data);
+  		// For each message, display the username of the author, the message content itself, and the message's timestamp. 
   		var messages = data.map(message => {
   			return message.author + '<br><p id=message>' + message.content + '</p><p id=timestamp>' + message.timestamp + '</p>'
   			}).join("");
@@ -55,9 +57,12 @@ function fetchMessages() {
   });
 }
 
+// Fetch the messages once when the page loads, and then ping the server every five seconds to see if new 
+// new messages are available. 
 window.onload = fetchMessages;
 setInterval(fetchMessages, 5000);
 
+// Function to POST new messages to the database. 
 document.addEventListener('submit', function (event) {
 
 	event.preventDefault();
@@ -76,7 +81,7 @@ document.addEventListener('submit', function (event) {
 		body: jsonData
 	})
 	.then(response => {
-		// If the server returns a redirect, follow the redirect url. At this point, a redirect only occurs if the user
+		// If the server returns a redirect, follow the redirect url. A redirect will occur if the user
 		// attempts to send a message but isn't logged in.  
 		if (response.redirected){
 			window.location.href = response.url;
