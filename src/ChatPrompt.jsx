@@ -49,8 +49,8 @@ function fetchMessages() {
   			return message.author + '<br><p id=message>' + message.content + '</p><p id=timestamp>' + message.timestamp + '</p>'
   			}).join("");
   		const chatLog = document.getElementById("chat-log");
-    	chatLog.innerHTML = messages;
-    	chatLog.scrollTop = chatLog.scrollHeight;
+  		chatLog.innerHTML = messages;
+  		chatLog.scrollTop = chatLog.scrollHeight;
     }	
   });
 }
