@@ -17,8 +17,8 @@
     		  <form id="chat-form" method="post">
     			 <input type="text" id="chat-name" name="chatname" placeholder="Enter a chatroom name..."></input>
     			 <input type="text" id="ptc-name" name="username" placeholder="Enter a username..."></input>
-           <input type="button" value="+" id="add-ptc-button" onclick="addParticipant(document.getElementById('chat-form'))"></input>
-           <input id="submit-forms" type="submit" onclick="submitForms()"></input>
+           <input type="button" value="+" id="add-ptc-button"></input>
+           <input id="submit-forms" type="submit"></input>
           </form>
         </div>
       </div>
@@ -47,7 +47,7 @@
 	</body>
   <script>
       var participant_counter = 1;
-      
+
       function addParticipant(container) {
         let max_participants = 10;
         participant_counter++;
