@@ -1,0 +1,64 @@
+<!DOCTYPE html> 
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link href="home.css" rel="stylesheet">
+	</head>
+
+	<body class="homepage">
+	<a id="logout" style=float:right href="http://127.0.0.1:8000/accounts/logout"><b>Log out</b></a>
+	<h1 id="home-title">Chat App</h1>
+
+	<div id="start-chat" style=overflow:scroll;>
+    <h3 align="center">Start a new chat</h3>
+      <div style="float:left">
+        <div id="container">
+    		  <form id="chat-form" method="post">
+    			 <input type="text" id="chat-name" name="chatname" placeholder="Enter a chatroom name..."></input>
+    			 <input type="text" id="ptc-name" name="username" placeholder="Enter a username..."></input>
+           <input type="button" value="+" id="add-ptc-button" onclick="addParticipant(document.getElementById('chat-form'))"></input>
+           <input id="submit-forms" type="submit" onclick="submitForms()"></input>
+          </form>
+        </div>
+      </div>
+  </div>
+  <div id="my-chats">
+  	<h3 align="center">My chats</h3>
+      <table id="chat-table">
+        <tr>
+          <td id="col-title"><b>Name</b></th>
+          <td id="col-title"><b>Participants</b></th>
+        </tr>
+        <tr>
+          <td>
+            <a id="chat-link">TypeScript</a>
+          </td>
+          <td>alec, matt</td>
+        </tr>
+        <tr>
+          <td>
+            <a id="chat-link">Django</a>
+          </td>
+          <td>alec, steve, carol, bob, matt</td>
+        </tr>
+      </table> 
+	 </div>
+	</body>
+  <script>
+      var participant_counter = 1;
+      
+      function addParticipant(container) {
+        let max_participants = 10;
+        participant_counter++;
+
+        if (participant_counter < max_participants){
+        let element = document.createElement("input");
+        element.id = "extra-ptcs";
+        element.name = "username";
+        container.append(element);
+    }
+  }
+  </script>
+
+
