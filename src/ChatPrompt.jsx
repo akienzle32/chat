@@ -99,11 +99,11 @@ document.addEventListener('submit', function (event) {
 export const Prompt = () => {
 	return (
 		<body>
-			<div>
-				<a id="logout" style={{float: 'right'}} href="http://127.0.0.1:8000/accounts/logout"><b>Log out</b></a>
-				<h1 style={{textAlign: 'center'}}>Chat App</h1>
+			<div class="upper-container">
+				<a id="logout" href="http://127.0.0.1:8000/accounts/logout"><b>Log out</b></a>
+				<h1 class="chat-title">Chat App</h1>
 			</div>
-				<div id="container">
+				<div class="lower-container">
 			  		<div id="ptc-list">
 			  			<p>Participants:</p>
 			  			<ul>
@@ -116,7 +116,7 @@ export const Prompt = () => {
 				<form id='message-form' >
 					<input type="text" id="chat-input" name="content" placeholder="Text message..."></input>
 					<input type='hidden' name='author'></input>
-					<input type='submit' value='Send' id='submitButton'></input>
+					<input type='submit' value='Send' class='submitButton'></input>
 				</form>	
 			</div>
 		  </div>	
