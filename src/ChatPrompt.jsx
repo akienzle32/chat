@@ -101,6 +101,14 @@ export const Prompt = () => {
 		<body>
 			<a id="logout" style={{float: 'right'}} href="http://127.0.0.1:8000/accounts/logout"><b>Log out</b></a>
 			<h1 style={{textAlign: 'center'}}>Chat App</h1>
+				<div id="container">
+			  		<div id="ptc-list">
+			  			<p>Participants:</p>
+			  			<ul>
+				  			<li>alec</li>
+				  			<li>matt</li>
+						</ul>
+			  		</div>
 			<div id="chat-log"></div>
 			<div id="lower-box">
 				<form id='message-form' >
@@ -108,7 +116,8 @@ export const Prompt = () => {
 					<input type='hidden' name='author'></input>
 					<input type='submit' value='Send' id='submitButton'></input>
 				</form>	
-			</div>	
+			</div>
+		  </div>	
 		</body>	
 	);
 };

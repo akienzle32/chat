@@ -19,6 +19,18 @@
   font-size: 12px;
 }
 
+#ptc-list {
+  height: 140px;
+  float: left;
+  margin-left: 180px;
+  display: inline-table;
+  padding: 15px;
+  padding-right: 20px;
+  background-color: #DCDCDC;
+  border: 6px solid #4169E1;
+  border-radius: 30px;
+}
+
 #chat-log {
   background-color: #DCDCDC;
   height: 200px;
@@ -27,7 +39,8 @@
   border-radius: 25px;
   border: 7px solid #4169E1;
   padding: 50px;
-  margin: auto
+  margin-left: 455px;
+  margin-right: 100px;
 }
 
 #lower-box {
@@ -42,7 +55,7 @@
   border-bottom: 7px solid #4169E1;
   border-left: 7px solid #4169E1;
   border-right: 7px solid #4169E1;
-  margin: auto
+  margin-left: 455px;
 }
 
 #chat-input {
