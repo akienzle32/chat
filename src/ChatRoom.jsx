@@ -98,30 +98,30 @@ document.addEventListener('submit', function (event) {
 
 export class ChatRoom extends React.Component {
 	render() {
-	return (
+	  return (
 		<body>
-			<div class="upper-container">
-				<a id="logout" href="http://127.0.0.1:8000/accounts/logout"><b>Log out</b></a>
-				<h1 class="chat-title">Chat App</h1>
-			</div>
-				<div class="lower-container">
-			  		<div id="ptc-list">
-			  			<p>Participants:</p>
-			  			<ul>
-				  			<li>alec</li>
-				  			<li>matt</li>
-						</ul>
-			  		</div>
-			<div id="message-log"></div>
-			<div id="lower-box">
+		  <div class="upper-container">
+			  <a id="logout" href="http://127.0.0.1:8000/accounts/logout"><b>Log out</b></a>
+			  <h1 class="chat-title">Chat App</h1>
+		  </div>
+		  <div class="lower-container">
+			  <div id="ptc-list">
+			    <p>Participants:</p>
+			  	<ul>
+				  <li>alec</li>
+				  <li>matt</li>
+				</ul>
+			  </div>
+			  <div id="message-log"></div>
+			  <div id="lower-box">
 				<form id='message-form' >
-					<input type="text" id="chat-input" name="content" placeholder="Text message..."></input>
-					<input type='hidden' name='author'></input>
-					<input type='submit' value='Send' class='submitButton'></input>
+				  <input type="text" id="chat-input" name="content" placeholder="Text message..."></input>
+				  <input type='hidden' name='author'></input>
+				  <input type='submit' value='Send' class='submitButton'></input>
 				</form>	
-			</div>
+			  </div>
 		  </div>	
 		</body>	
-	);
-};
+	  );
+	};
 }
