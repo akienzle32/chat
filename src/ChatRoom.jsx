@@ -1,5 +1,5 @@
 import React from 'react';
-import './ChatPrompt.css';
+import './ChatRoom.css';
 
 // Function provided by Django for adding csrf tokens to AJAX requests; see https://docs.djangoproject.com/en/3.2/ref/csrf/ for details.
 function getCookie(name) {
@@ -96,7 +96,7 @@ document.addEventListener('submit', function (event) {
 });
 
 
-export const Prompt = () => {
+export function ChatRoom() {
 	return (
 		<body>
 			<div class="upper-container">
