@@ -1,0 +1,154 @@
+#message {
+  text-align: left;
+  padding: 5px;
+  border: 2px solid #4169E1;
+  border-radius: 5px;
+  background-color: white;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  display: inline-block;
+}
+
+#timestamp {
+  text-align: left;
+  margin-top: 5px;
+  font-size: 12px;
+}
+
+#chat-log {
+  background-color: #DCDCDC;
+  height: 200px;
+  overflow: scroll;
+  width: 400px;
+  border-radius: 25px;
+  border: 7px solid #4169E1;
+  padding: 50px;
+  margin: auto
+}
+
+#lower-box {
+  background-color: #DCDCDC;
+  height: 50px;
+  width: 400px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  padding-right: 50px;
+  padding-left: 50px;
+  border-radius: 25px;
+  border-bottom: 7px solid #4169E1;
+  border-left: 7px solid #4169E1;
+  border-right: 7px solid #4169E1;
+  margin: auto
+}
+
+#chat-input {
+  background-color: white;
+  height: 20px;
+  width: 385px;
+  overflow: scroll;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  margin: 0px;
+  font-size: 16px
+}
+#login-alert {
+  font-size: 18px;
+  text-align: center;
+}
+
+#login-link {
+  font-size: 18px;
+  color: black;
+  text-decoration: none;
+}
+
+#logout {
+  font-size: 15px;
+  color:  black;
+  margin-right: 25px;
+  text-decoration: none
+}
+
+#start-chat {
+  background-color: #DCDCDC;
+  height: 80px;
+  width: 400px;
+  padding-bottom: 60px;
+  padding-right: 50px;
+  padding-left: 50px;
+  border-bottom: 7px solid #4169E1;
+  border-left: 7px solid #4169E1;
+  border-right: 7px solid #4169E1;
+  border-top: 7px solid #4169E1;
+  border-radius: 25px;
+  margin: auto
+}
+
+#enter-user {
+  height: 25px;
+  font-size: 15px;
+}
+
+#my-chats {
+  background-color: #DCDCDC;
+  height: 200px;
+  overflow: scroll;
+  width: 400px;
+  border-radius: 25px;
+  border-left: 7px solid #4169E1;
+  border-right: 7px solid #4169E1;
+  border-bottom: 7px solid #4169E1;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 50px;
+  margin: auto
+}
+
+#home-title {
+  padding-left: 80px;
+  text-align: center;
+}
+
+#col-title {
+  font-size: 17px;
+}
+
+#ptc-name, #chat-name {
+  width: 170px;
+  height: 22px;
+  font-size: 14px;
+}
+
+#chat-table {
+  width: 115%;
+}
+
+#add-ptc-button {
+  height: 27px;
+  margin-left: -5px;
+}
+
+#extra-ptcs {
+  display: table;
+  margin-left: 183px;
+  width: 170px;
+  height: 20px;
+}
+
+#submit-forms {
+  display: none;
+}
+
+body {
+  font-family: Tahoma, sans serif;
+}
+
+h1 {
+  padding-left: 50px;
+}
+
+a:hover {
+  background: #B0C4DE;
+}
