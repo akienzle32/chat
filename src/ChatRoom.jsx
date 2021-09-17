@@ -26,7 +26,7 @@ export class ChatRoom extends React.Component {
 		super(props);
 		this.state = {
 			messages: [],
-			loggedOut: false,
+			loggedIn: false,
 		};
 		this.messageRef = React.createRef();
 	}
@@ -55,9 +55,6 @@ export class ChatRoom extends React.Component {
   		// If the server sends a 401 response because the user is not authenticated, display an alert message prompting
   		// the user to log in.
   			if (response.status === 401){
-  				this.setState({
-  					loggedOut: true
-  				});
   				return;
   			}
   		// Otherwise, proceed as normal. 
@@ -68,7 +65,8 @@ export class ChatRoom extends React.Component {
   			if (data){
   				console.log(data);
   				this.setState({
-  					messages: data
+  					messages: data,
+  					loggedIn: true,
   				});
   				// For each message, display the username of the author, the message content itself, and the message's timestamp. 
     		}	
@@ -111,10 +109,10 @@ export class ChatRoom extends React.Component {
 	}
 
 	render() {
-		const { messages, loggedOut } = this.state;
+		const { messages, loggedIn} = this.state;
 		let messageList;
 
-		if (loggedOut){
+		if (!loggedIn){
 			messageList = <p id="login-alert">Please<b>
 			<a id="login-link" href='http://127.0.0.1:8000/accounts/login/'> log in</a></b> to receive messages.</p>;
 		}
