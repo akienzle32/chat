@@ -1,10 +1,6 @@
 import React from 'react';
 import './ChatRoom.css';
 
-// Function provided by Django for adding csrf tokens to AJAX requests; see https://docs.djangoproject.com/en/3.2/ref/csrf/ for details.
-
-// Function to POST new messages to the database. 
-
 export class ChatRoom extends React.Component {
 	constructor(props) {
 		super(props);
@@ -26,6 +22,7 @@ export class ChatRoom extends React.Component {
 		this.scrollToBottom();
 	}
 
+	// Function provided by Django for adding csrf tokens to AJAX requests; see https://docs.djangoproject.com/en/3.2/ref/csrf/ for details.
 	getCookie(name) {
     	let cookieValue = null;
     	if (document.cookie && document.cookie !== '') {
@@ -41,7 +38,6 @@ export class ChatRoom extends React.Component {
     	return cookieValue;
 	}
 	
-
 	getMessages = () => {
 		fetch('http://127.0.0.1:8000/chat/', {	
 			method: 'GET',
@@ -78,6 +74,7 @@ export class ChatRoom extends React.Component {
 		this.scrollToBottom()
 	}
 
+	// Function to POST new messages to the database. 
 	handleSubmit = (event) => {
 		this.getCookie('csrftoken');
 		event.preventDefault();
