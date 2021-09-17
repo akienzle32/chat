@@ -102,7 +102,8 @@ export class ChatRoom extends React.Component {
 			else 
 				return response.json();
 		})
-		.then(data => {console.log(data);
+		.then(data => {
+			console.log(data);
 		})
 		document.getElementById('message-form').reset();	
 	}
