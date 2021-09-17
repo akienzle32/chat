@@ -1,3 +1,4 @@
+
 #message {
   text-align: left;
   padding: 5px;
@@ -9,7 +10,7 @@
   display: inline-block;
 }
 
-#submitButton {
+#submitMessage {
   visibility: hidden;
 }
 
@@ -27,17 +28,15 @@
   border-radius: 25px;
   border: 7px solid #4169E1;
   padding: 50px;
-  margin: auto
+  margin-left: 463px;
+  margin-right: 100px;
 }
 
 #lower-box {
   background-color: #DCDCDC;
   height: 50px;
   width: 400px;
-  padding-top: 25px;
-  padding-bottom: 25px;
-  padding-right: 50px;
-  padding-left: 50px;
+  padding: 25px 50px;
   border-radius: 25px;
   border-bottom: 7px solid #4169E1;
   border-left: 7px solid #4169E1;
@@ -50,10 +49,7 @@
   height: 20px;
   width: 385px;
   overflow: scroll;
-  padding-left: 5px;
-  padding-right: 5px;
-  padding-bottom: 10px;
-  padding-top: 10px;
+  padding: 10px 5px;
   margin: 0px;
   font-size: 16px
 }
@@ -75,8 +71,25 @@
   text-decoration: none
 }
 
+#ptc-list {
+  height: 140px;
+  float: left;
+  margin-left: 210px;
+  display: inline-table;
+  padding: 15px;
+  background-color: #DCDCDC;
+  border: 6px solid #4169E1;
+  border-radius: 30px;
+}
+
+#add-ptc-box {
+  height: 20px;
+  width: 135px;
+  font-size: 15px;
+}
+
 h1 {
-  padding-left: 50px;
+  padding-left: 80px;
 }
 
 a:hover {
