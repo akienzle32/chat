@@ -28,7 +28,6 @@ export class ChatRoom extends React.Component {
 			messages: [],
 			loginAlert: null
 		};
-		//let timer;
 	}
 
 	componentDidMount() {
