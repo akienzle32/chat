@@ -62,6 +62,7 @@ document.addEventListener('submit', function (event) {
 	document.getElementById('message-form').reset();	
 });
 
+
 export class ChatRoom extends React.Component {
 	constructor(props) {
 		super(props);
@@ -72,6 +73,7 @@ export class ChatRoom extends React.Component {
 	}
 
 	componentDidMount() {
+
 		fetch('http://127.0.0.1:8000/chat/', {	
 			method: 'GET',
 			mode: 'cors',
@@ -106,6 +108,7 @@ export class ChatRoom extends React.Component {
     		}	
   		});
 	}
+
 	render() {
 		const { messages, loginAlert } = this.state;
 
