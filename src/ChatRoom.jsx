@@ -19,44 +19,7 @@ function getCookie(name) {
 
 const csrftoken = getCookie('csrftoken');
 
-// Send GET request to retrieve messages in database. 
-
-// Fetch the messages once when the page loads, and then ping the server every five seconds to see if new 
-// new messages are available. 
-
 // Function to POST new messages to the database. 
-document.addEventListener('submit', function (event) {
-
-	event.preventDefault();
-
-	let messageForm = event.target;
-	let formData = new FormData(messageForm);
-	let jsonData = JSON.stringify(Object.fromEntries(formData));
-
-	fetch('http://127.0.0.1:8000/chat/', {
-		method: 'POST',
-		mode: 'cors',
-		headers: {
-			'X-CSRFToken': csrftoken
-		},
-		credentials: 'include',
-		body: jsonData
-	})
-	.then(response => {
-		// If the server returns a redirect, follow the redirect url. A redirect will occur if the user
-		// attempts to send a message but isn't logged in.  
-		if (response.redirected){
-			window.location.href = response.url;
-			return;
-		} 
-		else 
-			response.json()
-	})
-	.then(data => {console.log(data);
-	})
-	document.getElementById('message-form').reset();	
-});
-
 
 export class ChatRoom extends React.Component {
 	constructor(props) {
@@ -104,6 +67,37 @@ export class ChatRoom extends React.Component {
   		});
 	}
 
+	handleSubmit(event) {
+		event.preventDefault();
+
+		let messageForm = event.target;
+		let formData = new FormData(messageForm);
+		let jsonData = JSON.stringify(Object.fromEntries(formData));
+
+		fetch('http://127.0.0.1:8000/chat/', {
+			method: 'POST',
+			mode: 'cors',
+			headers: {
+				'X-CSRFToken': csrftoken
+			},
+			credentials: 'include',
+			body: jsonData
+		})
+		.then(response => {
+		// If the server returns a redirect, follow the redirect url. A redirect will occur if the user
+		// attempts to send a message but isn't logged in.  
+			if (response.redirected){
+				window.location.href = response.url;
+				return;
+			} 
+			else 
+				response.json()
+		})
+		.then(data => {console.log(data);
+		})
+		document.getElementById('message-form').reset();	
+	}
+
 	render() {
 		const { messages, loginAlert } = this.state;
 
@@ -131,7 +125,7 @@ export class ChatRoom extends React.Component {
 			  	</div>
 			  	<div id="message-log">{messageList}</div>
 			  	  <div id="lower-box">
-					<form id='message-form'>
+					<form id='message-form' onSubmit={this.handleSubmit}>
 				  	  <input type="text" id="chat-input" name="content" placeholder="Text message..."></input>
 				  	  <input type='hidden' name='author'></input>
 				  	  <input type='submit' value='Send' className='submitButton'></input>
