@@ -96,7 +96,8 @@ document.addEventListener('submit', function (event) {
 });
 
 
-export function ChatRoom() {
+export class ChatRoom extends React.Component {
+	render() {
 	return (
 		<body>
 			<div class="upper-container">
@@ -123,3 +124,4 @@ export function ChatRoom() {
 		</body>	
 	);
 };
+}
