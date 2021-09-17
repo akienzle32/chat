@@ -97,6 +97,12 @@ document.addEventListener('submit', function (event) {
 
 
 export class ChatRoom extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			messages: []
+		};
+	}
 	render() {
 	  return (
 		<body>
