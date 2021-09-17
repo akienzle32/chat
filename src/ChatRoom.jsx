@@ -18,7 +18,7 @@ export class ChatRoom extends React.Component {
 
 	componentDidMount() {
 		this.getMessages();
-		//this.timer = setInterval(this.getMessages, 5000);
+		this.timer = setInterval(this.getMessages, 5000);
 		this.scrollToBottom();
 	}
 
