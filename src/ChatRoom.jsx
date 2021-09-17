@@ -20,14 +20,9 @@ function getCookie(name) {
 const csrftoken = getCookie('csrftoken');
 
 // Send GET request to retrieve messages in database. 
-function fetchMessages() {
-	
-}
 
 // Fetch the messages once when the page loads, and then ping the server every five seconds to see if new 
 // new messages are available. 
-window.onload = fetchMessages;
-setInterval(fetchMessages, 5000);
 
 // Function to POST new messages to the database. 
 document.addEventListener('submit', function (event) {
@@ -136,7 +131,7 @@ export class ChatRoom extends React.Component {
 			  	</div>
 			  	<div id="message-log">{messageList}</div>
 			  	  <div id="lower-box">
-					<form id='message-form' >
+					<form id='message-form'>
 				  	  <input type="text" id="chat-input" name="content" placeholder="Text message..."></input>
 				  	  <input type='hidden' name='author'></input>
 				  	  <input type='submit' value='Send' className='submitButton'></input>
