@@ -99,8 +99,10 @@ document.addEventListener('submit', function (event) {
 export const Prompt = () => {
 	return (
 		<body>
-			<a id="logout" style={{float: 'right'}} href="http://127.0.0.1:8000/accounts/logout"><b>Log out</b></a>
-			<h1 style={{textAlign: 'center'}}>Chat App</h1>
+			<div>
+				<a id="logout" style={{float: 'right'}} href="http://127.0.0.1:8000/accounts/logout"><b>Log out</b></a>
+				<h1 style={{textAlign: 'center'}}>Chat App</h1>
+			</div>
 				<div id="container">
 			  		<div id="ptc-list">
 			  			<p>Participants:</p>
