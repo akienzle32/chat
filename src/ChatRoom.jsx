@@ -22,39 +22,6 @@ const csrftoken = getCookie('csrftoken');
 // Send GET request to retrieve messages in database. 
 function fetchMessages() {
 	
-	fetch('http://127.0.0.1:8000/chat/', {	
-	method: 'GET',
-	mode: 'cors',
-	headers: {
-		'If-Modified-Since': new Date(Date.now() - 10000),
-		'X-CSRFToken': csrftoken,
-	},
-	credentials: 'include',
-})
-  .then(response => {
-  	// If the server sends a 401 response because the user is not authenticated, display an alert message prompting
-  	// the user to log in.
-  	if (response.status === 401){
-  		document.getElementById("message-log").innerHTML = '<p id=login-alert>Please ' + 
-  		'<b><a id=login-link href=http://127.0.0.1:8000/accounts/login/>log in</a></b> to receive messages.</p>';
-  		return;
-  	}
-  	// Otherwise, proceed as normal. 
-  	else
-  		return response.json();
-  })
-  .then(data => {
-  	if (data){
-  		console.log(data);
-  		// For each message, display the username of the author, the message content itself, and the message's timestamp. 
-  		var messages = data.map(message => {
-  			return message.author + '<br><p id=message>' + message.content + '</p><p id=timestamp>' + message.timestamp + '</p>'
-  			}).join("");
-  		const chatLog = document.getElementById("message-log");
-  		chatLog.innerHTML = messages;
-  		chatLog.scrollTop = chatLog.scrollHeight;
-    }	
-  });
 }
 
 // Fetch the messages once when the page loads, and then ping the server every five seconds to see if new 
@@ -100,10 +67,51 @@ export class ChatRoom extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			messages: []
+			messages: [],
+			loginAlert: null
 		};
 	}
+
+	componentDidMount() {
+		fetch('http://127.0.0.1:8000/chat/', {	
+			method: 'GET',
+			mode: 'cors',
+			headers: {
+				'If-Modified-Since': new Date(Date.now() - 10000),
+				'X-CSRFToken': csrftoken,
+			},
+			credentials: 'include',
+		})
+  		.then(response => {
+  		// If the server sends a 401 response because the user is not authenticated, display an alert message prompting
+  		// the user to log in.
+  			if (response.status === 401){
+  				const loginAlert = '<p id=login-alert>Please ' + 
+  				'<b><a id=login-link href=http://127.0.0.1:8000/accounts/login/>log in</a></b> to receive messages.</p>';
+  				this.setState({
+  					loginAlert: loginAlert
+  				});
+  				return;
+  			}
+  		// Otherwise, proceed as normal. 
+  			else
+  				return response.json();
+ 		 })
+ 		 .then(data => {
+  			if (data){
+  				console.log(data);
+  				this.setState({
+  					messages: data
+  				});
+  				// For each message, display the username of the author, the message content itself, and the message's timestamp. 
+    		}	
+  		});
+	}
 	render() {
+		const { messages, loginAlert } = this.state;
+		const messageList = messages.map(message => {
+  				return <div><p>{ message.author }</p><p id="message">{ message.content }</p><p id="timestamp">{ message.timestamp }</p></div>
+  				});
 	  return (
 		<body>
 		  <div class="upper-container">
@@ -118,7 +126,7 @@ export class ChatRoom extends React.Component {
 				  <li>matt</li>
 				</ul>
 			  </div>
-			  <div id="message-log"></div>
+			  <div id="message-log">{messageList}</div>
 			  <div id="lower-box">
 				<form id='message-form' >
 				  <input type="text" id="chat-input" name="content" placeholder="Text message..."></input>
