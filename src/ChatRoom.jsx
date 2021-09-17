@@ -2,22 +2,6 @@ import React from 'react';
 import './ChatRoom.css';
 
 // Function provided by Django for adding csrf tokens to AJAX requests; see https://docs.djangoproject.com/en/3.2/ref/csrf/ for details.
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-
-const csrftoken = getCookie('csrftoken');
 
 // Function to POST new messages to the database. 
 
@@ -29,6 +13,7 @@ export class ChatRoom extends React.Component {
 			loggedIn: false,
 		};
 		this.messageRef = React.createRef();
+		this.csrftoken = this.getCookie('csrftoken');
 	}
 
 	scrollToBottom() {
@@ -41,13 +26,29 @@ export class ChatRoom extends React.Component {
 		this.scrollToBottom();
 	}
 
+	getCookie(name) {
+    	let cookieValue = null;
+    	if (document.cookie && document.cookie !== '') {
+        	const cookies = document.cookie.split(';');
+        	for (let i = 0; i < cookies.length; i++) {
+          	  const cookie = cookies[i].trim();
+            	if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                	cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                	break;
+            	}
+        	}
+    	}
+    	return cookieValue;
+	}
+	
+
 	getMessages = () => {
 		fetch('http://127.0.0.1:8000/chat/', {	
 			method: 'GET',
 			mode: 'cors',
 			headers: {
 				'If-Modified-Since': new Date(Date.now() - 10000),
-				'X-CSRFToken': csrftoken,
+				'X-CSRFToken': this.csrftoken,
 			},
 			credentials: 'include',
 		})
@@ -77,7 +78,7 @@ export class ChatRoom extends React.Component {
 		this.scrollToBottom()
 	}
 
-	handleSubmit(event) {
+	handleSubmit = (event) => {
 		event.preventDefault();
 
 		let messageForm = event.target;
@@ -88,7 +89,7 @@ export class ChatRoom extends React.Component {
 			method: 'POST',
 			mode: 'cors',
 			headers: {
-				'X-CSRFToken': csrftoken
+				'X-CSRFToken': this.csrftoken,
 			},
 			credentials: 'include',
 			body: jsonData
