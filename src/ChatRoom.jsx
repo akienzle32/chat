@@ -8,12 +8,12 @@ export class ChatRoom extends React.Component {
 			messages: [],
 			loggedIn: false,
 		};
-		this.messageRef = React.createRef();
+		this.bottomOfMessages = React.createRef();
 		this.csrftoken = this.getCookie('csrftoken');
 	}
 
 	scrollToBottom() {
-		this.messageRef.current.scrollIntoView({behavior: 'smooth'});
+		this.bottomOfMessages.current.scrollIntoView({behavior: 'smooth'});
 	}
 
 	componentDidMount() {
@@ -136,7 +136,7 @@ export class ChatRoom extends React.Component {
 				  </ul>
 			  	</div>
 			  	<div id="message-log">{messageList}
-			  		<div ref={this.messageRef} />
+			  		<div ref={this.bottomOfMessages} />
 			  	</div>
 			  	  <div id="lower-box">
 					<form id='message-form' onSubmit={this.handleSubmit}>
