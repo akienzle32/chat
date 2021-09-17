@@ -108,38 +108,40 @@ export class ChatRoom extends React.Component {
 	}
 	render() {
 		const { messages, loginAlert } = this.state;
+
 		if (loginAlert){
 			return <div>Error: {loginAlert}</div>
 		}
 		else {
 		  const messageList = messages.map(message => {
-  			return <div><p>{ message.author }</p><p id="message">{ message.content }</p><p id="timestamp">{ message.timestamp }</p></div>
-  			});
+  			return  <div><p>{ message.author }</p><p id="message">{ message.content }</p>
+  					<p id="timestamp">{ message.timestamp }</p></div>
+  		  });
 	  	  return (
-			<body>
-		  	<div class="upper-container">
-			  <a id="logout" href="http://127.0.0.1:8000/accounts/logout"><b>Log out</b></a>
-			  <h1 class="chat-title">Chat App</h1>
-		  </div>
-		  <div class="lower-container">
-			  <div id="ptc-list">
-			    <p>Participants:</p>
-			  	<ul>
-				  <li>alec</li>
-				  <li>matt</li>
-				</ul>
-			  </div>
-			  <div id="message-log">{messageList}</div>
-			  <div id="lower-box">
-				<form id='message-form' >
-				  <input type="text" id="chat-input" name="content" placeholder="Text message..."></input>
-				  <input type='hidden' name='author'></input>
-				  <input type='submit' value='Send' class='submitButton'></input>
-				</form>	
-			  </div>
-		  </div>	
-		 </body>	
-	  );
-	}
-  }
+			<div>
+		  	  <div class="upper-container">
+			  	<a id="logout" href="http://127.0.0.1:8000/accounts/logout"><b>Log out</b></a>
+			  	<h1 class="chat-title">Chat App</h1>
+		  	  </div>
+		  	  <div class="lower-container">
+			  	<div id="ptc-list">
+			      <p>Participants:</p>
+			  	  <ul>
+				  	<li>alec</li>
+				  	<li>matt</li>
+				  </ul>
+			  	</div>
+			  	<div id="message-log">{messageList}</div>
+			  	  <div id="lower-box">
+					<form id='message-form' >
+				  	  <input type="text" id="chat-input" name="content" placeholder="Text message..."></input>
+				  	  <input type='hidden' name='author'></input>
+				  	  <input type='submit' value='Send' class='submitButton'></input>
+					</form>	
+			  	</div>
+		  	  </div>	
+		 	</div>	
+	  	  );
+	  	}
+  	}
 }
