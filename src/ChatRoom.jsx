@@ -27,12 +27,19 @@ export class ChatRoom extends React.Component {
 		this.state = {
 			messages: [],
 			loginAlert: null
+
 		};
+		this.messageRef = React.createRef();
+	}
+
+	scrollToBottom() {
+		this.messageRef.current.scrollIntoView({behavior: 'smooth'});
 	}
 
 	componentDidMount() {
 		this.getMessages();
 		this.timer = setInterval(this.getMessages, 5000);
+		this.scrollToBottom();
 	}
 
 	getMessages = () => {
@@ -69,6 +76,10 @@ export class ChatRoom extends React.Component {
   				// For each message, display the username of the author, the message content itself, and the message's timestamp. 
     		}	
   		});
+	}
+
+	componentDidUpdate() {
+		this.scrollToBottom()
 	}
 
 	handleSubmit(event) {
@@ -127,7 +138,9 @@ export class ChatRoom extends React.Component {
 				  	<li>matt</li>
 				  </ul>
 			  	</div>
-			  	<div id="message-log">{messageList}</div>
+			  	<div id="message-log">{messageList}
+			  		<div ref={this.messageRef} />
+			  	</div>
 			  	  <div id="lower-box">
 					<form id='message-form' onSubmit={this.handleSubmit}>
 				  	  <input type="text" id="chat-input" name="content" placeholder="Text message..."></input>
