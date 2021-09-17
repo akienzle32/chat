@@ -1,44 +1,13 @@
-#message {
-  text-align: left;
-  padding: 5px;
-  border: 2px solid #4169E1;
-  border-radius: 5px;
-  background-color: white;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  display: inline-block;
+body {
+  font-family: Tahoma, sans serif;
 }
 
-#timestamp {
-  text-align: left;
-  margin-top: 5px;
-  font-size: 12px;
-}
-
-#chat-log {
-  background-color: #DCDCDC;
-  height: 200px;
-  overflow: scroll;
-  width: 400px;
-  border-radius: 25px;
-  border: 7px solid #4169E1;
-  padding: 50px;
-  margin: auto
-}
-
-#lower-box {
-  background-color: #DCDCDC;
-  height: 50px;
-  width: 400px;
-  padding-top: 25px;
-  padding-bottom: 25px;
-  padding-right: 50px;
+h1 {
   padding-left: 50px;
-  border-radius: 25px;
-  border-bottom: 7px solid #4169E1;
-  border-left: 7px solid #4169E1;
-  border-right: 7px solid #4169E1;
-  margin: auto
+}
+
+a:hover {
+  background: #B0C4DE;
 }
 
 #chat-input {
@@ -72,6 +41,7 @@
 }
 
 #start-chat {
+  overflow: scroll;
   background-color: #DCDCDC;
   height: 80px;
   width: 400px;
@@ -83,7 +53,7 @@
   border-right: 7px solid #4169E1;
   border-top: 7px solid #4169E1;
   border-radius: 25px;
-  margin: auto
+  margin: auto;
 }
 
 #enter-user {
@@ -103,7 +73,7 @@
   padding-left: 50px;
   padding-right: 50px;
   padding-bottom: 50px;
-  margin: auto
+  margin-left: 455px;
 }
 
 #home-title {
@@ -139,16 +109,4 @@
 
 #submit-forms {
   display: none;
-}
-
-body {
-  font-family: Tahoma, sans serif;
-}
-
-h1 {
-  padding-left: 50px;
-}
-
-a:hover {
-  background: #B0C4DE;
 }

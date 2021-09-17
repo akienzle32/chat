@@ -50,7 +50,7 @@ function fetchMessages() {
   		var messages = data.map(message => {
   			return message.author + '<br><p id=message>' + message.content + '</p><p id=timestamp>' + message.timestamp + '</p>'
   			}).join("");
-  		const chatLog = document.getElementById("chat-log");
+  		const chatLog = document.getElementById("message-log");
   		chatLog.innerHTML = messages;
   		chatLog.scrollTop = chatLog.scrollHeight;
     }	
@@ -111,7 +111,7 @@ export const Prompt = () => {
 				  			<li>matt</li>
 						</ul>
 			  		</div>
-			<div id="chat-log"></div>
+			<div id="message-log"></div>
 			<div id="lower-box">
 				<form id='message-form' >
 					<input type="text" id="chat-input" name="content" placeholder="Text message..."></input>

@@ -35,7 +35,7 @@
   border-radius: 30px;
 }
 
-#chat-log {
+#message-log {
   background-color: #DCDCDC;
   height: 200px;
   overflow: scroll;
