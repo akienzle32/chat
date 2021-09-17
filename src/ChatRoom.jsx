@@ -119,11 +119,11 @@ export class ChatRoom extends React.Component {
   		  });
 	  	  return (
 			<div>
-		  	  <div class="upper-container">
+		  	  <div className="upper-container">
 			  	<a id="logout" href="http://127.0.0.1:8000/accounts/logout"><b>Log out</b></a>
-			  	<h1 class="chat-title">Chat App</h1>
+			  	<h1 className="chat-title">Chat App</h1>
 		  	  </div>
-		  	  <div class="lower-container">
+		  	  <div className="lower-container">
 			  	<div id="ptc-list">
 			      <p>Participants:</p>
 			  	  <ul>
@@ -136,7 +136,7 @@ export class ChatRoom extends React.Component {
 					<form id='message-form' >
 				  	  <input type="text" id="chat-input" name="content" placeholder="Text message..."></input>
 				  	  <input type='hidden' name='author'></input>
-				  	  <input type='submit' value='Send' class='submitButton'></input>
+				  	  <input type='submit' value='Send' className='submitButton'></input>
 					</form>	
 			  	</div>
 		  	  </div>	
