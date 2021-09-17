@@ -48,7 +48,7 @@ export class ChatRoom extends React.Component {
 			mode: 'cors',
 			headers: {
 				'If-Modified-Since': new Date(Date.now() - 10000),
-				'X-CSRFToken': this.csrftoken,
+				'X-CSRFToken': this.state.csrftoken,
 			},
 			credentials: 'include',
 		})
@@ -79,6 +79,7 @@ export class ChatRoom extends React.Component {
 	}
 
 	handleSubmit = (event) => {
+		this.getCookie('csrftoken');
 		event.preventDefault();
 
 		let messageForm = event.target;
