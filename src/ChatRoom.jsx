@@ -100,7 +100,7 @@ export class ChatRoom extends React.Component {
 				return;
 			} 
 			else 
-				response.json()
+				return response.json();
 		})
 		.then(data => {console.log(data);
 		})
