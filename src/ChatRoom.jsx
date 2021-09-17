@@ -26,8 +26,7 @@ export class ChatRoom extends React.Component {
 		super(props);
 		this.state = {
 			messages: [],
-			loginAlert: null
-
+			loggedOut: false,
 		};
 		this.messageRef = React.createRef();
 	}
@@ -56,10 +55,8 @@ export class ChatRoom extends React.Component {
   		// If the server sends a 401 response because the user is not authenticated, display an alert message prompting
   		// the user to log in.
   			if (response.status === 401){
-  				const loginAlert = <p id="login-alert">Please
-  						<b><a id="login-link" href='http://127.0.0.1:8000/accounts/login/'> log in</a></b> to receive messages.</p>;
   				this.setState({
-  					loginAlert: loginAlert
+  					loggedOut: true
   				});
   				return;
   			}
@@ -114,16 +111,19 @@ export class ChatRoom extends React.Component {
 	}
 
 	render() {
-		const { messages, loginAlert } = this.state;
+		const { messages, loggedOut } = this.state;
+		let messageList;
 
-		if (loginAlert){
-			return <div>Error: {loginAlert}</div>
+		if (loggedOut){
+			messageList = <p id="login-alert">Please<b>
+			<a id="login-link" href='http://127.0.0.1:8000/accounts/login/'> log in</a></b> to receive messages.</p>;
 		}
 		else {
-		  const messageList = messages.map(message => {
+		  messageList = messages.map(message => {
   			return  <div key={message.id}><p>{ message.author }</p><p id="message">{ message.content }</p>
   					<p id="timestamp">{ message.timestamp }</p></div>
   		  });
+  		}
 	  	  return (
 			<div>
 		  	  <div className="upper-container">
@@ -153,4 +153,3 @@ export class ChatRoom extends React.Component {
 	  	  );
 	  	}
   	}
-}
