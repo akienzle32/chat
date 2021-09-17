@@ -28,10 +28,15 @@ export class ChatRoom extends React.Component {
 			messages: [],
 			loginAlert: null
 		};
+		let timer;
 	}
 
 	componentDidMount() {
+		this.getMessages();
+		this.timer = setInterval(this.getMessages, 5000);
+	}
 
+	getMessages = () => {
 		fetch('http://127.0.0.1:8000/chat/', {	
 			method: 'GET',
 			mode: 'cors',
