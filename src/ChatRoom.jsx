@@ -18,7 +18,7 @@ export class ChatRoom extends React.Component {
 
 	componentDidMount() {
 		this.getMessages();
-		this.timer = setInterval(this.getMessages, 5000);
+		//this.timer = setInterval(this.getMessages, 5000);
 		this.scrollToBottom();
 	}
 
@@ -71,6 +71,7 @@ export class ChatRoom extends React.Component {
 	}
 
 	componentDidUpdate() {
+		this.displayMessages();
 		this.scrollToBottom()
 	}
 
@@ -104,12 +105,16 @@ export class ChatRoom extends React.Component {
 		})
 		.then(data => {
 			console.log(data);
+			var newData = this.state.messages.concat(data);
+			this.setState({
+				messages: newData,
+			})
 		})
 		document.getElementById('message-form').reset();	
 	}
 
-	render() {
-		const { messages, loggedIn} = this.state;
+	displayMessages() {
+		const { messages, loggedIn } = this.state;
 		let messageList;
 
 		if (!loggedIn){
@@ -122,6 +127,10 @@ export class ChatRoom extends React.Component {
   					<p id="timestamp">{ message.timestamp }</p></div>
   		  });
   		}
+  		return messageList;
+	}
+
+	render() {
 	  	  return (
 			<div>
 		  	  <div className="upper-container">
@@ -136,7 +145,7 @@ export class ChatRoom extends React.Component {
 				  	<li>matt</li>
 				  </ul>
 			  	</div>
-			  	<div id="message-log">{messageList}
+			  	<div id="message-log">{this.displayMessages()}
 			  		<div ref={this.bottomOfMessages} />
 			  	</div>
 			  	  <div id="lower-box">
