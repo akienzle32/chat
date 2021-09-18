@@ -12,6 +12,7 @@ export class ChatRoom extends React.Component {
 		this.csrftoken = this.getCookie('csrftoken');
 	}
 
+	// Function to scroll the message-log div to the bottom. It is called by both componentDidMount() and componentDidUpdate(). 
 	scrollToBottom() {
 		this.bottomOfMessages.current.scrollIntoView({behavior: 'smooth'});
 	}
@@ -64,8 +65,7 @@ export class ChatRoom extends React.Component {
   				this.setState({
   					messages: data,
   					loggedIn: true,
-  				});
-  				// For each message, display the username of the author, the message content itself, and the message's timestamp. 
+  				}); 
     		}	
   		});
 	}
@@ -94,8 +94,8 @@ export class ChatRoom extends React.Component {
 			body: jsonData
 		})
 		.then(response => {
-		// If the server returns a redirect, follow the redirect url. A redirect will occur if the user
-		// attempts to send a message but isn't logged in.  
+			// If the server returns a redirect, follow the redirect url. A redirect will occur if the user
+			// attempts to send a message but isn't logged in.  
 			if (response.redirected){
 				window.location.href = response.url;
 				return;
@@ -105,7 +105,7 @@ export class ChatRoom extends React.Component {
 		})
 		.then(data => {
 			console.log(data);
-			var newData = this.state.messages.concat(data);
+			var newData = this.state.messages.concat(data); // React-recommended way of adding elements to a "stateful" array. 
 			this.setState({
 				messages: newData,
 			})
@@ -113,6 +113,8 @@ export class ChatRoom extends React.Component {
 		document.getElementById('message-form').reset();	
 	}
 
+	// If the user is logged in, then for each message, display the username of the author, the message content itself, 
+	// and the message's timestamp. This method is called by both componentDidMount() and componentDidUpdate(). 
 	displayMessages() {
 		const { messages, loggedIn } = this.state;
 		let messageList;
@@ -146,7 +148,7 @@ export class ChatRoom extends React.Component {
 				  </ul>
 			  	</div>
 			  	<div id="message-log">{this.displayMessages()}
-			  		<div ref={this.bottomOfMessages} />
+			  	  <div ref={this.bottomOfMessages} />
 			  	</div>
 			  	  <div id="lower-box">
 					<form id='message-form' onSubmit={this.handleSubmit}>
