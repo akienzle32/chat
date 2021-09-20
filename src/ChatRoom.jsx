@@ -7,7 +7,7 @@ export class ChatRoom extends React.Component {
 		super(props);
 		this.state = {
 			messages: [],
-			loggedIn: false,
+			loggedIn: false, // Because the backend doesn't support multiple chats yet, I'm tracking authentication state here.
 		};
 		this.bottomOfMessages = React.createRef();
 		this.csrftoken = this.getCookie('csrftoken');
@@ -18,12 +18,14 @@ export class ChatRoom extends React.Component {
 		this.bottomOfMessages.current.scrollIntoView({behavior: 'smooth'});
 	}
 
+	// Load messages with the page, and ping the server once every five seconds for new messages after initial page load.  
 	componentDidMount() {
 		this.getMessages();
 		this.timer = setInterval(this.getMessages, 5000);
 		this.scrollToBottom();
 	}
 
+	// Needed to avoid continued GET requests after user navigates away from page. 
 	componentWillUnmount() {
 		clearInterval(this.timer);
 	}
