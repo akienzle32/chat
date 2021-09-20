@@ -10,11 +10,16 @@ import {
 export function App() {
 	return(
 		<Router>
-		  <Switch>
-			<Route path="/">
-			  <Home />
-			</Route>
-		  </Switch>
+		  <div>
+		  	<Switch>
+		  	  <Route path="/chat">
+				<ChatRoom />
+			  </Route>
+			  <Route path="/">
+			  	<Home />
+			  </Route>
+		  	</Switch>
+		  </div>
 		</Router>
 
 	);
