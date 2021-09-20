@@ -1,9 +1,11 @@
-h1 {
-  padding-left: 50px;
-}
 
 a:hover {
   background: #B0C4DE;
+}
+
+.nav-bar {
+  margin: 10px;
+
 }
 
 .container-title {
@@ -19,7 +21,7 @@ a:hover {
   background-color: #DCDCDC;
   border: 7px solid #4169E1;
   border-radius: 25px;
-  margin-left: 455px;
+  margin-left: 460px;
   overflow: scroll;
 }
 
@@ -29,7 +31,7 @@ a:hover {
   border-right: 7px solid #4169E1;
   border-bottom: 7px solid #4169E1;
   border-radius: 25px;
-  margin-left: 455px;
+  margin-left: 460px;
   overflow: scroll;
 }
 
@@ -39,6 +41,15 @@ a:hover {
 
 .chat-title {
   text-align: center;
+}
+
+#home-link {
+  float: left;
+  margin-left: 5px;
+}
+
+#logout {
+  float: right;
 }
 
 #start-chat {
@@ -91,21 +102,12 @@ a:hover {
   font-size: 18px;
 }
 
-#logout {
-  float: right;
-  font-size: 15px;
-  color:  black;
-  margin-right: 25px;
-  text-decoration: none
-}
-
 #enter-user {
   height: 25px;
   font-size: 15px;
 }
 
 #home-title {
-  padding-left: 80px;
   text-align: center;
 }
 

@@ -7,10 +7,11 @@ export class Home extends React.Component {
   render() {
   	return (
   	  <div>
-  		<div>
-	  	  <a id="logout" href="http://127.0.0.1:8000/accounts/logout"><b>Log out</b></a>
-	  	  <h1 id="home-title">Chat App</h1>
+  		<div className="nav-bar">
+  		  <Link className="link" to="/">Home</Link>
+	  	  <a className="link" id="logout" href="http://127.0.0.1:8000/accounts/logout">Log out</a>
 		</div>
+		<div><h1 id="home-title">Chat App</h1></div>
 
 		<div className="top-box" id="start-chat">
     	  <h3 className="container-title">Start a new chat</h3>
