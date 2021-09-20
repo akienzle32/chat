@@ -4,7 +4,21 @@ import './App.css';
 
 
 export class Home extends React.Component {
+  constructor(props) {
+  	super(props);
+  	this.state = {
+  		chats: [{id:1, name:"Django"}, {id:2, name:"React"}],
+  	}
+  }
   render() {
+  	const chats = this.state.chats;
+  	const chatList = chats.map(chat => {
+  		return  <div>
+  				  <ul>
+  				  	<li><Link className="link" to="/chat">{chat.name}</Link></li>
+  				  </ul>
+  				</div>
+  	})
   	return (
   	  <div>
   		<div className="nav-bar">
@@ -27,10 +41,8 @@ export class Home extends React.Component {
       		</div>
   		</div>
   		<div className="bottom-box" id="my-chats">
-  		  <h3 className="container-title">My Chats</h3>
-      		<div>
-      		  <Link className="link" to="/chat">Chat Room</Link>
-      		</div>
+  		  <h3 className="container-title">My Chat Rooms</h3>
+      		<div>{chatList}</div>
 	 	</div>
   	  </div>
     );

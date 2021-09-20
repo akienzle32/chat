@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import './App.css';
 
 export class ChatRoom extends React.Component {
@@ -170,3 +170,15 @@ export class ChatRoom extends React.Component {
 	  	  );
 	  	}
   	}
+
+/*
+export function GetParams() {
+	let { name } = useParams();
+	return(
+		<div>
+			<ChatRoom name={name} />
+		</div>
+	);
+}
+*/
+
