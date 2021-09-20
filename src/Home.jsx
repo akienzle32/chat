@@ -29,7 +29,7 @@ export class Home extends React.Component {
   		<div className="bottom-box" id="my-chats">
   		  <h3 className="container-title">My Chats</h3>
       		<div>
-      		  <Link className="link" to="/chat">Chat</Link>
+      		  <Link className="link" to="/chat">Chat Room</Link>
       		</div>
 	 	</div>
   	  </div>
