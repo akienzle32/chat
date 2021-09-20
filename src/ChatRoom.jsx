@@ -24,6 +24,10 @@ export class ChatRoom extends React.Component {
 		this.scrollToBottom();
 	}
 
+	componentWillUnmount() {
+		clearInterval(this.timer);
+	}
+
 	// Function provided by Django for adding csrf tokens to AJAX requests; see https://docs.djangoproject.com/en/3.2/ref/csrf/ for details.
 	getCookie(name) {
     	let cookieValue = null;
