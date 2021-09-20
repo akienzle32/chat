@@ -13,11 +13,7 @@ export class Home extends React.Component {
   render() {
   	const chats = this.state.chats;
   	const chatList = chats.map(chat => {
-  		return  <div>
-  				  <ul>
-  				  	<li><Link key={chat.id} className="link" to={`${chat.name}`}>{chat.name}</Link></li>
-  				  </ul>
-  				</div>
+  		return <li key={chat.id}><Link className="link" to={`${chat.name}`}>{chat.name}</Link></li>
   	})
   	return (
   	  <div>
@@ -42,7 +38,9 @@ export class Home extends React.Component {
   		</div>
   		<div className="bottom-box" id="my-chats">
   		  <h3 className="container-title">My chat rooms</h3>
-      		<div>{chatList}</div>
+      		<div>
+      		  <ul>{chatList}</ul>
+      		</div>
 	 	</div>
   	  </div>
     );
