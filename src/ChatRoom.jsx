@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import './App.css';
 
-export class ChatRoom extends React.Component {
+class ChatRoom extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -146,7 +146,7 @@ export class ChatRoom extends React.Component {
 		  	  	<Link className="link" to="/">Home</Link>
 			  	<a className="link" id="logout" href="http://127.0.0.1:8000/accounts/logout">Log out</a>
 		  	  </div>
-		  	  <div><h1 className="chat-title">Chat Room</h1></div>
+		  	  <div><h1 className="chat-title">{this.props.name}</h1></div>
 		  	  <div className="lower-container">
 			  	<div id="ptc-list">
 			      <p>Participants:</p>
@@ -171,7 +171,7 @@ export class ChatRoom extends React.Component {
 	  	}
   	}
 
-/*
+
 export function GetParams() {
 	let { name } = useParams();
 	return(
@@ -180,5 +180,4 @@ export function GetParams() {
 		</div>
 	);
 }
-*/
 

@@ -15,7 +15,7 @@ export class Home extends React.Component {
   	const chatList = chats.map(chat => {
   		return  <div>
   				  <ul>
-  				  	<li><Link className="link" to="/chat">{chat.name}</Link></li>
+  				  	<li><Link key={chat.id} className="link" to={`${chat.name}`}>{chat.name}</Link></li>
   				  </ul>
   				</div>
   	})
@@ -41,7 +41,7 @@ export class Home extends React.Component {
       		</div>
   		</div>
   		<div className="bottom-box" id="my-chats">
-  		  <h3 className="container-title">My Chat Rooms</h3>
+  		  <h3 className="container-title">My chat rooms</h3>
       		<div>{chatList}</div>
 	 	</div>
   	  </div>

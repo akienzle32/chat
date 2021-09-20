@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChatRoom } from './ChatRoom';
+import { GetParams } from './ChatRoom';
 import { Home } from './Home';
 import {
   BrowserRouter as Router,
@@ -11,8 +11,8 @@ export function App() {
 		<Router>
 		  <div>
 		  	<Switch>
-		  	  <Route path="/chat">
-				<ChatRoom />
+		  	  <Route path="/:name">
+				<GetParams />
 			  </Route>
 			  <Route path="/">
 			  	<Home />
