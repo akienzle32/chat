@@ -121,7 +121,7 @@ export class ChatRoom extends React.Component {
 
 		if (!loggedIn){
 			messageList = <p id="login-alert">Please<b>
-			<a id="login-link" href='http://127.0.0.1:8000/accounts/login/'> log in</a></b> to receive messages.</p>;
+			<a className="link" id="login-link" href='http://127.0.0.1:8000/accounts/login/'> log in </a></b> to receive messages.</p>;
 		}
 		else {
 		  messageList = messages.map(message => {
@@ -136,7 +136,7 @@ export class ChatRoom extends React.Component {
 	  	  return (
 			<div>
 		  	  <div className="upper-container">
-			  	<a id="logout" href="http://127.0.0.1:8000/accounts/logout"><b>Log out</b></a>
+			  	<a className="link" id="logout" href="http://127.0.0.1:8000/accounts/logout"><b>Log out</b></a>
 			  	<h1 className="chat-title">Chat App</h1>
 		  	  </div>
 		  	  <div className="lower-container">
@@ -147,12 +147,12 @@ export class ChatRoom extends React.Component {
 				  	<li>matt</li>
 				  </ul>
 			  	</div>
-			  	<div id="message-log">{this.displayMessages()}
+			  	<div className="top-box" id="message-log">{this.displayMessages()}
 			  	  <div ref={this.bottomOfMessages} />
 			  	</div>
-			  	  <div id="lower-box">
+			  	  <div className="bottom-box" id="new-messages">
 					<form id='message-form' onSubmit={this.handleSubmit}>
-				  	  <input type="text" id="chat-input" name="content" placeholder="Text message..."></input>
+				  	  <input type="text" id="message-input" name="content" placeholder="Text message..."></input>
 				  	  <input type='hidden' name='author'></input>
 				  	  <input type='submit' value='Send' className='submitButton'></input>
 					</form>	

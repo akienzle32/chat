@@ -12,7 +12,7 @@ export class Home extends React.Component {
 	  	  <h1 id="home-title">Chat App</h1>
 		</div>
 
-		<div id="start-chat">
+		<div className="top-box" id="start-chat">
     	  <h3 className="container-title">Start a new chat</h3>
       		<div>
         	  <div id="chat-form-container">
@@ -25,7 +25,7 @@ export class Home extends React.Component {
         	  </div>
       		</div>
   		</div>
-  		<div id="my-chats">
+  		<div className="bottom-box" id="my-chats">
   		  <h3 className="container-title">My Chats</h3>
       		<div>
       		  <Link className="link" to="/chat">Chat</Link>
