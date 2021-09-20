@@ -44,7 +44,7 @@ export class ChatRoom extends React.Component {
 			method: 'GET',
 			mode: 'cors',
 			headers: {
-				'If-Modified-Since': new Date(Date.now() - 10000),
+				//'If-Modified-Since': new Date(Date.now() - 10000),
 				'X-CSRFToken': this.state.csrftoken,
 			},
 			credentials: 'include',
