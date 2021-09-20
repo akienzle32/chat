@@ -11,6 +11,10 @@ a:hover {
   text-align: center;
 }
 
+.link {
+  text-decoration: none;
+}
+
 #chat-input {
   background-color: white;
   height: 20px;
