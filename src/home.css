@@ -1,6 +1,3 @@
-body {
-  font-family: Tahoma, sans serif;
-}
 
 h1 {
   padding-left: 50px;
@@ -8,6 +5,10 @@ h1 {
 
 a:hover {
   background: #B0C4DE;
+}
+
+.container-title {
+  text-align: center;
 }
 
 #chat-input {
@@ -73,7 +74,7 @@ a:hover {
   padding-left: 50px;
   padding-right: 50px;
   padding-bottom: 50px;
-  margin-left: 455px;
+  margin-left: 463px;
 }
 
 #home-title {
@@ -97,7 +98,6 @@ a:hover {
 
 #add-ptc-button {
   height: 27px;
-  margin-left: -5px;
 }
 
 #extra-ptcs {

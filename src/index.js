@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { ChatRoom } from './ChatRoom'
+import { App } from './App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ChatRoom />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
