@@ -1,5 +1,5 @@
 import React from 'react';
-import './ChatRoom.css';
+import './App.css';
 
 export class ChatRoom extends React.Component {
 	constructor(props) {
