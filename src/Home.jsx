@@ -7,6 +7,7 @@ export class Home extends React.Component {
   constructor(props) {
   	super(props);
   	this.state = {
+  		username: "alec",
   		chats: [{id:1, name:"Django"}, {id:2, name:"React"}],
   		participants: 	[{id:1, username:"alec", chat_id:1}, 
   						{id:2, username:"matt", chat_id:1},
@@ -28,16 +29,19 @@ export class Home extends React.Component {
   	this.setState({
   		chats: newChats,
   	})
-  		
-  	const username = document.getElementById("ptc-name").value;
+  	
+  	const myUsername = this.state.username;
+  	const otherUsername = document.getElementById("ptc-name").value;
   	const ptcps = this.state.participants;
   	const lastPtcp = ptcps[ptcps.length - 1];
   	const ptcpId = lastPtcp.id + 1;
-  	const JSONptcp = {id:ptcpId, username:username, chat_id:chatId};
-  	const newPtcps = this.state.participants.concat(JSONptcp);
-  	console.log(newPtcps);
+  	const firstJsonPtcp = {id:ptcpId, username:myUsername, chat_id:chatId};
+  	const secondJsonPtcp = {id:ptcpId+1, username: otherUsername, chat_id:chatId};
+  	ptcps.push(firstJsonPtcp);
+  	ptcps.push(secondJsonPtcp);
+  	console.log(ptcps);
   		this.setState({
-  			participants: newPtcps,
+  			participants: ptcps,
   		})
   	
   	document.getElementById("chat-form").reset();
