@@ -14,6 +14,8 @@ export class Home extends React.Component {
   						{id:4, username:"carol", chat_id:2, chat_name:"React"}],
   	}
   }
+
+ 
   render() {
   	const chats = this.state.chats;
   	const participants = this.state.participants;
@@ -32,9 +34,11 @@ export class Home extends React.Component {
   	}
 
   	const chatList = chatsAndPtcs.map(chat => {
-  		return	<tr>
-  				  <td><Link className="link" to={`${chat.name}`}>{chat.name}</Link></td>
-  				  <td>{chat.usernames}</td>
+  		let users = chat.usernames.join(", ");
+  		let name = chat.name;
+  		return <tr>
+  				  <td><Link className="link" to={`${name}`}>{name}</Link></td>
+  				  <td>{users}</td>
   				</tr>
   	})
 
