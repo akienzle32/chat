@@ -15,6 +15,35 @@ export class Home extends React.Component {
   	}
   }
 
+  handleSubmit = (event) => {
+  	event.preventDefault();
+  	const value = document.getElementById("chat-name").value;
+
+  	const chats = this.state.chats;
+  	const lastChat = chats[chats.length - 1];
+  	const chatId = lastChat.id + 1;
+  	const JSONelement = {id:chatId, name:value}
+  	const newChats = this.state.chats.concat(JSONelement);
+  	console.log(newChats);
+  	this.setState({
+  		chats: newChats,
+  	})
+  	document.getElementById("chat-form").reset();	
+  }
+
+  	/*
+  	}
+  	else {
+  		const newPtc = this.state.participants.concat(value);
+  		console.log(newPtc);
+  		this.setState({
+  			participants: newPtc,
+  		})
+  	}
+  	<input type="text" id="ptc-name" name="username" placeholder="Enter a username..."></input>
+  	<input type="button" value="+" id="add-ptc-button"></input>
+	*/
+
  
   render() {
   	const chats = this.state.chats;
@@ -36,7 +65,7 @@ export class Home extends React.Component {
   	const chatList = chatsAndPtcs.map(chat => {
   		let users = chat.usernames.join(", ");
   		let name = chat.name;
-  		return <tr>
+  		return <tr key={name}>
   				  <td><Link className="link" to={`${name}`}>{name}</Link></td>
   				  <td>{users}</td>
   				</tr>
@@ -54,12 +83,10 @@ export class Home extends React.Component {
     	  <h3 className="container-title">Start a new chat</h3>
       		<div>
         	  <div id="chat-form-container">
-    		  	<form id="chat-form" method="post">
+        	  	<form id="chat-form" onSubmit={this.handleSubmit}>
     			  <input type="text" id="chat-name" name="chatname" placeholder="Enter a chatroom name..."></input>
-    			  <input type="text" id="ptc-name" name="username" placeholder="Enter a username..."></input>
-           		  <input type="button" value="+" id="add-ptc-button"></input>
-           		  <input id="submit-forms" type="submit"></input>
-          		</form>
+           		  <input type="submit" id="submit-forms" className="submitButton"></input>
+           		</form>
         	  </div>
       		</div>
   		</div>
