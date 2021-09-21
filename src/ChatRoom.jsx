@@ -1,10 +1,11 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './App.css';
 
-class ChatRoom extends React.Component {
+export class ChatRoom extends React.Component {
 	constructor(props) {
 		super(props);
+		console.log(this.props.participants);
 		this.state = {
 			messages: [],
 			loggedIn: false, // Because the backend doesn't support multiple chats yet, I'm tracking authentication state here.
@@ -170,14 +171,4 @@ class ChatRoom extends React.Component {
 	  	  );
 	  	}
   	}
-
-
-export function GetParams() {
-	let { name } = useParams();
-	return(
-		<div>
-			<ChatRoom name={name} />
-		</div>
-	);
-}
 

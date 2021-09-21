@@ -4,25 +4,14 @@ import './App.css';
 
 
 export class Home extends React.Component {
-  constructor(props) {
-  	super(props);
-  	// Test data for handling state.
-  	this.state = {
-  		username: "alec",
-  		chats: [{id:1, name:"Django"}, {id:2, name:"React"}],
-  		participants: 	[{id:1, username:"alec", chat_id:1}, 
-  						{id:2, username:"matt", chat_id:1},
-  						{id:3, username:"alec", chat_id:2},
-  						{id:4, username:"carol", chat_id:2}],
-  	}
-  }
 
   // Test function for handling multiple input boxes. This will eventually handle two POST requests.
+  /*
   handleSubmit = (event) => {
   	event.preventDefault();
   	const chatName = document.getElementById("chat-name").value;
 
-  	const chats = this.state.chats;
+  	const chats = this.props.chats;
   	const lastChat = chats[chats.length - 1];
   	const chatId = lastChat.id + 1;
   	const JSONchat = {id:chatId, name:chatName}
@@ -32,9 +21,9 @@ export class Home extends React.Component {
   		chats: newChats,
   	})
   	
-  	const myUsername = this.state.username;
+  	const myUsername = this.props.username;
   	const otherUsername = document.getElementById("ptc-name").value;
-  	const ptcps = this.state.participants;
+  	const ptcps = this.props.participants;
   	const lastPtcp = ptcps[ptcps.length - 1];
   	const ptcpId = lastPtcp.id + 1;
   	const firstJsonPtcp = {id:ptcpId, username:myUsername, chat_id:chatId};
@@ -48,12 +37,13 @@ export class Home extends React.Component {
   	
   	document.getElementById("chat-form").reset();
   }
- 
+
+  */
   render() {
   	// Routine for displaying the user's chats and their participants. This will need to be moved to a 
   	// componentDidMount function once GET requests are functioning, but the logic should remain the same. 
-  	const chats = this.state.chats;
-  	const participants = this.state.participants;
+  	const chats = this.props.chats;
+  	const participants = this.props.participants;
   	const chatsAndPtcps = [];
 
   	for (let i = 0; i < chats.length; i++){
