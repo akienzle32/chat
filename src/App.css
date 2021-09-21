@@ -3,6 +3,11 @@ a:hover {
   background: #B0C4DE;
 }
 
+table {
+  width: 100%;
+  text-align: left;
+}
+
 .nav-bar {
   margin: 10px;
 

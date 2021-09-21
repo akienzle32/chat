@@ -8,13 +8,35 @@ export class Home extends React.Component {
   	super(props);
   	this.state = {
   		chats: [{id:1, name:"Django"}, {id:2, name:"React"}],
+  		participants: 	[{id:1, username:"alec", chat_id:1, chat_name:"Django"}, 
+  						{id:2, username:"matt", chat_id:1, chat_name:"Django"},
+  						{id:3, username:"alec", chat_id:2, chat_name:"React"},
+  						{id:4, username:"carol", chat_id:2, chat_name:"React"}],
   	}
   }
   render() {
   	const chats = this.state.chats;
-  	const chatList = chats.map(chat => {
-  		return <li key={chat.id}><Link className="link" to={`${chat.name}`}>{chat.name}</Link></li>
+  	const participants = this.state.participants;
+  	const chatsAndPtcs = [];
+
+  	for (let i = 0; i < chats.length; i++){
+  		const usernameArray = [];
+  		for (let j = 0; j < participants.length; j++){
+  			if (chats[i].name === participants[j].chat_name)
+  				usernameArray.push(participants[j].username);
+  		}
+  		let chatName = chats[i].name;
+  		let JSONelement = {name:chatName, usernames:usernameArray};
+  		chatsAndPtcs.push(JSONelement);
+  	} 
+
+  	const chatList = chatsAndPtcs.map(chat => {
+  		return	<tr>
+  				  <td>{chat.name}</td>
+  				  <td>{chat.usernames}</td>
+  				</tr>
   	})
+
   	return (
   	  <div>
   		<div className="nav-bar">
@@ -39,7 +61,13 @@ export class Home extends React.Component {
   		<div className="bottom-box" id="my-chats">
   		  <h3 className="container-title">My chat rooms</h3>
       		<div>
-      		  <ul>{chatList}</ul>
+      		  <table>
+      		  	<tr>
+      		  	  <th>Name</th>
+      		  	  <th>Participants</th>
+      		  	</tr>
+      		  	{chatList}
+      		  </table>
       		</div>
 	 	</div>
   	  </div>
