@@ -37,11 +37,11 @@ export class Home extends React.Component {
   	const ptcpId = lastPtcp.id + 1;
   	const firstJsonPtcp = {id:ptcpId, username:myUsername, chat_id:chatId};
   	const secondJsonPtcp = {id:ptcpId+1, username: otherUsername, chat_id:chatId};
-  	ptcps.push(firstJsonPtcp);
-  	ptcps.push(secondJsonPtcp);
-  	console.log(ptcps);
+  	const tempPtcps = ptcps.concat(firstJsonPtcp);
+  	const newPtcps = tempPtcps.concat(secondJsonPtcp);
+  	console.log(newPtcps);
   		this.setState({
-  			participants: ptcps,
+  			participants: newPtcps,
   		})
   	
   	document.getElementById("chat-form").reset();
