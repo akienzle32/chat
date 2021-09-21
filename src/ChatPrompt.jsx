@@ -35,7 +35,7 @@ function fetchMessages() {
   	// If the server sends a 401 response because the user is not authenticated, display an alert message prompting
   	// the user to log in.
   	if (response.status === 401){
-  		document.getElementById("chat-log").innerHTML = '<p id=login-alert>Please ' + 
+  		document.getElementById("message-log").innerHTML = '<p id=login-alert>Please ' + 
   		'<b><a id=login-link href=http://127.0.0.1:8000/accounts/login/>log in</a></b> to receive messages.</p>';
   		return;
   	}
@@ -50,7 +50,7 @@ function fetchMessages() {
   		var messages = data.map(message => {
   			return message.author + '<br><p id=message>' + message.content + '</p><p id=timestamp>' + message.timestamp + '</p>'
   			}).join("");
-  		const chatLog = document.getElementById("chat-log");
+  		const chatLog = document.getElementById("message-log");
   		chatLog.innerHTML = messages;
   		chatLog.scrollTop = chatLog.scrollHeight;
     }	
@@ -99,9 +99,11 @@ document.addEventListener('submit', function (event) {
 export const Prompt = () => {
 	return (
 		<body>
-			<a id="logout" style={{float: 'right'}} href="http://127.0.0.1:8000/accounts/logout"><b>Log out</b></a>
-			<h1 style={{textAlign: 'center'}}>Chat App</h1>
-				<div id="container">
+			<div class="upper-container">
+				<a id="logout" href="http://127.0.0.1:8000/accounts/logout"><b>Log out</b></a>
+				<h1 class="chat-title">Chat App</h1>
+			</div>
+				<div class="lower-container">
 			  		<div id="ptc-list">
 			  			<p>Participants:</p>
 			  			<ul>
@@ -109,12 +111,12 @@ export const Prompt = () => {
 				  			<li>matt</li>
 						</ul>
 			  		</div>
-			<div id="chat-log"></div>
+			<div id="message-log"></div>
 			<div id="lower-box">
 				<form id='message-form' >
 					<input type="text" id="chat-input" name="content" placeholder="Text message..."></input>
 					<input type='hidden' name='author'></input>
-					<input type='submit' value='Send' id='submitButton'></input>
+					<input type='submit' value='Send' class='submitButton'></input>
 				</form>	
 			</div>
 		  </div>	
