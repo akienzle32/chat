@@ -17,30 +17,32 @@ export class Home extends React.Component {
 
   handleSubmit = (event) => {
   	event.preventDefault();
-  	const value = document.getElementById("chat-name").value;
+  	const chatName = document.getElementById("chat-name").value;
 
   	const chats = this.state.chats;
   	const lastChat = chats[chats.length - 1];
   	const chatId = lastChat.id + 1;
-  	const JSONelement = {id:chatId, name:value}
-  	const newChats = this.state.chats.concat(JSONelement);
+  	const JSONchat = {id:chatId, name:chatName}
+  	const newChats = this.state.chats.concat(JSONchat);
   	console.log(newChats);
   	this.setState({
   		chats: newChats,
   	})
-  	document.getElementById("chat-form").reset();	
-  }
-
-  	/*
-  	}
-  	else {
-  		const newPtc = this.state.participants.concat(value);
-  		console.log(newPtc);
+  		
+  	const username = document.getElementById("ptc-name").value;
+  	const ptcps = this.state.participants;
+  	const lastPtcp = ptcps[ptcps.length - 1];
+  	const ptcpId = lastPtcp.id + 1;
+  	const JSONptcp = {id:ptcpId, username:username, chat_id:chatId};
+  	const newPtcps = this.state.participants.concat(JSONptcp);
+  	console.log(newPtcps);
   		this.setState({
-  			participants: newPtc,
+  			participants: newPtcps,
   		})
-  	}
-  	<input type="text" id="ptc-name" name="username" placeholder="Enter a username..."></input>
+  	
+  	document.getElementById("chat-form").reset();
+  }
+  	/*
   	<input type="button" value="+" id="add-ptc-button"></input>
 	*/
 
@@ -85,6 +87,7 @@ export class Home extends React.Component {
         	  <div id="chat-form-container">
         	  	<form id="chat-form" onSubmit={this.handleSubmit}>
     			  <input type="text" id="chat-name" name="chatname" placeholder="Enter a chatroom name..."></input>
+    			  <input type="text" id="ptc-name" name="username" placeholder="Enter a username..."></input>
            		  <input type="submit" id="submit-forms" className="submitButton"></input>
            		</form>
         	  </div>
