@@ -32,7 +32,7 @@ export class Home extends React.Component {
 
   	const chatList = chatsAndPtcs.map(chat => {
   		return	<tr>
-  				  <td>{chat.name}</td>
+  				  <td><Link className="link" to={`${chat.name}`}>{chat.name}</Link></td>
   				  <td>{chat.usernames}</td>
   				</tr>
   	})
