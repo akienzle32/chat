@@ -112,7 +112,7 @@ class ChatRoom extends React.Component {
 		})
 		.then(data => {
 			console.log(data);
-			var newData = this.state.messages.concat(data); // React-recommended way of adding elements to a "stateful" array. 
+			const newData = this.state.messages.concat(data); // React-recommended way of adding elements to a "stateful" array. 
 			this.setState({
 				messages: newData,
 			})
