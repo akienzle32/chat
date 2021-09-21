@@ -8,10 +8,10 @@ export class Home extends React.Component {
   	super(props);
   	this.state = {
   		chats: [{id:1, name:"Django"}, {id:2, name:"React"}],
-  		participants: 	[{id:1, username:"alec", chat_id:1, chat_name:"Django"}, 
-  						{id:2, username:"matt", chat_id:1, chat_name:"Django"},
-  						{id:3, username:"alec", chat_id:2, chat_name:"React"},
-  						{id:4, username:"carol", chat_id:2, chat_name:"React"}],
+  		participants: 	[{id:1, username:"alec", chat_id:1}, 
+  						{id:2, username:"matt", chat_id:1},
+  						{id:3, username:"alec", chat_id:2},
+  						{id:4, username:"carol", chat_id:2}],
   	}
   }
 
@@ -24,7 +24,7 @@ export class Home extends React.Component {
   	for (let i = 0; i < chats.length; i++){
   		const usernameArray = [];
   		for (let j = 0; j < participants.length; j++){
-  			if (chats[i].name === participants[j].chat_name){
+  			if (chats[i].id === participants[j].chat_id){
   				usernameArray.push(participants[j].username);
   			}
   		}
