@@ -50,6 +50,8 @@ export class Home extends React.Component {
   }
  
   render() {
+  	// Routine for displaying the user's chats and their participants. This will need to be moved to a 
+  	// componentDidMount function once GET requests are functioning, but the logic should remain the same. 
   	const chats = this.state.chats;
   	const participants = this.state.participants;
   	const chatsAndPtcps = [];
