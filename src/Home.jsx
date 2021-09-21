@@ -6,6 +6,7 @@ import './App.css';
 export class Home extends React.Component {
   constructor(props) {
   	super(props);
+  	// Test data for handling state.
   	this.state = {
   		username: "alec",
   		chats: [{id:1, name:"Django"}, {id:2, name:"React"}],
@@ -16,6 +17,7 @@ export class Home extends React.Component {
   	}
   }
 
+  // Test function for handling multiple input boxes. This will eventually handle two POST requests.
   handleSubmit = (event) => {
   	event.preventDefault();
   	const chatName = document.getElementById("chat-name").value;
@@ -46,15 +48,11 @@ export class Home extends React.Component {
   	
   	document.getElementById("chat-form").reset();
   }
-  	/*
-  	<input type="button" value="+" id="add-ptc-button"></input>
-	*/
-
  
   render() {
   	const chats = this.state.chats;
   	const participants = this.state.participants;
-  	const chatsAndPtcs = [];
+  	const chatsAndPtcps = [];
 
   	for (let i = 0; i < chats.length; i++){
   		const usernameArray = [];
@@ -65,10 +63,10 @@ export class Home extends React.Component {
   		}
   		let chatName = chats[i].name;
   		let JSONelement = {name:chatName, usernames:usernameArray};
-  		chatsAndPtcs.push(JSONelement);
+  		chatsAndPtcps.push(JSONelement);
   	}
 
-  	const chatList = chatsAndPtcs.map(chat => {
+  	const chatList = chatsAndPtcps.map(chat => {
   		let users = chat.usernames.join(", ");
   		let name = chat.name;
   		return <tr key={name}>
