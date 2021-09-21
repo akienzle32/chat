@@ -22,13 +22,14 @@ export class Home extends React.Component {
   	for (let i = 0; i < chats.length; i++){
   		const usernameArray = [];
   		for (let j = 0; j < participants.length; j++){
-  			if (chats[i].name === participants[j].chat_name)
+  			if (chats[i].name === participants[j].chat_name){
   				usernameArray.push(participants[j].username);
+  			}
   		}
   		let chatName = chats[i].name;
   		let JSONelement = {name:chatName, usernames:usernameArray};
   		chatsAndPtcs.push(JSONelement);
-  	} 
+  	}
 
   	const chatList = chatsAndPtcs.map(chat => {
   		return	<tr>
