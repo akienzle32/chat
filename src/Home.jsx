@@ -20,7 +20,7 @@ export class Home extends React.Component {
   }
 
   // Test function for updating the state of the user's chats. Eventually, this will be two POST requests. 
-  addChat = (chatname) => {
+  addChat = (chatname, ptcpname) => {
   	const chats = this.state.chats;
   	const lastChat = chats[chats.length - 1];
     const chatId = lastChat.id + 1;
@@ -28,26 +28,25 @@ export class Home extends React.Component {
   	const newChats = chats.concat(JSONchat);
   	console.log(newChats);
 
-  	this.setState({
-  		chats: newChats,
-  	})
-  }
-
-/*
-	const myUsername = this.state.username;
-  	const otherUsername = this.input2;
+  	const myUsername = this.state.username;
+  	const otherUsername = ptcpname;
   	const ptcps = this.state.participants;
   	const lastPtcp = ptcps[ptcps.length - 1];
   	const ptcpId = lastPtcp.id + 1;
   	const firstJsonPtcp = {id:ptcpId, username:myUsername, chat_id:chatId};
-  	const secondJsonPtcp = {id:ptcpId+1, username: otherUsername, chat_id:chatId};
+  	const secondJsonPtcp = {id:ptcpId+1, username:ptcpname, chat_id:chatId};
   	const tempPtcps = ptcps.concat(firstJsonPtcp);
   	const newPtcps = tempPtcps.concat(secondJsonPtcp);
   	console.log(newPtcps);
   		this.setState({
   			participants: newPtcps,
   		})
-  */
+
+  	this.setState({
+  		chats: newChats,
+  	})
+  }
+
   // Determines the conditional rendering of either the StartChat/ChatList components OR the ChatRoom component.
   // This gets passed down as a prop to StartChat and then eventually to ChatList. 
   handleClick = () => {

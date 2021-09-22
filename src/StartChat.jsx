@@ -2,27 +2,15 @@ import React from 'react';
 import { ChatList } from './ChatList';
 
 export class StartChat extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      chatInput: null,
-    }
-  }
 
   onSubmit = (event) => {
     event.preventDefault();
 
     const chatName = document.getElementById("chat-name").value;
-    //const ptcpName = document.getElementById("ptc-name").value;
-    //const ptcpInput = this.state.ptcpInput;
-    this.setState({
-      chatInput: chatName,
-    })
-    this.props.onSubmit(chatName);
+    const ptcpName = document.getElementById("ptc-name").value;
+    this.props.onSubmit(chatName, ptcpName);
     document.getElementById("chat-form").reset();
   }
-
-  /*<input type="text" id="ptc-name" name="username" placeholder="Enter a username..."></input>*/
 
   render() {
   	return(
@@ -34,6 +22,7 @@ export class StartChat extends React.Component {
         	  	  <div id="chat-form-container">
         	  		<form id="chat-form" onSubmit={this.onSubmit}>
     			  	    <input type="text" id="chat-name" name="chatname" placeholder="Enter a chatroom name..."></input>
+                  <input type="text" id="ptc-name" name="username" placeholder="Enter a username..."></input>
            		    <input type="submit" id="submit-forms" className="submitButton"></input>
            			</form>
         	   	  </div>
