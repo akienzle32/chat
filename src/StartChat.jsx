@@ -1,6 +1,5 @@
 import React from 'react';
 import { ChatList } from './ChatList';
-import { ChatRoom } from './ChatRoom';
 
 export class StartChat extends React.Component {
   constructor(props){

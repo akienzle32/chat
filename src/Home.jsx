@@ -1,6 +1,5 @@
 import React from 'react';
 import { StartChat } from './StartChat';
-import { ChatList } from './ChatList';
 import { ChatRoom } from './ChatRoom';
 import { Link } from 'react-router-dom';
 
