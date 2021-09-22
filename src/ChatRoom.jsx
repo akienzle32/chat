@@ -140,9 +140,27 @@ export class ChatRoom extends React.Component {
   		return messageList;
 	}
 
-	render() {
+	displayParticipants(){
+		/*
+		const chats = this.props.chats;
+		const participants = this.props.participants;
+
 		const path = window.location.pathname;
-		const chatName = path.slice(1);
+		const currentChat = path.slice(1);
+		*/
+	}
+
+	displayChatRoomName(){
+		const path = window.location.pathname;
+		const pathArray = path.split('/');
+		const chatName = pathArray[1];
+
+		return(chatName);
+	}
+
+	render() {
+		const chatName = this.displayChatRoomName();
+
 	  	  return (
 			<div>
 		  	  <div><h1 className="chat-title">{chatName}</h1></div>
