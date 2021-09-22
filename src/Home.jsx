@@ -29,7 +29,6 @@ export class Home extends React.Component {
   	console.log(newChats);
 
   	const myUsername = this.state.username;
-  	const otherUsername = ptcpname;
   	const ptcps = this.state.participants;
   	const lastPtcp = ptcps[ptcps.length - 1];
   	const ptcpId = lastPtcp.id + 1;
