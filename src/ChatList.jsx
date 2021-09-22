@@ -16,16 +16,18 @@ export class ChatList extends React.Component {
   				usernameArray.push(participants[j].username);
   			}
   		}
+  		let chatId = chats[i].id;
   		let chatName = chats[i].name;
-  		let JSONelement = {name:chatName, usernames:usernameArray};
+  		let JSONelement = {id:chatId, name:chatName, usernames:usernameArray};
   		chatsAndPtcps.push(JSONelement);
   	}
 
   	const chatList = chatsAndPtcps.map(chat => {
   	let users = chat.usernames.join(", ");
   	let name = chat.name;
+  	let id = chat.id;
   		return <tr key={name}>
-  				  <td><Link onClick={this.props.onClick} className="link" to={`${name}`}>{name}</Link></td>
+  				  <td><Link onClick={this.props.onClick} className="link" to={`${name}/${id}`}>{name}</Link></td>
   				  <td>{users}</td>
   			   </tr>
   	})

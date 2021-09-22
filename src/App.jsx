@@ -57,7 +57,7 @@ export class App extends React.Component {
 	  	  <a className="link" id="logout" href="http://127.0.0.1:8000/accounts/logout">Log out</a>
 		</div>
 	 	<Switch>
-	 	  <Route path="/:name">
+	 	  <Route path="/:name/:id">
   			<ChatRoom chats={this.state.chats} participants={this.state.participants} />;
   		  </Route>
 		  <Route path="/">
