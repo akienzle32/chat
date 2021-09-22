@@ -37,11 +37,13 @@ export class ChatList extends React.Component {
   		  	<h3 className="container-title">My chat rooms</h3>
       		  <div>
       		    <table>
-      		  	  <tr>
-      		  	  	<th>Name</th>
-      		  	  	<th>Participants</th>
-      		  	  </tr>
+      		      <tbody>
+      		  	  	<tr>
+      		  	  	  <th>Name</th>
+      		  	  	  <th>Participants</th>
+      		  	  	</tr>
       		  		{chatList}
+      		  	  </tbody>
       		  	</table>
       		  </div>
 	 		</div>
