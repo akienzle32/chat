@@ -1,10 +1,11 @@
 import React from 'react';
 import './App.css';
 
+
 export class ChatRoom extends React.Component {
+
 	constructor(props) {
 		super(props);
-		console.log(this.props.participants);
 		this.state = {
 			messages: [],
 			loggedIn: false, // Because the backend doesn't support multiple chats yet, I'm tracking authentication state here.
@@ -140,9 +141,11 @@ export class ChatRoom extends React.Component {
 	}
 
 	render() {
+		const path = window.location.pathname;
+		const chatName = path.slice(1);
 	  	  return (
 			<div>
-		  	  <div><h1 className="chat-title">Chat Room</h1></div>
+		  	  <div><h1 className="chat-title">{chatName}</h1></div>
 		  	  <div className="lower-container">
 			  	<div id="ptc-list">
 			      <p>Participants:</p>
