@@ -24,15 +24,13 @@ export class Home extends React.Component {
   	const chats = this.state.chats;
   	const lastChat = chats[chats.length - 1];
     const chatId = lastChat.id + 1;
-    if (chatname !== null){
-    	const JSONchat = {id:chatId, name:chatname}
-  		const newChats = chats.concat(JSONchat);
-  		console.log(newChats);
+    const JSONchat = {id:chatId, name:chatname}
+  	const newChats = chats.concat(JSONchat);
+  	console.log(newChats);
 
-  		this.setState({
-  			chats: newChats,
-  		})
-  	}
+  	this.setState({
+  		chats: newChats,
+  	})
   }
 
 /*
