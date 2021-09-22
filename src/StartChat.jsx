@@ -3,6 +3,9 @@ import { ChatList } from './ChatList';
 
 export class StartChat extends React.Component {
 
+
+  // Function to pass text input up to App component, where the state of chats and participants 
+  // is tracked. 
   onSubmit = (event) => {
     event.preventDefault();
 

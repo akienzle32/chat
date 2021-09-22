@@ -22,7 +22,8 @@ export class App extends React.Component {
   		isClicked: false,
   	}
   }
-
+  // Test function for updating the state of the user's chats. Eventually, this will be two POST requests, one 
+  // to a chat endpoint and the other to a participant endpoint.
   addChat = (chatname, ptcpname) => {
   	const chats = this.state.chats;
   	const lastChat = chats[chats.length - 1];
