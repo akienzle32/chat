@@ -1,5 +1,6 @@
 import React from 'react';
 import { ChatList } from './ChatList';
+import { ChatRoom } from './ChatRoom';
 
 export class StartChat extends React.Component {
   constructor(props){
@@ -60,7 +61,7 @@ export class StartChat extends React.Component {
         	   	  </div>
       			</div>
   			</div>
-  			<ChatList chats={this.state.chats} participants={this.state.participants} />
+  			<ChatList chats={this.state.chats} participants={this.state.participants} onClick={this.props.onClick} />
   	  </div>
 
   	);

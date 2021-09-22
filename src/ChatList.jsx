@@ -23,7 +23,7 @@ export class ChatList extends React.Component {
   	let users = chat.usernames.join(", ");
   	let name = chat.name;
   		return <tr key={name}>
-  				  <td><Link className="link" to={`${name}`}>{name}</Link></td>
+  				  <td><Link onClick={this.props.onClick} className="link" to={`${name}`}>{name}</Link></td>
   				  <td>{users}</td>
   			   </tr>
   	})
