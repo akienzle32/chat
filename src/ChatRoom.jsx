@@ -153,7 +153,7 @@ export class ChatRoom extends React.Component {
 				participantArray.push(participants[i].username);
 		}
 		console.log(participantArray);
-		const ptcpList = participantArray.map(participant => {return <li>{ participant }</li>})
+		const ptcpList = participantArray.map((participant, index) => {return <li key={index}>{ participant }</li>})
 		return(ptcpList);
 	}
 
