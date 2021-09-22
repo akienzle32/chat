@@ -13,9 +13,6 @@ export class App extends React.Component {
 	return(
 	  <Router>
 	 	<Switch>
-	 	  <Route path="/:name">
-	 	  	<ChatRoom />
-	 	  </Route>
 		  <Route path="/">
 			  <Home />
 		  </Route>
