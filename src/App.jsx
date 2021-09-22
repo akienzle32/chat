@@ -1,6 +1,6 @@
 import React from 'react';
 import { ChatRoom } from './ChatRoom';
-import { Home } from './Home';
+import { StartChat } from './StartChat';
 import {
   BrowserRouter as Router,
   Switch,
@@ -61,7 +61,7 @@ export class App extends React.Component {
   			<ChatRoom participants={this.state.participants} />;
   		  </Route>
 		  <Route path="/">
-			<Home chats={this.state.chats} participants={this.state.participants} onSubmit={this.addChat} />
+			<StartChat chats={this.state.chats} participants={this.state.participants} onSubmit={this.addChat} />
 		  </Route>
 		</Switch>
 	  </Router>
