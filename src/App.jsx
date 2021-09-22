@@ -10,7 +10,7 @@ import {
 export class App extends React.Component {
   constructor(props){
   	super(props);
-  	// Test data for managing state. 
+  	// Test data for managing state. This data gets passed down as props to child components. 
   	this.state = {
   		username: "alec",
   		chats: [{id:1, name:"Django"}, {id:2, name:"React"}],
@@ -21,8 +21,9 @@ export class App extends React.Component {
   			{id:4, username:"carol", chat_id:2}],
   	}
   }
-  // Test function for updating the state of the user's chats. Eventually, this will be two POST requests, one 
-  // to a chat endpoint and the other to a participant endpoint.
+  // Test function for updating the state of the user's chats that gets passed down as a prop
+  // to StartChat. Eventually, this will be two POST requests, one to a chat endpoint and the 
+  // other to a participant endpoint.
   addChat = (chatname, ptcpname) => {
   	const chats = this.state.chats;
   	const lastChat = chats[chats.length - 1];
