@@ -141,14 +141,22 @@ export class ChatRoom extends React.Component {
 	}
 
 	displayParticipants(){
-		/*
-		const chats = this.props.chats;
 		const participants = this.props.participants;
+		const participantArray = [];
 
 		const path = window.location.pathname;
-		const currentChat = path.slice(1);
-		*/
+		const pathArray = path.split('/');
+		const chatId = parseInt(pathArray[2]);
+
+		for (let i = 0; i < participants.length; i++){
+			if (participants[i].chat_id === chatId)
+				participantArray.push(participants[i].username);
+		}
+		console.log(participantArray);
+		const ptcpList = participantArray.map(participant => {return <li>{ participant }</li>})
+		return(ptcpList);
 	}
+
 
 	displayChatRoomName(){
 		const path = window.location.pathname;
@@ -159,18 +167,13 @@ export class ChatRoom extends React.Component {
 	}
 
 	render() {
-		const chatName = this.displayChatRoomName();
-
 	  	  return (
 			<div>
-		  	  <div><h1 className="chat-title">{chatName}</h1></div>
+		  	  <div><h1 className="chat-title">{this.displayChatRoomName()}</h1></div>
 		  	  <div className="lower-container">
 			  	<div id="ptc-list">
 			      <p>Participants:</p>
-			  	  <ul>
-				  	<li>alec</li>
-				  	<li>matt</li>
-				  </ul>
+			  	  <ul>{this.displayParticipants()}</ul>
 			  	</div>
 			  	<div className="top-box" id="message-log">{this.displayMessages()}
 			  	  <div ref={this.bottomOfMessages} />
