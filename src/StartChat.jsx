@@ -5,16 +5,19 @@ import { ChatRoom } from './ChatRoom';
 export class StartChat extends React.Component {
   constructor(props){
   	super(props);
+  	// Test data for managing state. 
   	this.state = {
   		username: "alec",
   		chats: [{id:1, name:"Django"}, {id:2, name:"React"}],
-  		participants: 	[{id:1, username:"alec", chat_id:1}, 
-  						{id:2, username:"matt", chat_id:1},
-  						{id:3, username:"alec", chat_id:2},
-  						{id:4, username:"carol", chat_id:2}],
+  		participants:
+  			[{id:1, username:"alec", chat_id:1}, 
+  			{id:2, username:"matt", chat_id:1},
+  			{id:3, username:"alec", chat_id:2},
+  			{id:4, username:"carol", chat_id:2}],
   	}  	
   }
 
+ // Test function for updating the state of the user's chats. Eventually, this will be two POST requests. 
  handleSubmit = (event) => {
   	event.preventDefault();
   	const chatName = document.getElementById("chat-name").value;

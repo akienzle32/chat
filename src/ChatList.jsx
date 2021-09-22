@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 
 export class ChatList extends React.Component {
   render() {
+
+  	// Routine for mapping each individual chat to its participants and displaying the data. 
   	const chats = this.props.chats;
   	const participants = this.props.participants;
   	const chatsAndPtcps = [];

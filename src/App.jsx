@@ -12,16 +12,16 @@ export class App extends React.Component {
 
   render() {
 	return(
-		<Router>
-		  <Switch>
-		  	<Route path="/:name">
-			  <ChatRoom />
-			</Route>
-		  	<Route path="/">
+	  <Router>
+	 	<Switch>
+	 	  <Route path="/:name">
+	 	  	<ChatRoom />
+	 	  </Route>
+		  <Route path="/">
 			  <Home />
-			</Route>
-		  </Switch>
-	  	</Router>
+		  </Route>
+		</Switch>
+	  </Router>
 	);
   }
 }
