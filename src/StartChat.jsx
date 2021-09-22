@@ -31,7 +31,7 @@ export class StartChat extends React.Component {
         	   	  </div>
       			</div>
   			</div>
-  			<ChatList chats={this.props.chats} participants={this.props.participants} onClick={this.props.onClick} />
+  			<ChatList chats={this.props.chats} participants={this.props.participants} />
   	  </div>
   	);
   }

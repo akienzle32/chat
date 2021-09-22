@@ -10,7 +10,7 @@ export class Home extends React.Component {
 	  <div>
 		<div>
 			<StartChat chats={this.props.chats} participants={this.props.participants} 
-  	onSubmit={this.props.onSubmit} onClick={this.props.onClick} />;
+  	onSubmit={this.props.onSubmit} />;
 		</div>
 	  </div>
 	);

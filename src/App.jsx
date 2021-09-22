@@ -19,7 +19,6 @@ export class App extends React.Component {
   			{id:2, username:"matt", chat_id:1},
   			{id:3, username:"alec", chat_id:2},
   			{id:4, username:"carol", chat_id:2}],
-  		isClicked: false,
   	}
   }
   // Test function for updating the state of the user's chats. Eventually, this will be two POST requests, one 
@@ -50,10 +49,6 @@ export class App extends React.Component {
   	})
   }
 
-  handleClick = () => {
-  	this.setState({isClicked: true});
-  }
-
   render() {
 	return(
 	  <Router>
@@ -66,8 +61,7 @@ export class App extends React.Component {
   			<ChatRoom participants={this.state.participants} />;
   		  </Route>
 		  <Route path="/">
-			<Home chats={this.state.chats} participants={this.state.participants} 
-				onSubmit={this.addChat} onClick={this.handleClick} />
+			<Home chats={this.state.chats} participants={this.state.participants} onSubmit={this.addChat} />
 		  </Route>
 		</Switch>
 	  </Router>
