@@ -48,6 +48,26 @@ table {
   text-align: center;
 }
 
+.ptcp-name {
+  width: 170px;
+  height: 22px;
+  font-size: 14px;
+}
+
+#chat-name {
+  width: 170px;
+  height: 22px;
+  font-size: 14px;
+}
+
+#add-ptcp-button {
+  height: 28px;
+  margin-right: 18px;
+  display: table;
+  float: right;
+
+}
+
 #home-link {
   float: left;
   margin-left: 5px;
@@ -118,33 +138,6 @@ table {
 
 #col-title {
   font-size: 17px;
-}
-
-.ptcp-name {
-  width: 170px;
-  height: 22px;
-  font-size: 14px;
-}
-
-#chat-name {
-  width: 170px;
-  height: 22px;
-  font-size: 14px;
-  margin-left: 10px;
-}
-
-#add-ptcp-button {
-  float: right;
-  height: 28px;
-  margin-right: 10px;
-  align-content: center;
-}
-
-#extra-ptcs {
-  display: table;
-  margin-left: 183px;
-  width: 170px;
-  height: 20px;
 }
 
 #submit-forms {

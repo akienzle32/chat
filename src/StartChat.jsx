@@ -57,14 +57,14 @@ export class StartChat extends React.Component {
 			<div className="top-box" id="start-chat">
     	  	  <h3 className="container-title">Start a new chat</h3>
       			<div>
-        	  	  <div id="chat-form-container">
-        	  		<form id="chat-form" onSubmit={this.onSubmit}>
+        	  	<form id="chat-form" onSubmit={this.onSubmit}>
+                <div>
     			  	    <input type="text" id="chat-name" name="chatname" placeholder="Enter a chatroom name..."></input>
-                  {this.displayInputBoxes()}
                   <input type="button" id="add-ptcp-button" value="+" onClick={this.addParticipants}></input>
+                  {this.displayInputBoxes()}
            		    <input type="submit" id="submit-forms" className="submitButton"></input>
-           			</form>
-        	   	  </div>
+                </div>
+           		</form>
       			</div>
   			</div>
   			<ChatList chats={this.props.chats} participants={this.props.participants} />
