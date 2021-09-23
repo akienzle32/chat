@@ -6,7 +6,7 @@ export class StartChat extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      ptcpCounter: 1,
+      input: ["Please enter a username..."],
     }
   }
 
@@ -25,25 +25,30 @@ export class StartChat extends React.Component {
 
 
   addParticipants = () => {
-    let ptcpCounter = this.state.ptcpCounter;
-    if (ptcpCounter < 5)
-      ptcpCounter++;
-    this.setState({
-      ptcpCounter: ptcpCounter,
+    const input = this.state.input;
+    const extraInput = "";
+    const newInput = input.concat(extraInput);
+    if (input.length < 5)
+      this.setState({
+        input: newInput,
     })
   }
-/*
-  displayExtraInput(){
-    const maxParticipants = 5;
-    const ptcpCounter = this.state.ptcpCounter;
-    let extraInput;
-    if (ptcpCounter < maxParticipants){
-      extraInput = <input type="text" name="username" className="ptcp-name"></input>
-    }
 
-    return(extraInput);
+  displayInputBoxes(){
+    const input = this.state.input;
+    const inputList = input.map((placeholder, index) => {
+      return <input key={index} type="text" className="ptcp-name" name="username" placeholder={ placeholder }></input>
+    })
+    return(inputList);
   }
- */   
+
+  componentDidMount(){
+    this.displayInputBoxes();
+  }
+
+  componentDidUpdate(){
+    this.displayInputBoxes();
+  }
 
   render() {
   	return(
@@ -55,7 +60,7 @@ export class StartChat extends React.Component {
         	  	  <div id="chat-form-container">
         	  		<form id="chat-form" onSubmit={this.onSubmit}>
     			  	    <input type="text" id="chat-name" name="chatname" placeholder="Enter a chatroom name..."></input>
-                  <input type="text" className="ptcp-name" name="username" placeholder="Enter a username..."></input>
+                  {this.displayInputBoxes()}
                   <input type="button" id="add-ptcp-button" value="+" onClick={this.addParticipants}></input>
            		    <input type="submit" id="submit-forms" className="submitButton"></input>
            			</form>
