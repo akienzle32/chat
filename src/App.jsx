@@ -48,6 +48,8 @@ export class App extends React.Component {
   	})
   }
   
+  // Tester function for adding a date to a new chat. We may eventually want to refrain from actually adding 
+  // a chat to the database until a message has been sent (I think this is how iMessage works?).
   addTime(){
   	const weekday = "Thu";
   	const month = "Sep";
