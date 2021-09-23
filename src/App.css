@@ -52,27 +52,25 @@ table {
   width: 170px;
   height: 22px;
   font-size: 14px;
-  display: inline-grid;
+  display: table;
 }
 
-#first-ptcp-box.ptcp-name {
-  width: 170px;
-  height: 22px;
-  font-size: 14px;
-  display: inline-grid;
+#form-container {
+  margin-left: 110px;
 }
 
 #chat-name {
   width: 170px;
   height: 22px;
   font-size: 14px;
+  display: table;
+
 }
 
 #add-ptcp-button {
   height: 28px;
-  margin-right: 20px;
-  display: table;
   float: right;
+  margin-right: 88px;
 }
 
 #home-link {

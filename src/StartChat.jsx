@@ -26,7 +26,7 @@ export class StartChat extends React.Component {
 
   addParticipants = () => {
     const input = this.state.input;
-    const extraInput = "";
+    const extraInput = "Add another username... ";
     const newInput = input.concat(extraInput);
     if (input.length < 5)
       this.setState({
@@ -37,7 +37,7 @@ export class StartChat extends React.Component {
   displayInputBoxes(){
     const input = this.state.input;
     const inputList = input.map((placeholder, index) => {
-        return <input key={index} type="text" className="ptcp-name" name="username" placeholder={ placeholder }></input>
+      return <input key={index} type="text" className="ptcp-name" name="username" placeholder={ placeholder }></input>
     })
     return(inputList);
   }
@@ -56,7 +56,7 @@ export class StartChat extends React.Component {
 		  <h1 id="home-title">Chat App</h1>
 			<div className="top-box" id="start-chat">
     	  	  <h3 className="container-title">Start a new chat</h3>
-      			<div>
+      			<div id="form-container">
         	  	<form id="chat-form" onSubmit={this.onSubmit}>
                 <div>
     			  	    <input type="text" id="chat-name" name="chatname" placeholder="Enter a chatroom name..."></input>
