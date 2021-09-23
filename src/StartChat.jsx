@@ -6,7 +6,7 @@ export class StartChat extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      input: ["Please enter a username..."],
+      input: ["Enter a username... "],
     }
   }
 
