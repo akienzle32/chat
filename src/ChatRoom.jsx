@@ -26,7 +26,7 @@ export class ChatRoom extends React.Component {
 		this.scrollToBottom();
 	}
 
-	// This method is needed to avoid continued GET requests after user navigates away from page. 
+	// This method is needed in order to avoid continued GET requests after user navigates away from page. 
 	componentWillUnmount() {
 		clearInterval(this.timer);
 	}
@@ -52,7 +52,8 @@ export class ChatRoom extends React.Component {
 			method: 'GET',
 			mode: 'cors',
 			headers: {
-				//'If-Modified-Since': new Date(Date.now() - 10000),
+				// For this initial testing phase, I'm getting rid of conditional GET requests.
+				/*'If-Modified-Since': new Date(Date.now() - 10000),*/
 				'X-CSRFToken': this.state.csrftoken,
 			},
 			credentials: 'include',
@@ -156,7 +157,7 @@ export class ChatRoom extends React.Component {
 		return(ptcpList);
 	}
 
-
+	// Scrape the chat room name from the url. 
 	displayChatRoomName(){
 		const path = window.location.pathname;
 		const pathArray = path.split('/');

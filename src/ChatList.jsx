@@ -33,6 +33,7 @@ export class ChatList extends React.Component {
   sortChats(chatsAndPtcps){
   	const sortedChats = chatsAndPtcps.sort((chatA, chatB) => 
   		{return chatB.last_modified - chatA.last_modified});
+
   	return(sortedChats);
   }
   
@@ -57,10 +58,10 @@ export class ChatList extends React.Component {
   		let intHour = parseInt(hourstring) + 12;
     	hourstring = intHour.toString();
     	tempTime = hourstring + minutes;
-    	//console.log(tempTime);
   	}
   	const time = tempTime.slice(0, 5) + ":00";
   	const convertedDatetime = month + " " + day + ", " + year + " " + time;
+
   	return(convertedDatetime);
   }
 
