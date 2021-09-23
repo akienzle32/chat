@@ -4,11 +4,10 @@ import { Link } from 'react-router-dom';
 export class ChatList extends React.Component {
 
   // Maps chats to their participants and returns this array sorted by the last_modified column.
-  mapAndSortChats(){
+  mapChats(){
   	const chats = this.props.chats;
   	const participants = this.props.participants;
   	const chatsAndPtcps = [];
-  	let sortedChats = [];
 
   	for (let i = 0; i < chats.length; i++){
   		const usernameArray = [];
@@ -24,9 +23,15 @@ export class ChatList extends React.Component {
   		let parsedDate = new Date(convertedDate);
   		let JSONelement = {id:chatId, name:chatName, usernames:usernameArray, last_modified:parsedDate};
   		chatsAndPtcps.push(JSONelement);
-  		sortedChats = chatsAndPtcps.sort((chatA, chatB) => {return chatB.last_modified - chatA.last_modified});
+  		
   	}
 
+  	return(chatsAndPtcps);
+  }
+
+  sortChats(chats){
+  	const sortedChats = chats.sort((chatA, chatB) => 
+  		{return chatB.last_modified - chatA.last_modified});
   	return(sortedChats);
   }
   
@@ -61,7 +66,8 @@ export class ChatList extends React.Component {
 
   render() {
   	// Routine for displaying the data chats and their participants.
-  	const sortedChats = this.mapAndSortChats();
+  	const chatsAndPtcps = this.mapChats();
+  	const sortedChats = this.sortChats(chatsAndPtcps);
   	const chatList = sortedChats.map(chat => {
   		let users = chat.usernames.join(", ");
   		let name = chat.name;
