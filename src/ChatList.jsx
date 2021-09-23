@@ -2,7 +2,35 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export class ChatList extends React.Component {
+
+  // Maps chats to their participants and returns this array sorted by the last_modified column.
+  mapAndSortChats(){
+  	const chats = this.props.chats;
+  	const participants = this.props.participants;
+  	const chatsAndPtcps = [];
+  	let sortedChats = [];
+
+  	for (let i = 0; i < chats.length; i++){
+  		const usernameArray = [];
+  		for (let j = 0; j < participants.length; j++){
+  			if (chats[i].id === participants[j].chat_id){
+  				usernameArray.push(participants[j].username);
+  			}
+  		}
+  		let chatId = chats[i].id;
+  		let chatName = chats[i].name;
+  		let lastModified = chats[i].last_modified;
+  		let convertedDate = this.convertDatetime(lastModified);
+  		let parsedDate = new Date(convertedDate);
+  		let JSONelement = {id:chatId, name:chatName, usernames:usernameArray, last_modified:parsedDate};
+  		chatsAndPtcps.push(JSONelement);
+  		sortedChats = chatsAndPtcps.sort((chatA, chatB) => {return chatB.last_modified - chatA.last_modified});
+  	}
+
+  	return(sortedChats);
+  }
   
+  // Converts the data in last_modified column into a format that can be easily sorted by JavaScript.
   convertDatetime(datestring) {
 	const month = datestring.slice(5, 8);
 	const day = datestring.slice(9, 11);
@@ -32,33 +60,12 @@ export class ChatList extends React.Component {
 
 
   render() {
-  	// Routine for mapping each individual chat to its participants and displaying the data. 
-  	const chats = this.props.chats;
-  	const participants = this.props.participants;
-  	const chatsAndPtcps = [];
-  	let sortedChats = [];
-
-  	for (let i = 0; i < chats.length; i++){
-  		const usernameArray = [];
-  		for (let j = 0; j < participants.length; j++){
-  			if (chats[i].id === participants[j].chat_id){
-  				usernameArray.push(participants[j].username);
-  			}
-  		}
-  		let chatId = chats[i].id;
-  		let chatName = chats[i].name;
-  		let lastModified = chats[i].last_modified;
-  		let convertedDate = this.convertDatetime(lastModified);
-  		let parsedDate = new Date(convertedDate);
-  		let JSONelement = {id:chatId, name:chatName, usernames:usernameArray, last_modified:parsedDate};
-  		chatsAndPtcps.push(JSONelement);
-  		sortedChats = chatsAndPtcps.sort((chatA, chatB) => {return chatB.last_modified - chatA.last_modified});
-  	}
-
+  	// Routine for displaying the data chats and their participants.
+  	const sortedChats = this.mapAndSortChats();
   	const chatList = sortedChats.map(chat => {
-  	let users = chat.usernames.join(", ");
-  	let name = chat.name;
-  	let id = chat.id;
+  		let users = chat.usernames.join(", ");
+  		let name = chat.name;
+  		let id = chat.id;
   		return <tr key={name}>
   				  <td><Link onClick={this.props.onClick} className="link" to={`${name}/${id}`}>{name}</Link></td>
   				  <td>{users}</td>
