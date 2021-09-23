@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export class ChatList extends React.Component {
-
   
   convertDatetime(datestring) {
 	const month = datestring.slice(5, 8);
@@ -33,7 +32,6 @@ export class ChatList extends React.Component {
 
 
   render() {
-
   	// Routine for mapping each individual chat to its participants and displaying the data. 
   	const chats = this.props.chats;
   	const participants = this.props.participants;

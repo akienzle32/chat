@@ -47,7 +47,7 @@ export class App extends React.Component {
   		chats: newChats,
   	})
   }
-
+  
   addTime(){
   	const weekday = "Thu";
   	const month = "Sep";
