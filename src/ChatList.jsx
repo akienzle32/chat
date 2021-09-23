@@ -12,9 +12,8 @@ export class ChatList extends React.Component {
   	for (let i = 0; i < chats.length; i++){
   		const usernameArray = [];
   		for (let j = 0; j < participants.length; j++){
-  			if (chats[i].id === participants[j].chat_id){
+  			if (chats[i].id === participants[j].chat_id)
   				usernameArray.push(participants[j].username);
-  			}
   		}
   		let chatId = chats[i].id;
   		let chatName = chats[i].name;
@@ -48,16 +47,16 @@ export class ChatList extends React.Component {
     
   	let paddedHour;
   	if (hour.length === 1)
-    	paddedHour = '0' + hour;
+  		paddedHour = '0' + hour;
   	else
-    	paddedHour = hour;
+  		paddedHour = hour;
     
   	let tempTime = paddedHour + minutes;
   	if (tempTime[5] === 'P'){
   		let hourstring = tempTime.slice(0, 2);
   		let intHour = parseInt(hourstring) + 12;
-    	hourstring = intHour.toString();
-    	tempTime = hourstring + minutes;
+  		hourstring = intHour.toString();
+  		tempTime = hourstring + minutes;
   	}
   	const time = tempTime.slice(0, 5) + ":00";
   	const convertedDatetime = month + " " + day + ", " + year + " " + time;

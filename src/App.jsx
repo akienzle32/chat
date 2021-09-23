@@ -27,9 +27,9 @@ export class App extends React.Component {
   addChat = (chatname, ptcpname) => {
   	const chats = this.state.chats;
   	const lastChat = chats[chats.length - 1];
-    const chatId = lastChat.id + 1;
-    const datetime = this.addTime();
-    const JSONchat = {id:chatId, name:chatname, last_modified:datetime}
+  	const chatId = lastChat.id + 1;
+  	const datetime = this.addTime();
+  	const JSONchat = {id:chatId, name:chatname, last_modified:datetime}
   	const newChats = chats.concat(JSONchat);
   	console.log(newChats);
 
