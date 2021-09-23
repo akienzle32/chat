@@ -120,10 +120,17 @@ table {
   font-size: 17px;
 }
 
-#ptc-name, #chat-name {
+#ptc-name {
   width: 170px;
   height: 22px;
   font-size: 14px;
+}
+
+#chat-name {
+  width: 170px;
+  height: 22px;
+  font-size: 14px;
+  margin-left: 18px;
 }
 
 #add-ptc-button {
