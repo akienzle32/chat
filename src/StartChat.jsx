@@ -23,16 +23,28 @@ export class StartChat extends React.Component {
     document.getElementById("chat-form").reset();
   }
 
-  /*
-  addExtraParticipant(){
-    let maxParticipants = 5;
+
+  addParticipants = () => {
     let ptcpCounter = this.state.ptcpCounter;
+    if (ptcpCounter < 5)
+      ptcpCounter++;
+    this.setState({
+      ptcpCounter: ptcpCounter,
+    })
+  }
+/*
+  displayExtraInput(){
+    const maxParticipants = 5;
+    const ptcpCounter = this.state.ptcpCounter;
+    let extraInput;
     if (ptcpCounter < maxParticipants){
-      let extraInput = <input></input>
+      extraInput = <input type="text" name="username" className="ptcp-name"></input>
     }
 
+    return(extraInput);
   }
-  */
+ */   
+
   render() {
   	return(
   	  <div>
@@ -44,7 +56,7 @@ export class StartChat extends React.Component {
         	  		<form id="chat-form" onSubmit={this.onSubmit}>
     			  	    <input type="text" id="chat-name" name="chatname" placeholder="Enter a chatroom name..."></input>
                   <input type="text" className="ptcp-name" name="username" placeholder="Enter a username..."></input>
-                  <input type="text" id="add-ptcp-button" value="+"></input>
+                  <input type="button" id="add-ptcp-button" value="+" onClick={this.addParticipants}></input>
            		    <input type="submit" id="submit-forms" className="submitButton"></input>
            			</form>
         	   	  </div>
