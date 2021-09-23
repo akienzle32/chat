@@ -41,11 +41,8 @@ export class App extends React.Component {
   	const tempPtcps = ptcps.concat(firstJsonPtcp);
   	const newPtcps = tempPtcps.concat(secondJsonPtcp);
   	console.log(newPtcps);
-  		this.setState({
-  			participants: newPtcps,
-  		})
-
   	this.setState({
+  		participants: newPtcps,
   		chats: newChats,
   	})
   }
