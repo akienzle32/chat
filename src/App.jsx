@@ -48,9 +48,10 @@ export class App extends React.Component {
   	})
   }
   
-  // Tester function for adding a date to a new chat. We may eventually want to refrain from actually adding 
-  // a chat to the database until a message has been sent (I think this is how iMessage works?), but with the
-  // current setup, I have to add a datetime into last_modified right when a chat is created. 
+  // Tester function for adding a date to a new chat. Considering that last_modified will be a
+  // foreign key on the messages table, we may eventually want to refrain from actually adding a
+  // chat to the database until a message is sent. But with the current setup I have, a datetime 
+  // needs to be added into the last_modified column right when a chat is created. 
   addTime(){
   	const weekday = "Thu";
   	const month = "Sep";
