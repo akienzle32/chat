@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export class ChatList extends React.Component {
 
-  // Maps chats to their participants and returns this array sorted by the last_modified column.
+  // Maps chats to their participants.
   mapChats(){
   	const chats = this.props.chats;
   	const participants = this.props.participants;
@@ -29,8 +29,9 @@ export class ChatList extends React.Component {
   	return(chatsAndPtcps);
   }
 
-  sortChats(chats){
-  	const sortedChats = chats.sort((chatA, chatB) => 
+  // Sorts the mapped chats array by the last_modified column.
+  sortChats(chatsAndPtcps){
+  	const sortedChats = chatsAndPtcps.sort((chatA, chatB) => 
   		{return chatB.last_modified - chatA.last_modified});
   	return(sortedChats);
   }
