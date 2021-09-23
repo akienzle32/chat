@@ -141,6 +141,10 @@ table {
   display: none;
 }
 
+#author-par {
+  margin-bottom: 5px;
+}
+
 #message {
   text-align: left;
   padding: 5px;
