@@ -2,12 +2,43 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export class ChatList extends React.Component {
+
+  
+  convertDatetime(datestring) {
+	const month = datestring.slice(5, 8);
+	const day = datestring.slice(9, 11);
+	const timestring = datestring.slice(12, 18);
+	const year = new Date().getFullYear();
+	const hour = timestring.slice(0, timestring.indexOf(":"));
+  	const minutes = timestring.slice(timestring.indexOf(":"));
+    
+  	let paddedHour;
+  	if (hour.length === 1)
+    	paddedHour = '0' + hour;
+  	else
+    	paddedHour = hour;
+    
+  	let tempTime = paddedHour + minutes;
+  	if (tempTime[5] === 'P'){
+  		let hourstring = tempTime.slice(0, 2);
+  		let intHour = parseInt(hourstring) + 12;
+    	hourstring = intHour.toString();
+    	tempTime = hourstring + minutes;
+    	//console.log(tempTime);
+  	}
+  	const time = tempTime.slice(0, 5) + ":00";
+  	const convertedDatetime = month + " " + day + ", " + year + " " + time;
+  	return(convertedDatetime);
+  }
+
+
   render() {
 
   	// Routine for mapping each individual chat to its participants and displaying the data. 
   	const chats = this.props.chats;
   	const participants = this.props.participants;
   	const chatsAndPtcps = [];
+  	let sortedChats = [];
 
   	for (let i = 0; i < chats.length; i++){
   		const usernameArray = [];
@@ -18,11 +49,15 @@ export class ChatList extends React.Component {
   		}
   		let chatId = chats[i].id;
   		let chatName = chats[i].name;
-  		let JSONelement = {id:chatId, name:chatName, usernames:usernameArray};
+  		let lastModified = chats[i].last_modified;
+  		let convertedDate = this.convertDatetime(lastModified);
+  		let parsedDate = new Date(convertedDate);
+  		let JSONelement = {id:chatId, name:chatName, usernames:usernameArray, last_modified:parsedDate};
   		chatsAndPtcps.push(JSONelement);
+  		sortedChats = chatsAndPtcps.sort((chatA, chatB) => {return chatB.last_modified - chatA.last_modified});
   	}
 
-  	const chatList = chatsAndPtcps.map(chat => {
+  	const chatList = sortedChats.map(chat => {
   	let users = chat.usernames.join(", ");
   	let name = chat.name;
   	let id = chat.id;

@@ -13,7 +13,7 @@ export class App extends React.Component {
   	// Test data for managing state. This data gets passed down as props to child components. 
   	this.state = {
   		username: "alec",
-  		chats: [{id:1, name:"Django"}, {id:2, name:"React"}],
+  		chats: [{id:1, name:"Django", last_modified:"Tue, Sep 21 8:28PM"}, {id:2, name:"React", last_modified: "Wed, Sep 22 8:28PM"}],
   		participants:
   			[{id:1, username:"alec", chat_id:1}, 
   			{id:2, username:"matt", chat_id:1},
@@ -28,7 +28,8 @@ export class App extends React.Component {
   	const chats = this.state.chats;
   	const lastChat = chats[chats.length - 1];
     const chatId = lastChat.id + 1;
-    const JSONchat = {id:chatId, name:chatname}
+    const datetime = this.addTime();
+    const JSONchat = {id:chatId, name:chatname, last_modified:datetime}
   	const newChats = chats.concat(JSONchat);
   	console.log(newChats);
 
@@ -47,6 +48,18 @@ export class App extends React.Component {
   	})
   }
 
+  addTime(){
+  	const weekday = "Thu";
+  	const month = "Sep";
+  	const day = "23";
+  	const time = "10:47AM";
+
+  	const datetime = weekday + ", " + month + " " + day + " " + time;
+
+  	return(datetime);
+
+  }
+
   render() {
 	return(
 	  <Router>
@@ -56,7 +69,7 @@ export class App extends React.Component {
 		</div>
 	 	<Switch>
 	 	  <Route path="/:name/:id">
-  			<ChatRoom chats={this.state.chats} participants={this.state.participants} />;
+  			<ChatRoom participants={this.state.participants} />;
   		  </Route>
 		  <Route path="/">
 			<StartChat chats={this.state.chats} participants={this.state.participants} onSubmit={this.addChat} />
