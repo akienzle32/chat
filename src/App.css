@@ -55,6 +55,13 @@ table {
   display: inline-grid;
 }
 
+#first-ptcp-box.ptcp-name {
+  width: 170px;
+  height: 22px;
+  font-size: 14px;
+  display: inline-grid;
+}
+
 #chat-name {
   width: 170px;
   height: 22px;
