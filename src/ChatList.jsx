@@ -27,7 +27,6 @@ export class ChatList extends React.Component {
 
   	return(chatsAndPtcps);
   }
-
   // Sorts the mapped chats array by the last_modified column.
   sortChats(chatsAndPtcps){
   	const sortedChats = chatsAndPtcps.sort((chatA, chatB) => 
@@ -37,8 +36,10 @@ export class ChatList extends React.Component {
           return -1;
         else if (chatB.last_modified === null)
           return 1;
-        else 
-          return chatA.last_modified < chatB.last_modified ? 1 : -1;
+        else if (chatA.last_modified < chatB.last_modified)
+          return 1;
+        else
+          return -1;
       });
 
   	return(sortedChats);
