@@ -5,8 +5,15 @@ export class ChatList extends React.Component {
 
   // Maps chats to their participants.
   mapChats(){
+    const currentUser = this.props.username;
   	const chats = this.props.chats;
-  	const participants = this.props.participants;
+  	let participants = this.props.participants;
+    
+    for (let i = 0; i < participants.length; i++){
+      if (participants[i].username === currentUser)
+        participants[i].username = "me";
+    }
+
   	const chatsAndPtcps = [];
 
   	for (let i = 0; i < chats.length; i++){
@@ -22,7 +29,6 @@ export class ChatList extends React.Component {
   		let parsedDate = new Date(convertedDate);
   		let JSONelement = {id:chatId, name:chatName, usernames:usernameArray, last_modified:parsedDate};
   		chatsAndPtcps.push(JSONelement);
-  		
   	}
 
   	return(chatsAndPtcps);
