@@ -31,35 +31,46 @@ export class ChatList extends React.Component {
   // Sorts the mapped chats array by the last_modified column.
   sortChats(chatsAndPtcps){
   	const sortedChats = chatsAndPtcps.sort((chatA, chatB) => 
-  		{return chatB.last_modified - chatA.last_modified});
+  		{ if (chatA.last_modified === chatB.last_modified)
+          return 0;
+        else if (chatA.last_modified === null)
+          return -1;
+        else if (chatB.last_modified === null)
+          return 1;
+        else 
+          return chatA.last_modified < chatB.last_modified ? 1 : -1;
+      });
 
   	return(sortedChats);
   }
   
   // Converts the data in last_modified column into a format that can be easily sorted by JavaScript.
   convertDatetime(datestring) {
-	const month = datestring.slice(5, 8);
-	const day = datestring.slice(9, 11);
-	const timestring = datestring.slice(12, 18);
-	const year = new Date().getFullYear();
-	const hour = timestring.slice(0, timestring.indexOf(":"));
-  	const minutes = timestring.slice(timestring.indexOf(":"));
+  	let convertedDatetime;
+  	if (datestring !== null){
+  		const month = datestring.slice(5, 8);
+		const day = datestring.slice(9, 11);
+		const timestring = datestring.slice(12, 18);
+		const year = new Date().getFullYear();
+		const hour = timestring.slice(0, timestring.indexOf(":"));
+  		const minutes = timestring.slice(timestring.indexOf(":"));
     
-  	let paddedHour;
-  	if (hour.length === 1)
-  		paddedHour = '0' + hour;
-  	else
-  		paddedHour = hour;
+  		let paddedHour;
+  		if (hour.length === 1)
+  			paddedHour = '0' + hour;
+  		else
+  			paddedHour = hour;
     
-  	let tempTime = paddedHour + minutes;
-  	if (tempTime[5] === 'P'){
-  		let hourstring = tempTime.slice(0, 2);
-  		let intHour = parseInt(hourstring) + 12;
-  		hourstring = intHour.toString();
-  		tempTime = hourstring + minutes;
+  		let tempTime = paddedHour + minutes;
+  		if (tempTime[5] === 'P'){
+  			let hourstring = tempTime.slice(0, 2);
+  			let intHour = parseInt(hourstring) + 12;
+  			hourstring = intHour.toString();
+  			tempTime = hourstring + minutes;
+  		}
+  		const time = tempTime.slice(0, 5) + ":00";
+  		convertedDatetime = month + " " + day + ", " + year + " " + time;
   	}
-  	const time = tempTime.slice(0, 5) + ":00";
-  	const convertedDatetime = month + " " + day + ", " + year + " " + time;
 
   	return(convertedDatetime);
   }

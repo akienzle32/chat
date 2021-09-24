@@ -28,8 +28,7 @@ export class App extends React.Component {
   	const chats = this.state.chats;
   	const lastChat = chats[chats.length - 1];
   	const chatId = lastChat.id + 1;
-  	const datetime = this.addTime();
-  	const JSONchat = {id:chatId, name:chatname, last_modified:datetime}
+  	const JSONchat = {id:chatId, name:chatname, last_modified:null}
   	const newChats = chats.concat(JSONchat);
   	console.log(newChats);
 
@@ -46,22 +45,6 @@ export class App extends React.Component {
   		participants: newPtcps,
   		chats: newChats,
   	})
-  }
-  
-  // Tester function for adding a date to a new chat. Considering that last_modified will be a
-  // foreign key on the messages table, we may eventually want to refrain from actually adding a
-  // chat to the database until a message is sent. But with the current setup I have, a datetime 
-  // needs to be added into the last_modified column right when a chat is created. 
-  addTime(){
-  	const weekday = "Thu";
-  	const month = "Sep";
-  	const day = "23";
-  	const time = "10:47AM";
-
-  	const datetime = weekday + ", " + month + " " + day + " " + time;
-
-  	return(datetime);
-
   }
 
   render() {
