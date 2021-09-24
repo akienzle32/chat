@@ -56,6 +56,7 @@ export class StartChat extends React.Component {
   }
 
   render() {
+    const { username, chats, participants } = this.props;
   	return(
   	  <div>
 		  <h1 id="home-title">Chat App</h1>
@@ -72,7 +73,7 @@ export class StartChat extends React.Component {
            		</form>
       			</div>
   			</div>
-  			<ChatList username={this.props.username} chats={this.props.chats} participants={this.props.participants} />
+  			<ChatList username={username} chats={chats} participants={participants} />
   	  </div>
   	);
   }

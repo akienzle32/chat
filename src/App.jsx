@@ -56,6 +56,7 @@ export class App extends React.Component {
   }
 
   render() {
+  	const { username, chats, participants } = this.state;
 	return(
 	  <Router>
 	  	<div className="nav-bar">
@@ -64,10 +65,10 @@ export class App extends React.Component {
 		</div>
 	 	<Switch>
 	 	  <Route path="/:name/:id">
-  			<ChatRoom participants={this.state.participants} />;
+  			<ChatRoom participants={participants} />;
   		  </Route>
 		  <Route path="/">
-			<StartChat username={this.state.username} chats={this.state.chats} participants={this.state.participants} onSubmit={this.addChat} />
+			<StartChat username={username} chats={chats} participants={participants} onSubmit={this.addChat} />
 		  </Route>
 		</Switch>
 	  </Router>
