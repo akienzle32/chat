@@ -17,9 +17,14 @@ export class StartChat extends React.Component {
     event.preventDefault();
 
     const chatName = document.getElementById("chat-name").value;
-    const ptcpArray = document.getElementsByClassName("ptcp-name");
-    const ptcpName = ptcpArray[0].value;
-    this.props.onSubmit(chatName, ptcpName);
+    const htmlArray = document.getElementsByClassName("ptcp-name");
+    let ptcpArray = [];
+
+    for (let i = 0; i < htmlArray.length; i++){
+      const ptcpName = htmlArray[i].value;
+      ptcpArray.push(ptcpName);
+    }
+    this.props.onSubmit(chatName, ptcpArray);
     document.getElementById("chat-form").reset();
   }
 

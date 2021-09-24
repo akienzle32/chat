@@ -24,25 +24,30 @@ export class App extends React.Component {
   // Test function for updating the state of the user's chats that gets passed down as a prop
   // to StartChat. Eventually, this will be two POST requests, one to a chat endpoint and the 
   // other to a participant endpoint.
-  addChat = (chatname, ptcpname) => {
+  addChat = (chatname, ptcpArray) => {
   	const chats = this.state.chats;
   	const lastChat = chats[chats.length - 1];
   	const chatId = lastChat.id + 1;
   	const JSONchat = {id:chatId, name:chatname, last_modified:null}
   	const newChats = chats.concat(JSONchat);
   	console.log(newChats);
+  	console.log(ptcpArray);
 
-  	const myUsername = this.state.username;
+  	//const myUsername = this.state.username;
   	const ptcps = this.state.participants;
   	const lastPtcp = ptcps[ptcps.length - 1];
-  	const ptcpId = lastPtcp.id + 1;
-  	const firstJsonPtcp = {id:ptcpId, username:myUsername, chat_id:chatId};
-  	const secondJsonPtcp = {id:ptcpId+1, username:ptcpname, chat_id:chatId};
-  	const tempPtcps = ptcps.concat(firstJsonPtcp);
-  	const newPtcps = tempPtcps.concat(secondJsonPtcp);
+  	let ptcpId = lastPtcp.id + 1;
+  	let newPtcps = [];
+
+  	for (let i = 0; i < ptcpArray.length; i++){
+  		let JSONelement = {id:ptcpId, username:ptcpArray[i], chat_id:chatId};
+  		newPtcps.push(JSONelement); 
+  		ptcpId++;
+  	}
   	console.log(newPtcps);
+  	const participants = ptcps.concat(newPtcps);
   	this.setState({
-  		participants: newPtcps,
+  		participants: participants,
   		chats: newChats,
   	})
   }
