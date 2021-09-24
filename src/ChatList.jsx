@@ -66,7 +66,7 @@ export class ChatList extends React.Component {
 
 
   render() {
-  	// Routine for displaying the data chats and their participants.
+  	// Routine for displaying chats and their participants.
   	const chatsAndPtcps = this.mapChats();
   	const sortedChats = this.sortChats(chatsAndPtcps);
   	const chatList = sortedChats.map(chat => {
