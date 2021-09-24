@@ -32,11 +32,15 @@ export class App extends React.Component {
   	chats = chats.concat(JSONchat);
   	console.log(chats);
 
-  	//const myUsername = this.state.username;
   	let participants = this.state.participants;
   	const lastPtcp = participants[participants.length - 1];
   	let ptcpId = lastPtcp.id + 1;
   	let newPtcps = [];
+
+  	const currentUsername = this.state.username;
+  	const currentUserJSON = {id:ptcpId, username:currentUsername, chat_id:chatId};
+  	newPtcps.push(currentUserJSON);
+  	ptcpId++;
 
   	for (let i = 0; i < ptcpArray.length; i++){
   		let JSONelement = {id:ptcpId, username:ptcpArray[i], chat_id:chatId};
