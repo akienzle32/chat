@@ -12,7 +12,7 @@ export class StartChat extends React.Component {
 
 
   // Function to pass text input up to App component, where the state of chats and participants 
-  // is tracked. 
+  // is tracked. This function can handle arrays of participants in order to support group chats.
   onSubmit = (event) => {
     event.preventDefault();
 

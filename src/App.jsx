@@ -25,17 +25,16 @@ export class App extends React.Component {
   // to StartChat. Eventually, this will be two POST requests, one to a chat endpoint and the 
   // other to a participant endpoint.
   addChat = (chatname, ptcpArray) => {
-  	const chats = this.state.chats;
+  	let chats = this.state.chats;
   	const lastChat = chats[chats.length - 1];
   	const chatId = lastChat.id + 1;
   	const JSONchat = {id:chatId, name:chatname, last_modified:null}
-  	const newChats = chats.concat(JSONchat);
-  	console.log(newChats);
-  	console.log(ptcpArray);
+  	chats = chats.concat(JSONchat);
+  	console.log(chats);
 
   	//const myUsername = this.state.username;
-  	const ptcps = this.state.participants;
-  	const lastPtcp = ptcps[ptcps.length - 1];
+  	let participants = this.state.participants;
+  	const lastPtcp = participants[participants.length - 1];
   	let ptcpId = lastPtcp.id + 1;
   	let newPtcps = [];
 
@@ -44,11 +43,11 @@ export class App extends React.Component {
   		newPtcps.push(JSONelement); 
   		ptcpId++;
   	}
-  	console.log(newPtcps);
-  	const participants = ptcps.concat(newPtcps);
+  	participants = participants.concat(newPtcps);
+  	console.log(participants);
   	this.setState({
   		participants: participants,
-  		chats: newChats,
+  		chats: chats,
   	})
   }
 
