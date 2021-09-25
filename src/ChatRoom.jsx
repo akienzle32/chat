@@ -142,6 +142,7 @@ export class ChatRoom extends React.Component {
 	}
 
 	displayParticipants(){
+		const currentUser = this.props.username;
 		const participants = this.props.participants;
 		const participantArray = [];
 
@@ -150,8 +151,13 @@ export class ChatRoom extends React.Component {
 		const chatId = parseInt(pathArray[2]);
 
 		for (let i = 0; i < participants.length; i++){
-			if (participants[i].chat_id === chatId)
-				participantArray.push(participants[i].username);
+			if (participants[i].chat_id === chatId){
+				let ptcpName = participants[i].username;
+				if (ptcpName === currentUser)
+					ptcpName = "me";
+
+				participantArray.push(ptcpName);
+			}
 		}
 		const ptcpList = participantArray.map((participant, index) => {return <li key={index}>{ participant }</li>})
 		return(ptcpList);
