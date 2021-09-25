@@ -8,19 +8,14 @@ export class ChatList extends React.Component {
     const currentUser = this.props.username;
   	const chats = this.props.chats;
   	let participants = this.props.participants;
-    
-    for (let i = 0; i < participants.length; i++){
-      if (participants[i].username === currentUser)
-        participants[i].username = "me";
-    }
 
   	const chatsAndPtcps = [];
 
   	for (let i = 0; i < chats.length; i++){
   		const usernameArray = [];
   		for (let j = 0; j < participants.length; j++){
-  			if (chats[i].id === participants[j].chat_id)
-  				usernameArray.push(participants[j].username);
+          if (chats[i].id === participants[j].chat_id && participants[j].username !== currentUser)
+  				  usernameArray.push(participants[j].username);
   		}
   		let chatId = chats[i].id;
   		let chatName = chats[i].name;
@@ -81,7 +76,6 @@ export class ChatList extends React.Component {
 
   	return(convertedDatetime);
   }
-
 
   render() {
   	// Routine for displaying chats and their participants.
