@@ -10,7 +10,6 @@ export class StartChat extends React.Component {
     }
   }
 
-
   // Function to pass text input up to App component, where the state of chats and participants 
   // is tracked. This function handles arrays of participants in order to support group chats.
   onSubmit = (event) => {
@@ -29,14 +28,14 @@ export class StartChat extends React.Component {
     document.getElementById("chat-form").reset();
   }
 
-
+  // Function for adding additional participants for a group chat. I'm limiting group chats to five
+  // participants for now. 
   addParticipants = () => {
     const input = this.state.input;
     const extraInput = "Add another username... ";
-    const newInput = input.concat(extraInput);
     if (input.length < 5)
       this.setState({
-        input: newInput,
+        input: input.concat(extraInput),
     })
   }
 

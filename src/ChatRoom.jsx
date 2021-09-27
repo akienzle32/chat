@@ -68,11 +68,11 @@ export class ChatRoom extends React.Component {
   			else
   				return response.json();
  		 })
- 		 .then(data => {
-  			if (data){
-  				console.log(data);
+ 		 .then(messages => {
+  			if (messages){
+  				console.log(messages);
   				this.setState({
-  					messages: data,
+  					messages: messages,
   					loggedIn: true,
   				}); 
     		}	
@@ -112,11 +112,11 @@ export class ChatRoom extends React.Component {
 			else 
 				return response.json();
 		})
-		.then(data => {
-			console.log(data);
-			const newData = this.state.messages.concat(data); // React-recommended way of adding elements to a "stateful" array. 
+		.then(newMessage => {
+			console.log(newMessage);
+			const messages = this.state.messages; // React-recommended way of adding elements to a "stateful" array. 
 			this.setState({
-				messages: newData,
+				messages: messages.concat(newMessage),
 			})
 		})
 		document.getElementById('message-form').reset();	

@@ -37,14 +37,15 @@ export class App extends React.Component {
   	let ptcpId = lastPtcp.id + 1;
   	let newPtcps = [];
 
+    // Automatically add the current user to the newly created chat.
   	const currentUsername = this.state.username;
   	const currentUserJSON = {id:ptcpId, username:currentUsername, chat_id:chatId};
   	newPtcps.push(currentUserJSON);
   	ptcpId++;
 
   	for (let i = 0; i < ptcpArray.length; i++){
-  		let JSONelement = {id:ptcpId, username:ptcpArray[i], chat_id:chatId};
-  		newPtcps.push(JSONelement); 
+  		let ptcpJSON = {id:ptcpId, username:ptcpArray[i], chat_id:chatId};
+  		newPtcps.push(ptcpJSON); 
   		ptcpId++;
   	}
   	participants = participants.concat(newPtcps);
