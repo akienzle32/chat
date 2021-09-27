@@ -30,8 +30,8 @@ export function ChatList(props) {
   }
   // Sorts the mapped chats array by the last_modified column.
   function sortChats(chatsAndPtcps){
-  	const sortedChats = chatsAndPtcps.sort((chatA, chatB) => 
-  		{ if (chatA.last_modified === chatB.last_modified)
+  	const sortedChats = chatsAndPtcps.sort((chatA, chatB) =>
+      { if (chatA.last_modified === chatB.last_modified)
           return 0;
         else if (chatA.last_modified === null)
           return -1;
@@ -48,8 +48,8 @@ export function ChatList(props) {
   
   // Converts the data in last_modified column into a format that can be easily sorted in JavaScript.
   function convertDatetime(dateString) {
-  	let convertedDatetime;
-  	if (dateString !== null){
+    let convertedDatetime;
+    if (dateString !== null){
       const month = dateString.slice(5, 8);
       const day = dateString.slice(9, 11);
       const timeString = dateString.slice(12, 18);
@@ -79,10 +79,10 @@ export function ChatList(props) {
 
   // Displays chats and their participants, with each chat linking to the ChatRoom component.
   function displayChats(){
-  	const chatsAndPtcps = mapChats();
-  	const sortedChats = sortChats(chatsAndPtcps);
+    const chatsAndPtcps = mapChats();
+    const sortedChats = sortChats(chatsAndPtcps);
     console.log(sortedChats);
-  	const chatList = sortedChats.map(chat => {
+    const chatList = sortedChats.map(chat => {
   		let users = chat.usernames.join(", ");
   		let name = chat.name;
   		let id = chat.id;
@@ -108,7 +108,7 @@ export function ChatList(props) {
       		  	  </tbody>
       		  	</table>
       		  </div>
-	 		</div>
+	 		    </div>
   	  	</div>
 
 	);
