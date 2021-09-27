@@ -85,7 +85,7 @@ export class StartChat extends React.Component {
     const { username, chats, participants } = this.props;
   	return(
   	  <div>
-		  <h1 id="home-title">Chat App</h1>
+		  <h1 className="chat-title">Chat App</h1>
 			<div className="top-box" id="start-chat">
     	  	  <h3 className="container-title">Start a new chat</h3>
       			<div id="form-container">
