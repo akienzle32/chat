@@ -57,22 +57,23 @@ export class App extends React.Component {
   }
 
   render() {
-  	const { username, chats, participants } = this.state;
-	return(
-	  <Router>
+    const { username, chats, participants } = this.state;
+
+	  return(
+	   <Router>
 	  	<div className="nav-bar">
   		  <Link className="link" to="/">Home</Link>
 	  	  <a className="link" id="logout" href="http://127.0.0.1:8000/accounts/logout">Log out</a>
-		</div>
-	 	<Switch>
-	 	  <Route path="/:name/:id">
-  			<ChatRoom username={username} participants={participants} />;
+		  </div>
+	 	  <Switch>
+        <Route path="/:name/:id">
+  			 <ChatRoom username={username} participants={participants} />;
   		  </Route>
-		  <Route path="/">
-			<StartChat username={username} chats={chats} participants={participants} onSubmit={this.addChat} />
-		  </Route>
-		</Switch>
+		    <Route path="/">
+			   <StartChat username={username} chats={chats} participants={participants} onSubmit={this.addChat} />
+		    </Route>
+		  </Switch>
 	  </Router>
-	);
+	 );
   }
 }

@@ -63,6 +63,10 @@ table {
   display: table;
 }
 
+.chat-table {
+  width: 400px
+}
+
 #form-container {
   margin-left: 110px;
 }

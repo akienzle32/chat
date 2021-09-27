@@ -46,7 +46,7 @@ export function ChatList(props) {
   	return(sortedChats);
   }
   
-  // Converts the data in last_modified column into a format that can be easily sorted by JavaScript.
+  // Converts the data in last_modified column into a format that can be easily sorted in JavaScript.
   function convertDatetime(dateString) {
   	let convertedDatetime;
   	if (dateString !== null){
@@ -98,7 +98,7 @@ export function ChatList(props) {
   		  <div className="bottom-box" id="my-chats">
   		  	<h3 className="container-title">My chat rooms</h3>
       		  <div>
-      		    <table>
+      		    <table className="chat-table">
       		      <tbody>
       		  	  	<tr>
       		  	  	  <th>Name</th>
