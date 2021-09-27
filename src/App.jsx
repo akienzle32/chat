@@ -18,7 +18,8 @@ export class App extends React.Component {
   			[{id:1, username:"alec", chat_id:1}, 
   			{id:2, username:"matt", chat_id:1},
   			{id:3, username:"alec", chat_id:2},
-  			{id:4, username:"carol", chat_id:2}],
+  			{id:4, username:"carol", chat_id:2},
+        {id:5, username:"steve", chat_id:2}],
   	}
   }
   // Test function for updating the state of the user's chats that gets passed down as a prop
