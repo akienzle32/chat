@@ -9,6 +9,7 @@ export class StartChat extends React.Component {
       input: ["Enter a username... "],
     }
     this.baseState = this.state;
+    this.bottomOfStartChat = React.createRef();
   }
 
   // Function to pass text input up to App component, where the state of chats and participants 
@@ -59,12 +60,17 @@ export class StartChat extends React.Component {
     return(inputList);
   }
 
+  scrollToBottom(){
+    this.bottomOfStartChat.current.scrollIntoView();
+  }
+
   componentDidMount(){
     this.displayInputBoxes();
   }
 
   componentDidUpdate(){
     this.displayInputBoxes();
+    this.scrollToBottom();
   }
 
   render() {
@@ -85,9 +91,12 @@ export class StartChat extends React.Component {
         	  	<form id="chat-form" onSubmit={this.onSubmit}>
                 <div>
     			  	    <input type="text" id="chat-name" name="chatname" placeholder="Enter a chatroom name..."></input>
-                  {subPtcpButton}
-                  <input type="button" className="ptcp-button" id="add-ptcp-button" value="+" onClick={this.addInputBoxes}></input>
-                  {this.displayInputBoxes()}
+                  <div>
+                    {this.displayInputBoxes()}
+                    {subPtcpButton}
+                    <input type="button" className="ptcp-button" id="add-ptcp-button" value="+" 
+                      onClick={this.addInputBoxes} ref={this.bottomOfStartChat}></input>
+                  </div>
            		    <input type="submit" id="submit-forms" className="submitButton"></input>
                 </div>
            		</form>

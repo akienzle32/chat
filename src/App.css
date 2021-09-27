@@ -17,6 +17,7 @@ table {
   height: 28px;
   width: 25px;
   float: right;
+  display: table;
 }
 
 .container-title {
@@ -58,6 +59,7 @@ table {
   width: 170px;
   height: 22px;
   font-size: 14px;
+  float: left;
   display: table;
 }
 
