@@ -8,7 +8,7 @@ export class StartChat extends React.Component {
     this.state = {
       ptcpInput: ["Enter a username... "],
     }
-    this.baseState = this.state;
+    this.baseState = this.state; // Record the base state in order to revert to it after form submission.
     this.bottomOfStartChat = React.createRef();
   }
 
