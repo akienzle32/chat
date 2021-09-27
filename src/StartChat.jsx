@@ -12,7 +12,7 @@ export class StartChat extends React.Component {
 
 
   // Function to pass text input up to App component, where the state of chats and participants 
-  // is tracked. This function can handle arrays of participants in order to support group chats.
+  // is tracked. This function handles arrays of participants in order to support group chats.
   onSubmit = (event) => {
     event.preventDefault();
 
@@ -24,6 +24,7 @@ export class StartChat extends React.Component {
       const ptcpName = htmlArray[i].value;
       ptcpArray.push(ptcpName);
     }
+
     this.props.onSubmit(chatName, ptcpArray);
     document.getElementById("chat-form").reset();
   }

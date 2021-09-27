@@ -154,7 +154,7 @@ export class ChatRoom extends React.Component {
 			if (participants[i].chat_id === chatId){
 				let ptcpName = participants[i].username;
 				if (ptcpName === currentUser)
-					ptcpName = "me";
+					ptcpName = "me"; // In each individual chatroom, display the current user as "me"
 
 				participantArray.push(ptcpName);
 			}
