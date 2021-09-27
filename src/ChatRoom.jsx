@@ -8,7 +8,6 @@ export class ChatRoom extends React.Component {
 		super(props);
 		this.state = {
 			messages: [],
-			loggedIn: false, // Because the backend doesn't support multiple chats yet, I'm tracking authentication state here.
 		};
 		this.bottomOfMessages = React.createRef();
 		this.csrftoken = this.getCookie('csrftoken');
@@ -73,10 +72,16 @@ export class ChatRoom extends React.Component {
   				console.log(messages);
   				this.setState({
   					messages: messages,
-  					loggedIn: true,
-  				}); 
+  				});
+  				this.loggedIn(); // Because the backend doesn't support individual chats yet, I'm just setting loggedIn
+  				                // to true based on whether or not the server sends a 200 response for the message
+  				               // request. This state is tracked in the main App component. 
     		}	
   		});
+	}
+
+	loggedIn = () => {
+		this.props.userLoggedIn();
 	}
 
 	componentDidUpdate() {
@@ -125,7 +130,8 @@ export class ChatRoom extends React.Component {
 	// If the user is logged in, then for each message, display the username of the author, the message content itself, 
 	// and the message's timestamp. This method is called by both componentDidMount() and componentDidUpdate(). 
 	displayMessages() {
-		const { messages, loggedIn } = this.state;
+		const messages = this.state.messages;
+		const loggedIn = this.props.loggedIn;
 		let messageList;
 
 		if (!loggedIn){

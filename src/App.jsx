@@ -13,6 +13,7 @@ export class App extends React.Component {
   	// Test data for managing state. This data gets passed down as props to child components. 
   	this.state = {
   		username: "alec",
+      loggedIn: false,
   		chats: [{id:1, name:"Django", last_modified:"Tue, Sep 21 8:28PM"}, {id:2, name:"React", last_modified: "Wed, Sep 22 8:28PM"}],
   		participants:
   			[{id:1, username:"alec", chat_id:1}, 
@@ -57,8 +58,14 @@ export class App extends React.Component {
   	})
   }
 
+  userLoggedIn = () => {
+    this.setState({
+      loggedIn: true,
+    })
+  }
+
   render() {
-    const { username, chats, participants } = this.state;
+    const { username, chats, loggedIn, participants } = this.state;
 
 	  return(
 	   <Router>
@@ -68,7 +75,7 @@ export class App extends React.Component {
 		  </div>
 	 	  <Switch>
         <Route path="/:name/:id">
-  			 <ChatRoom username={username} participants={participants} />;
+  			 <ChatRoom username={username} participants={participants} userLoggedIn={this.userLoggedIn} loggedIn={loggedIn}  />;
   		  </Route>
 		    <Route path="/">
 			   <StartChat username={username} chats={chats} participants={participants} onSubmit={this.addChat} />
