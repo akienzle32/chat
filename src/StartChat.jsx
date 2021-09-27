@@ -91,12 +91,10 @@ export class StartChat extends React.Component {
         	  	<form id="chat-form" onSubmit={this.onSubmit}>
                 <div>
     			  	    <input type="text" id="chat-name" name="chatname" placeholder="Enter a chatroom name..."></input>
-                  <div>
                     {this.displayInputBoxes()}
                     {subPtcpButton}
                     <input type="button" className="ptcp-button" id="add-ptcp-button" value="+" 
                       onClick={this.addInputBoxes} ref={this.bottomOfStartChat}></input>
-                  </div>
            		    <input type="submit" id="submit-forms" className="submitButton"></input>
                 </div>
            		</form>
