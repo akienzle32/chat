@@ -56,25 +56,24 @@ export function ChatList(props) {
       const year = new Date().getFullYear();
       const hour = timeString.slice(0, timeString.indexOf(":"));
       const minutes = timeString.slice(timeString.indexOf(":"));
-    
-  		let paddedHour;
-  		if (hour.length === 1)
-  			paddedHour = '0' + hour;
-  		else
-  			paddedHour = hour;
-    
-  		let tempTime = paddedHour + minutes;
-  		if (tempTime[5] === 'P'){
-  			let hourString = tempTime.slice(0, 2);
-  			let intHour = parseInt(hourString) + 12;
-  			hourString = intHour.toString();
-  			tempTime = hourString + minutes;
-  		}
-  		const time = tempTime.slice(0, 5) + ":00";
-  		convertedDatetime = month + " " + day + ", " + year + " " + time;
-  	}
 
-  	return(convertedDatetime);
+      let paddedHour;
+      if (hour.length === 1)
+        paddedHour = '0' + hour;
+      else
+        paddedHour = hour;
+      let tempTime = paddedHour + minutes;
+      if (tempTime[5] === 'P'){
+        let hourString = tempTime.slice(0, 2);
+        let intHour = parseInt(hourString) + 12;
+        hourString = intHour.toString();
+        tempTime = hourString + minutes;
+      }
+      const time = tempTime.slice(0, 5) + ":00";
+      convertedDatetime = month + " " + day + ", " + year + " " + time;
+    }
+    
+    return(convertedDatetime);
   }
 
   // Displays chats and their participants, with each chat linking to the ChatRoom component.
@@ -107,9 +106,9 @@ export function ChatList(props) {
       		  		  {displayChats()}
       		  	  </tbody>
       		  	</table>
-      		  </div>
-	 		    </div>
-  	  	</div>
+            </div>
+          </div>
+        </div>
 
 	);
 }
