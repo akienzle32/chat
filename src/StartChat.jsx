@@ -28,12 +28,10 @@ export class StartChat extends React.Component {
     document.getElementById("chat-form").reset();
   }
 
-  // Function for adding additional participants for a group chat. I'm limiting group chats to five
-  // participants for now. 
-  addParticipants = () => {
+  addInputBoxes = () => {
     const input = this.state.input;
     const extraInput = "Add another username... ";
-    if (input.length < 5)
+    if (input.length < 5)// I'm limiting group chats to five participants for now. 
       this.setState({
         input: input.concat(extraInput),
     })
