@@ -173,15 +173,18 @@ export class ChatRoom extends React.Component {
 	}
 
 	render() {
+		const chatRoomName = this.displayChatRoomName();
+		const messages = this.displayMessages();
+		const participants = this.displayParticipants();
 	  	  return (
 			<div>
-		  	  <div><h1 className="chat-title">{this.displayChatRoomName()}</h1></div>
+		  	  <div><h1 className="chat-title">{chatRoomName}</h1></div>
 		  	  <div className="lower-container">
 			  	<div id="ptc-list">
 			      <p>Participants:</p>
-			  	  <ul>{this.displayParticipants()}</ul>
+			  	  <ul>{participants}</ul>
 			  	</div>
-			  	<div className="top-box" id="message-log">{this.displayMessages()}
+			  	<div className="top-box" id="message-log">{messages}
 			  	  <div ref={this.bottomOfMessages} />
 			  	</div>
 			  	  <div className="bottom-box" id="new-messages">
