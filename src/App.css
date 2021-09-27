@@ -13,6 +13,12 @@ table {
 
 }
 
+.ptcp-button {
+  height: 28px;
+  width: 25px;
+  float: right;
+}
+
 .container-title {
   text-align: center;
 }
@@ -65,12 +71,6 @@ table {
   font-size: 14px;
   display: table;
 
-}
-
-#add-ptcp-button {
-  height: 28px;
-  float: right;
-  margin-right: 88px;
 }
 
 #home-link {

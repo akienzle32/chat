@@ -37,6 +37,18 @@ export class StartChat extends React.Component {
     })
   }
 
+  removeInputBoxes = () => {
+    const input = this.state.input;
+    if (input.length > 1){
+      const lastInput = input.length - 1;
+      const newInput = input.slice(0, lastInput);
+      console.log(newInput);
+      this.setState({
+        input: newInput,
+      })
+    }
+  }
+
   displayInputBoxes(){
     const input = this.state.input;
     const inputList = input.map((placeholder, index) => {
@@ -64,7 +76,8 @@ export class StartChat extends React.Component {
         	  	<form id="chat-form" onSubmit={this.onSubmit}>
                 <div>
     			  	    <input type="text" id="chat-name" name="chatname" placeholder="Enter a chatroom name..."></input>
-                  <input type="button" id="add-ptcp-button" value="+" onClick={this.addParticipants}></input>
+                  <input type="button" className="ptcp-button" id="add-ptcp-button" value="+" onClick={this.addInputBoxes}></input>
+                  <input type="button" className="ptcp-button" id="sub-ptcp-button" value="-" onClick={this.removeInputBoxes}></input>
                   {this.displayInputBoxes()}
            		    <input type="submit" id="submit-forms" className="submitButton"></input>
                 </div>
