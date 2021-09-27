@@ -8,6 +8,7 @@ export class StartChat extends React.Component {
     this.state = {
       input: ["Enter a username... "],
     }
+    this.baseState = this.state;
   }
 
   // Function to pass text input up to App component, where the state of chats and participants 
@@ -26,6 +27,7 @@ export class StartChat extends React.Component {
 
     this.props.onSubmit(chatName, ptcpArray);
     document.getElementById("chat-form").reset();
+    this.setState(this.baseState);
   }
 
   addInputBoxes = () => {
