@@ -68,6 +68,13 @@ export class StartChat extends React.Component {
   }
 
   render() {
+    const input = this.state.input;
+    let subPtcpButton;
+    if (input.length > 1)
+      subPtcpButton = <input type="button" className="ptcp-button" id="sub-ptcp-button" value="–" onClick={this.removeInputBoxes}></input>;
+    else
+      subPtcpButton = <input style={{visibility: "hidden"}} type="button" className="ptcp-button" id="sub-ptcp-button"></input>;
+
     const { username, chats, participants } = this.props;
   	return(
   	  <div>
@@ -78,7 +85,7 @@ export class StartChat extends React.Component {
         	  	<form id="chat-form" onSubmit={this.onSubmit}>
                 <div>
     			  	    <input type="text" id="chat-name" name="chatname" placeholder="Enter a chatroom name..."></input>
-                  <input type="button" className="ptcp-button" id="sub-ptcp-button" value="–" onClick={this.removeInputBoxes}></input>
+                  {subPtcpButton}
                   <input type="button" className="ptcp-button" id="add-ptcp-button" value="+" onClick={this.addInputBoxes}></input>
                   {this.displayInputBoxes()}
            		    <input type="submit" id="submit-forms" className="submitButton"></input>
