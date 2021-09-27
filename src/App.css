@@ -19,10 +19,6 @@ table {
   float: right;
 }
 
-#sub-ptcp-button {
-  margin-right: 57px;
-}
-
 .container-title {
   text-align: center;
 }
@@ -74,7 +70,7 @@ table {
   height: 22px;
   font-size: 14px;
   display: table;
-
+  margin-bottom: 4px;
 }
 
 #home-link {
@@ -92,6 +88,10 @@ table {
   padding-bottom: 60px;
   padding-right: 50px;
   padding-left: 50px;
+}
+
+#sub-ptcp-button {
+  margin-right: 58px;
 }
 
 #my-chats {
