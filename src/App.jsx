@@ -59,9 +59,7 @@ export class App extends React.Component {
   }
 
   userLoggedIn = () => {
-    this.setState({
-      loggedIn: true,
-    })
+    this.setState({loggedIn: true});
   }
 
   render() {
