@@ -47,7 +47,7 @@ export class ChatRoom extends React.Component {
 	}
 	
 	getMessages = () => {
-		fetch('http://127.0.0.1:8000/chat/', {	
+		fetch('http://127.0.0.1:8000/chat/messages', {	
 			method: 'GET',
 			mode: 'cors',
 			headers: {
