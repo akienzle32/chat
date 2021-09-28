@@ -98,7 +98,7 @@ export class ChatRoom extends React.Component {
 		let formData = new FormData(messageForm);
 		let jsonData = JSON.stringify(Object.fromEntries(formData));
 
-		fetch('http://127.0.0.1:8000/chat/', {
+		fetch('http://127.0.0.1:8000/chat/messages', {
 			method: 'POST',
 			mode: 'cors',
 			headers: {
