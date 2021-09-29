@@ -12,7 +12,7 @@ export class App extends React.Component {
   	super(props);
   	// Test data for managing state. This data gets passed down as props to child components. 
   	this.state = {
-  		username: "alec",
+  		username: "",
       loggedIn: false,
   		chats: [{id:1, name:"Django", last_modified:"Tue, Sep 21 8:28PM"}, {id:2, name:"React", last_modified: "Wed, Sep 22 8:28PM"}],
   		participants:
@@ -22,6 +22,43 @@ export class App extends React.Component {
   			{id:4, username:"carol", chat_id:2},
         {id:5, username:"steve", chat_id:2}],
   	}
+    this.csrftoken = this.getCookie('csrftoken');
+  }
+
+  // Function provided by Django for adding csrf tokens to AJAX requests; see https://docs.djangoproject.com/en/3.2/ref/csrf/ for details.
+  getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+  }
+
+
+  getUsername = () => {
+    fetch('http://127.0.0.1:8000/chat/user', {
+      method: 'GET',
+      mode: 'cors',
+      credentials: 'include',
+    }).then(response => {
+      return response.json();
+    }).then(username => {
+      console.log(username);
+      this.setState({
+        username: username.username,
+      })
+    })
+  }
+
+  componentDidMount(){
+    this.getUsername();
   }
   // Test function for updating the state of the user's chats that gets passed down as a prop
   // to StartChat. Eventually, this will be two POST requests, one to a chat endpoint and the 
