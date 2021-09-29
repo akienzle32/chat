@@ -16,12 +16,7 @@ export class App extends React.Component {
       loggedIn: false,
   		//chats: [{id:1, name:"Django", last_modified:"Tue, Sep 21 8:28PM"}, {id:2, name:"React", last_modified: "Wed, Sep 22 8:28PM"}],
       chats: [],
-  		participants:
-  			[{id:1, username:"alec", chat_id:1}, 
-  			{id:2, username:"matt", chat_id:1},
-  			{id:3, username:"alec", chat_id:2},
-  			{id:4, username:"carol", chat_id:2},
-        {id:5, username:"steve", chat_id:2}],
+  		participants: [],
   	}
     this.csrftoken = this.getCookie('csrftoken');
   }
@@ -83,9 +78,27 @@ export class App extends React.Component {
     })
   }
 
+  getParticipants = () => {
+    fetch('http://127.0.0.1:8000/chat/participants', {
+      method: 'GET',
+      mode: 'cors',
+      credentials: 'include',
+    }).then(response => {
+      return response.json();
+    }).then(participants => {
+      if (participants){
+        console.log(participants);
+        this.setState({
+          participants: participants,
+        })
+      }
+    })
+  }
+
   componentDidMount(){
     this.getUsername();
     this.getChats();
+    this.getParticipants();
   }
   // Test function for updating the state of the user's chats that gets passed down as a prop
   // to StartChat. Eventually, this will be two POST requests, one to a chat endpoint and the 

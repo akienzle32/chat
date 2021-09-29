@@ -14,11 +14,12 @@ export function ChatList(props) {
   	for (let i = 0; i < chats.length; i++){
   		const usernameArray = [];
   		for (let j = 0; j < participants.length; j++){
-          if (chats[i].id === participants[j].chat_id && participants[j].username !== currentUser)
-  				  usernameArray.push(participants[j].username);
+          if (chats[i].id === participants[j].chat && participants[j].name !== currentUser)
+  				  usernameArray.push(participants[j].name);
   		}
   		let chatId = chats[i].id;
   		let chatName = chats[i].name;
+      console.log(usernameArray);
   		//let lastModified = chats[i].last_modified;
   		//let convertedDate = convertDatetime(lastModified);
   		//let parsedDate = new Date(convertedDate);
@@ -85,7 +86,7 @@ export function ChatList(props) {
   function displayChats(){
     const chatsAndPtcps = mapChats();
     //const sortedChats = sortChats(chatsAndPtcps);
-    console.log(chatsAndPtcps);
+    //console.log(chatsAndPtcps);
     const chatList = chatsAndPtcps.map(chat => {
   		let users = chat.usernames.join(", ");
   		let name = chat.name;
