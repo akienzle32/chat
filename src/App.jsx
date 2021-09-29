@@ -48,12 +48,20 @@ export class App extends React.Component {
       mode: 'cors',
       credentials: 'include',
     }).then(response => {
-      return response.json();
+      if (response.status !== 200){
+        alert("Please log in."); // Temporary solution.
+        return;
+      }
+      else
+        return response.json();
     }).then(username => {
-      console.log(username);
-      this.setState({
-        username: username.username,
-      })
+      if (username){
+        console.log(username);
+        this.setState({
+          username: username.username,
+      });
+      this.userLoggedIn();
+      }
     })
   }
 

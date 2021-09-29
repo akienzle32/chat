@@ -77,7 +77,7 @@ export class ChatRoom extends React.Component {
   				this.setState({
   					messages: messages,
   				});
-  				this.loggedIn(); // Because the backend doesn't support individual chats yet, I'm just setting loggedIn
+  				//this.loggedIn(); // Because the backend doesn't support individual chats yet, I'm just setting loggedIn
   				                // to true based on whether or not the server sends a 200 response for the message
   				               // request. This state is tracked in the main App component. 
     		}	
