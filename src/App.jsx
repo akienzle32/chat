@@ -67,7 +67,7 @@ export class App extends React.Component {
   }
 
   getChats = () => {
-    fetch('http://127.0.0.1:8000/chat/', {
+    fetch('http://127.0.0.1:8000/chat', {
       method: 'GET',
       mode: 'cors',
       credentials: 'include',
