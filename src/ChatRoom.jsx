@@ -98,13 +98,17 @@ export class ChatRoom extends React.Component {
 		this.getCookie('csrftoken');
 		event.preventDefault();
 
-		let messageForm = event.target;
-		let formData = new FormData(messageForm);
-		let jsonData = JSON.stringify(Object.fromEntries(formData));
-
 		const path = window.location.pathname;
 		const pathArray = path.split('/');
-		const chatId = pathArray[2];	
+		const chatId = pathArray[2];
+		console.log(chatId);
+
+		let messageForm = event.target;
+		let formData = new FormData(messageForm);
+		formData.append('chat', chatId);
+		let jsonData = JSON.stringify(Object.fromEntries(formData));
+		console.log(jsonData);
+
 
 		fetch('http://127.0.0.1:8000/chat/messages/' + chatId, {
 			method: 'POST',
@@ -205,6 +209,7 @@ export class ChatRoom extends React.Component {
 					<form id='message-form' onSubmit={this.handleSubmit}>
 				  	  <input type="text" id="message-input" name="content" placeholder="Text message..."></input>
 				  	  <input type='hidden' name='author'></input>
+				  	  <input type='hidden' name='chat'></input>
 				  	  <input type='submit' value='Send' className='submitButton'></input>
 					</form>	
 			  	</div>
