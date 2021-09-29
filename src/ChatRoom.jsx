@@ -47,7 +47,11 @@ export class ChatRoom extends React.Component {
 	}
 	
 	getMessages = () => {
-		fetch('http://127.0.0.1:8000/chat/messages', {	
+		const path = window.location.pathname;
+		const pathArray = path.split('/');
+		const chatId = pathArray[2];	
+
+		fetch('http://127.0.0.1:8000/chat/messages/' + chatId, {	
 			method: 'GET',
 			mode: 'cors',
 			headers: {
@@ -98,7 +102,11 @@ export class ChatRoom extends React.Component {
 		let formData = new FormData(messageForm);
 		let jsonData = JSON.stringify(Object.fromEntries(formData));
 
-		fetch('http://127.0.0.1:8000/chat/messages', {
+		const path = window.location.pathname;
+		const pathArray = path.split('/');
+		const chatId = pathArray[2];	
+
+		fetch('http://127.0.0.1:8000/chat/messages/' + chatId, {
 			method: 'POST',
 			mode: 'cors',
 			headers: {
