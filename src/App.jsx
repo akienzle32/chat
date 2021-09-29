@@ -15,7 +15,7 @@ export class App extends React.Component {
   		username: "",
       loggedIn: false,
   		//chats: [{id:1, name:"Django", last_modified:"Tue, Sep 21 8:28PM"}, {id:2, name:"React", last_modified: "Wed, Sep 22 8:28PM"}],
-      chats: [{id:1, name:"Django"}, {id:2, name:"React"}],
+      chats: [],
   		participants:
   			[{id:1, username:"alec", chat_id:1}, 
   			{id:2, username:"matt", chat_id:1},
@@ -66,8 +66,26 @@ export class App extends React.Component {
     })
   }
 
+  getChats = () => {
+    fetch('http://127.0.0.1:8000/chat/', {
+      method: 'GET',
+      mode: 'cors',
+      credentials: 'include',
+    }).then(response => {
+      return response.json();
+    }).then(chats => {
+      if (chats){
+        console.log(chats);
+        this.setState({
+          chats: chats,
+        })
+      }
+    })
+  }
+
   componentDidMount(){
     this.getUsername();
+    this.getChats();
   }
   // Test function for updating the state of the user's chats that gets passed down as a prop
   // to StartChat. Eventually, this will be two POST requests, one to a chat endpoint and the 
