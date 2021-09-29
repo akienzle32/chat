@@ -19,15 +19,19 @@ export function ChatList(props) {
   		}
   		let chatId = chats[i].id;
   		let chatName = chats[i].name;
-  		let lastModified = chats[i].last_modified;
-  		let convertedDate = convertDatetime(lastModified);
-  		let parsedDate = new Date(convertedDate);
-  		let JSONelement = {id:chatId, name:chatName, usernames:usernameArray, last_modified:parsedDate};
+  		//let lastModified = chats[i].last_modified;
+  		//let convertedDate = convertDatetime(lastModified);
+  		//let parsedDate = new Date(convertedDate);
+  		//let JSONelement = {id:chatId, name:chatName, usernames:usernameArray, last_modified:parsedDate};
+      let JSONelement = {id:chatId, name:chatName, usernames:usernameArray};
   		chatsAndPtcps.push(JSONelement);
   	}
 
   	return(chatsAndPtcps);
   }
+
+  // Functions to sort chats by last_modified column, once I've added that column to the database.
+  /*
   // Sorts the mapped chats array by the last_modified column.
   function sortChats(chatsAndPtcps){
   	const sortedChats = chatsAndPtcps.sort((chatA, chatB) =>
@@ -45,7 +49,7 @@ export function ChatList(props) {
 
   	return(sortedChats);
   }
-  
+
   // Converts the data in last_modified column into a format that can be easily sorted in JavaScript.
   function convertDatetime(dateString) {
     let convertedDatetime;
@@ -72,16 +76,17 @@ export function ChatList(props) {
       const time = tempTime.slice(0, 5) + ":00";
       convertedDatetime = month + " " + day + ", " + year + " " + time;
     }
-    
+
     return(convertedDatetime);
   }
+  */
 
   // Displays chats and their participants, with each chat linking to the ChatRoom component.
   function displayChats(){
     const chatsAndPtcps = mapChats();
-    const sortedChats = sortChats(chatsAndPtcps);
-    console.log(sortedChats);
-    const chatList = sortedChats.map(chat => {
+    //const sortedChats = sortChats(chatsAndPtcps);
+    console.log(chatsAndPtcps);
+    const chatList = chatsAndPtcps.map(chat => {
   		let users = chat.usernames.join(", ");
   		let name = chat.name;
   		let id = chat.id;
