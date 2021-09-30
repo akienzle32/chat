@@ -37,20 +37,29 @@ export class App extends React.Component {
     return cookieValue;
   }
 
+  handleErrors(response) {
+    if (!response.ok){
+      throw Error(response.statusText);
+    }
+    return(response);
+  }
 
   getUsername = () => {
     fetch('http://127.0.0.1:8000/chat/current-user', {
       method: 'GET',
       mode: 'cors',
       credentials: 'include',
-    }).then(response => {
+    })
+    .then(this.handleErrors)
+    .then(response => {
       if (response.redirected){
         window.location.href = response.url;
         return;
       }
       else
         return response.json();
-    }).then(username => {
+    })
+    .then(username => {
       if (username){
         console.log(username);
         this.setState({
@@ -59,6 +68,7 @@ export class App extends React.Component {
       this.userLoggedIn();
       }
     })
+    .catch(error => console.log(error))
   }
 
   getChats = () => {
@@ -66,9 +76,12 @@ export class App extends React.Component {
       method: 'GET',
       mode: 'cors',
       credentials: 'include',
-    }).then(response => {
+    })
+    .then(this.handleErrors)
+    .then(response => {
       return response.json();
-    }).then(chats => {
+    })
+    .then(chats => {
       if (chats){
         console.log(chats);
         this.setState({
@@ -76,6 +89,7 @@ export class App extends React.Component {
         })
       }
     })
+    .catch(error => console.log(error))
   }
 
   getParticipants = () => {
@@ -83,9 +97,12 @@ export class App extends React.Component {
       method: 'GET',
       mode: 'cors',
       credentials: 'include',
-    }).then(response => {
+    })
+    .then(this.handleErrors)
+    .then(response => {
       return response.json();
-    }).then(participants => {
+    })
+    .then(participants => {
       if (participants){
         console.log(participants);
         this.setState({
@@ -93,6 +110,7 @@ export class App extends React.Component {
         })
       }
     })
+    .catch(error => console.log(error))
   }
 
   componentDidMount(){
