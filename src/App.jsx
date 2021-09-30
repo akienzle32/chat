@@ -129,9 +129,12 @@ export class App extends React.Component {
         chats: chats.concat(newChat),
       })
 
-      for (let i = 0; i < ptcpArray.length; i++){
+      const currentUser = this.state.username;
+      const newPtcpArray = ptcpArray.concat(currentUser);
+
+      for (let i = 0; i < newPtcpArray.length; i++){
       const data = new FormData();
-      data.append("name", ptcpArray[i]);
+      data.append("name", newPtcpArray[i]);
       console.log(chatId);
       data.append("chat", chatId);
       const jsonData = JSON.stringify(Object.fromEntries(data));
