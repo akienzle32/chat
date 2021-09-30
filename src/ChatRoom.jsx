@@ -20,8 +20,8 @@ export class ChatRoom extends React.Component {
 
 	// Load messages with the page, and ping the server once every five seconds for new messages after initial page load.  
 	componentDidMount() {
-		this.getMessages();
-		this.timer = setInterval(this.getMessages, 5000);
+		this.initGetMessages();
+		this.timer = setInterval(this.getMessagesOnInterval, 5000);
 		this.scrollToBottom();
 	}
 
@@ -45,8 +45,8 @@ export class ChatRoom extends React.Component {
     	}
     	return cookieValue;
 	}
-	
-	getMessages = () => {
+
+	initGetMessages = () => {
 		const path = window.location.pathname;
 		const pathArray = path.split('/');
 		const chatId = pathArray[2];	
@@ -55,8 +55,6 @@ export class ChatRoom extends React.Component {
 			method: 'GET',
 			mode: 'cors',
 			headers: {
-				// For this initial testing phase, I'm getting rid of conditional GET requests.
-				/*'If-Modified-Since': new Date(Date.now() - 10000),*/
 				'X-CSRFToken': this.state.csrftoken,
 			},
 			credentials: 'include',
@@ -77,9 +75,42 @@ export class ChatRoom extends React.Component {
   				this.setState({
   					messages: messages,
   				});
-  				//this.loggedIn(); // Because the backend doesn't support individual chats yet, I'm just setting loggedIn
-  				                // to true based on whether or not the server sends a 200 response for the message
-  				               // request. This state is tracked in the main App component. 
+    		}	
+  		});
+	}
+
+	
+	getMessagesOnInterval = () => {
+		const path = window.location.pathname;
+		const pathArray = path.split('/');
+		const chatId = pathArray[2];	
+
+		fetch('http://127.0.0.1:8000/chat/messages/' + chatId, {	
+			method: 'GET',
+			mode: 'cors',
+			headers: {
+				// For this initial testing phase, I'm getting rid of conditional GET requests.
+				'If-Modified-Since': new Date(Date.now() - 10000),
+				'X-CSRFToken': this.state.csrftoken,
+			},
+			credentials: 'include',
+		})
+  		.then(response => {
+  		// If the server sends a 401 response because the user is not authenticated, display an alert message prompting
+  		// the user to log in.
+  			if (response.status === 401){
+  				return;
+  			}
+  		// Otherwise, proceed as normal. 
+  			else
+  				return response.json();
+ 		 })
+ 		 .then(messages => {
+  			if (messages){
+  				console.log(messages);
+  				this.setState({
+  					messages: messages,
+  				});
     		}	
   		});
 	}
