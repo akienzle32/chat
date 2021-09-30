@@ -127,7 +127,7 @@ export class App extends React.Component {
 
     let chatId;
 
-    fetch('http://127.0.0.1:8000/chat/', {
+    fetch('http://127.0.0.1:8000/chat/chats', {
       method: 'POST',
       mode: 'cors',
       headers: {
