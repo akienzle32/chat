@@ -204,15 +204,27 @@ export class App extends React.Component {
     this.setState({loggedIn: true});
   }
 
+  displayLoginOrLogout(){
+    let navButton;
+    const loggedIn = this.state.loggedIn;
+    if (loggedIn)
+      navButton = <a className="link" id="logout" href="http://127.0.0.1:8000/accounts/logout">Log out</a>;
+    else
+      navButton = <a className="link" id="logout" href="http://127.0.0.1:8000/accounts/login">Login</a>
+
+    return(navButton);
+  }
+
   render() {
     const { username, chats, loggedIn, participants } = this.state;
+    const navButton = this.displayLoginOrLogout();
 
 	  return(
 	   <Router>
 	  	<div className="nav-bar">
   		  <Link className="link" to="/">Home</Link>
-	  	  <a className="link" id="logout" href="http://127.0.0.1:8000/accounts/logout">Log out</a>
-		  </div>
+	  	  {navButton}
+		  </div>  
 	 	  <Switch>
         <Route path="/:name/:id">
   			 <ChatRoom username={username} participants={participants} userLoggedIn={this.userLoggedIn} loggedIn={loggedIn}  />;
