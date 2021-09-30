@@ -1,0 +1,183 @@
+
+a:hover {
+  background: #B0C4DE;
+}
+
+table {
+  width: 100%;
+  text-align: left;
+}
+
+.nav-bar {
+  margin: 10px;
+
+}
+
+.ptcp-button {
+  height: 28px;
+  width: 25px;
+  float: right;
+  display: table;
+}
+
+.container-title {
+  text-align: center;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+}
+
+.top-box {
+  background-color: #DCDCDC;
+  border: 7px solid #4169E1;
+  border-radius: 25px;
+  margin-left: 460px;
+  overflow: scroll;
+}
+
+.bottom-box {
+  background-color: #DCDCDC;
+  border-left: 7px solid #4169E1;
+  border-right: 7px solid #4169E1;
+  border-bottom: 7px solid #4169E1;
+  border-radius: 25px;
+  margin-left: 460px;
+  overflow: scroll;
+}
+
+.submitButton {
+  visibility: hidden;
+}
+
+.chat-title {
+  text-align: center;
+}
+
+.ptcp-name {
+  width: 170px;
+  height: 22px;
+  font-size: 14px;
+  float: left;
+  display: table;
+}
+
+.chat-table {
+  width: 400px;
+}
+
+#form-container {
+  margin-left: 110px;
+}
+
+#chat-name {
+  width: 170px;
+  height: 22px;
+  font-size: 14px;
+  display: table;
+  margin-bottom: 4px;
+}
+
+#home-link {
+  float: left;
+}
+
+#logout {
+  float: right;
+}
+
+#start-chat {
+  height: 92px;
+  width: 400px;
+  padding-bottom: 60px;
+  padding-right: 50px;
+  padding-left: 50px;
+}
+
+#sub-ptcp-button {
+  margin-right: 58px;
+}
+
+#my-chats {
+  height: 200px;
+  width: 400px;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 50px;
+}
+
+#message-log {
+  height: 200px;
+  width: 400px;
+  padding: 50px;
+  margin-right: 100px;
+}
+
+#new-messages {
+  height: 50px;
+  width: 400px;
+  padding: 25px 50px;
+}
+
+#message-input {
+  background-color: white;
+  height: 20px;
+  width: 385px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  margin: 0px;
+  font-size: 16px
+}
+
+#login-alert {
+  font-size: 18px;
+  text-align: center;
+}
+
+#login-link {
+  font-size: 18px;
+}
+
+#col-title {
+  font-size: 17px;
+}
+
+#submit-forms {
+  display: none;
+}
+
+#author-par {
+  margin-bottom: 5px;
+}
+
+#message {
+  text-align: left;
+  padding: 5px;
+  border: 2px solid #4169E1;
+  border-radius: 5px;
+  background-color: white;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  display: inline-block;
+}
+
+#timestamp {
+  text-align: left;
+  margin-top: 5px;
+  font-size: 12px;
+}
+
+#ptc-list {
+  height: 140px;
+  float: left;
+  margin-left: 180px;
+  display: inline-table;
+  padding: 15px;
+  padding-right: 20px;
+  background-color: #DCDCDC;
+  border: 6px solid #4169E1;
+  border-radius: 30px;
+}
