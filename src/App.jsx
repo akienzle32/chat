@@ -44,8 +44,8 @@ export class App extends React.Component {
       mode: 'cors',
       credentials: 'include',
     }).then(response => {
-      if (response.status !== 200){
-        alert("Please log in."); // Temporary solution.
+      if (response.redirected){
+        window.location.href = response.url;
         return;
       }
       else
