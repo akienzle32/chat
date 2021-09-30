@@ -129,37 +129,37 @@ export class App extends React.Component {
         chats: chats.concat(newChat),
       })
 
-      const currentUser = this.state.username;
-      const newPtcpArray = ptcpArray.concat(currentUser);
+        const currentUser = this.state.username;
+        const newPtcpArray = ptcpArray.concat(currentUser);
 
-      for (let i = 0; i < newPtcpArray.length; i++){
-      const data = new FormData();
-      data.append("name", newPtcpArray[i]);
-      console.log(chatId);
-      data.append("chat", chatId);
-      const jsonData = JSON.stringify(Object.fromEntries(data));
-      console.log(jsonData);
+        for (let i = 0; i < newPtcpArray.length; i++){
+          const data = new FormData();
+          data.append("name", newPtcpArray[i]);
+          console.log(chatId);
+          data.append("chat", chatId);
+          const jsonData = JSON.stringify(Object.fromEntries(data));
+          console.log(jsonData);
 
-      fetch('http://127.0.0.1:8000/chat/participants', {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          'X-CSRFToken': this.csrftoken,         
-        },
-        credentials: 'include',
-        body: jsonData
-      })
-      .then(response => {
-        return response.json();
-      })
-      .then(newPtcp => {
-        console.log(newPtcp);
-        const participants = this.state.participants;
-        this.setState({
-          participants: participants.concat(newPtcp),
-        })
-      })
-    }
+          fetch('http://127.0.0.1:8000/chat/participants', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+              'X-CSRFToken': this.csrftoken,         
+            },
+            credentials: 'include',
+            body: jsonData
+          })
+          .then(response => {
+            return response.json();
+          })
+          .then(newPtcp => {
+            console.log(newPtcp);
+            const participants = this.state.participants;
+            this.setState({
+              participants: participants.concat(newPtcp),
+            })
+          })
+        }
     })
   }
 
