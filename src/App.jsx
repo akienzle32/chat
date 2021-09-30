@@ -168,14 +168,21 @@ export class App extends React.Component {
             body: jsonData
           })
           .then(response => {
-            return response.json();
+            if (response.status === 400){
+              alert('That username does not exist.');
+              return;
+            }
+            else
+              return response.json();
           })
           .then(newPtcp => {
-            console.log(newPtcp);
-            const participants = this.state.participants;
-            this.setState({
-              participants: participants.concat(newPtcp),
-            })
+            if(newPtcp){
+              console.log(newPtcp);
+              const participants = this.state.participants;
+              this.setState({
+                participants: participants.concat(newPtcp),
+              })
+            }
           })
         }
     })
