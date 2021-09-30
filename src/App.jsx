@@ -119,6 +119,35 @@ export class App extends React.Component {
     this.getParticipants();
   }
 
+  addParticipant = (jsonData) => {
+    fetch('http://127.0.0.1:8000/chat/participants', {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'X-CSRFToken': this.csrftoken,
+      },
+      credentials: 'include',
+      body: jsonData
+    })
+    .then(response => {
+      if (response.status === 400){
+        alert('That username does not exist.');
+        return;
+      }
+      else
+        return response.json();
+    })
+    .then(newPtcp => {
+      if(newPtcp){
+        console.log(newPtcp);
+        const participants = this.state.participants;
+        this.setState({
+          participants: participants.concat(newPtcp),
+        })
+      }
+    })
+  }
+
   addChat = (chatName, ptcpArray) => {
 
     const data = new FormData();
@@ -157,33 +186,7 @@ export class App extends React.Component {
           data.append("chat", chatId);
           const jsonData = JSON.stringify(Object.fromEntries(data));
           console.log(jsonData);
-
-          fetch('http://127.0.0.1:8000/chat/participants', {
-            method: 'POST',
-            mode: 'cors',
-            headers: {
-              'X-CSRFToken': this.csrftoken,         
-            },
-            credentials: 'include',
-            body: jsonData
-          })
-          .then(response => {
-            if (response.status === 400){
-              alert('That username does not exist.');
-              return;
-            }
-            else
-              return response.json();
-          })
-          .then(newPtcp => {
-            if(newPtcp){
-              console.log(newPtcp);
-              const participants = this.state.participants;
-              this.setState({
-                participants: participants.concat(newPtcp),
-              })
-            }
-          })
+          this.addParticipant(jsonData);
         }
     })
   }
