@@ -230,6 +230,10 @@ export class ChatRoom extends React.Component {
 			  	<div id="ptc-list">
 			      <p>Participants:</p>
 			  	  <ul>{participants}</ul>
+			  	  <form id="new-ptcp-form">
+			  	  	<input type="text" name="name" placeholder="Add participant..."></input>
+			  	  	<input type="submit" value="Send" className="submitButton"></input>
+			  	  </form>
 			  	</div>
 			  	<div className="top-box" id="message-log">{messages}
 			  	  <div ref={this.bottomOfMessages} />
