@@ -19,7 +19,7 @@ export function ChatList(props) {
   		}
   		let chatId = chats[i].id;
   		let chatName = chats[i].name;
-      console.log(usernameArray);
+      //console.log(usernameArray);
   		//let lastModified = chats[i].last_modified;
   		//let convertedDate = convertDatetime(lastModified);
   		//let parsedDate = new Date(convertedDate);

@@ -100,6 +100,67 @@ export class App extends React.Component {
     this.getChats();
     this.getParticipants();
   }
+
+  addChat = (chatName, ptcpArray) => {
+
+    const data = new FormData();
+    data.append("name", chatName);
+    const jsonData = JSON.stringify(Object.fromEntries(data));
+
+    let chatId;
+
+    fetch('http://127.0.0.1:8000/chat/', {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'X-CSRFToken': this.csrftoken,
+      }, 
+      credentials: 'include',
+      body: jsonData    
+    })
+    .then(response => {
+      return response.json();
+    })
+    .then(newChat => {
+      console.log(newChat);
+      chatId = newChat.id;
+      const chats = this.state.chats;
+      this.setState({
+        chats: chats.concat(newChat),
+      })
+
+      for (let i = 0; i < ptcpArray.length; i++){
+      const data = new FormData();
+      data.append("name", ptcpArray[i]);
+      console.log(chatId);
+      data.append("chat", chatId);
+      const jsonData = JSON.stringify(Object.fromEntries(data));
+      console.log(jsonData);
+
+      fetch('http://127.0.0.1:8000/chat/participants', {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'X-CSRFToken': this.csrftoken,         
+        },
+        credentials: 'include',
+        body: jsonData
+      })
+      .then(response => {
+        return response.json();
+      })
+      .then(newPtcp => {
+        console.log(newPtcp);
+        const participants = this.state.participants;
+        this.setState({
+          participants: participants.concat(newPtcp),
+        })
+      })
+    }
+    })
+  }
+
+  /*
   // Test function for updating the state of the user's chats that gets passed down as a prop
   // to StartChat. Eventually, this will be two POST requests, one to a chat endpoint and the 
   // other to a participant endpoint.
@@ -135,7 +196,7 @@ export class App extends React.Component {
   		chats: chats,
   	})
   }
-
+  */
   userLoggedIn = () => {
     this.setState({loggedIn: true});
   }
