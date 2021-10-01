@@ -150,10 +150,9 @@ export class ChatRoom extends React.Component {
 			this.setState({
 				messages: messages.concat(newMessage),
 			})
+			this.patchChat();
 		})
 		document.getElementById('message-form').reset();	
-
-		this.patchChat();
 	}
 
 	patchChat = () => {
