@@ -168,6 +168,18 @@ export class ChatRoom extends React.Component {
 		document.getElementById('message-form').reset();	
 	}
 
+	addParticipant = (event) => {
+		event.preventDefault();
+
+		const ptcpName = document.getElementById("ptcp-username").value;
+		const path = window.location.pathname;
+		const pathArray = path.split('/');
+		const chatId = parseInt(pathArray[2]);
+
+		this.props.addParticipant(ptcpName, chatId);
+		document.getElementById("new-ptcp-form").reset();
+	}
+
 	// If the user is logged in, then for each message, display the username of the author, the message content itself, 
 	// and the message's timestamp. This method is called by both componentDidMount() and componentDidUpdate(). 
 	displayMessages() {
@@ -230,8 +242,8 @@ export class ChatRoom extends React.Component {
 			  	<div id="ptc-list">
 			      <p>Participants:</p>
 			  	  <ul>{participants}</ul>
-			  	  <form id="new-ptcp-form">
-			  	  	<input type="text" name="name" placeholder="Add participant..."></input>
+			  	  <form id="new-ptcp-form" onSubmit={this.addParticipant}>
+			  	  	<input type="text" id="ptcp-username" name="name" placeholder="Add participant..."></input>
 			  	  	<input type="submit" value="Send" className="submitButton"></input>
 			  	  </form>
 			  	</div>

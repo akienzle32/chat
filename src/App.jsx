@@ -119,7 +119,12 @@ export class App extends React.Component {
     this.getParticipants();
   }
 
-  addParticipant = (jsonData) => {
+  addParticipant = (ptcp, chatId) => {
+    const data = new FormData();
+    data.append("name", ptcp);
+    data.append("chat", chatId);
+    const jsonData = JSON.stringify(Object.fromEntries(data));
+
     fetch('http://127.0.0.1:8000/chat/participants', {
       method: 'POST',
       mode: 'cors',
@@ -180,13 +185,7 @@ export class App extends React.Component {
         const newPtcpArray = ptcpArray.concat(currentUser);
 
         for (let i = 0; i < newPtcpArray.length; i++){
-          const data = new FormData();
-          data.append("name", newPtcpArray[i]);
-          console.log(chatId);
-          data.append("chat", chatId);
-          const jsonData = JSON.stringify(Object.fromEntries(data));
-          console.log(jsonData);
-          this.addParticipant(jsonData);
+          this.addParticipant(newPtcpArray[i], chatId);
         }
     })
   }
@@ -255,7 +254,8 @@ export class App extends React.Component {
 		  </div>  
 	 	  <Switch>
         <Route path="/:name/:id">
-  			 <ChatRoom username={username} participants={participants} userLoggedIn={this.userLoggedIn} loggedIn={loggedIn}  />;
+  			 <ChatRoom username={username} participants={participants} userLoggedIn={this.userLoggedIn} 
+          addParticipant={this.addParticipant} loggedIn={loggedIn}  />;
   		  </Route>
 		    <Route path="/">
 			   <StartChat username={username} chats={chats} participants={participants} onSubmit={this.addChat} />
