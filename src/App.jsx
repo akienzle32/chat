@@ -202,44 +202,7 @@ export class App extends React.Component {
     })
 
   }
-
-  /*
-  // Test function for updating the state of the user's chats that gets passed down as a prop
-  // to StartChat. Eventually, this will be two POST requests, one to a chat endpoint and the 
-  // other to a participant endpoint.
-  addChat = (chatname, ptcpArray) => {
-  	let chats = this.state.chats;
-  	const lastChat = chats[chats.length - 1];
-  	const chatId = lastChat.id + 1;
-  	//const JSONchat = {id:chatId, name:chatname, last_modified:null}
-    const JSONchat = {id:chatId, name:chatname}
-  	chats = chats.concat(JSONchat);
-  	console.log(chats);
-
-  	let participants = this.state.participants;
-  	const lastPtcp = participants[participants.length - 1];
-  	let ptcpId = lastPtcp.id + 1;
-  	let newPtcps = [];
-
-    // Automatically add the current user to the newly created chat.
-  	const currentUsername = this.state.username;
-  	const currentUserJSON = {id:ptcpId, name:currentUsername, chat:chatId};
-  	newPtcps.push(currentUserJSON);
-  	ptcpId++;
-
-  	for (let i = 0; i < ptcpArray.length; i++){
-  		let ptcpJSON = {id:ptcpId, name:ptcpArray[i], chat:chatId};
-  		newPtcps.push(ptcpJSON); 
-  		ptcpId++;
-  	}
-  	participants = participants.concat(newPtcps);
-  	console.log(participants);
-  	this.setState({
-  		participants: participants,
-  		chats: chats,
-  	})
-  }
-  */
+  
   userLoggedIn = () => {
     this.setState({loggedIn: true});
   }
