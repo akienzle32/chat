@@ -152,6 +152,31 @@ export class ChatRoom extends React.Component {
 			})
 		})
 		document.getElementById('message-form').reset();	
+
+		this.patchChat();
+	}
+
+	patchChat = () => {
+		const path = window.location.pathname; // Should make this its own function, with a parameter for which element to strip
+		const pathArray = path.split('/');
+		const chatId = parseInt(pathArray[2]);
+
+		fetch('http://127.0.0.1:8000/chat/chats/' + chatId, {
+			method: 'PUT',
+			mode: 'cors',
+			headers: {
+				'X-CSRFToken': this.csrftoken,
+			},
+			credentials: 'include',
+		})
+		.then(this.props.handleErrors)
+		.then(response => {
+			return response.json()
+		})
+		.then(chat => {
+			console.log(chat);
+		})
+		.catch(error => console.log(error))
 	}
 
 	addParticipant = (event) => {
