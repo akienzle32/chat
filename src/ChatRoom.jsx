@@ -46,13 +46,6 @@ export class ChatRoom extends React.Component {
     	return cookieValue;
 	}
 
-	handleErrors(response) {
-		if (!response.ok){
-			throw Error(response.statusText);
-		}
-		return(response);
-	}
-
 	initGetMessages = () => {
 		const path = window.location.pathname;
 		const pathArray = path.split('/');
@@ -66,7 +59,7 @@ export class ChatRoom extends React.Component {
 			},
 			credentials: 'include',
 		})
-		.then(this.handleErrors)
+		.then(this.props.handleErrors)
   		.then(response => {
   			return response.json();
  		 })
@@ -97,7 +90,7 @@ export class ChatRoom extends React.Component {
 			},
 			credentials: 'include',
 		})
-		.then(this.handleErrors)
+		.then(this.props.handleErrors)
   		.then(response => {
   			return response.json();
  		 })

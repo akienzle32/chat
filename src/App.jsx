@@ -255,7 +255,7 @@ export class App extends React.Component {
 	 	  <Switch>
         <Route path="/:name/:id">
   			 <ChatRoom username={username} participants={participants} userLoggedIn={this.userLoggedIn} 
-          addParticipant={this.addParticipant} loggedIn={loggedIn}  />;
+          addParticipant={this.addParticipant} handleErrors={this.handleErrors} loggedIn={loggedIn}  />;
   		  </Route>
 		    <Route path="/">
 			   <StartChat username={username} chats={chats} participants={participants} onSubmit={this.addChat} />
