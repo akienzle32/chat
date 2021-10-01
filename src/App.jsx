@@ -190,6 +190,19 @@ export class App extends React.Component {
     })
   }
 
+  updateChatState = (jsonChat) => {
+    const chats = this.state.chats;
+    const chatId = jsonChat.id;
+
+    const index = chats.findIndex(chat => chat.id === chatId);
+    chats[index] = jsonChat;
+
+    this.setState({
+      chats: chats,
+    })
+
+  }
+
   /*
   // Test function for updating the state of the user's chats that gets passed down as a prop
   // to StartChat. Eventually, this will be two POST requests, one to a chat endpoint and the 
@@ -254,8 +267,9 @@ export class App extends React.Component {
 		  </div>  
 	 	  <Switch>
         <Route path="/:name/:id">
-  			 <ChatRoom username={username} chats={chats} participants={participants} userLoggedIn={this.userLoggedIn} 
-          addParticipant={this.addParticipant} handleErrors={this.handleErrors} loggedIn={loggedIn}  />;
+  			 <ChatRoom username={username} participants={participants} userLoggedIn={this.userLoggedIn} 
+          addParticipant={this.addParticipant} handleErrors={this.handleErrors} 
+          updateChatState={this.updateChatState} loggedIn={loggedIn}  />;
   		  </Route>
 		    <Route path="/">
 			   <StartChat username={username} chats={chats} participants={participants} onSubmit={this.addChat} />

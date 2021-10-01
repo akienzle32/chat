@@ -174,6 +174,7 @@ export class ChatRoom extends React.Component {
 		})
 		.then(chat => {
 			console.log(chat);
+			this.props.updateChatState(chat);
 		})
 		.catch(error => console.log(error))
 	}
