@@ -22,8 +22,8 @@ export function ChatList(props) {
       //console.log(usernameArray);
   		let lastModified = chats[i].last_modified;
   		//let convertedDate = convertDatetime(lastModified);
-  		let parsedDate = new Date(lastModified);
-  		let JSONelement = {id:chatId, name:chatName, usernames:usernameArray, last_modified:parsedDate};
+  		//let parsedDate = new Date(lastModified);
+  		let JSONelement = {id:chatId, name:chatName, usernames:usernameArray, last_modified:lastModified};
       //let JSONelement = {id:chatId, name:chatName, usernames:usernameArray};
   		chatsAndPtcps.push(JSONelement);
   	}
@@ -41,7 +41,7 @@ export function ChatList(props) {
           return -1;
         else if (chatB.last_modified === null)
           return 1;
-        else if (chatA.last_modified < chatB.last_modified)
+        else if (new Date(chatA.last_modified) < new Date(chatB.last_modified))
           return 1;
         else
           return -1;
