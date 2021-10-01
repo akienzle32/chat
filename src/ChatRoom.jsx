@@ -210,9 +210,10 @@ export class ChatRoom extends React.Component {
 
 	// Scrape the chat room name from the url. 
 	displayChatRoomName(){
-		const path = window.location.pathname;
-		const pathArray = path.split('/');
-		const chatName = pathArray[1];
+		const url = window.location.href;
+		const cleanUrl = decodeURI(url);
+		const pathArray = cleanUrl.split('/');
+		const chatName = pathArray[3];
 
 		return(chatName);
 	}
