@@ -46,6 +46,13 @@ export class ChatRoom extends React.Component {
     	return cookieValue;
 	}
 
+	handleErrors(response) {
+		if (!response.ok){
+			throw Error(response.statusText);
+		}
+		return(response);
+	}
+
 	initGetMessages = () => {
 		const path = window.location.pathname;
 		const pathArray = path.split('/');
@@ -59,15 +66,9 @@ export class ChatRoom extends React.Component {
 			},
 			credentials: 'include',
 		})
+		.then(this.handleErrors)
   		.then(response => {
-  		// If the server sends a 401 response because the user is not authenticated, display an alert message prompting
-  		// the user to log in.
-  			if (response.status === 401){
-  				return;
-  			}
-  		// Otherwise, proceed as normal. 
-  			else
-  				return response.json();
+  			return response.json();
  		 })
  		 .then(messages => {
   			if (messages){
@@ -76,7 +77,8 @@ export class ChatRoom extends React.Component {
   					messages: messages,
   				});
     		}	
-  		});
+  		})
+ 		.catch(error => console.log(error))
 	}
 
 	
@@ -95,15 +97,9 @@ export class ChatRoom extends React.Component {
 			},
 			credentials: 'include',
 		})
+		.then(this.handleErrors)
   		.then(response => {
-  		// If the server sends a 401 response because the user is not authenticated, display an alert message prompting
-  		// the user to log in.
-  			if (response.status === 401){
-  				return;
-  			}
-  		// Otherwise, proceed as normal. 
-  			else
-  				return response.json();
+  			return response.json();
  		 })
  		 .then(messages => {
   			if (messages){
@@ -112,7 +108,8 @@ export class ChatRoom extends React.Component {
   					messages: messages,
   				});
     		}	
-  		});
+  		})
+ 		.catch(error => console.log(error))
 	}
 
 	loggedIn = () => {
