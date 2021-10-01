@@ -54,9 +54,6 @@ export class ChatRoom extends React.Component {
 		fetch('http://127.0.0.1:8000/chat/messages/' + chatId, {	
 			method: 'GET',
 			mode: 'cors',
-			headers: {
-				'X-CSRFToken': this.state.csrftoken,
-			},
 			credentials: 'include',
 		})
 		.then(this.props.handleErrors)
@@ -86,7 +83,6 @@ export class ChatRoom extends React.Component {
 			headers: {
 				// For this initial testing phase, I'm getting rid of conditional GET requests.
 				'If-Modified-Since': new Date(Date.now() - 10000),
-				'X-CSRFToken': this.state.csrftoken,
 			},
 			credentials: 'include',
 		})
