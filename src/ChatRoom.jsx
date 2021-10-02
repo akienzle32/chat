@@ -47,6 +47,7 @@ export class ChatRoom extends React.Component {
     	return cookieValue;
 	}
 
+	// Function to extract either the chat name or the chat id from the url.
 	extractFromUrl(url, string) {
 		const cleanUrl = decodeURI(url);
 		const pathArray = cleanUrl.split('/');
@@ -88,7 +89,9 @@ export class ChatRoom extends React.Component {
  		.catch(error => console.log(error))
 	}
 
-	
+	// This method gets called every five seconds after the initial GET request is sent. In contrast to the first
+	// request, this one features an 'If-Modified-Since' header, so that the server will only send the resource
+	// again if there are new messages. 
 	getMessagesOnInterval = () => {
 		const url = window.location.href;
 		const chatId = this.extractFromUrl(url, 'id');	
@@ -97,7 +100,6 @@ export class ChatRoom extends React.Component {
 			method: 'GET',
 			mode: 'cors',
 			headers: {
-				// For this initial testing phase, I'm getting rid of conditional GET requests.
 				'If-Modified-Since': new Date(Date.now() - 10000),
 			},
 			credentials: 'include',
@@ -160,7 +162,7 @@ export class ChatRoom extends React.Component {
 		})
 		.then(newMessage => {
 			console.log(newMessage);
-			const messages = this.state.messages; // React-recommended way of adding elements to a "stateful" array. 
+			const messages = this.state.messages; 
 			this.setState({
 				messages: messages.concat(newMessage),
 			})
@@ -169,6 +171,10 @@ export class ChatRoom extends React.Component {
 		document.getElementById('message-form').reset();	
 	}
 
+	// This method is essentially a request for the server to update the last_modified column of the current
+	// chat, and is called every time a message is sent. Because timestamps for messages are added on the
+	// server side, the logic for updating this column is entirely located on the server (which explains why 
+	// the PUT request actually features an empty body).
 	patchChat = () => {
 		const url = window.location.href;
 		const chatId = this.extractFromUrl(url, 'id');
