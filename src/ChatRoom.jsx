@@ -45,7 +45,7 @@ export class ChatRoom extends React.Component {
     	}
     	return cookieValue;
 	}
-
+	
 	initGetMessages = () => {
 		const path = window.location.pathname;
 		const pathArray = path.split('/');
