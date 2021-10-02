@@ -45,11 +45,25 @@ export class ChatRoom extends React.Component {
     	}
     	return cookieValue;
 	}
-	
+
+	extractFromUrl(url, string) {
+		const cleanUrl = decodeURI(url);
+		const pathArray = cleanUrl.split('/');
+		let urlElement;
+		switch(string){
+			case 'name':
+				urlElement = pathArray[3];
+				break;
+			case 'id':
+				urlElement = pathArray[4];
+				break;
+    	}
+    	return urlElement;
+	}
+
 	initGetMessages = () => {
-		const path = window.location.pathname;
-		const pathArray = path.split('/');
-		const chatId = pathArray[2];	
+		const url = window.location.href;
+		const chatId = this.extractFromUrl(url, 'id');
 
 		fetch('http://127.0.0.1:8000/chat/messages/' + chatId, {	
 			method: 'GET',
@@ -73,9 +87,8 @@ export class ChatRoom extends React.Component {
 
 	
 	getMessagesOnInterval = () => {
-		const path = window.location.pathname;
-		const pathArray = path.split('/');
-		const chatId = pathArray[2];	
+		const url = window.location.href;
+		const chatId = this.extractFromUrl(url, 'id');	
 
 		fetch('http://127.0.0.1:8000/chat/messages/' + chatId, {	
 			method: 'GET',
@@ -115,10 +128,8 @@ export class ChatRoom extends React.Component {
 		this.getCookie('csrftoken');
 		event.preventDefault();
 
-		const path = window.location.pathname;
-		const pathArray = path.split('/');
-		const chatId = pathArray[2];
-		console.log(chatId);
+		const url = window.location.href;
+		const chatId = this.extractFromUrl(url, 'id');
 
 		let messageForm = event.target;
 		let formData = new FormData(messageForm);
@@ -156,9 +167,8 @@ export class ChatRoom extends React.Component {
 	}
 
 	patchChat = () => {
-		const path = window.location.pathname; // Should make this its own function, with a parameter for which element to strip
-		const pathArray = path.split('/');
-		const chatId = parseInt(pathArray[2]);
+		const url = window.location.href;
+		const chatId = this.extractFromUrl(url, 'id');
 
 		fetch('http://127.0.0.1:8000/chat/chats/' + chatId, {
 			method: 'PUT',
@@ -183,9 +193,8 @@ export class ChatRoom extends React.Component {
 		event.preventDefault();
 
 		const ptcpName = document.getElementById("ptcp-username").value;
-		const path = window.location.pathname;
-		const pathArray = path.split('/');
-		const chatId = parseInt(pathArray[2]);
+		const url = window.location.href;
+		const chatId = this.extractFromUrl(url, 'id');
 
 		this.props.addParticipant(ptcpName, chatId);
 		document.getElementById("new-ptcp-form").reset();
@@ -216,9 +225,8 @@ export class ChatRoom extends React.Component {
 		const participants = this.props.participants;
 		const participantArray = [];
 
-		const path = window.location.pathname;
-		const pathArray = path.split('/');
-		const chatId = parseInt(pathArray[2]);
+		const url = window.location.href;
+		const chatId = parseInt(this.extractFromUrl(url, 'id'));
 
 		for (let i = 0; i < participants.length; i++){
 			if (participants[i].chat === chatId){
@@ -236,9 +244,7 @@ export class ChatRoom extends React.Component {
 	// Scrape the chat room name from the url. 
 	displayChatRoomName(){
 		const url = window.location.href;
-		const cleanUrl = decodeURI(url);
-		const pathArray = cleanUrl.split('/');
-		const chatName = pathArray[3];
+		const chatName = this.extractFromUrl(url, 'name');
 
 		return(chatName);
 	}
