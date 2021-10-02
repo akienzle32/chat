@@ -1,4 +1,5 @@
 import React from 'react';
+import { AddParticipant } from './AddParticipant';
 import './App.css';
 
 
@@ -191,17 +192,6 @@ export class ChatRoom extends React.Component {
 		.catch(error => console.log(error))
 	}
 
-	addParticipant = (event) => {
-		event.preventDefault();
-
-		const ptcpName = document.getElementById("ptcp-username").value;
-		const url = window.location.href;
-		const chatId = this.extractFromUrl(url, 'id');
-
-		this.props.addParticipant(ptcpName, chatId);
-		document.getElementById("new-ptcp-form").reset();
-	}
-
 	// If the user is logged in, then for each message, display the username of the author, the message content itself, 
 	// and the message's timestamp. This method is called by both componentDidMount() and componentDidUpdate(). 
 	displayMessages() {
@@ -222,27 +212,6 @@ export class ChatRoom extends React.Component {
   		return messageList;
 	}
 
-	displayParticipants(){
-		const currentUser = this.props.username;
-		const participants = this.props.participants;
-		const participantArray = [];
-
-		const url = window.location.href;
-		const chatId = parseInt(this.extractFromUrl(url, 'id'));
-
-		for (let i = 0; i < participants.length; i++){
-			if (participants[i].chat === chatId){
-				let ptcpName = participants[i].name;
-				if (ptcpName === currentUser)
-					ptcpName = "me"; // In each individual chatroom, display the current user as "me"
-
-				participantArray.push(ptcpName);
-			}
-		}
-		const ptcpList = participantArray.map((participant, index) => {return <li key={index}>{ participant }</li>})
-		return(ptcpList);
-	}
-
 	// Scrape the chat room name from the url. 
 	displayChatRoomName(){
 		const url = window.location.href;
@@ -254,19 +223,12 @@ export class ChatRoom extends React.Component {
 	render() {
 		const chatRoomName = this.displayChatRoomName();
 		const messages = this.displayMessages();
-		const participants = this.displayParticipants();
 	  	  return (
 			<div>
 		  	  <div><h1 className="chat-title">{chatRoomName}</h1></div>
 		  	  <div className="lower-container">
-			  	<div id="ptc-list">
-			      <p>Participants:</p>
-			  	  <ul>{participants}</ul>
-			  	  <form id="new-ptcp-form" onSubmit={this.addParticipant}>
-			  	  	<input type="text" id="ptcp-username" name="name" placeholder="Add participant..."></input>
-			  	  	<input type="submit" value="Send" className="submitButton"></input>
-			  	  </form>
-			  	</div>
+		  	  	<AddParticipant username={this.props.username} participants={this.props.participants} 
+		  	  		extractFromUrl={this.extractFromUrl} addParticipant={this.props.addParticipant} />
 			  	<div className="top-box" id="message-log">{messages}
 			  	  <div ref={this.bottomOfMessages} />
 			  	</div>
