@@ -57,6 +57,8 @@ export class ChatRoom extends React.Component {
 			case 'id':
 				urlElement = pathArray[4];
 				break;
+			default:
+				urlElement = null;
     	}
     	return urlElement;
 	}
