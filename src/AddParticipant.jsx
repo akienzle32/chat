@@ -35,7 +35,7 @@ export const AddParticipant = (props) => {
 		return(ptcpList);
 	}
 	return (
-	  <div id="ptc-list">
+	  <div id="ptcp-list">
 		<p>Participants</p>
 		  <ul>{displayParticipants()}</ul>
 			<form id="new-ptcp-form" onSubmit={onSubmit}>
