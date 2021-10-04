@@ -1,5 +1,5 @@
 import React from 'react';
-import { AddParticipant } from './AddParticipant';
+import { ParticipantList } from './ParticipantList';
 import './App.css';
 
 
@@ -233,7 +233,7 @@ export class ChatRoom extends React.Component {
 			<div>
 		  	  <div><h1 className="chat-title">{chatRoomName}</h1></div>
 		  	  <div className="lower-container">
-		  	  	<AddParticipant username={this.props.username} participants={this.props.participants} 
+		  	  	<ParticipantList username={this.props.username} participants={this.props.participants} 
 		  	  		extractFromUrl={this.extractFromUrl} addParticipant={this.props.addParticipant} />
 			  	<div className="top-box" id="message-log">{messages}
 			  	  <div ref={this.bottomOfMessages} />

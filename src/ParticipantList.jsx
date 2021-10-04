@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 
-export const AddParticipant = (props) => {
+export const ParticipantList = (props) => {
 
 	const onSubmit = (event) => {
 		event.preventDefault();
