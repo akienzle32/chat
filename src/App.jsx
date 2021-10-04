@@ -61,7 +61,6 @@ export class App extends React.Component {
     })
     .then(username => {
       if (username){
-        console.log(username);
         this.setState({
           username: username.username,
       });
@@ -83,7 +82,6 @@ export class App extends React.Component {
     })
     .then(chats => {
       if (chats){
-        console.log(chats);
         this.setState({
           chats: chats,
         })
@@ -104,7 +102,6 @@ export class App extends React.Component {
     })
     .then(participants => {
       if (participants){
-        console.log(participants);
         this.setState({
           participants: participants,
         })
@@ -144,7 +141,6 @@ export class App extends React.Component {
     })
     .then(newPtcp => {
       if(newPtcp){
-        console.log(newPtcp);
         const participants = this.state.participants;
         this.setState({
           participants: participants.concat(newPtcp),
@@ -175,7 +171,6 @@ export class App extends React.Component {
       return response.json();
     })
     .then(newChat => {
-      console.log(newChat);
       chatId = newChat.id;
       const chats = this.state.chats;
       this.setState({

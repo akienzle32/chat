@@ -87,7 +87,6 @@ export function ChatList(props) {
   function displayChats(){
     const chatsAndPtcps = mapChats();
     const sortedChats = sortChats(chatsAndPtcps);
-    console.log(chatsAndPtcps);
     const chatList = sortedChats.map(chat => {
   		let users = chat.usernames.join(", ");
   		let name = chat.name;
