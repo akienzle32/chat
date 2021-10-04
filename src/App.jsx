@@ -211,22 +211,36 @@ export class App extends React.Component {
     let navButton;
     const loggedIn = this.state.loggedIn;
     if (loggedIn)
-      navButton = <a className="link" id="logout" href="http://127.0.0.1:8000/accounts/logout">Log out</a>;
+      navButton = <li className="right-nav-element"><a className="link" href="http://127.0.0.1:8000/accounts/logout">Log out</a></li>;
     else
-      navButton = <a className="link" id="logout" href="http://127.0.0.1:8000/accounts/login">Login</a>
+      navButton = <li className="right-nav-element"><a className="link" href="http://127.0.0.1:8000/accounts/login">Login</a></li>;
 
     return(navButton);
+  }
+
+  displayUsername(){
+    let usernameIcon;
+    const username = this.state.username;
+    if (username)
+      usernameIcon = <li className="right-nav-element" id="username">Signed in as <b>{username}</b></li>
+    else
+      usernameIcon = <li className = "right-nav-element" id="username"></li>
+    return(usernameIcon);
   }
 
   render() {
     const { username, chats, loggedIn, participants } = this.state;
     const navButton = this.displayLoginOrLogout();
+    const usernameIcon = this.displayUsername();
 
 	  return(
 	   <Router>
-	  	<div className="nav-bar">
-  		  <Link className="link" to="/">Home</Link>
-	  	  {navButton}
+	  	<div>
+        <ul className="nav-bar">
+  		    <li className="left-nav-element"><Link className="link" to="/">Home</Link></li>
+          {navButton}
+          {usernameIcon}
+        </ul>
 		  </div>  
 	 	  <Switch>
         <Route path="/:name/:id">
