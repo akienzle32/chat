@@ -1,4 +1,5 @@
 import React from 'react';
+import { ParticipantList } from './ParticipantList';
 import './App.css';
 
 
@@ -20,8 +21,8 @@ export class ChatRoom extends React.Component {
 
 	// Load messages with the page, and ping the server once every five seconds for new messages after initial page load.  
 	componentDidMount() {
-		this.getMessages();
-		this.timer = setInterval(this.getMessages, 5000);
+		this.initGetMessages();
+		this.timer = setInterval(this.getMessagesOnInterval, 5000);
 		this.scrollToBottom();
 	}
 
@@ -45,27 +46,37 @@ export class ChatRoom extends React.Component {
     	}
     	return cookieValue;
 	}
-	
-	getMessages = () => {
-		fetch('http://127.0.0.1:8000/chat/messages', {	
+
+	// Function to extract either the chat name or the chat id from the url.
+	extractFromUrl(url, string) {
+		const cleanUrl = decodeURI(url);
+		const pathArray = cleanUrl.split('/');
+		let urlElement;
+		switch(string){
+			case 'name':
+				urlElement = pathArray[3];
+				break;
+			case 'id':
+				urlElement = pathArray[4];
+				break;
+			default:
+				urlElement = null;
+    	}
+    	return urlElement;
+	}
+
+	initGetMessages = () => {
+		const url = window.location.href;
+		const chatId = this.extractFromUrl(url, 'id');
+
+		fetch('http://127.0.0.1:8000/chat/messages/' + chatId, {	
 			method: 'GET',
 			mode: 'cors',
-			headers: {
-				// For this initial testing phase, I'm getting rid of conditional GET requests.
-				/*'If-Modified-Since': new Date(Date.now() - 10000),*/
-				'X-CSRFToken': this.state.csrftoken,
-			},
 			credentials: 'include',
 		})
+		.then(this.props.handleErrors)
   		.then(response => {
-  		// If the server sends a 401 response because the user is not authenticated, display an alert message prompting
-  		// the user to log in.
-  			if (response.status === 401){
-  				return;
-  			}
-  		// Otherwise, proceed as normal. 
-  			else
-  				return response.json();
+  			return response.json();
  		 })
  		 .then(messages => {
   			if (messages){
@@ -73,11 +84,39 @@ export class ChatRoom extends React.Component {
   				this.setState({
   					messages: messages,
   				});
-  				this.loggedIn(); // Because the backend doesn't support individual chats yet, I'm just setting loggedIn
-  				                // to true based on whether or not the server sends a 200 response for the message
-  				               // request. This state is tracked in the main App component. 
     		}	
-  		});
+  		})
+ 		.catch(error => console.log(error))
+	}
+
+	// This method gets called every five seconds after the initial GET request is sent. In contrast to the first
+	// request, this one features an 'If-Modified-Since' header, so that the server will only send the resource
+	// again if there are new messages. 
+	getMessagesOnInterval = () => {
+		const url = window.location.href;
+		const chatId = this.extractFromUrl(url, 'id');	
+
+		fetch('http://127.0.0.1:8000/chat/messages/' + chatId, {	
+			method: 'GET',
+			mode: 'cors',
+			headers: {
+				'If-Modified-Since': new Date(Date.now() - 10000),
+			},
+			credentials: 'include',
+		})
+		.then(this.props.handleErrors)
+  		.then(response => {
+  			return response.json();
+ 		 })
+ 		 .then(messages => {
+  			if (messages){
+  				console.log(messages);
+  				this.setState({
+  					messages: messages,
+  				});
+    		}	
+  		})
+ 		.catch(error => console.log(error))
 	}
 
 	loggedIn = () => {
@@ -94,11 +133,15 @@ export class ChatRoom extends React.Component {
 		this.getCookie('csrftoken');
 		event.preventDefault();
 
+		const url = window.location.href;
+		const chatId = this.extractFromUrl(url, 'id');
+
 		let messageForm = event.target;
 		let formData = new FormData(messageForm);
+		formData.append('chat', chatId);
 		let jsonData = JSON.stringify(Object.fromEntries(formData));
 
-		fetch('http://127.0.0.1:8000/chat/messages', {
+		fetch('http://127.0.0.1:8000/chat/messages/' + chatId, {
 			method: 'POST',
 			mode: 'cors',
 			headers: {
@@ -119,12 +162,40 @@ export class ChatRoom extends React.Component {
 		})
 		.then(newMessage => {
 			console.log(newMessage);
-			const messages = this.state.messages; // React-recommended way of adding elements to a "stateful" array. 
+			const messages = this.state.messages; 
 			this.setState({
 				messages: messages.concat(newMessage),
 			})
+			this.patchChat();
 		})
 		document.getElementById('message-form').reset();	
+	}
+
+	// This method is essentially a request for the server to update the last_modified column of the current
+	// chat, and is called every time a message is sent. Because timestamps for messages are added on the
+	// server side, the logic for updating this column is entirely located on the server (which explains why 
+	// the PUT request actually features an empty body).
+	patchChat = () => {
+		const url = window.location.href;
+		const chatId = this.extractFromUrl(url, 'id');
+
+		fetch('http://127.0.0.1:8000/chat/chats/' + chatId, {
+			method: 'PUT',
+			mode: 'cors',
+			headers: {
+				'X-CSRFToken': this.csrftoken,
+			},
+			credentials: 'include',
+		})
+		.then(this.props.handleErrors)
+		.then(response => {
+			return response.json()
+		})
+		.then(chat => {
+			console.log(chat);
+			this.props.updateChatState(chat);
+		})
+		.catch(error => console.log(error))
 	}
 
 	// If the user is logged in, then for each message, display the username of the author, the message content itself, 
@@ -147,49 +218,24 @@ export class ChatRoom extends React.Component {
   		return messageList;
 	}
 
-	displayParticipants(){
-		const currentUser = this.props.username;
-		const participants = this.props.participants;
-		const participantArray = [];
-
-		const path = window.location.pathname;
-		const pathArray = path.split('/');
-		const chatId = parseInt(pathArray[2]);
-
-		for (let i = 0; i < participants.length; i++){
-			if (participants[i].chat_id === chatId){
-				let ptcpName = participants[i].username;
-				if (ptcpName === currentUser)
-					ptcpName = "me"; // In each individual chatroom, display the current user as "me"
-
-				participantArray.push(ptcpName);
-			}
-		}
-		const ptcpList = participantArray.map((participant, index) => {return <li key={index}>{ participant }</li>})
-		return(ptcpList);
-	}
-
 	// Scrape the chat room name from the url. 
 	displayChatRoomName(){
-		const path = window.location.pathname;
-		const pathArray = path.split('/');
-		const chatName = pathArray[1];
+		const url = window.location.href;
+		const chatName = this.extractFromUrl(url, 'name');
+		const decodedChatName = decodeURIComponent(chatName);
 
-		return(chatName);
+		return(decodedChatName);
 	}
 
 	render() {
 		const chatRoomName = this.displayChatRoomName();
 		const messages = this.displayMessages();
-		const participants = this.displayParticipants();
 	  	  return (
 			<div>
 		  	  <div><h1 className="chat-title">{chatRoomName}</h1></div>
 		  	  <div className="lower-container">
-			  	<div id="ptc-list">
-			      <p>Participants:</p>
-			  	  <ul>{participants}</ul>
-			  	</div>
+		  	  	<ParticipantList username={this.props.username} participants={this.props.participants} 
+		  	  		extractFromUrl={this.extractFromUrl} addParticipant={this.props.addParticipant} />
 			  	<div className="top-box" id="message-log">{messages}
 			  	  <div ref={this.bottomOfMessages} />
 			  	</div>
@@ -197,6 +243,7 @@ export class ChatRoom extends React.Component {
 					<form id='message-form' onSubmit={this.handleSubmit}>
 				  	  <input type="text" id="message-input" name="content" placeholder="Text message..."></input>
 				  	  <input type='hidden' name='author'></input>
+				  	  <input type='hidden' name='chat'></input>
 				  	  <input type='submit' value='Send' className='submitButton'></input>
 					</form>	
 			  	</div>

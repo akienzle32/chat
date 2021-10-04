@@ -45,7 +45,6 @@ export class StartChat extends React.Component {
     if (ptcpInput.length > 1){
       const lastInput = ptcpInput.length - 1;
       const newInput = ptcpInput.slice(0, lastInput);
-      console.log(newInput);
       this.setState({
         ptcpInput: newInput,
       })

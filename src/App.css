@@ -8,11 +8,6 @@ table {
   text-align: left;
 }
 
-.nav-bar {
-  margin: 10px;
-
-}
-
 .ptcp-button {
   height: 28px;
   width: 25px;
@@ -67,6 +62,25 @@ table {
   width: 400px;
 }
 
+.nav-bar {
+  list-style-type: none;
+  margin: 10px;
+  padding: 0px;
+  overflow: hidden;
+}
+
+.left-nav-element {
+  float: left;
+}
+
+.right-nav-element {
+  float: right
+}
+
+#username {
+  margin-right: 15px;
+}
+
 #form-container {
   margin-left: 110px;
 }
@@ -81,10 +95,6 @@ table {
 
 #home-link {
   float: left;
-}
-
-#logout {
-  float: right;
 }
 
 #start-chat {
@@ -170,8 +180,9 @@ table {
   font-size: 12px;
 }
 
-#ptc-list {
+#ptcp-list {
   height: 140px;
+  width: 80px;
   float: left;
   margin-left: 180px;
   display: inline-table;

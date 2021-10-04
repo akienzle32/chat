@@ -14,20 +14,25 @@ export function ChatList(props) {
   	for (let i = 0; i < chats.length; i++){
   		const usernameArray = [];
   		for (let j = 0; j < participants.length; j++){
-          if (chats[i].id === participants[j].chat_id && participants[j].username !== currentUser)
-  				  usernameArray.push(participants[j].username);
+          if (chats[i].id === participants[j].chat && participants[j].name !== currentUser)
+  				  usernameArray.push(participants[j].name);
   		}
   		let chatId = chats[i].id;
   		let chatName = chats[i].name;
+      let decodedChatName = decodeURIComponent(chatName);
+      //console.log(usernameArray);
   		let lastModified = chats[i].last_modified;
-  		let convertedDate = convertDatetime(lastModified);
-  		let parsedDate = new Date(convertedDate);
-  		let JSONelement = {id:chatId, name:chatName, usernames:usernameArray, last_modified:parsedDate};
+  		//let convertedDate = convertDatetime(lastModified);
+  		//let parsedDate = new Date(lastModified);
+  		let JSONelement = {id:chatId, name:decodedChatName, usernames:usernameArray, last_modified:lastModified};
+      //let JSONelement = {id:chatId, name:chatName, usernames:usernameArray};
   		chatsAndPtcps.push(JSONelement);
   	}
 
   	return(chatsAndPtcps);
   }
+
+
   // Sorts the mapped chats array by the last_modified column.
   function sortChats(chatsAndPtcps){
   	const sortedChats = chatsAndPtcps.sort((chatA, chatB) =>
@@ -37,7 +42,7 @@ export function ChatList(props) {
           return -1;
         else if (chatB.last_modified === null)
           return 1;
-        else if (chatA.last_modified < chatB.last_modified)
+        else if (new Date(chatA.last_modified) < new Date(chatB.last_modified))
           return 1;
         else
           return -1;
@@ -45,7 +50,8 @@ export function ChatList(props) {
 
   	return(sortedChats);
   }
-  
+
+  /*
   // Converts the data in last_modified column into a format that can be easily sorted in JavaScript.
   function convertDatetime(dateString) {
     let convertedDatetime;
@@ -72,21 +78,22 @@ export function ChatList(props) {
       const time = tempTime.slice(0, 5) + ":00";
       convertedDatetime = month + " " + day + ", " + year + " " + time;
     }
-    
+
     return(convertedDatetime);
   }
+  */
 
   // Displays chats and their participants, with each chat linking to the ChatRoom component.
   function displayChats(){
     const chatsAndPtcps = mapChats();
     const sortedChats = sortChats(chatsAndPtcps);
-    console.log(sortedChats);
     const chatList = sortedChats.map(chat => {
   		let users = chat.usernames.join(", ");
   		let name = chat.name;
+      let encodedName = encodeURIComponent(name); // This variable is safe for use in a URL.
   		let id = chat.id;
   		return <tr key={name}>
-  				  <td><Link onClick={props.onClick} className="link" to={`${name}/${id}`}>{name}</Link></td>
+  				  <td><Link onClick={props.onClick} className="link" to={`${encodedName}/${id}`}>{name}</Link></td>
   				  <td>{users}</td>
   			   </tr>
   	})
