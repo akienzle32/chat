@@ -135,10 +135,10 @@ export class App extends React.Component {
       body: jsonData
     })
     .then(response => {
-      if (response.status === 400){
-        alert('That username does not exist.');
-        return;
-      }
+      if (response.status === 400)
+        alert('Participant already in chat')
+      else if (response.status === 404)
+        alert('Username does not exist')
       else
         return response.json();
     })
