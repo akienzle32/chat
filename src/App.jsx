@@ -155,8 +155,9 @@ export class App extends React.Component {
 
   addChat = (chatName, ptcpArray) => {
 
+    const encodedChatName = encodeURIComponent(chatName); // Extra step needed in case a chat name includes a reserved URL character.
     const data = new FormData();
-    data.append("name", chatName);
+    data.append("name", encodedChatName);
     const jsonData = JSON.stringify(Object.fromEntries(data));
 
     let chatId;
@@ -202,7 +203,6 @@ export class App extends React.Component {
     })
 
   }
-  
   userLoggedIn = () => {
     this.setState({loggedIn: true});
   }

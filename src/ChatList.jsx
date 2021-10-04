@@ -19,11 +19,12 @@ export function ChatList(props) {
   		}
   		let chatId = chats[i].id;
   		let chatName = chats[i].name;
+      let decodedChatName = decodeURIComponent(chatName);
       //console.log(usernameArray);
   		let lastModified = chats[i].last_modified;
   		//let convertedDate = convertDatetime(lastModified);
   		//let parsedDate = new Date(lastModified);
-  		let JSONelement = {id:chatId, name:chatName, usernames:usernameArray, last_modified:lastModified};
+  		let JSONelement = {id:chatId, name:decodedChatName, usernames:usernameArray, last_modified:lastModified};
       //let JSONelement = {id:chatId, name:chatName, usernames:usernameArray};
   		chatsAndPtcps.push(JSONelement);
   	}
@@ -90,9 +91,10 @@ export function ChatList(props) {
     const chatList = sortedChats.map(chat => {
   		let users = chat.usernames.join(", ");
   		let name = chat.name;
+      let encodedName = encodeURIComponent(name); // This variable is safe for use in a URL.
   		let id = chat.id;
   		return <tr key={name}>
-  				  <td><Link onClick={props.onClick} className="link" to={`${name}/${id}`}>{name}</Link></td>
+  				  <td><Link onClick={props.onClick} className="link" to={`${encodedName}/${id}`}>{name}</Link></td>
   				  <td>{users}</td>
   			   </tr>
   	})
