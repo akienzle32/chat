@@ -40,12 +40,9 @@ export const Login = (props) => {
   	.then(props.handleErrors)
   	.then(response => {
  		if (response.status === 200)
- 			window.location.href = 'http://127.0.0.1:3000';
+ 			window.location.replace('http://127.0.0.1:3000');
   		else
   			return response.json();
-  	})
-  	.then(data => {
-  		console.log(data);
   	})
   	.catch(error => console.log(error))
   	document.getElementById("login-form").reset();

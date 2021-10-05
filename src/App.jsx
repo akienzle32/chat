@@ -208,18 +208,18 @@ export class App extends React.Component {
     this.setState(this.baseState);
   }
 
-/*
   displayLoginOrLogout(){
     let navButton;
     const loggedIn = this.state.loggedIn;
     if (loggedIn)
-      navButton = <li className="right-nav-element"><a className="link" href="http://127.0.0.1:8000/accounts/logout">Log out</a></li>;
+      navButton = <li className="right-nav-element"><Link className="link" to="/logout">Log out</Link></li>;
     else
-      navButton = <li className="right-nav-element"><a className="link" href="http://127.0.0.1:8000/accounts/login">Login</a></li>;
+      navButton = <li className="right-nav-element"><Link className="link" to="/login">Login</Link></li>;
 
     return(navButton);
   }
-*/
+
+
   displayUsername(){
     let usernameIcon;
     const username = this.state.username;
@@ -230,9 +230,10 @@ export class App extends React.Component {
     return(usernameIcon);
   }
 
+  
   render() {
     const { username, chats, loggedIn, participants } = this.state;
-    //const navButton = this.displayLoginOrLogout();
+    const navButton = this.displayLoginOrLogout();
     const usernameIcon = this.displayUsername();
 
 	  return(
@@ -240,8 +241,7 @@ export class App extends React.Component {
 	  	<div>
         <ul className="nav-bar">
   		    <li className="left-nav-element"><Link className="link" to="/">Home</Link></li>
-          <li className="left-nav-element"><Link className="link" to="/login">Login</Link></li>
-          <li className="left-nav-element"><Link className="link" to="/logout">Logout</Link></li>
+          {navButton}
           {usernameIcon}
         </ul>
 		  </div>  
