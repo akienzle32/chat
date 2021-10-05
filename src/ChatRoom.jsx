@@ -240,7 +240,7 @@ export class ChatRoom extends React.Component {
 				  	  <input type="text" id="message-input" name="content" placeholder="Text message..."></input>
 				  	  <input type='hidden' name='author'></input>
 				  	  <input type='hidden' name='chat'></input>
-				  	  <input type='submit' value='Send' className='submitButton'></input>
+				  	  <input type='submit' value='Send' className='submit-button'></input>
 					</form>	
 			  	</div>
 		  	  </div>	
