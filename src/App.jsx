@@ -243,7 +243,7 @@ export class App extends React.Component {
           addParticipant={this.addParticipant} handleErrors={this.handleErrors} 
           updateChatState={this.updateChatState} loggedIn={loggedIn}  />;
   		  </Route>
-        <Route path="/login">
+        <Route path="/login" handleError={this.handleErrors}>
           <Login />
         </Route>
 		    <Route path="/">
