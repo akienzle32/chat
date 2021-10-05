@@ -52,7 +52,7 @@ export class App extends React.Component {
     .then(this.handleErrors)
     .then(response => {
       if (response.redirected){
-        window.location.href = response.url;
+        //window.location.href = response.url;
         return;
       }
       else
