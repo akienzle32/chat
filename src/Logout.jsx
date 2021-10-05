@@ -34,7 +34,9 @@ export class Logout extends React.Component {
   	})
   	.then(this.props.handleErrors)
   	.then(response => {
-  		return response.json();
+  		if (response.status === 200){
+  			this.props.userLoggedOut();
+  		}
   	})
   	.catch(error => console.log(error))
   }

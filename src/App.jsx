@@ -19,6 +19,7 @@ export class App extends React.Component {
   		participants: [],
   	}
     this.csrftoken = this.getCookie('csrftoken');
+    this.baseState = this.state;
   }
 
   // Function provided by Django for adding csrf tokens to AJAX requests; see https://docs.djangoproject.com/en/3.2/ref/csrf/ for details.
@@ -198,8 +199,13 @@ export class App extends React.Component {
     })
 
   }
+
   userLoggedIn = () => {
     this.setState({loggedIn: true});
+  }
+
+  userLoggedOut = () => {
+    this.setState(this.baseState);
   }
 
 /*
@@ -245,11 +251,11 @@ export class App extends React.Component {
           addParticipant={this.addParticipant} handleErrors={this.handleErrors} 
           updateChatState={this.updateChatState} loggedIn={loggedIn}  />;
   		  </Route>
-        <Route path="/login" handleError={this.handleErrors}>
-          <Login />
+        <Route path="/login">
+          <Login handleError={this.handleErrors} />
         </Route>
-        <Route path ="/logout" handleErrors={this.handleErrors}>
-          <Logout />
+        <Route path ="/logout">
+          <Logout  userLoggedOut={this.userLoggedOut} handleErrors={this.handleErrors} />
         </Route>
 		    <Route path="/">
 			   <StartChat username={username} chats={chats} participants={participants} onSubmit={this.addChat} />
