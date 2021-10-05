@@ -11,7 +11,7 @@ export class ChatRoom extends React.Component {
 			messages: [],
 		};
 		this.bottomOfMessages = React.createRef();
-		this.csrftoken = this.getCookie('csrftoken');
+		//this.csrftoken = this.getCookie('csrftoken');
 	}
 
 	// Function to scroll the message-log div to the bottom. It is called by both componentDidMount() and componentDidUpdate(). 
@@ -29,22 +29,6 @@ export class ChatRoom extends React.Component {
 	// This method is needed in order to avoid continued GET requests after user navigates away from page. 
 	componentWillUnmount() {
 		clearInterval(this.timer);
-	}
-
-	// Function provided by Django for adding csrf tokens to AJAX requests; see https://docs.djangoproject.com/en/3.2/ref/csrf/ for details.
-	getCookie(name) {
-    	let cookieValue = null;
-    	if (document.cookie && document.cookie !== '') {
-        	const cookies = document.cookie.split(';');
-        	for (let i = 0; i < cookies.length; i++) {
-          	  const cookie = cookies[i].trim();
-            	if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                	cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                	break;
-            	}
-        	}
-    	}
-    	return cookieValue;
 	}
 
 	// Function to extract either the chat name or the chat id from the url.
@@ -128,7 +112,7 @@ export class ChatRoom extends React.Component {
 
 	// Function to POST new messages to the database. 
 	handleSubmit = (event) => {
-		this.getCookie('csrftoken');
+		//this.getCookie('csrftoken');
 		event.preventDefault();
 
 		const url = window.location.href;
@@ -143,7 +127,7 @@ export class ChatRoom extends React.Component {
 			method: 'POST',
 			mode: 'cors',
 			headers: {
-				'X-CSRFToken': this.csrftoken,
+				'X-CSRFToken': this.props.csrftoken,
 			},
 			credentials: 'include',
 			body: jsonData
@@ -180,7 +164,7 @@ export class ChatRoom extends React.Component {
 			method: 'PUT',
 			mode: 'cors',
 			headers: {
-				'X-CSRFToken': this.csrftoken,
+				'X-CSRFToken': this.props.csrftoken,
 			},
 			credentials: 'include',
 		})

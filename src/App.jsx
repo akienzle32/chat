@@ -17,8 +17,8 @@ export class App extends React.Component {
       loggedIn: false,
       chats: [],
   		participants: [],
+      csrftoken: "",
   	}
-    this.csrftoken = this.getCookie('csrftoken');
     this.baseState = this.state;
   }
 
@@ -111,7 +111,15 @@ export class App extends React.Component {
     .catch(error => console.log(error))
   }
 
+  setCookie(){
+    const csrftoken = this.getCookie('csrftoken');
+    this.setState({
+      csrftoken: csrftoken,
+    })
+  }
+
   componentDidMount(){
+    this.setCookie();
     this.getUsername();
     this.getChats();
     this.getParticipants();
@@ -127,7 +135,7 @@ export class App extends React.Component {
       method: 'POST',
       mode: 'cors',
       headers: {
-        'X-CSRFToken': this.csrftoken,
+        'X-CSRFToken': this.state.csrftoken,
       },
       credentials: 'include',
       body: jsonData
@@ -163,7 +171,7 @@ export class App extends React.Component {
       method: 'POST',
       mode: 'cors',
       headers: {
-        'X-CSRFToken': this.csrftoken,
+        'X-CSRFToken': this.state.csrftoken,
       }, 
       credentials: 'include',
       body: jsonData    
@@ -232,7 +240,7 @@ export class App extends React.Component {
 
   
   render() {
-    const { username, chats, loggedIn, participants } = this.state;
+    const { username, chats, loggedIn, participants, csrftoken } = this.state;
     const navButton = this.displayLoginOrLogout();
     const usernameIcon = this.displayUsername();
 
@@ -249,7 +257,7 @@ export class App extends React.Component {
         <Route path="/:name/:id">
   			 <ChatRoom username={username} participants={participants} userLoggedIn={this.userLoggedIn} 
           addParticipant={this.addParticipant} handleErrors={this.handleErrors} 
-          updateChatState={this.updateChatState} loggedIn={loggedIn}  />;
+          updateChatState={this.updateChatState} loggedIn={loggedIn} csrftoken={csrftoken}  />;
   		  </Route>
         <Route path="/login">
           <Login handleError={this.handleErrors} />
