@@ -1,6 +1,7 @@
 import React from 'react';
 import { ChatRoom } from './ChatRoom';
 import { StartChat } from './StartChat';
+import { Login } from './Login';
 import {
   BrowserRouter as Router,
   Switch,
@@ -10,7 +11,6 @@ import {
 export class App extends React.Component {
   constructor(props){
   	super(props);
-  	// Test data for managing state. This data gets passed down as props to child components. 
   	this.state = {
   		username: "",
       loggedIn: false,
@@ -232,6 +232,7 @@ export class App extends React.Component {
 	  	<div>
         <ul className="nav-bar">
   		    <li className="left-nav-element"><Link className="link" to="/">Home</Link></li>
+          <li className="left-nav-element"><Link className="link" to="/login">Login</Link></li>
           {navButton}
           {usernameIcon}
         </ul>
@@ -242,6 +243,9 @@ export class App extends React.Component {
           addParticipant={this.addParticipant} handleErrors={this.handleErrors} 
           updateChatState={this.updateChatState} loggedIn={loggedIn}  />;
   		  </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
 		    <Route path="/">
 			   <StartChat username={username} chats={chats} participants={participants} onSubmit={this.addChat} />
 		    </Route>
