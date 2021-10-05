@@ -7,7 +7,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link } from "react-router-dom";
+  Link,
+  Redirect } from "react-router-dom";
 
 export class App extends React.Component {
   constructor(props){
@@ -17,7 +18,7 @@ export class App extends React.Component {
       loggedIn: false,
       chats: [],
   		participants: [],
-      csrftoken: "",
+      csrftoken: this.getCookie('csrftoken'),
   	}
     this.baseState = this.state;
   }
@@ -111,15 +112,7 @@ export class App extends React.Component {
     .catch(error => console.log(error))
   }
 
-  setCookie(){
-    const csrftoken = this.getCookie('csrftoken');
-    this.setState({
-      csrftoken: csrftoken,
-    })
-  }
-
   componentDidMount(){
-    this.setCookie();
     this.getUsername();
     this.getChats();
     this.getParticipants();
@@ -260,7 +253,7 @@ export class App extends React.Component {
           updateChatState={this.updateChatState} loggedIn={loggedIn} csrftoken={csrftoken}  />;
   		  </Route>
         <Route path="/login">
-          <Login handleError={this.handleErrors} />
+          <Login handleError={this.handleErrors} csrftoken={csrftoken} />
         </Route>
         <Route path ="/logout">
           <Logout  userLoggedOut={this.userLoggedOut} handleErrors={this.handleErrors} />
