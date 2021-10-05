@@ -14,7 +14,6 @@ export class App extends React.Component {
   	this.state = {
   		username: "",
       loggedIn: false,
-  		//chats: [{id:1, name:"Django", last_modified:"Tue, Sep 21 8:28PM"}, {id:2, name:"React", last_modified: "Wed, Sep 22 8:28PM"}],
       chats: [],
   		participants: [],
   	}

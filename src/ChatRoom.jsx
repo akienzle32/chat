@@ -80,7 +80,6 @@ export class ChatRoom extends React.Component {
  		 })
  		 .then(messages => {
   			if (messages){
-  				console.log(messages);
   				this.setState({
   					messages: messages,
   				});
@@ -110,7 +109,6 @@ export class ChatRoom extends React.Component {
  		 })
  		 .then(messages => {
   			if (messages){
-  				console.log(messages);
   				this.setState({
   					messages: messages,
   				});
@@ -161,7 +159,6 @@ export class ChatRoom extends React.Component {
 				return response.json();
 		})
 		.then(newMessage => {
-			console.log(newMessage);
 			const messages = this.state.messages; 
 			this.setState({
 				messages: messages.concat(newMessage),
@@ -192,7 +189,6 @@ export class ChatRoom extends React.Component {
 			return response.json()
 		})
 		.then(chat => {
-			console.log(chat);
 			this.props.updateChatState(chat);
 		})
 		.catch(error => console.log(error))
