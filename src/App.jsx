@@ -201,6 +201,7 @@ export class App extends React.Component {
     this.setState({loggedIn: true});
   }
 
+/*
   displayLoginOrLogout(){
     let navButton;
     const loggedIn = this.state.loggedIn;
@@ -211,7 +212,7 @@ export class App extends React.Component {
 
     return(navButton);
   }
-
+*/
   displayUsername(){
     let usernameIcon;
     const username = this.state.username;
@@ -224,7 +225,7 @@ export class App extends React.Component {
 
   render() {
     const { username, chats, loggedIn, participants } = this.state;
-    const navButton = this.displayLoginOrLogout();
+    //const navButton = this.displayLoginOrLogout();
     const usernameIcon = this.displayUsername();
 
 	  return(
@@ -233,7 +234,6 @@ export class App extends React.Component {
         <ul className="nav-bar">
   		    <li className="left-nav-element"><Link className="link" to="/">Home</Link></li>
           <li className="left-nav-element"><Link className="link" to="/login">Login</Link></li>
-          {navButton}
           {usernameIcon}
         </ul>
 		  </div>  
