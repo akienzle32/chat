@@ -2,6 +2,7 @@ import React from 'react';
 import { ChatRoom } from './ChatRoom';
 import { StartChat } from './StartChat';
 import { Login } from './Login';
+import { Logout } from './Logout';
 import {
   BrowserRouter as Router,
   Switch,
@@ -234,6 +235,7 @@ export class App extends React.Component {
         <ul className="nav-bar">
   		    <li className="left-nav-element"><Link className="link" to="/">Home</Link></li>
           <li className="left-nav-element"><Link className="link" to="/login">Login</Link></li>
+          <li className="left-nav-element"><Link className="link" to="/logout">Logout</Link></li>
           {usernameIcon}
         </ul>
 		  </div>  
@@ -245,6 +247,9 @@ export class App extends React.Component {
   		  </Route>
         <Route path="/login" handleError={this.handleErrors}>
           <Login />
+        </Route>
+        <Route path ="/logout" handleErrors={this.handleErrors}>
+          <Logout />
         </Route>
 		    <Route path="/">
 			   <StartChat username={username} chats={chats} participants={participants} onSubmit={this.addChat} />

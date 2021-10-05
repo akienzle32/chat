@@ -39,7 +39,10 @@ export const Login = (props) => {
   	})
   	.then(props.handleErrors)
   	.then(response => {
-  		return response.json();
+ 		if (response.status === 201)
+ 			window.location.href = 'http://127.0.0.1:3000';
+  		else
+  			return response.json();
   	})
   	.then(data => {
   		console.log(data);
