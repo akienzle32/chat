@@ -1,13 +1,12 @@
 import React from 'react';
-import { ChatRoom } from './ChatRoom';
-import { StartChat } from './StartChat';
 import { Login } from './Login';
 import { Logout } from './Logout';
+import { Home } from './Home';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link } from "react-router-dom";
+  Link, } from "react-router-dom";
 
 export class App extends React.Component {
   constructor(props){
@@ -15,8 +14,6 @@ export class App extends React.Component {
   	this.state = {
   		username: "",
       loggedIn: false,
-      chats: [],
-  		participants: [],
       csrftoken: this.getCookie('csrftoken'),
   	}
     this.baseState = this.state;
@@ -38,166 +35,10 @@ export class App extends React.Component {
     return cookieValue;
   }
 
-  handleErrors(response) {
-    if (!response.ok){
-      throw Error(response.statusText);
-    }
-    return(response);
-  }
-
-  getUsername = () => {
-    fetch('http://127.0.0.1:8000/chat/current-user', {
-      method: 'GET',
-      mode: 'cors',
-      credentials: 'include',
-    })
-    .then(this.handleErrors)
-    .then(response => {
-      if (response.redirected){
-        //window.location.href = response.url;
-        return;
-      }
-      else
-        return response.json();
-    })
-    .then(username => {
-      if (username){
-        this.setState({
-          username: username.username,
-      });
-      this.userLoggedIn();
-      }
-    })
-    .catch(error => console.log(error))
-  }
-
-  getChats = () => {
-    fetch('http://127.0.0.1:8000/chat/chats', {
-      method: 'GET',
-      mode: 'cors',
-      credentials: 'include',
-    })
-    .then(this.handleErrors)
-    .then(response => {
-      return response.json();
-    })
-    .then(chats => {
-      if (chats){
-        this.setState({
-          chats: chats,
-        })
-      }
-    })
-    .catch(error => console.log(error))
-  }
-
-  getParticipants = () => {
-    fetch('http://127.0.0.1:8000/chat/participants', {
-      method: 'GET',
-      mode: 'cors',
-      credentials: 'include',
-    })
-    .then(this.handleErrors)
-    .then(response => {
-      return response.json();
-    })
-    .then(participants => {
-      if (participants){
-        this.setState({
-          participants: participants,
-        })
-      }
-    })
-    .catch(error => console.log(error))
-  }
-
-  componentDidMount(){
-    this.getUsername();
-    this.getChats();
-    this.getParticipants();
-  }
-
-  addParticipant = (ptcp, chatId) => {
-    const data = new FormData();
-    data.append("name", ptcp);
-    data.append("chat", chatId);
-    const jsonData = JSON.stringify(Object.fromEntries(data));
-
-    fetch('http://127.0.0.1:8000/chat/participants', {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'X-CSRFToken': this.state.csrftoken,
-      },
-      credentials: 'include',
-      body: jsonData
-    })
-    .then(response => {
-      if (response.status === 400)
-        alert('Participant already in chat')
-      else if (response.status === 404)
-        alert('Username does not exist')
-      else
-        return response.json();
-    })
-    .then(newPtcp => {
-      if(newPtcp){
-        const participants = this.state.participants;
-        this.setState({
-          participants: participants.concat(newPtcp),
-        })
-      }
-    })
-  }
-
-  addChat = (chatName, ptcpArray) => {
-
-    const encodedChatName = encodeURIComponent(chatName); // Extra step needed in case a chat name includes a reserved URL character.
-    const data = new FormData();
-    data.append("name", encodedChatName);
-    const jsonData = JSON.stringify(Object.fromEntries(data));
-
-    let chatId;
-
-    fetch('http://127.0.0.1:8000/chat/chats', {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'X-CSRFToken': this.state.csrftoken,
-      }, 
-      credentials: 'include',
-      body: jsonData    
-    })
-    .then(response => {
-      return response.json();
-    })
-    .then(newChat => {
-      chatId = newChat.id;
-      const chats = this.state.chats;
-      this.setState({
-        chats: chats.concat(newChat),
-      })
-
-        const currentUser = this.state.username;
-        const newPtcpArray = ptcpArray.concat(currentUser);
-
-        for (let i = 0; i < newPtcpArray.length; i++){
-          this.addParticipant(newPtcpArray[i], chatId);
-        }
-    })
-  }
-
-  updateChatState = (jsonChat) => {
-    const chats = this.state.chats;
-    const chatId = jsonChat.id;
-
-    const index = chats.findIndex(chat => chat.id === chatId);
-    chats[index] = jsonChat;
-
+  setUser = (username) => {
     this.setState({
-      chats: chats,
+      username: username,
     })
-
   }
 
   userLoggedIn = () => {
@@ -221,11 +62,13 @@ export class App extends React.Component {
 
   displayLoginOrHomeComponent(){
     let component;
-    const { username, chats, participants, csrftoken, loggedIn } = this.state;
-    if (!loggedIn)
-      component = <Route><Login handleError={this.handleErrors} csrftoken={csrftoken} /></Route>;
-    else
-      component = <Route><StartChat username={username} chats={chats} participants={participants} onSubmit={this.addChat} /></Route>;
+    const { username, csrftoken, loggedIn } = this.state;
+    if (!loggedIn){
+      component = <Route><Login csrftoken={csrftoken} username={username} userLoggedIn={this.userLoggedIn} setUser={this.setUser} /></Route>
+    }
+    else {
+      component = <Route path="/"><Home username={username} csrftoken={csrftoken} loggedIn={loggedIn}  /></Route>;
+    }
 
     return(component);
   }
@@ -243,7 +86,6 @@ export class App extends React.Component {
 
   
   render() {
-    const { username, chats, loggedIn, participants, csrftoken } = this.state;
     const navButton = this.displayLoginOrLogout();
     const usernameIcon = this.displayUsername();
     const component = this.displayLoginOrHomeComponent();
@@ -252,17 +94,12 @@ export class App extends React.Component {
 	   <Router>
 	  	<div>
         <ul className="nav-bar">
-  		    <li className="left-nav-element"><Link className="link" to="/home">Home</Link></li>
+  		    <li className="left-nav-element"><Link className="link" to="/">Home</Link></li>
           {navButton}
           {usernameIcon}
         </ul>
       </div>
 	 	  <Switch>
-        <Route path="/:name/:id">
-  			 <ChatRoom username={username} participants={participants} userLoggedIn={this.userLoggedIn} 
-          addParticipant={this.addParticipant} handleErrors={this.handleErrors} 
-          updateChatState={this.updateChatState} loggedIn={loggedIn} csrftoken={csrftoken}  />;
-  		  </Route>
         <Route path ="/logout">
           <Logout  userLoggedOut={this.userLoggedOut} handleErrors={this.handleErrors} />
         </Route>

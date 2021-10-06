@@ -101,10 +101,6 @@ export class ChatRoom extends React.Component {
  		.catch(error => console.log(error))
 	}
 
-	loggedIn = () => {
-		this.props.userLoggedIn();
-	}
-
 	componentDidUpdate() {
 		this.displayMessages();
 		this.scrollToBottom()

@@ -1,10 +1,17 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import './App.css';
 
 
-export const Login = (props) => {
+export class Login extends React.Component {
+  constructor(props){
+  	super(props);
+  	this.state = {
+  		redirect: false,
+  	}
+  }
 
-  const onSubmit = (event) => {
+  onSubmit = (event) => {
   	event.preventDefault();
   	let loginForm = document.getElementById('login-form');
   	let formData = new FormData(loginForm);
@@ -14,34 +21,47 @@ export const Login = (props) => {
   		method: 'POST',
   		mode: 'cors',
       	headers: {
-        'X-CSRFToken': props.csrftoken,
+        'X-CSRFToken': this.props.csrftoken,
       	}, 
       	credentials: 'include',
       	body: formData,
 
   	})
-  	.then(props.handleErrors)
+  	.then(this.props.handleErrors)
   	.then(response => {
- 		if (response.status === 200)
- 			window.location.replace('http://127.0.0.1:3000/home');
-  		else
-  			return response.json();
+ 		if (response.status === 200){
+ 			this.setState({
+ 				redirect: true,
+ 			})
+ 			this.props.userLoggedIn();
+ 			return response.json();
+ 		}
+  	})
+  	.then(user => {
+  		console.log(user);
+  		this.props.setUser(user.username);
   	})
   	.catch(error => console.log(error))
   	document.getElementById("login-form").reset();
   }
-  return(
-	<div>
-	  <h1 className="chat-title">Login</h1>
-	  	<div style={{textAlign: 'center'}}>
-	  	  <form id="login-form" onSubmit={onSubmit}>
-	  	  	<p className="input-title">Username:  </p>
-	  	  	<input type="text" id="username-input" name="username"></input><br></br>
-	  	  	<p className="input-title">Password: </p>
-	  	  	<input type="password" id="password-input" name="password"></input><br></br>
-	  	  	<input type="submit" className="submit-button"></input>
-	  	  </form>
-	  	</div>
-	</div>
-  );
+  render() {
+  	const redirect = this.state.redirect;
+  	if (redirect){
+  		return <Redirect exact from ="/login" to="/" />;
+  	}
+  	return(
+	  <div>
+	  	<h1 className="chat-title">Login</h1>
+	  	  <div style={{textAlign: 'center'}}>
+	  	  	<form id="login-form" onSubmit={this.onSubmit}>
+	  	  	  <p className="input-title">Username:  </p>
+	  	  	  <input type="text" id="username-input" name="username"></input><br></br>
+	  	  	  <p className="input-title">Password: </p>
+	  	  	  <input type="password" id="password-input" name="password"></input><br></br>
+	  	  	  <input type="submit" className="submit-button"></input>
+	  	    </form>
+	  	  </div>
+	  </div>
+  	);
+  }
 }
