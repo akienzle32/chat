@@ -32,23 +32,20 @@ export class App extends React.Component {
     this.setState(this.baseState);
   }
 
-  displayLogoutButton(){
-    let logoutButton = null;
+  displayNavBar(){
+    let navBar = null;
     const loggedIn = this.state.loggedIn;
-    if (loggedIn)
-      logoutButton = <li className="right-nav-element"><Link className="link" to="/logout">Log out</Link></li>;
+    const username = this.state.username;
 
-    return(logoutButton);
-  }
-
-  displayHomeButton(){
-    let homeButton = null;
-    const loggedIn = this.state.loggedIn;
-
-    if (loggedIn)
-      homeButton = <li className="left-nav-element"><Link className="link" to="/">Home</Link></li>;
-
-    return(homeButton);
+    if (loggedIn){
+      navBar = 
+      <ul className="nav-bar">
+        <li className="left-nav-element"><Link className="link" to="/">Home</Link></li>
+        <li className="right-nav-element"><Link className="link" to="/logout">Log out</Link></li>
+        <li className="right-nav-element" id="username">Signed in as <b>{username}</b></li>
+      </ul>
+    }
+    return(navBar);
   }
 
   displayLoginOrHomeComponent(){
@@ -65,31 +62,15 @@ export class App extends React.Component {
   }
 
 
-  displayUsername(){
-    let usernameIcon;
-    const username = this.state.username;
-    if (username)
-      usernameIcon = <li className="right-nav-element" id="username">Signed in as <b>{username}</b></li>
-    else
-      usernameIcon = <li className = "right-nav-element" id="username"></li>
-    return(usernameIcon);
-  }
-
   
   render() {
-    const logoutButton = this.displayLogoutButton();
-    const homeButton = this.displayHomeButton();
-    const usernameIcon = this.displayUsername();
+    const navBar = this.displayNavBar();
     const component = this.displayLoginOrHomeComponent();
 
 	  return(
 	   <Router>
 	  	<div>
-        <ul className="nav-bar">
-          {homeButton}
-          {logoutButton}
-          {usernameIcon}
-        </ul>
+        {navBar}
       </div>
       {component}
 	 	  <Switch>
