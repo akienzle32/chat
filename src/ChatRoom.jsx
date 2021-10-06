@@ -107,7 +107,6 @@ export class ChatRoom extends React.Component {
 
 	// Function to POST new messages to the database. 
 	handleSubmit = (event) => {
-		//this.getCookie('csrftoken');
 		event.preventDefault();
 
 		const url = window.location.href;
@@ -127,15 +126,9 @@ export class ChatRoom extends React.Component {
 			credentials: 'include',
 			body: jsonData
 		})
-		.then(response => {
-			// If the server returns a redirect, follow the redirect url. A redirect will occur if the user
-			// attempts to send a message but isn't logged in.  
-			if (response.redirected){
-				window.location.href = response.url;
-				return;
-			} 
-			else 
-				return response.json();
+		.then(this.props.handleErrors)
+		.then(response => {  
+			return response.json();
 		})
 		.then(newMessage => {
 			const messages = this.state.messages; 
@@ -144,6 +137,7 @@ export class ChatRoom extends React.Component {
 			})
 			this.patchChat();
 		})
+		.catch(error => console.log(error))
 		document.getElementById('message-form').reset();	
 	}
 
@@ -180,11 +174,7 @@ export class ChatRoom extends React.Component {
 		const loggedIn = this.props.loggedIn;
 		let messageList;
 
-		if (!loggedIn){
-			messageList = <p id="login-alert">Please<b>
-			<a className="link" id="login-link" href='http://127.0.0.1:8000/accounts/login/'> log in </a></b> to receive messages.</p>;
-		}
-		else {
+		if (loggedIn){
 		  messageList = messages.map(message => {
   			return  <div key={message.id}><p id="author-par">{ message.author }</p><p id="message">{ message.content }</p>
   					<p id="timestamp">{ message.timestamp }</p></div>
