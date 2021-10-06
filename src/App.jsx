@@ -1,11 +1,7 @@
 import React from 'react';
 import { Login } from './Login';
 import { Home } from './Home';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link, } from "react-router-dom";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 
 export class App extends React.Component {
   constructor(props){
