@@ -6,24 +6,8 @@ export class Login extends React.Component {
   constructor(props){
   	super(props);
   	this.state = {
-  		csrftoken: this.getCookie('csrftoken'),
+  		csrftoken: this.props.getCookie('csrftoken'),
   	}
-  }
-
-  // Function provided by Django for adding csrf tokens to AJAX requests; see https://docs.djangoproject.com/en/3.2/ref/csrf/ for details.
-  getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
   }
 
   onSubmit = (event) => {

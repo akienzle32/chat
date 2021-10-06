@@ -66,9 +66,9 @@ export class App extends React.Component {
 
   displayLoginOrHomeComponent(){
     let component;
-    const { username, csrftoken, loggedIn } = this.state;
+    const { username, loggedIn } = this.state;
     if (!loggedIn){
-      component = <Login csrftoken={csrftoken} username={username} userLoggedIn={this.userLoggedIn} setUser={this.setUser} />
+      component = <Login getCookie={this.getCookie} username={username} userLoggedIn={this.userLoggedIn} setUser={this.setUser} />
     }
     else {
       component = <Home username={username} getCookie={this.getCookie} loggedIn={loggedIn}  />
