@@ -18,6 +18,21 @@ export class App extends React.Component {
     this.baseState = this.state;
   }
 
+  getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+  }
+
   setUser = (username) => {
     this.setState({
       username: username,
@@ -74,8 +89,8 @@ export class App extends React.Component {
       </div>
       {component}
 	 	  <Switch>
-        <Route path ="/logout">
-          <Logout  userLoggedOut={this.userLoggedOut} handleErrors={this.handleErrors} />
+        <Route path="/logout">
+          <Logout  getCookie={this.getCookie} userLoggedOut={this.userLoggedOut} handleErrors={this.handleErrors} />
         </Route>
 		  </Switch>
 	  </Router>

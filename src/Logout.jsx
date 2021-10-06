@@ -5,9 +5,8 @@ import './App.css';
 export class Logout extends React.Component {
   constructor(props){
   	super(props);
-  	this.csrftoken = this.getCookie('csrftoken');
   }
-
+/*
   getCookie = (name) => {
     let cookieValue = null;
       if (document.cookie && document.cookie !== '') {
@@ -22,14 +21,14 @@ export class Logout extends React.Component {
       }
     return cookieValue;
   }
-
+*/
 
   logoutUser(){
   	fetch('http://127.0.0.1:8000/chat/logout', {
   	  method: 'POST',
   	  mode: 'cors',
   	  headers: {
-  	  	'X-CSRFToken': this.csrftoken,
+  	  	'X-CSRFToken': this.props.getCookie('csrftoken'),
   	  },
   	  credentials: 'include',
   	})
