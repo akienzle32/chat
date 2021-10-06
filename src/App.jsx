@@ -1,6 +1,5 @@
 import React from 'react';
 import { Login } from './Login';
-import { Logout } from './Logout';
 import { Home } from './Home';
 import {
   BrowserRouter as Router,
@@ -34,6 +33,13 @@ export class App extends React.Component {
     return cookieValue;
   }
 
+  handleErrors(response) {
+    if (!response.ok){
+      throw Error(response.statusText);
+    }
+    return(response);
+  }
+
   setUser = (username) => {
     this.setState({
       username: username,
@@ -57,7 +63,7 @@ export class App extends React.Component {
       navBar = 
       <ul className="nav-bar">
         <li className="left-nav-element"><Link className="link" to="/">Home</Link></li>
-        <li className="right-nav-element"><Link className="link" to="/logout">Log out</Link></li>
+        <li className="right-nav-element"><button className="link" onClick={this.logoutUser}>Log out</button></li>
         <li className="right-nav-element" id="username">Signed in as <b>{username}</b></li>
       </ul>
     }
@@ -77,8 +83,26 @@ export class App extends React.Component {
     return(component);
   }
 
+  logoutUser = () => {
+    const csrftoken = this.getCookie('csrftoken');
 
-  
+    fetch('http://127.0.0.1:8000/chat/logout', {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'X-CSRFToken': csrftoken,
+      },
+      credentials: 'include',
+    })
+    .then(this.handleErrors)
+    .then(response => {
+      if (response.status === 200){
+        this.userLoggedOut();
+      }
+    })
+    .catch(error => console.log(error))
+  }
+
   render() {
     const navBar = this.displayNavBar();
     const component = this.displayLoginOrHomeComponent();
@@ -89,11 +113,6 @@ export class App extends React.Component {
         {navBar}
       </div>
       {component}
-	 	  <Switch>
-        <Route path="/logout">
-          <Logout  getCookie={this.getCookie} userLoggedOut={this.userLoggedOut} handleErrors={this.handleErrors} />
-        </Route>
-		  </Switch>
 	  </Router>
 	 );
   }
