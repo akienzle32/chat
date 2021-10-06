@@ -82,6 +82,11 @@ table {
   margin-right: 5px;
 }
 
+#login-title {
+  text-align: center;
+  margin-top: 50px;
+}
+
 #username {
   margin-right: 15px;
 }

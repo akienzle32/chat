@@ -63,7 +63,8 @@ export class Login extends React.Component {
 
   	return(
 	  <div>
-	  	<h1 className="chat-title">Login</h1>
+	  	<h1 id="login-title">Welcome to the Chat App!</h1>
+	  	  <h4 style={{textAlign: 'center'}}>Please login.</h4>
 	  	  <div style={{textAlign: 'center'}}>
 	  	  	<form id="login-form" onSubmit={this.onSubmit}>
 	  	  	  <p className="input-title">Username:  </p>
