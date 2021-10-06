@@ -219,6 +219,17 @@ export class App extends React.Component {
     return(navButton);
   }
 
+  displayLoginOrHomeComponent(){
+    let component;
+    const { username, chats, participants, csrftoken, loggedIn } = this.state;
+    if (!loggedIn)
+      component = <Route><Login handleError={this.handleErrors} csrftoken={csrftoken} /></Route>;
+    else
+      component = <Route><StartChat username={username} chats={chats} participants={participants} onSubmit={this.addChat} /></Route>;
+
+    return(component);
+  }
+
 
   displayUsername(){
     let usernameIcon;
@@ -235,31 +246,27 @@ export class App extends React.Component {
     const { username, chats, loggedIn, participants, csrftoken } = this.state;
     const navButton = this.displayLoginOrLogout();
     const usernameIcon = this.displayUsername();
+    const component = this.displayLoginOrHomeComponent();
 
 	  return(
 	   <Router>
 	  	<div>
         <ul className="nav-bar">
-  		    <li className="left-nav-element"><Link className="link" to="/">Home</Link></li>
+  		    <li className="left-nav-element"><Link className="link" to="/home">Home</Link></li>
           {navButton}
           {usernameIcon}
         </ul>
-		  </div>  
+      </div>
 	 	  <Switch>
         <Route path="/:name/:id">
   			 <ChatRoom username={username} participants={participants} userLoggedIn={this.userLoggedIn} 
           addParticipant={this.addParticipant} handleErrors={this.handleErrors} 
           updateChatState={this.updateChatState} loggedIn={loggedIn} csrftoken={csrftoken}  />;
   		  </Route>
-        <Route path="/login">
-          <Login handleError={this.handleErrors} csrftoken={csrftoken} />
-        </Route>
         <Route path ="/logout">
           <Logout  userLoggedOut={this.userLoggedOut} handleErrors={this.handleErrors} />
         </Route>
-		    <Route path="/">
-			   <StartChat username={username} chats={chats} participants={participants} onSubmit={this.addChat} />
-		    </Route>
+        {component}
 		  </Switch>
 	  </Router>
 	 );

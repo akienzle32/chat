@@ -23,7 +23,7 @@ export const Login = (props) => {
   	.then(props.handleErrors)
   	.then(response => {
  		if (response.status === 200)
- 			window.location.replace('http://127.0.0.1:3000');
+ 			window.location.replace('http://127.0.0.1:3000/home');
   		else
   			return response.json();
   	})
