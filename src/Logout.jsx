@@ -41,6 +41,7 @@ export class Logout extends React.Component {
   	})
   	.catch(error => console.log(error))
   }
+  
   componentDidMount(){
   	this.logoutUser();
 
