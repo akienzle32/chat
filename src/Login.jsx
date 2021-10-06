@@ -2,55 +2,44 @@ import React from 'react';
 import './App.css';
 
 
-export class Login extends React.Component {
-  constructor(props){
-  	super(props);
-  	this.state = {
-  		csrftoken: this.props.getCookie('csrftoken'),
-  	}
-  }
+export const Login = (props) => {
 
-  onSubmit = (event) => {
+  const onSubmit = (event) => {
   	event.preventDefault();
-  	let loginForm = document.getElementById('login-form');
-  	let formData = new FormData(loginForm);
-  	console.log(formData);
+  	const loginForm = document.getElementById('login-form');
+  	const formData = new FormData(loginForm);
+  	const csrftoken = props.getCookie('csrftoken');
 
   	fetch('http://127.0.0.1:8000/chat/login', {
   		method: 'POST',
   		mode: 'cors',
       	headers: {
-        'X-CSRFToken': this.state.csrftoken,
+        'X-CSRFToken': csrftoken,
       	}, 
       	credentials: 'include',
       	body: formData,
 
   	})
-  	.then(this.props.handleErrors)
+  	.then(props.handleErrors)
   	.then(response => {
  		if (response.status === 200){
- 			this.setState({
- 				redirect: true,
- 			})
- 			this.props.userLoggedIn();
+ 			props.userLoggedIn();
  			return response.json();
  		}
   	})
   	.then(user => {
   		console.log(user);
-  		this.props.setUser(user.username);
+  		props.setUser(user.username);
   	})
   	.catch(error => console.log(error))
   	document.getElementById("login-form").reset();
   }
-  render() {
-
   	return(
 	  <div>
 	  	<h1 id="login-title">Welcome to the Chat App!</h1>
 	  	  <h4 style={{textAlign: 'center'}}>Please login.</h4>
 	  	  <div style={{textAlign: 'center'}}>
-	  	  	<form id="login-form" onSubmit={this.onSubmit}>
+	  	  	<form id="login-form" onSubmit={onSubmit}>
 	  	  	  <p className="input-title">Username:  </p>
 	  	  	  <input type="text" id="username-input" name="username"></input><br></br>
 	  	  	  <p className="input-title">Password: </p>
@@ -60,5 +49,4 @@ export class Login extends React.Component {
 	  	  </div>
 	  </div>
   	);
-  }
 }

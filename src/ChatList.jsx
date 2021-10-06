@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export function ChatList(props) {
+export const ChatList = (props) => {
 
   // Maps chats to their participants.
-  function mapChats(){
+  const mapChats = () => {
     const currentUser = props.username;
   	const chats = props.chats;
   	let participants = props.participants;
@@ -34,7 +34,7 @@ export function ChatList(props) {
 
 
   // Sorts the mapped chats array by the last_modified column.
-  function sortChats(chatsAndPtcps){
+  const sortChats = (chatsAndPtcps) => {
   	const sortedChats = chatsAndPtcps.sort((chatA, chatB) =>
       { if (chatA.last_modified === chatB.last_modified)
           return 0;
@@ -84,7 +84,7 @@ export function ChatList(props) {
   */
 
   // Displays chats and their participants, with each chat linking to the ChatRoom component.
-  function displayChats(){
+  const displayChats = () => {
     const chatsAndPtcps = mapChats();
     const sortedChats = sortChats(chatsAndPtcps);
     const chatList = sortedChats.map(chat => {
