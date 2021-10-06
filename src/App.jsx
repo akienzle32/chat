@@ -32,15 +32,23 @@ export class App extends React.Component {
     this.setState(this.baseState);
   }
 
-  displayLoginOrLogout(){
-    let navButton;
+  displayLogoutButton(){
+    let logoutButton = null;
     const loggedIn = this.state.loggedIn;
     if (loggedIn)
-      navButton = <li className="right-nav-element"><Link className="link" to="/logout">Log out</Link></li>;
-    else
-      navButton = <li className="right-nav-element"><Link className="link" to="/">Login</Link></li>;
+      logoutButton = <li className="right-nav-element"><Link className="link" to="/logout">Log out</Link></li>;
 
-    return(navButton);
+    return(logoutButton);
+  }
+
+  displayHomeButton(){
+    let homeButton = null;
+    const loggedIn = this.state.loggedIn;
+
+    if (loggedIn)
+      homeButton = <li className="left-nav-element"><Link className="link" to="/">Home</Link></li>;
+
+    return(homeButton);
   }
 
   displayLoginOrHomeComponent(){
@@ -69,7 +77,8 @@ export class App extends React.Component {
 
   
   render() {
-    const navButton = this.displayLoginOrLogout();
+    const logoutButton = this.displayLogoutButton();
+    const homeButton = this.displayHomeButton();
     const usernameIcon = this.displayUsername();
     const component = this.displayLoginOrHomeComponent();
 
@@ -77,8 +86,8 @@ export class App extends React.Component {
 	   <Router>
 	  	<div>
         <ul className="nav-bar">
-  		    <li className="left-nav-element"><Link className="link" to="/">Home</Link></li>
-          {navButton}
+          {homeButton}
+          {logoutButton}
           {usernameIcon}
         </ul>
       </div>
