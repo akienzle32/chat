@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import './App.css';
 
 export class Logout extends React.Component {
@@ -47,7 +48,7 @@ export class Logout extends React.Component {
   render() {
   	return(
   	  <div>
-  	  	<h2 style={{textAlign: 'center'}}>Thanks for using the app!</h2>
+        <Redirect to="/"></Redirect>
   	  </div>
   	);
   }
