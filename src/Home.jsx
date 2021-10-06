@@ -10,7 +10,25 @@ export class Home extends React.Component{
   	this.state = {
   		chats: [],
   		participants: [],
+  		csrftoken: this.getCookie('csrftoken'),
+
   	}
+  }
+
+  // Function provided by Django for adding csrf tokens to AJAX requests; see https://docs.djangoproject.com/en/3.2/ref/csrf/ for details.
+  getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
   }
 
   handleErrors(response) {
@@ -70,7 +88,7 @@ export class Home extends React.Component{
       method: 'POST',
       mode: 'cors',
       headers: {
-        'X-CSRFToken': this.props.csrftoken,
+        'X-CSRFToken': this.state.csrftoken,
       },
       credentials: 'include',
       body: jsonData
@@ -85,7 +103,7 @@ export class Home extends React.Component{
     })
     .then(newPtcp => {
       if(newPtcp){
-        const participants = this.props.participants;
+        const participants = this.state.participants;
         this.setState({
           participants: participants.concat(newPtcp),
         })
@@ -106,7 +124,7 @@ export class Home extends React.Component{
       method: 'POST',
       mode: 'cors',
       headers: {
-        'X-CSRFToken': this.props.csrftoken,
+        'X-CSRFToken': this.state.csrftoken,
       }, 
       credentials: 'include',
       body: jsonData    
@@ -121,7 +139,7 @@ export class Home extends React.Component{
         chats: chats.concat(newChat),
       })
 
-        const currentUser = this.state.username;
+        const currentUser = this.props.username;
         const newPtcpArray = ptcpArray.concat(currentUser);
 
         for (let i = 0; i < newPtcpArray.length; i++){
@@ -149,8 +167,8 @@ export class Home extends React.Component{
   }
 
   render(){
-  	const { username, loggedIn, csrftoken } = this.props;
-  	const { chats, participants } = this.state;
+  	const { username, loggedIn } = this.props;
+  	const { chats, participants, csrftoken } = this.state;
 
   	return (
   	 <div>

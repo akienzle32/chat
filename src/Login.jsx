@@ -7,8 +7,24 @@ export class Login extends React.Component {
   constructor(props){
   	super(props);
   	this.state = {
-  		redirect: false,
+  		csrftoken: this.getCookie('csrftoken'),
   	}
+  }
+
+  // Function provided by Django for adding csrf tokens to AJAX requests; see https://docs.djangoproject.com/en/3.2/ref/csrf/ for details.
+  getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
   }
 
   onSubmit = (event) => {
@@ -21,7 +37,7 @@ export class Login extends React.Component {
   		method: 'POST',
   		mode: 'cors',
       	headers: {
-        'X-CSRFToken': this.props.csrftoken,
+        'X-CSRFToken': this.state.csrftoken,
       	}, 
       	credentials: 'include',
       	body: formData,
@@ -45,10 +61,7 @@ export class Login extends React.Component {
   	document.getElementById("login-form").reset();
   }
   render() {
-  	const redirect = this.state.redirect;
-  	if (redirect){
-  		return <Redirect exact from ="/login" to="/" />;
-  	}
+
   	return(
 	  <div>
 	  	<h1 className="chat-title">Login</h1>

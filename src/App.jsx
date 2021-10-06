@@ -14,25 +14,8 @@ export class App extends React.Component {
   	this.state = {
   		username: "",
       loggedIn: false,
-      csrftoken: this.getCookie('csrftoken'),
   	}
     this.baseState = this.state;
-  }
-
-  // Function provided by Django for adding csrf tokens to AJAX requests; see https://docs.djangoproject.com/en/3.2/ref/csrf/ for details.
-  getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
   }
 
   setUser = (username) => {
@@ -55,7 +38,7 @@ export class App extends React.Component {
     if (loggedIn)
       navButton = <li className="right-nav-element"><Link className="link" to="/logout">Log out</Link></li>;
     else
-      navButton = <li className="right-nav-element"><Link className="link" to="/login">Login</Link></li>;
+      navButton = <li className="right-nav-element"><Link className="link" to="/">Login</Link></li>;
 
     return(navButton);
   }
@@ -64,10 +47,10 @@ export class App extends React.Component {
     let component;
     const { username, csrftoken, loggedIn } = this.state;
     if (!loggedIn){
-      component = <Route><Login csrftoken={csrftoken} username={username} userLoggedIn={this.userLoggedIn} setUser={this.setUser} /></Route>
+      component = <Login csrftoken={csrftoken} username={username} userLoggedIn={this.userLoggedIn} setUser={this.setUser} />
     }
     else {
-      component = <Route path="/"><Home username={username} csrftoken={csrftoken} loggedIn={loggedIn}  /></Route>;
+      component = <Home username={username} csrftoken={csrftoken} loggedIn={loggedIn}  />
     }
 
     return(component);
@@ -99,11 +82,11 @@ export class App extends React.Component {
           {usernameIcon}
         </ul>
       </div>
+      {component}
 	 	  <Switch>
         <Route path ="/logout">
           <Logout  userLoggedOut={this.userLoggedOut} handleErrors={this.handleErrors} />
         </Route>
-        {component}
 		  </Switch>
 	  </Router>
 	 );
