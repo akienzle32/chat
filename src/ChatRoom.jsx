@@ -11,7 +11,6 @@ export class ChatRoom extends React.Component {
 			messages: [],
 		};
 		this.bottomOfMessages = React.createRef();
-		//this.csrftoken = this.getCookie('csrftoken');
 	}
 
 	// Function to scroll the message-log div to the bottom. It is called by both componentDidMount() and componentDidUpdate(). 
