@@ -22,6 +22,9 @@ export const Login = (props) => {
   	})
   	.then(props.handleErrors)
   	.then(response => {
+  		if (response.status === 404){
+  			alert('Your login credentials were not found.')
+  		}
  		if (response.status === 200){
  			props.userLoggedIn();
  			return response.json();
