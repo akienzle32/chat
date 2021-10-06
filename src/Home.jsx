@@ -15,20 +15,13 @@ export class Home extends React.Component{
   	}
   }
 
-  handleErrors(response) {
-    if (!response.ok){
-      throw Error(response.statusText);
-    }
-    return(response);
-  }
-
   getChats = () => {
     fetch('http://127.0.0.1:8000/chat/chats', {
       method: 'GET',
       mode: 'cors',
       credentials: 'include',
     })
-    .then(this.handleErrors)
+    .then(this.props.handleErrors)
     .then(response => {
       return response.json();
     })
@@ -48,7 +41,7 @@ export class Home extends React.Component{
       mode: 'cors',
       credentials: 'include',
     })
-    .then(this.handleErrors)
+    .then(this.props.handleErrors)
     .then(response => {
       return response.json();
     })
@@ -151,16 +144,16 @@ export class Home extends React.Component{
   }
 
   render(){
-  	const { username, loggedIn } = this.props;
+  	const { username, loggedIn, handleErrors } = this.props;
   	const { chats, participants, csrftoken } = this.state;
 
   	return (
   	 <div>
   	    <Switch>
      	  <Route path="/:name/:id">
-  		  	<ChatRoom username={username} participants={participants}
-  		  	  addParticipant={this.addParticipant} handleErrors={this.handleErrors} 
-  		  	  updateChatState={this.updateChatState} loggedIn={loggedIn} csrftoken={csrftoken}  />;
+  		  	<ChatRoom username={username} participants={participants} 
+  		  		handleErrors={handleErrors} loggedIn={loggedIn} csrftoken={csrftoken} 
+  		  		addParticipant={this.addParticipant} updateChatState={this.updateChatState}   />;
   		  </Route>
   		  <Route path="/">
  			<StartChat username={username} chats={chats} participants={participants} onSubmit={this.addChat} />

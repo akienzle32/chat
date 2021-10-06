@@ -74,10 +74,11 @@ export class App extends React.Component {
     let component;
     const { username, loggedIn } = this.state;
     if (!loggedIn){
-      component = <Login getCookie={this.getCookie} username={username} userLoggedIn={this.userLoggedIn} setUser={this.setUser} />
+      component = <Login username={username} getCookie={this.getCookie} userLoggedIn={this.userLoggedIn} 
+      setUser={this.setUser} handleErrors={this.handleErrors} />
     }
     else {
-      component = <Home username={username} getCookie={this.getCookie} loggedIn={loggedIn}  />
+      component = <Home username={username} loggedIn={loggedIn} getCookie={this.getCookie} handleErrors={this.handleErrors}  />
     }
 
     return(component);
