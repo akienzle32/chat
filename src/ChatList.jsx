@@ -83,6 +83,14 @@ export const ChatList = (props) => {
   }
   */
 
+  const handleClick = (name, chatId) => {
+    const deleteChat = props.deleteChat;
+    let deleteButton = window.confirm('Are you sure you want to delete the ' + name + ' chat room?');
+    if (deleteButton){
+      deleteChat(chatId);
+    }
+  }
+
   // Displays chats and their participants, with each chat linking to the ChatRoom component.
   const displayChats = () => {
     const chatsAndPtcps = mapChats();
@@ -92,13 +100,17 @@ export const ChatList = (props) => {
   		let name = chat.name;
       let encodedName = encodeURIComponent(name); // This variable is safe for use in a URL.
   		let id = chat.id;
-  		return <tr key={name}>
-  				  <td><Link onClick={props.onClick} className="link" to={`${encodedName}/${id}`}>{name}</Link></td>
+  		return <tr key={id}>
+  				  <td><Link className="link" to={`${encodedName}/${id}`}>{name}</Link></td>
   				  <td>{users}</td>
+            <td><button onClick={() => handleClick(name, id)}>x</button></td>
   			   </tr>
   	})
     return(chatList);
   }
+
+
+
 	return(
 		<div>
   		  <div className="bottom-box" id="my-chats">
@@ -109,6 +121,7 @@ export const ChatList = (props) => {
       		  	  	<tr>
       		  	  	  <th>Name</th>
       		  	  	  <th>Participants</th>
+                    <th></th>
       		  	  	</tr>
       		  		  {displayChats()}
       		  	  </tbody>
@@ -117,5 +130,5 @@ export const ChatList = (props) => {
           </div>
         </div>
 
-	);
+	 );
 }
