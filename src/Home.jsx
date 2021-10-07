@@ -135,7 +135,6 @@ export class Home extends React.Component{
     this.setState({
       chats: chats,
     })
-
   }
 
   deleteChat = (chatId) => {
@@ -148,7 +147,17 @@ export class Home extends React.Component{
       	credentials: 'include',		
   	})
   	.then(this.props.handleErrors)
-  	.then(response => console.log(response))
+  	.then(response => {
+  		console.log(response);
+  		if (response.status === 200){
+  			const chats = this.state.chats;
+  			const index = chats.findIndex(chat => chat.id === chatId);
+  			chats.splice(index, 1);
+  			this.setState({
+  				chats: chats,
+  			})
+  		}
+  	})
   	.catch(error => console.log(error))
   }
 
