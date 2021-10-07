@@ -122,11 +122,6 @@ export class App extends React.Component {
     this.checkLoginStatus();
   }
 
-  componentDidUpdate(){
-    this.displayNavBar();
-  }
-
-
   render() {
     const navBar = this.displayNavBar();
     const component = this.displayLoginOrHomeComponent();
