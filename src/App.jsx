@@ -47,7 +47,7 @@ export class App extends React.Component {
     this.setState(this.baseState);
   }
 
-  displayNavBar(){
+  displayNavBar = () => {
     let navBar = null;
     const loggedIn = this.state.loggedIn;
     const username = this.state.username;
@@ -63,7 +63,7 @@ export class App extends React.Component {
     return(navBar);
   }
 
-  displayLoginOrHomeComponent(){
+  displayLoginOrHomeComponent = () => {
     let component;
     const { username, loggedIn } = this.state;
     if (!loggedIn){
@@ -98,7 +98,7 @@ export class App extends React.Component {
     .catch(error => console.log(error))
   }
 
-  checkLoginStatus() {
+  checkLoginStatus = () => {
     fetch('http://127.0.0.1:8000/chat/current-user', {
       method: 'GET',
       mode: 'cors',
