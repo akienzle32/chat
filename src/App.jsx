@@ -36,14 +36,11 @@ export class App extends React.Component {
     return(response);
   }
 
-  setUser = (username) => {
+  loginAndSetUser = (username) => {
     this.setState({
       username: username,
+      loggedIn: true,
     })
-  }
-
-  userLoggedIn = () => {
-    this.setState({loggedIn: true});
   }
 
   userLoggedOut = () => {
@@ -70,8 +67,8 @@ export class App extends React.Component {
     let component;
     const { username, loggedIn } = this.state;
     if (!loggedIn){
-      component = <Login username={username} getCookie={this.getCookie} userLoggedIn={this.userLoggedIn} 
-      setUser={this.setUser} handleErrors={this.handleErrors} />
+      component = <Login username={username} getCookie={this.getCookie} 
+      loginAndSetUser={this.loginAndSetUser} handleErrors={this.handleErrors} />
     }
     else {
       component = <Home username={username} loggedIn={loggedIn} getCookie={this.getCookie} handleErrors={this.handleErrors}  />

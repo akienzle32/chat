@@ -26,13 +26,12 @@ export const Login = (props) => {
   			alert('Your login credentials were not found.')
   		}
  		if (response.status === 200){
- 			props.userLoggedIn();
  			return response.json();
  		}
   	})
   	.then(user => {
   		console.log(user);
-  		props.setUser(user.username);
+  		props.loginAndSetUser(user.username);
   	})
   	.catch(error => console.log(error))
   	document.getElementById("login-form").reset();
