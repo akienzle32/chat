@@ -148,7 +148,7 @@ export class Home extends React.Component{
       	credentials: 'include',		
   	})
   	.then(this.props.handleErrors)
-  	.then(response => response.json())
+  	.then(response => console.log(response))
   	.catch(error => console.log(error))
   }
 
