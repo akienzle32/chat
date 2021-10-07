@@ -20,23 +20,22 @@ export const Login = (props) => {
       	body: formData,
 
   	})
-  	.then(props.handleErrors)
   	.then(response => {
   		if (response.status === 404){
-  			alert('Your login credentials were not found.')
+  			alert('Your login credentials were not found.');
   		}
  		if (response.status === 200){
- 			props.userLoggedIn();
  			return response.json();
  		}
   	})
   	.then(user => {
-  		console.log(user);
-  		props.setUser(user.username);
+  		if (user){
+ 			props.loginAndSetUser(user.username);
+ 		}
   	})
-  	.catch(error => console.log(error))
   	document.getElementById("login-form").reset();
   }
+
   	return(
 	  <div>
 	  	<h1 id="login-title">Welcome to the Chat App!</h1>

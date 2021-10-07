@@ -7,8 +7,8 @@ export class App extends React.Component {
   constructor(props){
   	super(props);
   	this.state = {
-  		username: "",
-      loggedIn: false,
+        username: "",
+        loggedIn: false,
   	}
     this.baseState = this.state;
   }
@@ -36,21 +36,18 @@ export class App extends React.Component {
     return(response);
   }
 
-  setUser = (username) => {
+  loginAndSetUser = (username) => {
     this.setState({
       username: username,
+      loggedIn: true,
     })
-  }
-
-  userLoggedIn = () => {
-    this.setState({loggedIn: true});
   }
 
   userLoggedOut = () => {
     this.setState(this.baseState);
   }
 
-  displayNavBar(){
+  displayNavBar = () => {
     let navBar = null;
     const loggedIn = this.state.loggedIn;
     const username = this.state.username;
@@ -66,15 +63,16 @@ export class App extends React.Component {
     return(navBar);
   }
 
-  displayLoginOrHomeComponent(){
+  displayLoginOrHomeComponent = () => {
     let component;
     const { username, loggedIn } = this.state;
     if (!loggedIn){
-      component = <Login username={username} getCookie={this.getCookie} userLoggedIn={this.userLoggedIn} 
-      setUser={this.setUser} handleErrors={this.handleErrors} />
+      component = <Login username={username} getCookie={this.getCookie} 
+      loginAndSetUser={this.loginAndSetUser} handleErrors={this.handleErrors} />
     }
     else {
-      component = <Home username={username} loggedIn={loggedIn} getCookie={this.getCookie} handleErrors={this.handleErrors}  />
+      component = <Home username={username} loggedIn={loggedIn}
+      getCookie={this.getCookie} handleErrors={this.handleErrors}  />
     }
 
     return(component);
@@ -98,6 +96,30 @@ export class App extends React.Component {
       }
     })
     .catch(error => console.log(error))
+  }
+
+  checkLoginStatus = () => {
+    fetch('http://127.0.0.1:8000/chat/current-user', {
+      method: 'GET',
+      mode: 'cors',
+      credentials: 'include'
+    })
+    .then(this.handleErrors)
+    .then(response => {
+      if (response.status === 200)
+        return response.json();
+    })
+    .then(user => {
+      this.setState({
+        username: user.username,
+        loggedIn: true,
+      })
+    })
+    .catch(error => console.log(error))
+  }
+
+  componentDidMount(){
+    this.checkLoginStatus();
   }
 
   render() {

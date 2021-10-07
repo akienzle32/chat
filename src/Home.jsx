@@ -74,7 +74,7 @@ export class Home extends React.Component{
       if (response.status === 400)
         alert('Participant already in chat')
       else if (response.status === 404)
-        alert('Username does not exist')
+        alert('Username not found')
       else
         return response.json();
     })
@@ -160,6 +160,7 @@ export class Home extends React.Component{
   	})
   	.catch(error => console.log(error))
   }
+
 
   componentDidMount(){
     this.getChats();
