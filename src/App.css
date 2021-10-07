@@ -42,7 +42,22 @@ table {
   overflow: scroll;
 }
 
-.submitButton {
+button.link{
+  font-size: 16px;
+  border: none;
+  background-color: white;
+  padding: 0;
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+
+}
+
+button.link:hover {
+    background-color: #B0C4DE;
+}
+
+.submit-button {
   visibility: hidden;
 }
 
@@ -76,6 +91,17 @@ table {
 .right-nav-element {
   float: right
 }
+
+.input-title {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+#login-title {
+  text-align: center;
+  margin-top: 50px;
+}
+
 
 #username {
   margin-right: 15px;

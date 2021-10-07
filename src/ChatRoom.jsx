@@ -11,7 +11,6 @@ export class ChatRoom extends React.Component {
 			messages: [],
 		};
 		this.bottomOfMessages = React.createRef();
-		this.csrftoken = this.getCookie('csrftoken');
 	}
 
 	// Function to scroll the message-log div to the bottom. It is called by both componentDidMount() and componentDidUpdate(). 
@@ -29,22 +28,6 @@ export class ChatRoom extends React.Component {
 	// This method is needed in order to avoid continued GET requests after user navigates away from page. 
 	componentWillUnmount() {
 		clearInterval(this.timer);
-	}
-
-	// Function provided by Django for adding csrf tokens to AJAX requests; see https://docs.djangoproject.com/en/3.2/ref/csrf/ for details.
-	getCookie(name) {
-    	let cookieValue = null;
-    	if (document.cookie && document.cookie !== '') {
-        	const cookies = document.cookie.split(';');
-        	for (let i = 0; i < cookies.length; i++) {
-          	  const cookie = cookies[i].trim();
-            	if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                	cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                	break;
-            	}
-        	}
-    	}
-    	return cookieValue;
 	}
 
 	// Function to extract either the chat name or the chat id from the url.
@@ -80,7 +63,6 @@ export class ChatRoom extends React.Component {
  		 })
  		 .then(messages => {
   			if (messages){
-  				console.log(messages);
   				this.setState({
   					messages: messages,
   				});
@@ -110,17 +92,12 @@ export class ChatRoom extends React.Component {
  		 })
  		 .then(messages => {
   			if (messages){
-  				console.log(messages);
   				this.setState({
   					messages: messages,
   				});
     		}	
   		})
  		.catch(error => console.log(error))
-	}
-
-	loggedIn = () => {
-		this.props.userLoggedIn();
 	}
 
 	componentDidUpdate() {
@@ -130,7 +107,6 @@ export class ChatRoom extends React.Component {
 
 	// Function to POST new messages to the database. 
 	handleSubmit = (event) => {
-		this.getCookie('csrftoken');
 		event.preventDefault();
 
 		const url = window.location.href;
@@ -145,29 +121,23 @@ export class ChatRoom extends React.Component {
 			method: 'POST',
 			mode: 'cors',
 			headers: {
-				'X-CSRFToken': this.csrftoken,
+				'X-CSRFToken': this.props.csrftoken,
 			},
 			credentials: 'include',
 			body: jsonData
 		})
-		.then(response => {
-			// If the server returns a redirect, follow the redirect url. A redirect will occur if the user
-			// attempts to send a message but isn't logged in.  
-			if (response.redirected){
-				window.location.href = response.url;
-				return;
-			} 
-			else 
-				return response.json();
+		.then(this.props.handleErrors)
+		.then(response => {  
+			return response.json();
 		})
 		.then(newMessage => {
-			console.log(newMessage);
 			const messages = this.state.messages; 
 			this.setState({
 				messages: messages.concat(newMessage),
 			})
 			this.patchChat();
 		})
+		.catch(error => console.log(error))
 		document.getElementById('message-form').reset();	
 	}
 
@@ -183,7 +153,7 @@ export class ChatRoom extends React.Component {
 			method: 'PUT',
 			mode: 'cors',
 			headers: {
-				'X-CSRFToken': this.csrftoken,
+				'X-CSRFToken': this.props.csrftoken,
 			},
 			credentials: 'include',
 		})
@@ -192,7 +162,6 @@ export class ChatRoom extends React.Component {
 			return response.json()
 		})
 		.then(chat => {
-			console.log(chat);
 			this.props.updateChatState(chat);
 		})
 		.catch(error => console.log(error))
@@ -205,11 +174,7 @@ export class ChatRoom extends React.Component {
 		const loggedIn = this.props.loggedIn;
 		let messageList;
 
-		if (!loggedIn){
-			messageList = <p id="login-alert">Please<b>
-			<a className="link" id="login-link" href='http://127.0.0.1:8000/accounts/login/'> log in </a></b> to receive messages.</p>;
-		}
-		else {
+		if (loggedIn){
 		  messageList = messages.map(message => {
   			return  <div key={message.id}><p id="author-par">{ message.author }</p><p id="message">{ message.content }</p>
   					<p id="timestamp">{ message.timestamp }</p></div>
@@ -244,7 +209,7 @@ export class ChatRoom extends React.Component {
 				  	  <input type="text" id="message-input" name="content" placeholder="Text message..."></input>
 				  	  <input type='hidden' name='author'></input>
 				  	  <input type='hidden' name='chat'></input>
-				  	  <input type='submit' value='Send' className='submitButton'></input>
+				  	  <input type='submit' value='Send' className='submit-button'></input>
 					</form>	
 			  	</div>
 		  	  </div>	

@@ -40,7 +40,7 @@ export const ParticipantList = (props) => {
 		  <ul>{displayParticipants()}</ul>
 			<form id="new-ptcp-form" onSubmit={onSubmit}>
 			  <input type="text" id="ptcp-username" name="name" placeholder="Add participant..."></input>
-			  <input type="submit" value="Send" className="submitButton"></input>
+			  <input type="submit" value="Send" className="submit-button"></input>
 			</form>
 	  </div>
 	);
