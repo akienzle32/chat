@@ -30,12 +30,12 @@ export const Login = (props) => {
  		}
   	})
   	.then(user => {
-  		console.log(user);
-  		props.loginAndSetUser(user.username);
+ 		props.loginAndSetUser(user.username);
   	})
   	.catch(error => console.log(error))
   	document.getElementById("login-form").reset();
   }
+
   	return(
 	  <div>
 	  	<h1 id="login-title">Welcome to the Chat App!</h1>

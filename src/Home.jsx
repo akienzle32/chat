@@ -161,6 +161,7 @@ export class Home extends React.Component{
   	.catch(error => console.log(error))
   }
 
+
   componentDidMount(){
     this.getChats();
     this.getParticipants();

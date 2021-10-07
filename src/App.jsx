@@ -7,8 +7,8 @@ export class App extends React.Component {
   constructor(props){
   	super(props);
   	this.state = {
-  		username: "",
-      loggedIn: false,
+        username: "",
+        loggedIn: false,
   	}
     this.baseState = this.state;
   }
@@ -71,7 +71,8 @@ export class App extends React.Component {
       loginAndSetUser={this.loginAndSetUser} handleErrors={this.handleErrors} />
     }
     else {
-      component = <Home username={username} loggedIn={loggedIn} getCookie={this.getCookie} handleErrors={this.handleErrors}  />
+      component = <Home username={username} loggedIn={loggedIn}
+      getCookie={this.getCookie} handleErrors={this.handleErrors}  />
     }
 
     return(component);
@@ -96,6 +97,35 @@ export class App extends React.Component {
     })
     .catch(error => console.log(error))
   }
+
+  checkLoginStatus() {
+    fetch('http://127.0.0.1:8000/chat/current-user', {
+      method: 'GET',
+      mode: 'cors',
+      credentials: 'include'
+    })
+    .then(this.handleErrors)
+    .then(response => {
+      if (response.status === 200)
+        return response.json();
+    })
+    .then(user => {
+      this.setState({
+        username: user.username,
+        loggedIn: true,
+      })
+    })
+    .catch(error => console.log(error))
+  }
+
+  componentDidMount(){
+    this.checkLoginStatus();
+  }
+
+  componentDidUpdate(){
+    this.displayNavBar();
+  }
+
 
   render() {
     const navBar = this.displayNavBar();
