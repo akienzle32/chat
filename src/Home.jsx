@@ -138,6 +138,20 @@ export class Home extends React.Component{
 
   }
 
+  deleteChat = (chatId) => {
+  	fetch('http://127.0.0.1:8000/chat/chats/' + chatId, {
+  		method: 'DELETE',
+  		mode: 'cors',
+      	headers: {
+          'X-CSRFToken': this.state.csrftoken,
+      	},
+      	credentials: 'include',		
+  	})
+  	.then(this.props.handleErrors)
+  	.then(response => response.json())
+  	.catch(error => console.log(error))
+  }
+
   componentDidMount(){
     this.getChats();
     this.getParticipants();
@@ -156,7 +170,7 @@ export class Home extends React.Component{
   		  		addParticipant={this.addParticipant} updateChatState={this.updateChatState}   />;
   		  </Route>
   		  <Route path="/">
- 			<StartChat username={username} chats={chats} participants={participants} onSubmit={this.addChat} />
+ 			<StartChat username={username} chats={chats} participants={participants} onSubmit={this.addChat} deleteChat={this.deleteChat} />
   		  </Route>
   		</Switch>
   	 </div>

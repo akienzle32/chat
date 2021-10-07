@@ -100,7 +100,7 @@ export class StartChat extends React.Component {
            		</form>
       			</div>
   			</div>
-  			<ChatList username={username} chats={chats} participants={participants} />
+  			<ChatList username={username} chats={chats} participants={participants} deleteChat={this.props.deleteChat} />
   	  </div>
   	);
   }
