@@ -13,7 +13,7 @@ export class Login extends React.Component {
 
   onSubmit = (event) => {
   	event.preventDefault();
-  	const loginForm = document.getElementById('login-form');
+  	const loginForm = event.target;
   	const formData = new FormData(loginForm);
   	const csrftoken = this.props.getCookie('csrftoken');
 
