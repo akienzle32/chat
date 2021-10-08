@@ -51,7 +51,7 @@ export const Register = (props) => {
   	        <label htmlFor="password2">Re-enter password: </label>      
   	        <input type="password" id="password2" name="password2"></input>      
   	        <br></br>      
-  	        <input type="submit"></input>  
+  	        <input id="submit-register" type="submit"></input>  
   	      </form>
 			
 		</div>
