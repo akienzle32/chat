@@ -208,9 +208,10 @@ a:hover {
   float: left;
   margin-left: 180px;
   display: inline-table;
-  padding: 15px;
+  padding-top: 8px;
+  padding-bottom: 27px;
   padding-right: 20px;
-  padding-bottom: 30px;
+  padding-left: 15px;
   background-color: #DCDCDC;
   border: 6px solid #4169E1;
   border-radius: 30px;
