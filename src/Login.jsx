@@ -1,4 +1,5 @@
 import React from 'react';
+import { Register } from './Register';
 import './App.css';
 
 
@@ -42,68 +43,18 @@ export class Login extends React.Component {
   	document.getElementById("login-form").reset();
   }
 
+  toggleDisplayForm = () => {
+  	const displayForm = this.state.displayForm;
+  	this.setState({
+  		displayForm: displayForm ? false : true,
+  	})
+  }
+
   displayRegistrationForm = () => {
-  	let form = null;
   	const displayForm = this.state.displayForm;
   	if (displayForm){
-  		form =  <form id="registration-form" onSubmit={this.createNewUser}>
-  		           <label htmlFor="user">Enter a username: </label>
-  	               <input type="text" id="user" name="username"></input>
-  	               <br></br>
-  	               <label htmlFor="email">Enter an email: </label>
-  	               <input type="email" id="email" name="email"></input>
-  	               <br></br>
-  	               <label htmlFor="password1">Enter a password: </label>
-  	               <input type="password" id="password1" name="password1"></input>
-  	               <br></br>
-  	               <label htmlFor="password2">Re-enter password: </label>
-  	               <input type="password" id="password2" name="password2"></input>
-  	               <br></br>
-  	               <input type="submit"></input>
-  	            </form>
+  		return <Register toggleDisplayForm={this.toggleDisplayForm} getCookie={this.props.getCookie} />
   	}
-  	return(form);
-  }
-
-  onClick = () => {
-  	const displayForm = this.state.displayForm;
-  	const newDisplay = displayForm ? false : true;
-  	this.setState({
-  		displayForm: newDisplay,
-  	})
-  }
-
-  createNewUser = (event) => {
-  	event.preventDefault();
-  	const newUserForm = event.target;
-  	const formData = new FormData(newUserForm);
-  	const csrftoken = this.props.getCookie('csrftoken');
-
-  	fetch('http://127.0.0.1:8000/chat/register', {
-  		method: 'POST',
-  		mode: 'cors',
-  		headers: {
-  			'X-CSRFToken': csrftoken, 
-  		},
-  		credentials: 'include',
-  		body: formData,
-  	})
-  	.then(response => {
-  		if (response.status === 400)
-  			return response.text();
-  		if (response.status === 200)
-  			return response.json();
-  	})
-  	.then(object => {
-  		console.log(object);
-  		if (object === 'Passwords do not match' || object === 'That username is not available')
-  			alert(object);
-  		else
-  			alert("Registration success! Please login with your new credentials.")
-  			this.setState({
-  			displayForm: false,
-  			})
-  	})
   }
 
   render(){
@@ -123,7 +74,7 @@ export class Login extends React.Component {
 	  	  </div>
 	  	  <div>
 	  	  	<h4 style={{textAlign: 'center'}}>Don't have an account? Click <button className="link"
-	  	  	onClick={this.onClick}><b>HERE</b></button> to register.</h4>
+	  	  	onClick={this.toggleDisplayForm}><b>HERE</b></button> to register.</h4>
 	  	  	<div className="register-div">{registrationForm}</div>
 	  	  </div>
 	  </div>
