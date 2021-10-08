@@ -62,12 +62,12 @@ export class Login extends React.Component {
   	return(
 	  <div>
 	  	<h1 id="login-title">Welcome to the Chat App!</h1>
-	  	  <h4 style={{textAlign: 'center'}}>Please login.</h4>
+	  	  <h4 className="title">Please login.</h4>
 	  	  <div style={{textAlign: 'center'}}>
 	  	  	<form id="login-form" onSubmit={this.onSubmit}>
-	  	  	  <p className="input-title">Username:  </p>
+	  	  	  <label htmlFor="username-input" className="login-label">Username: </label>
 	  	  	  <input type="text" id="username-input" name="username"></input><br></br>
-	  	  	  <p className="input-title">Password: </p>
+	  	  	  <label htmlFor="password-input" className="login-label">Password: </label>
 	  	  	  <input type="password" id="password-input" name="password"></input><br></br>
 	  	  	  <input type="submit" className="submit-button"></input>
 	  	    </form>
