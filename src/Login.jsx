@@ -47,17 +47,18 @@ export class Login extends React.Component {
   	const displayForm = this.state.displayForm;
   	if (displayForm){
   		form =  <form id="registration-form" onSubmit={this.createNewUser}>
-  		           <label for="user">Enter a username: </label>
+  		           <label htmlFor="user">Enter a username: </label>
   	               <input type="text" id="user" name="username"></input>
   	               <br></br>
-  	               <label for="email">Enter an email: </label>
+  	               <label htmlFor="email">Enter an email: </label>
   	               <input type="email" id="email" name="email"></input>
   	               <br></br>
-  	               <label for="password1">Enter a password: </label>
+  	               <label htmlFor="password1">Enter a password: </label>
   	               <input type="password" id="password1" name="password1"></input>
   	               <br></br>
-  	               <label for="password2">Re-enter password: </label>
+  	               <label htmlFor="password2">Re-enter password: </label>
   	               <input type="password" id="password2" name="password2"></input>
+  	               <br></br>
   	               <input type="submit"></input>
   	            </form>
   	}
@@ -87,18 +88,21 @@ export class Login extends React.Component {
   		credentials: 'include',
   		body: formData,
   	})
-  	.then(this.props.handleErrors)
   	.then(response => {
-  		if (response.status === 200){
-  			response.json();
+  		if (response.status === 400)
+  			return response.text();
+  		if (response.status === 200)
+  			return response.json();
+  	})
+  	.then(object => {
+  		console.log(object);
+  		if (object === 'Passwords do not match' || object === 'That username is not available')
+  			alert(object);
+  		else
   			alert("Registration success! Please login with your new credentials.")
   			this.setState({
   			displayForm: false,
   			})
-  		}
-  	})
-  	.then(user => {
-  		console.log(user);
   	})
   }
 
