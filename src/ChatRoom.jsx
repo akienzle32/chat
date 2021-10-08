@@ -176,8 +176,8 @@ export class ChatRoom extends React.Component {
 
 		if (loggedIn){
 		  messageList = messages.map(message => {
-  			return  <div key={message.id}><p id="author-par">{ message.author }</p><p id="message">{ message.content }</p>
-  					<p id="timestamp">{ message.timestamp }</p></div>
+  			return  <div key={message.id}><p id="message-author">{ message.author }</p><p id="message-content">{ message.content }</p>
+  					<p id="message-timestamp">{ message.timestamp }</p></div>
   		  });
   		}
   		return messageList;
@@ -204,7 +204,7 @@ export class ChatRoom extends React.Component {
 			  	<div className="top-rounded-box" id="message-log">{messages}
 			  	  <div ref={this.bottomOfMessages} />
 			  	</div>
-			  	  <div className="bottom-rounded-box" id="new-messages">
+			  	  <div className="bottom-rounded-box" id="new-message-box">
 					<form id='message-form' onSubmit={this.handleSubmit}>
 				  	  <input type="text" id="message-input" name="content" placeholder="Text message..."></input>
 				  	  <input type='hidden' name='author'></input>

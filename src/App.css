@@ -116,25 +116,12 @@ a:hover {
   text-align: center;
 }
 
+#home-link {
+  float: left;
+}
 
 #username {
   margin-right: 15px;
-}
-
-#form-container {
-  margin-left: 110px;
-}
-
-#chat-name {
-  width: 170px;
-  height: 22px;
-  font-size: 14px;
-  display: table;
-  margin-bottom: 4px;
-}
-
-#home-link {
-  float: left;
 }
 
 #start-chat {
@@ -143,6 +130,10 @@ a:hover {
   padding-bottom: 60px;
   padding-right: 50px;
   padding-left: 50px;
+}
+
+#chat-form-container {
+  margin-left: 110px;
 }
 
 #sub-ptcp-button {
@@ -157,6 +148,14 @@ a:hover {
   padding-bottom: 50px;
 }
 
+#chat-name {
+  width: 170px;
+  height: 22px;
+  font-size: 14px;
+  display: table;
+  margin-bottom: 4px;
+}
+
 #message-log {
   height: 200px;
   width: 400px;
@@ -164,7 +163,7 @@ a:hover {
   margin-right: 100px;
 }
 
-#new-messages {
+#new-message-box {
   height: 50px;
   width: 400px;
   padding: 25px 50px;
@@ -182,11 +181,11 @@ a:hover {
   font-size: 16px
 }
 
-#author-par {
+#message-author {
   margin-bottom: 5px;
 }
 
-#message {
+#message-content {
   text-align: left;
   padding: 5px;
   border: 2px solid #4169E1;
@@ -197,7 +196,7 @@ a:hover {
   display: inline-block;
 }
 
-#timestamp {
+#message-timestamp {
   text-align: left;
   margin-top: 5px;
   font-size: 12px;
@@ -211,7 +210,7 @@ a:hover {
   display: inline-table;
   padding: 15px;
   padding-right: 20px;
-  padding-bottom: 25px;
+  padding-bottom: 30px;
   background-color: #DCDCDC;
   border: 6px solid #4169E1;
   border-radius: 30px;
