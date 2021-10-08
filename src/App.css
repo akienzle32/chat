@@ -57,6 +57,12 @@ button.link:hover {
     background-color: #B0C4DE;
 }
 
+label {
+  display: inline-block;
+  width: 150px;
+  padding: 5px;
+}
+
 .submit-button {
   visibility: hidden;
 }
@@ -95,6 +101,17 @@ button.link:hover {
 .input-title {
   display: inline-block;
   margin-right: 5px;
+}
+
+.register-div {
+  margin-left: 550px;
+  text-align: left;
+}
+
+#submit-register {
+  margin-top: 5px;
+  margin-left: 5px;
+
 }
 
 #login-title {
