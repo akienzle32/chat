@@ -39,16 +39,16 @@ export const Register = (props) => {
 	return(
 		<div>
 		  <form id="registration-form" onSubmit={createNewUser}>
-			<label htmlFor="user">Enter a username: </label>
+			<label htmlFor="user" className="register-label">Enter a username: </label>
 			<input type="text" id="user" name="username"></input>
 			<br></br>
-			<label htmlFor="email">Enter an email: </label>
+			<label htmlFor="email" className="register-label">Enter an email: </label>
 			<input type="email" id="email" name="email"></input>
   	        <br></br>       
-  	        <label htmlFor="password1">Enter a password: </label>      
+  	        <label htmlFor="password1" className="register-label">Enter a password: </label>      
   	        <input type="password" id="password1" name="password1"></input>       
   	        <br></br>       
-  	        <label htmlFor="password2">Re-enter password: </label>      
+  	        <label htmlFor="password2" className="register-label">Re-enter password: </label>      
   	        <input type="password" id="password2" name="password2"></input>      
   	        <br></br>      
   	        <input id="submit-registration" type="submit"></input>  

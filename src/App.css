@@ -20,13 +20,22 @@ button.link:hover {
 }
 
 label {
-  display: inline-block;
-  width: 150px;
   padding: 5px;
 }
 
 a:hover {
   background: #B0C4DE;
+}
+
+.login-label {
+  display: inline-block;
+  width: 100px;
+
+}
+
+.register-label {
+  display: inline-block;
+  width: 150px;
 }
 
 .title {
