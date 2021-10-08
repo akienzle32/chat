@@ -137,8 +137,8 @@ export class Home extends React.Component{
     })
   }
 
-  deleteChat = (chatId) => {
-  	fetch('http://127.0.0.1:8000/chat/chats/' + chatId, {
+  removeFromChat = (chatId) => {
+  	fetch('http://127.0.0.1:8000/chat/participants/' + chatId, {
   		method: 'DELETE',
   		mode: 'cors',
       	headers: {
@@ -180,7 +180,7 @@ export class Home extends React.Component{
   		  		addParticipant={this.addParticipant} updateChatState={this.updateChatState}   />;
   		  </Route>
   		  <Route path="/">
- 			<StartChat username={username} chats={chats} participants={participants} onSubmit={this.addChat} deleteChat={this.deleteChat} />
+ 			<StartChat username={username} chats={chats} participants={participants} onSubmit={this.addChat} removeFromChat={this.removeFromChat} />
   		  </Route>
   		</Switch>
   	 </div>

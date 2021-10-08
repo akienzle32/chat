@@ -84,10 +84,10 @@ export const ChatList = (props) => {
   */
 
   const handleClick = (name, chatId) => {
-    const deleteChat = props.deleteChat;
-    let deleteButton = window.confirm('Are you sure you want to delete the ' + name + ' chat room?');
+    const removeFromChat = props.removeFromChat;
+    let deleteButton = window.confirm('Are you sure you want remove yourself from the ' + name + ' chat room?');
     if (deleteButton){
-      deleteChat(chatId);
+      removeFromChat(chatId);
     }
   }
 
