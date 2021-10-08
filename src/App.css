@@ -1,45 +1,7 @@
 
-a:hover {
-  background: #B0C4DE;
-}
-
 table {
   width: 100%;
   text-align: left;
-}
-
-.ptcp-button {
-  height: 28px;
-  width: 25px;
-  float: right;
-  display: table;
-}
-
-.container-title {
-  text-align: center;
-}
-
-.link {
-  text-decoration: none;
-  color: black;
-}
-
-.top-box {
-  background-color: #DCDCDC;
-  border: 7px solid #4169E1;
-  border-radius: 25px;
-  margin-left: 460px;
-  overflow: scroll;
-}
-
-.bottom-box {
-  background-color: #DCDCDC;
-  border-left: 7px solid #4169E1;
-  border-right: 7px solid #4169E1;
-  border-bottom: 7px solid #4169E1;
-  border-radius: 25px;
-  margin-left: 460px;
-  overflow: scroll;
 }
 
 button.link{
@@ -63,12 +25,47 @@ label {
   padding: 5px;
 }
 
-.submit-button {
-  visibility: hidden;
+a:hover {
+  background: #B0C4DE;
 }
 
-.chat-title {
+.title {
   text-align: center;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+}
+
+.ptcp-button {
+  height: 28px;
+  width: 25px;
+  float: right;
+  display: table;
+}
+
+.top-rounded-box {
+  background-color: #DCDCDC;
+  border: 7px solid #4169E1;
+  border-radius: 25px;
+  margin-left: 460px;
+  overflow: scroll;
+}
+
+.bottom-rounded-box {
+  background-color: #DCDCDC;
+  border-left: 7px solid #4169E1;
+  border-right: 7px solid #4169E1;
+  border-bottom: 7px solid #4169E1;
+  border-radius: 25px;
+  margin-left: 460px;
+  overflow: scroll;
+}
+
+.submit-button {
+  visibility: hidden;
+  display: none;
 }
 
 .ptcp-name {
@@ -108,36 +105,23 @@ label {
   text-align: left;
 }
 
-#submit-register {
+#submit-registration {
   margin-top: 5px;
   margin-left: 5px;
 
 }
 
 #login-title {
-  text-align: center;
   margin-top: 50px;
-}
-
-
-#username {
-  margin-right: 15px;
-}
-
-#form-container {
-  margin-left: 110px;
-}
-
-#chat-name {
-  width: 170px;
-  height: 22px;
-  font-size: 14px;
-  display: table;
-  margin-bottom: 4px;
+  text-align: center;
 }
 
 #home-link {
   float: left;
+}
+
+#username {
+  margin-right: 15px;
 }
 
 #start-chat {
@@ -146,6 +130,10 @@ label {
   padding-bottom: 60px;
   padding-right: 50px;
   padding-left: 50px;
+}
+
+#chat-form-container {
+  margin-left: 110px;
 }
 
 #sub-ptcp-button {
@@ -160,6 +148,14 @@ label {
   padding-bottom: 50px;
 }
 
+#chat-name {
+  width: 170px;
+  height: 22px;
+  font-size: 14px;
+  display: table;
+  margin-bottom: 4px;
+}
+
 #message-log {
   height: 200px;
   width: 400px;
@@ -167,7 +163,7 @@ label {
   margin-right: 100px;
 }
 
-#new-messages {
+#new-message-box {
   height: 50px;
   width: 400px;
   padding: 25px 50px;
@@ -185,28 +181,11 @@ label {
   font-size: 16px
 }
 
-#login-alert {
-  font-size: 18px;
-  text-align: center;
-}
-
-#login-link {
-  font-size: 18px;
-}
-
-#col-title {
-  font-size: 17px;
-}
-
-#submit-forms {
-  display: none;
-}
-
-#author-par {
+#message-author {
   margin-bottom: 5px;
 }
 
-#message {
+#message-content {
   text-align: left;
   padding: 5px;
   border: 2px solid #4169E1;
@@ -217,7 +196,7 @@ label {
   display: inline-block;
 }
 
-#timestamp {
+#message-timestamp {
   text-align: left;
   margin-top: 5px;
   font-size: 12px;
@@ -229,8 +208,10 @@ label {
   float: left;
   margin-left: 180px;
   display: inline-table;
-  padding: 15px;
+  padding-top: 8px;
+  padding-bottom: 27px;
   padding-right: 20px;
+  padding-left: 15px;
   background-color: #DCDCDC;
   border: 6px solid #4169E1;
   border-radius: 30px;

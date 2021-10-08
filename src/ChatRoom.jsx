@@ -176,8 +176,8 @@ export class ChatRoom extends React.Component {
 
 		if (loggedIn){
 		  messageList = messages.map(message => {
-  			return  <div key={message.id}><p id="author-par">{ message.author }</p><p id="message">{ message.content }</p>
-  					<p id="timestamp">{ message.timestamp }</p></div>
+  			return  <div key={message.id}><p id="message-author">{ message.author }</p><p id="message-content">{ message.content }</p>
+  					<p id="message-timestamp">{ message.timestamp }</p></div>
   		  });
   		}
   		return messageList;
@@ -197,14 +197,14 @@ export class ChatRoom extends React.Component {
 		const messages = this.displayMessages();
 	  	  return (
 			<div>
-		  	  <div><h1 className="chat-title">{chatRoomName}</h1></div>
+		  	  <div><h1 className="title">{chatRoomName}</h1></div>
 		  	  <div className="lower-container">
 		  	  	<ParticipantList username={this.props.username} participants={this.props.participants} 
 		  	  		extractFromUrl={this.extractFromUrl} addParticipant={this.props.addParticipant} />
-			  	<div className="top-box" id="message-log">{messages}
+			  	<div className="top-rounded-box" id="message-log">{messages}
 			  	  <div ref={this.bottomOfMessages} />
 			  	</div>
-			  	  <div className="bottom-box" id="new-messages">
+			  	  <div className="bottom-rounded-box" id="new-message-box">
 					<form id='message-form' onSubmit={this.handleSubmit}>
 				  	  <input type="text" id="message-input" name="content" placeholder="Text message..."></input>
 				  	  <input type='hidden' name='author'></input>
