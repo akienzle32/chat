@@ -1,45 +1,7 @@
 
-a:hover {
-  background: #B0C4DE;
-}
-
 table {
   width: 100%;
   text-align: left;
-}
-
-.ptcp-button {
-  height: 28px;
-  width: 25px;
-  float: right;
-  display: table;
-}
-
-.container-title {
-  text-align: center;
-}
-
-.link {
-  text-decoration: none;
-  color: black;
-}
-
-.top-box {
-  background-color: #DCDCDC;
-  border: 7px solid #4169E1;
-  border-radius: 25px;
-  margin-left: 460px;
-  overflow: scroll;
-}
-
-.bottom-box {
-  background-color: #DCDCDC;
-  border-left: 7px solid #4169E1;
-  border-right: 7px solid #4169E1;
-  border-bottom: 7px solid #4169E1;
-  border-radius: 25px;
-  margin-left: 460px;
-  overflow: scroll;
 }
 
 button.link{
@@ -63,12 +25,47 @@ label {
   padding: 5px;
 }
 
-.submit-button {
-  visibility: hidden;
+a:hover {
+  background: #B0C4DE;
 }
 
-.chat-title {
+.title {
   text-align: center;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+}
+
+.ptcp-button {
+  height: 28px;
+  width: 25px;
+  float: right;
+  display: table;
+}
+
+.top-rounded-box {
+  background-color: #DCDCDC;
+  border: 7px solid #4169E1;
+  border-radius: 25px;
+  margin-left: 460px;
+  overflow: scroll;
+}
+
+.bottom-rounded-box {
+  background-color: #DCDCDC;
+  border-left: 7px solid #4169E1;
+  border-right: 7px solid #4169E1;
+  border-bottom: 7px solid #4169E1;
+  border-radius: 25px;
+  margin-left: 460px;
+  overflow: scroll;
+}
+
+.submit-button {
+  visibility: hidden;
+  display: none;
 }
 
 .ptcp-name {
@@ -108,15 +105,15 @@ label {
   text-align: left;
 }
 
-#submit-register {
+#submit-registration {
   margin-top: 5px;
   margin-left: 5px;
 
 }
 
 #login-title {
-  text-align: center;
   margin-top: 50px;
+  text-align: center;
 }
 
 
@@ -185,23 +182,6 @@ label {
   font-size: 16px
 }
 
-#login-alert {
-  font-size: 18px;
-  text-align: center;
-}
-
-#login-link {
-  font-size: 18px;
-}
-
-#col-title {
-  font-size: 17px;
-}
-
-#submit-forms {
-  display: none;
-}
-
 #author-par {
   margin-bottom: 5px;
 }
@@ -231,6 +211,7 @@ label {
   display: inline-table;
   padding: 15px;
   padding-right: 20px;
+  padding-bottom: 25px;
   background-color: #DCDCDC;
   border: 6px solid #4169E1;
   border-radius: 30px;
