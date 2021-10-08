@@ -20,12 +20,8 @@ export const ChatList = (props) => {
   		let chatId = chats[i].id;
   		let chatName = chats[i].name;
       let decodedChatName = decodeURIComponent(chatName);
-      //console.log(usernameArray);
   		let lastModified = chats[i].last_modified;
-  		//let convertedDate = convertDatetime(lastModified);
-  		//let parsedDate = new Date(lastModified);
   		let JSONelement = {id:chatId, name:decodedChatName, usernames:usernameArray, last_modified:lastModified};
-      //let JSONelement = {id:chatId, name:chatName, usernames:usernameArray};
   		chatsAndPtcps.push(JSONelement);
   	}
 
@@ -50,38 +46,6 @@ export const ChatList = (props) => {
 
   	return(sortedChats);
   }
-
-  /*
-  // Converts the data in last_modified column into a format that can be easily sorted in JavaScript.
-  function convertDatetime(dateString) {
-    let convertedDatetime;
-    if (dateString !== null){
-      const month = dateString.slice(5, 8);
-      const day = dateString.slice(9, 11);
-      const timeString = dateString.slice(12, 18);
-      const year = new Date().getFullYear();
-      const hour = timeString.slice(0, timeString.indexOf(":"));
-      const minutes = timeString.slice(timeString.indexOf(":"));
-
-      let paddedHour;
-      if (hour.length === 1)
-        paddedHour = '0' + hour;
-      else
-        paddedHour = hour;
-      let tempTime = paddedHour + minutes;
-      if (tempTime[5] === 'P'){
-        let hourString = tempTime.slice(0, 2);
-        let intHour = parseInt(hourString) + 12;
-        hourString = intHour.toString();
-        tempTime = hourString + minutes;
-      }
-      const time = tempTime.slice(0, 5) + ":00";
-      convertedDatetime = month + " " + day + ", " + year + " " + time;
-    }
-
-    return(convertedDatetime);
-  }
-  */
 
   const handleClick = (name, chatId) => {
     const removeFromChat = props.removeFromChat;
