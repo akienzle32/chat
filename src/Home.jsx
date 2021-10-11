@@ -148,7 +148,6 @@ export class Home extends React.Component{
   	})
   	.then(this.props.handleErrors)
   	.then(response => {
-  		console.log(response);
   		if (response.status === 200){
   			const chats = this.state.chats;
   			const index = chats.findIndex(chat => chat.id === chatId);
