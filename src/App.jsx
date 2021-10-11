@@ -63,6 +63,7 @@ export class App extends React.Component {
     return(navBar);
   }
 
+  // Depending upon authentications status, display either the Login or Home component.
   displayLoginOrHomeComponent = () => {
     let component;
     const { username, loggedIn } = this.state;
@@ -98,6 +99,8 @@ export class App extends React.Component {
     .catch(error => console.log(error))
   }
 
+  // This initial GET request allows for the user to persist after refreshing the window by asking the 
+  // server to send back the user's details, if available. 
   checkLoginStatus = () => {
     fetch('http://127.0.0.1:8000/chat/current-user', {
       method: 'GET',

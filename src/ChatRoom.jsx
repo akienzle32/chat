@@ -25,7 +25,7 @@ export class ChatRoom extends React.Component {
 		this.scrollToBottom();
 	}
 
-	// This method is needed in order to avoid continued GET requests after user navigates away from page. 
+	// This method is needed in order to avoid continued GET requests after user navigates away from the page. 
 	componentWillUnmount() {
 		clearInterval(this.timer);
 	}

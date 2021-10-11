@@ -55,6 +55,8 @@ export class Home extends React.Component{
     .catch(error => console.log(error))
   }
 
+  // This method is called within addChat in order to allow both the chat and its participants to be added
+  // with one submission. 
   addParticipant = (ptcp, chatId) => {
     const data = new FormData();
     data.append("name", ptcp);
@@ -116,15 +118,17 @@ export class Home extends React.Component{
         chats: chats.concat(newChat),
       })
 
-        const currentUser = this.props.username;
-        const newPtcpArray = ptcpArray.concat(currentUser);
+      const currentUser = this.props.username;
+      const newPtcpArray = ptcpArray.concat(currentUser);
 
-        for (let i = 0; i < newPtcpArray.length; i++){
-          this.addParticipant(newPtcpArray[i], chatId);
-        }
+      for (let i = 0; i < newPtcpArray.length; i++){
+        this.addParticipant(newPtcpArray[i], chatId);
+      }
     })
   }
 
+  // This method is passed down as a prop to the ChatRoom component and allows for the state of the chats
+  // to be updated based on a PUT request sent within ChatRoom.
   updateChatState = (jsonChat) => {
     const chats = this.state.chats;
     const chatId = jsonChat.id;
@@ -137,6 +141,7 @@ export class Home extends React.Component{
     })
   }
 
+  // Removes the user from the participant list of the selected chat.
   removeFromChat = (chatId) => {
   	fetch('http://127.0.0.1:8000/chat/participants/' + chatId, {
   		method: 'DELETE',
@@ -168,7 +173,8 @@ export class Home extends React.Component{
 
   render(){
   	const { username, loggedIn, handleErrors } = this.props;
-  	const { chats, participants, csrftoken } = this.state;
+  	const { chats, participants, csrftoken } = this.state; // Because no other forms are dynamically added from here, we can pass down the csrf
+  	                                                       // token itself, rather than the getCookie() function. 
 
   	return (
   	 <div>
