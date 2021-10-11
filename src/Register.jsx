@@ -3,7 +3,7 @@ import './App.css';
 
 export const Register = (props) => {
 
-  const createNewUser = (event) => {
+  const onSubmit = (event) => {
   	event.preventDefault();
   	const newUserForm = event.target;
   	const formData = new FormData(newUserForm);
@@ -38,7 +38,7 @@ export const Register = (props) => {
   }
 	return(
 		<div>
-		  <form id="registration-form" onSubmit={createNewUser}>
+		  <form id="registration-form" onSubmit={onSubmit}>
 			<label htmlFor="user" className="register-label">Enter a username: </label>
 			<input type="text" id="user" name="username"></input>
 			<br></br>
