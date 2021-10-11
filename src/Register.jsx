@@ -23,6 +23,8 @@ export const Register = (props) => {
   			return response.text();
   		if (response.status === 200)
   			return response.json();
+  		else
+  			this.props.handleErrors(response);
   	})
   	.then(object => {
   		if (object){
@@ -35,6 +37,7 @@ export const Register = (props) => {
   			}
   		}
   	})
+  	.catch(error => console.log(error))
   }
 	return(
 		<div>
