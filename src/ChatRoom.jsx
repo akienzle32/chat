@@ -106,7 +106,7 @@ export class ChatRoom extends React.Component {
 	}
 
 	// Function to POST new messages to the database. 
-	handleSubmit = (event) => {
+	onSubmit = (event) => {
 		event.preventDefault();
 
 		const url = window.location.href;
@@ -205,7 +205,7 @@ export class ChatRoom extends React.Component {
 			  	  <div ref={this.bottomOfMessages} />
 			  	</div>
 			  	  <div className="bottom-rounded-box" id="new-message-box">
-					<form id='message-form' onSubmit={this.handleSubmit}>
+					<form id='message-form' onSubmit={this.onSubmit}>
 				  	  <input type="text" id="message-input" name="content" placeholder="Text message..."></input>
 				  	  <input type='hidden' name='author'></input>
 				  	  <input type='hidden' name='chat'></input>
