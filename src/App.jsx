@@ -67,7 +67,7 @@ export class App extends React.Component {
     let component;
     const { username, loggedIn } = this.state;
     if (!loggedIn){
-      component = <Login username={username} getCookie={this.getCookie} 
+      component = <Login username={username} getCookie={this.getCookie}
       loginAndSetUser={this.loginAndSetUser} handleErrors={this.handleErrors} />
     }
     else {
