@@ -15,7 +15,10 @@ export class Login extends React.Component {
   	event.preventDefault();
   	const loginForm = event.target;
   	const formData = new FormData(loginForm);
-  	const csrftoken = this.props.getCookie('csrftoken');
+  	const csrftoken = this.props.getCookie('csrftoken'); // Django has trouble setting csrf tokens on dynamically added forms
+  	                                                     // (see https://docs.djangoproject.com/en/3.2/ref/csrf/), so I've worked 
+  	                                                     // around this problem by passing down the function to retrieve the cookie
+  	                                                     // rather than the cookie itself. 
 
   	fetch('http://127.0.0.1:8000/chat/login', {
   		method: 'POST',
