@@ -1,8 +1,5 @@
 This repository hosts the frontend of my chat app, which I started in order to gain experience
-in the lifecycle of a basic web application. I started working on it in React, but in the end
-wrote most of the functionality in simple JavaScript (which you can find in the 
-ChatPrompt.jsx file) because I wanted to solidify these skills before moving on to a more 
-dynamic frontend framework. The backend of the app, developed with the Django REST Framework, 
+in the lifecycle of a basic web application. The backend of the app, developed with Django, 
 is hosted here: https://github.com/akienzle32/chat-drf.
 
 
