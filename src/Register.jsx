@@ -9,7 +9,7 @@ export const Register = (props) => {
   	const formData = new FormData(newUserForm);
   	const csrftoken = props.getCookie('csrftoken');
 
-  	fetch('http://127.0.0.1:8000/chat/register', {
+  	fetch('/register', {
   		method: 'POST',
   		mode: 'cors',
   		headers: {

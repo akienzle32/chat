@@ -16,7 +16,7 @@ export class Home extends React.Component{
   }
 
   getChats = () => {
-    fetch('http://127.0.0.1:8000/chat/chats', {
+    fetch('/chats', {
       method: 'GET',
       mode: 'cors',
       credentials: 'include',
@@ -36,7 +36,7 @@ export class Home extends React.Component{
   }
 
   getParticipants = () => {
-    fetch('http://127.0.0.1:8000/chat/participants', {
+    fetch('/participants', {
       method: 'GET',
       mode: 'cors',
       credentials: 'include',
@@ -63,7 +63,7 @@ export class Home extends React.Component{
     data.append("chat", chatId);
     const jsonData = JSON.stringify(Object.fromEntries(data));
 
-    fetch('http://127.0.0.1:8000/chat/participants', {
+    fetch('/participants', {
       method: 'POST',
       mode: 'cors',
       headers: {
@@ -99,7 +99,7 @@ export class Home extends React.Component{
 
     let chatId;
 
-    fetch('http://127.0.0.1:8000/chat/chats', {
+    fetch('/chats', {
       method: 'POST',
       mode: 'cors',
       headers: {
@@ -143,7 +143,7 @@ export class Home extends React.Component{
 
   // Removes the user from the participant list of the selected chat.
   removeFromChat = (chatId) => {
-  	fetch('http://127.0.0.1:8000/chat/participants/' + chatId, {
+  	fetch('/participants/' + chatId, {
   		method: 'DELETE',
   		mode: 'cors',
       	headers: {
