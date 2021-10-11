@@ -37,12 +37,16 @@ export class Login extends React.Component {
  		if (response.status === 200){
  			return response.json();
  		}
+ 		else {
+ 			this.props.handleErrors(response);
+ 		}
   	})
   	.then(user => {
   		if (user){
  			this.props.loginAndSetUser(user.username);
  		}
   	})
+  	.catch(error => console.log(error));
   	document.getElementById("login-form").reset();
   }
 
