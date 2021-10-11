@@ -1,8 +1,7 @@
 This repository hosts the frontend of my chat app, which I started in order to gain experience
-in the lifecycle of a basic web application. It was designed with React, and allows users to create 
-named chat rooms to which they can add participants and send messages. The user's chat rooms are 
-organized according to the timestamp of the last message sent. The backend of the app, developed 
-with Django, is hosted here: https://github.com/akienzle32/chat-drf.
+in the lifecycle of a basic web application. It was designed with React, and allows users to creat 
+named chat rooms to which they can add participants and send messages. The backend of the app, 
+developed with Django, is hosted here: https://github.com/akienzle32/chat-drf.
 
 
 
