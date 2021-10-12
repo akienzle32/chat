@@ -20,7 +20,7 @@ export class Login extends React.Component {
   	                                                     // around this problem by passing down the function to retrieve the cookie
   	                                                     // rather than the cookie itself. 
 
-  	fetch('http://127.0.0.1:8000/chat/login', {
+  	fetch('/login', {
   		method: 'POST',
   		mode: 'cors',
       	headers: {

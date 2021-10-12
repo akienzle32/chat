@@ -52,7 +52,7 @@ export class ChatRoom extends React.Component {
 		const url = window.location.href;
 		const chatId = this.extractFromUrl(url, 'id');
 
-		fetch('http://127.0.0.1:8000/chat/messages/' + chatId, {	
+		fetch('/messages/' + chatId, {	
 			method: 'GET',
 			mode: 'cors',
 			credentials: 'include',
@@ -78,7 +78,7 @@ export class ChatRoom extends React.Component {
 		const url = window.location.href;
 		const chatId = this.extractFromUrl(url, 'id');	
 
-		fetch('http://127.0.0.1:8000/chat/messages/' + chatId, {	
+		fetch('/messages/' + chatId, {	
 			method: 'GET',
 			mode: 'cors',
 			headers: {
@@ -117,7 +117,7 @@ export class ChatRoom extends React.Component {
 		formData.append('chat', chatId);
 		let jsonData = JSON.stringify(Object.fromEntries(formData));
 
-		fetch('http://127.0.0.1:8000/chat/messages/' + chatId, {
+		fetch('/messages/' + chatId, {
 			method: 'POST',
 			mode: 'cors',
 			headers: {
@@ -149,7 +149,7 @@ export class ChatRoom extends React.Component {
 		const url = window.location.href;
 		const chatId = this.extractFromUrl(url, 'id');
 
-		fetch('http://127.0.0.1:8000/chat/chats/' + chatId, {
+		fetch('/chats/' + chatId, {
 			method: 'PUT',
 			mode: 'cors',
 			headers: {

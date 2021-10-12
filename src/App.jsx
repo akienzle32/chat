@@ -82,7 +82,7 @@ export class App extends React.Component {
   logoutUser = () => {
     const csrftoken = this.getCookie('csrftoken');
 
-    fetch('http://127.0.0.1:8000/chat/logout', {
+    fetch('/logout', {
       method: 'POST',
       mode: 'cors',
       headers: {
@@ -102,7 +102,7 @@ export class App extends React.Component {
   // This initial GET request allows for the user to persist after refreshing the window by asking the 
   // server to send back the user's details, if available. 
   checkLoginStatus = () => {
-    fetch('http://127.0.0.1:8000/chat/current-user', {
+    fetch('/current-user', {
       method: 'GET',
       mode: 'cors',
       credentials: 'include'
