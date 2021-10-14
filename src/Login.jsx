@@ -20,7 +20,7 @@ export class Login extends React.Component {
   	                                                     // around this problem by passing down the function to retrieve the cookie
   	                                                     // rather than the cookie itself. 
 
-  	fetch('/login', {
+  	fetch('https://alec-chat-api.herokuapp.com/login', {
   		method: 'POST',
   		mode: 'cors',
       	headers: {

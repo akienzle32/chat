@@ -82,7 +82,7 @@ export class App extends React.Component {
   logoutUser = () => {
     const csrftoken = this.getCookie('csrftoken');
 
-    fetch('/logout', {
+    fetch('https://alec-chat-api.herokuapp.com/logout', {
       method: 'POST',
       mode: 'cors',
       headers: {
@@ -102,7 +102,7 @@ export class App extends React.Component {
   // This initial GET request allows for the user to persist after refreshing the window by asking the 
   // server to send back the user's details, if available. 
   checkLoginStatus = () => {
-    fetch('/current-user', {
+    fetch('https://alec-chat-api.herokuapp.com/current-user', {
       method: 'GET',
       mode: 'cors',
       credentials: 'include'
