@@ -35,10 +35,10 @@ export class Login extends React.Component {
  			this.props.handleErrors(response);
  		}
   	})
-  	.then(token => {
-  		console.log(token);
-  		if (token){
- 			this.props.loginAndSetUser(username, token);
+  	.then(data => {
+  		console.log(data);
+  		if (data){
+ 			this.props.loginAndSetUser(username, data.token);
  		}
   	})
   	.catch(error => console.log(error));
