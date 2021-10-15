@@ -29,6 +29,20 @@ export class App extends React.Component {
     return cookieValue;
   }
 
+  getToken = () => {
+    fetch('https://alec-chat-api.herokuapp.com/token', {
+      method: 'GET',
+      mode: 'cors',
+      credentials: 'include',
+    })
+    .then(this.handleErrors)
+    .then(response => {
+      console.log(response);
+      return response.json();
+    })
+    .catch(error => console.log(error))
+  }
+
   handleErrors(response) {
     if (!response.ok){
       throw Error(response.statusText);
@@ -122,6 +136,7 @@ export class App extends React.Component {
   }
 
   componentDidMount(){
+    this.getToken();
     this.checkLoginStatus();
   }
 
