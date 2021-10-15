@@ -9,6 +9,7 @@ export class Login extends React.Component {
   	this.state = {
   		displayForm: false,
   	}
+  	this.csrftoken = this.props.getCookie('csrftoken');
   }
 
   onSubmit = (event) => {
@@ -24,7 +25,7 @@ export class Login extends React.Component {
   		method: 'POST',
   		mode: 'cors',
       	headers: {
-        'X-CSRFToken': this.props.token,
+        'X-CSRFToken': this.csrftoken,
       	}, 
       	credentials: 'include',
       	body: formData,

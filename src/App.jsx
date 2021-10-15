@@ -88,7 +88,7 @@ export class App extends React.Component {
     let component;
     const { username, loggedIn, token } = this.state;
     if (!loggedIn){
-      component = <Login username={username} getCookie={this.getCookie} token={token}
+      component = <Login username={username} getCookie={this.getCookie} getToken={this.getToken}
       loginAndSetUser={this.loginAndSetUser} handleErrors={this.handleErrors} />
     }
     else {
@@ -142,7 +142,6 @@ export class App extends React.Component {
   }
 
   componentDidMount(){
-    this.getToken();
     this.checkLoginStatus();
   }
 
