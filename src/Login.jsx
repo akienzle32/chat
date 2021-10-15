@@ -8,7 +8,7 @@ export class Login extends React.Component {
   	super(props);
   	this.state = {
   		displayForm: false,
-  		csrftoken: null,
+  		//csrftoken: null,
   	}
   }
 
@@ -36,7 +36,7 @@ export class Login extends React.Component {
   	event.preventDefault();
   	const loginForm = event.target;
   	const formData = new FormData(loginForm);
-  	//const csrftoken = this.props.getCookie('csrftoken'); // Django has trouble setting csrf tokens on dynamically added forms
+  	const csrftoken = this.props.getCookie('csrftoken'); // Django has trouble setting csrf tokens on dynamically added forms
   	                                                     // (see https://docs.djangoproject.com/en/3.2/ref/csrf/), so I've worked 
   	                                                     // around this problem by passing down the function to retrieve the cookie
   	                                                     // rather than the cookie itself. 
@@ -45,7 +45,7 @@ export class Login extends React.Component {
   		method: 'POST',
   		mode: 'cors',
       	headers: {
-        'X-CSRFToken': this.state.csrftoken,
+        'X-CSRFToken': csrftoken,
       	}, 
       	credentials: 'include',
       	body: formData,
