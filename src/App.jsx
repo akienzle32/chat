@@ -9,24 +9,9 @@ export class App extends React.Component {
   	this.state = {
         username: "",
         loggedIn: false,
+        token: null,
   	}
     this.baseState = this.state;
-  }
-
-  getToken = () => {
-    fetch('https://alec-chat-api.herokuapp.com/token', {
-      method: 'GET',
-      mode: 'cors',
-      credentials: 'include',
-    })
-    .then(this.handleErrors)
-    .then(response => {
-      return response.json();
-    })
-    .then(token => {
-      console.log(token);
-    })
-    .catch(error => console.log(error))
   }
 
   // Function provided by Django for adding csrf tokens to AJAX requests; see https://docs.djangoproject.com/en/3.2/ref/csrf/ for details.
@@ -52,10 +37,11 @@ export class App extends React.Component {
     return(response);
   }
 
-  loginAndSetUser = (username) => {
+  loginAndSetUser = (username, token) => {
     this.setState({
       username: username,
       loggedIn: true,
+      token: 'Token ' + token,
     })
   }
 
@@ -84,11 +70,11 @@ export class App extends React.Component {
     let component;
     const { username, loggedIn, token } = this.state;
     if (!loggedIn){
-      component = <Login username={username} getCookie={this.getCookie}
+      component = <Login username={username}  token={token} getCookie={this.getCookie}
       loginAndSetUser={this.loginAndSetUser} handleErrors={this.handleErrors} />
     }
     else {
-      component = <Home username={username} loggedIn={loggedIn}
+      component = <Home username={username} loggedIn={loggedIn} token={token}
       getCookie={this.getCookie} handleErrors={this.handleErrors}  />
     }
 
@@ -96,13 +82,12 @@ export class App extends React.Component {
   }
 
   logoutUser = () => {
-    const csrftoken = this.getCookie('csrftoken');
 
     fetch('https://alec-chat-api.herokuapp.com/logout', {
       method: 'POST',
       mode: 'cors',
       headers: {
-        'X-CSRFToken': csrftoken,
+        'X-CSRFToken': this.state.token,
       },
       credentials: 'include',
     })

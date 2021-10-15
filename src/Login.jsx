@@ -11,39 +11,16 @@ export class Login extends React.Component {
   	}
   }
 
-  getToken = () => {
-    fetch('https://alec-chat-api.herokuapp.com/token', {
-      method: 'GET',
-      mode: 'cors',
-      credentials: 'include',
-    })
-    .then(this.handleErrors)
-    .then(response => {
-      return response.json();
-    })
-    .then(token => {
-      console.log(token);
-    })
-    .catch(error => console.log(error))
-  }
-
 
   onSubmit = (event) => {
   	event.preventDefault();
   	const loginForm = event.target;
   	const formData = new FormData(loginForm);
-  	const csrftoken = this.props.getCookie('csrftoken'); // Django has trouble setting csrf tokens on dynamically added forms
-  	                                                     // (see https://docs.djangoproject.com/en/3.2/ref/csrf/), so I've worked 
-  	                                                     // around this problem by passing down the function to retrieve the cookie
-  	                                                     // rather than the cookie itself. 
+  	const username = formData.get('username');
 
-  	fetch('https://alec-chat-api.herokuapp.com/login', {
+  	fetch('https://alec-chat-api.herokuapp.com/api-token-auth', {
   		method: 'POST',
   		mode: 'cors',
-      	headers: {
-        'X-CSRFToken': csrftoken,
-      	}, 
-      	credentials: 'include',
       	body: formData,
 
   	})
@@ -58,9 +35,10 @@ export class Login extends React.Component {
  			this.props.handleErrors(response);
  		}
   	})
-  	.then(user => {
-  		if (user){
- 			this.props.loginAndSetUser(user.username);
+  	.then(token => {
+  		console.log(token);
+  		if (token){
+ 			this.props.loginAndSetUser(username, token);
  		}
   	})
   	.catch(error => console.log(error));
