@@ -18,7 +18,7 @@ export class Login extends React.Component {
   	const formData = new FormData(loginForm);
   	const username = formData.get('username');
 
-  	fetch('https://alec-chat-api.herokuapp.com/api-token-auth', {
+  	fetch('https://alec-chat-api.herokuapp.com/api-token-auth/', {
   		method: 'POST',
   		mode: 'cors',
       	body: formData,
