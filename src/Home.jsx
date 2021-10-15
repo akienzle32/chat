@@ -10,7 +10,6 @@ export class Home extends React.Component{
   	this.state = {
   		chats: [],
   		participants: [],
-  		csrftoken: this.props.getCookie('csrftoken'),
 
   	}
   }
@@ -67,7 +66,7 @@ export class Home extends React.Component{
       method: 'POST',
       mode: 'cors',
       headers: {
-        'Authorization': this.props.csrftoken,
+        'Authorization': this.props.token,
       },
       credentials: 'include',
       body: jsonData
@@ -103,7 +102,7 @@ export class Home extends React.Component{
       method: 'POST',
       mode: 'cors',
       headers: {
-        'Authorization': this.props.csrftoken,
+        'Authorization': this.props.token,
       }, 
       credentials: 'include',
       body: jsonData    
@@ -147,7 +146,7 @@ export class Home extends React.Component{
   		method: 'DELETE',
   		mode: 'cors',
       	headers: {
-          'Authorization': this.props.csrftoken,
+          'Authorization': this.props.token,
       	},
       	credentials: 'include',		
   	})
