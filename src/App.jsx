@@ -9,6 +9,7 @@ export class App extends React.Component {
   	this.state = {
         username: "",
         loggedIn: false,
+        token: null,
   	}
     this.baseState = this.state;
   }
@@ -39,6 +40,11 @@ export class App extends React.Component {
     .then(response => {
       console.log(response);
       return response.json();
+    })
+    .then(token => {
+      this.setState({
+        token: token,
+      })
     })
     .catch(error => console.log(error))
   }
@@ -80,9 +86,9 @@ export class App extends React.Component {
   // Depending upon authentications status, display either the Login or Home component.
   displayLoginOrHomeComponent = () => {
     let component;
-    const { username, loggedIn } = this.state;
+    const { username, loggedIn, token } = this.state;
     if (!loggedIn){
-      component = <Login username={username} getCookie={this.getCookie}
+      component = <Login username={username} getCookie={this.getCookie} token={token}
       loginAndSetUser={this.loginAndSetUser} handleErrors={this.handleErrors} />
     }
     else {

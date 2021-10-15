@@ -24,7 +24,7 @@ export class Login extends React.Component {
   		method: 'POST',
   		mode: 'cors',
       	headers: {
-        'X-CSRFToken': csrftoken,
+        'X-CSRFToken': this.props.token,
       	}, 
       	credentials: 'include',
       	body: formData,
