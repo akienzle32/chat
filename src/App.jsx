@@ -13,6 +13,22 @@ export class App extends React.Component {
     this.baseState = this.state;
   }
 
+  getToken = () => {
+    fetch('https://alec-chat-api.herokuapp.com/token', {
+      method: 'GET',
+      mode: 'cors',
+      credentials: 'include',
+    })
+    .then(this.handleErrors)
+    .then(response => {
+      return response.json();
+    })
+    .then(token => {
+      console.log(token);
+    })
+    .catch(error => console.log(error))
+  }
+
   // Function provided by Django for adding csrf tokens to AJAX requests; see https://docs.djangoproject.com/en/3.2/ref/csrf/ for details.
   getCookie(name) {
     let cookieValue = null;
@@ -123,6 +139,7 @@ export class App extends React.Component {
 
   componentDidMount(){
     this.checkLoginStatus();
+    this.getToken();
   }
 
   render() {

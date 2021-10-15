@@ -8,7 +8,6 @@ export class Login extends React.Component {
   	super(props);
   	this.state = {
   		displayForm: false,
-  		//csrftoken: null,
   	}
   }
 
