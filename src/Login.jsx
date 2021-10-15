@@ -24,9 +24,6 @@ export class Login extends React.Component {
     })
     .then(token => {
       console.log(token);
-      this.setState({
-      	csrftoken: token,
-      })
     })
     .catch(error => console.log(error))
   }
