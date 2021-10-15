@@ -21,6 +21,7 @@ export class Login extends React.Component {
   	fetch('https://alec-chat-api.herokuapp.com/api-token-auth/', {
   		method: 'POST',
   		mode: 'cors',
+  		credentials: 'include',
       	body: formData,
   	})
   	.then(response => {
