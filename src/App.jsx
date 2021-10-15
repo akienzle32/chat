@@ -87,7 +87,7 @@ export class App extends React.Component {
       method: 'POST',
       mode: 'cors',
       headers: {
-        'X-CSRFToken': this.state.token,
+        'Authorization': this.state.token,
       },
       credentials: 'include',
     })
@@ -124,7 +124,6 @@ export class App extends React.Component {
 
   componentDidMount(){
     this.checkLoginStatus();
-    this.getToken();
   }
 
   render() {

@@ -22,7 +22,6 @@ export class Login extends React.Component {
   		method: 'POST',
   		mode: 'cors',
       	body: formData,
-
   	})
   	.then(response => {
   		if (response.status === 404){
@@ -57,10 +56,6 @@ export class Login extends React.Component {
   	if (displayForm){
   		return <Register toggleDisplayForm={this.toggleDisplayForm} getCookie={this.props.getCookie} />
   	}
-  }
-
-  componentDidMount(){
-  	this.getToken();
   }
 
   render(){
