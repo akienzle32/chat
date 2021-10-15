@@ -52,7 +52,7 @@ export class ChatRoom extends React.Component {
 		const url = window.location.href;
 		const chatId = this.extractFromUrl(url, 'id');
 
-		fetch('/messages/' + chatId, {	
+		fetch('https://alec-chat-api.herokuapp.com/messages/' + chatId, {	
 			method: 'GET',
 			mode: 'cors',
 			credentials: 'include',
@@ -78,7 +78,7 @@ export class ChatRoom extends React.Component {
 		const url = window.location.href;
 		const chatId = this.extractFromUrl(url, 'id');	
 
-		fetch('/messages/' + chatId, {	
+		fetch('https://alec-chat-api.herokuapp.com/messages/' + chatId, {	
 			method: 'GET',
 			mode: 'cors',
 			headers: {
@@ -117,11 +117,11 @@ export class ChatRoom extends React.Component {
 		formData.append('chat', chatId);
 		let jsonData = JSON.stringify(Object.fromEntries(formData));
 
-		fetch('/messages/' + chatId, {
+		fetch('https://alec-chat-api.herokuapp.com/messages/' + chatId, {
 			method: 'POST',
 			mode: 'cors',
 			headers: {
-				'X-CSRFToken': this.props.csrftoken,
+				'Authorization': this.props.token,
 			},
 			credentials: 'include',
 			body: jsonData
@@ -153,7 +153,7 @@ export class ChatRoom extends React.Component {
 			method: 'PUT',
 			mode: 'cors',
 			headers: {
-				'X-CSRFToken': this.props.csrftoken,
+				'Authorization': this.props.token,
 			},
 			credentials: 'include',
 		})

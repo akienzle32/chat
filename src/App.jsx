@@ -14,22 +14,6 @@ export class App extends React.Component {
     this.baseState = this.state;
   }
 
-  // Function provided by Django for adding csrf tokens to AJAX requests; see https://docs.djangoproject.com/en/3.2/ref/csrf/ for details.
-  getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-  }
-
   handleErrors(response) {
     if (!response.ok){
       throw Error(response.statusText);
@@ -70,12 +54,11 @@ export class App extends React.Component {
     let component;
     const { username, loggedIn, token } = this.state;
     if (!loggedIn){
-      component = <Login username={username}  token={token} getCookie={this.getCookie}
-      loginAndSetUser={this.loginAndSetUser} handleErrors={this.handleErrors} />
+      component = <Login username={username}  token={token} loginAndSetUser={this.loginAndSetUser} 
+      handleErrors={this.handleErrors} />
     }
     else {
-      component = <Home username={username} loggedIn={loggedIn} token={token}
-      getCookie={this.getCookie} handleErrors={this.handleErrors}  />
+      component = <Home username={username} loggedIn={loggedIn} token={token} handleErrors={this.handleErrors}  />
     }
 
     return(component);

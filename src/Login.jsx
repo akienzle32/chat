@@ -36,8 +36,8 @@ export class Login extends React.Component {
  		}
   	})
   	.then(data => {
-  		console.log(data);
   		if (data){
+  			console.log(data);
  			this.props.loginAndSetUser(username, data.token);
  		}
   	})
@@ -55,7 +55,7 @@ export class Login extends React.Component {
   displayRegistrationForm = () => {
   	const displayForm = this.state.displayForm;
   	if (displayForm){
-  		return <Register toggleDisplayForm={this.toggleDisplayForm} getCookie={this.props.getCookie} />
+  		return <Register toggleDisplayForm={this.toggleDisplayForm} token={this.props.token} />
   	}
   }
 

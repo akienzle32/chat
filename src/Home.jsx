@@ -63,11 +63,11 @@ export class Home extends React.Component{
     data.append("chat", chatId);
     const jsonData = JSON.stringify(Object.fromEntries(data));
 
-    fetch('/participants', {
+    fetch('https://alec-chat-api.herokuapp.com/participants', {
       method: 'POST',
       mode: 'cors',
       headers: {
-        'X-CSRFToken': this.state.csrftoken,
+        'Authorization': this.props.csrftoken,
       },
       credentials: 'include',
       body: jsonData
@@ -99,11 +99,11 @@ export class Home extends React.Component{
 
     let chatId;
 
-    fetch('/chats', {
+    fetch('https://alec-chat-api.herokuapp.com/chats', {
       method: 'POST',
       mode: 'cors',
       headers: {
-        'X-CSRFToken': this.state.csrftoken,
+        'Authorization': this.props.csrftoken,
       }, 
       credentials: 'include',
       body: jsonData    
@@ -143,11 +143,11 @@ export class Home extends React.Component{
 
   // Removes the user from the participant list of the selected chat.
   removeFromChat = (chatId) => {
-  	fetch('/participants/' + chatId, {
+  	fetch('https://alec-chat-api.herokuapp.com/participants/' + chatId, {
   		method: 'DELETE',
   		mode: 'cors',
       	headers: {
-          'X-CSRFToken': this.state.csrftoken,
+          'Authorization': this.props.csrftoken,
       	},
       	credentials: 'include',		
   	})
@@ -172,21 +172,21 @@ export class Home extends React.Component{
   }
 
   render(){
-  	const { username, loggedIn, handleErrors } = this.props;
-  	const { chats, participants, csrftoken } = this.state; // Because no other forms are dynamically added from here, we can pass down the csrf
-  	                                                       // token itself, rather than the getCookie() function. 
+  	const { username, loggedIn, token, handleErrors } = this.props;
+  	const { chats, participants } = this.state; 
 
   	return (
   	 <div>
   	    <Switch>
      	  <Route path="/:name/:id">
   		  	<ChatRoom username={username} participants={participants} 
-  		  		handleErrors={handleErrors} loggedIn={loggedIn} csrftoken={csrftoken} 
+  		  		handleErrors={handleErrors} loggedIn={loggedIn} token={token} 
   		  		addParticipant={this.addParticipant} updateChatState={this.updateChatState}   />;
   		  </Route>
   		  <Route path="/">
- 			<StartChat username={username} chats={chats} participants={participants} 
+ 			<StartChat username={username} chats={chats} participants={participants} token={token}
  				onSubmit={this.addChat} removeFromChat={this.removeFromChat} />
+ 			}
   		  </Route>
   		</Switch>
   	 </div>
