@@ -9,7 +9,6 @@ export class App extends React.Component {
   	this.state = {
         username: "",
         loggedIn: false,
-        token: null,
   	}
     this.baseState = this.state;
   }
@@ -28,25 +27,6 @@ export class App extends React.Component {
         }
     }
     return cookieValue;
-  }
-
-  getToken = () => {
-    fetch('https://alec-chat-api.herokuapp.com/token', {
-      method: 'GET',
-      mode: 'cors',
-      credentials: 'include',
-    })
-    .then(this.handleErrors)
-    .then(response => {
-      console.log(response);
-      return response.json();
-    })
-    .then(token => {
-      this.setState({
-        token: token,
-      })
-    })
-    .catch(error => console.log(error))
   }
 
   handleErrors(response) {
@@ -88,7 +68,7 @@ export class App extends React.Component {
     let component;
     const { username, loggedIn, token } = this.state;
     if (!loggedIn){
-      component = <Login username={username} getCookie={this.getCookie} getToken={this.getToken}
+      component = <Login username={username} getCookie={this.getCookie}
       loginAndSetUser={this.loginAndSetUser} handleErrors={this.handleErrors} />
     }
     else {
