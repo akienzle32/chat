@@ -18,6 +18,9 @@ export class Home extends React.Component{
     fetch('https://alec-chat-api.herokuapp.com/chats', {
       method: 'GET',
       mode: 'cors',
+      headers: {
+        'Authorization': this.props.token,
+      },      
       credentials: 'include',
     })
     .then(this.props.handleErrors)
