@@ -55,6 +55,9 @@ export class ChatRoom extends React.Component {
 		fetch('https://alec-chat-api.herokuapp.com/messages/' + chatId, {	
 			method: 'GET',
 			mode: 'cors',
+			headers: {
+				'Authorization': this.props.token
+			},
 			credentials: 'include',
 		})
 		.then(this.props.handleErrors)
@@ -82,6 +85,7 @@ export class ChatRoom extends React.Component {
 			method: 'GET',
 			mode: 'cors',
 			headers: {
+				'Authorization': this.props.token,
 				'If-Modified-Since': new Date(Date.now() - 10000),
 			},
 			credentials: 'include',
