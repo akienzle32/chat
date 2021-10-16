@@ -15,7 +15,7 @@ export class Home extends React.Component{
   }
 
   getChats = () => {
-    fetch('/chats', {
+    fetch('https://alec-chat-api.herokuapp.com/chats', {
       method: 'GET',
       mode: 'cors',
       credentials: 'include',
@@ -35,7 +35,7 @@ export class Home extends React.Component{
   }
 
   getParticipants = () => {
-    fetch('/participants', {
+    fetch('https://alec-chat-api.herokuapp.com/participants', {
       method: 'GET',
       mode: 'cors',
       credentials: 'include',

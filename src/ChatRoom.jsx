@@ -149,7 +149,7 @@ export class ChatRoom extends React.Component {
 		const url = window.location.href;
 		const chatId = this.extractFromUrl(url, 'id');
 
-		fetch('/chats/' + chatId, {
+		fetch('https://alec-chat-api.herokuapp.com/chats/' + chatId, {
 			method: 'PUT',
 			mode: 'cors',
 			headers: {
