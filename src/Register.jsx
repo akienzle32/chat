@@ -11,9 +11,6 @@ export const Register = (props) => {
   	fetch('/register', {
   		method: 'POST',
   		mode: 'cors',
-  		headers: {
-  			'Authorization': this.props.token, 
-  		},
   		credentials: 'include',
   		body: formData,
   	})

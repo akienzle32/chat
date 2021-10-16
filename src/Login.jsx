@@ -55,7 +55,7 @@ export class Login extends React.Component {
   displayRegistrationForm = () => {
   	const displayForm = this.state.displayForm;
   	if (displayForm){
-  		return <Register toggleDisplayForm={this.toggleDisplayForm} token={this.props.token} />
+  		return <Register toggleDisplayForm={this.toggleDisplayForm} handleErros={this.props.handleErrors} />
   	}
   }
 
