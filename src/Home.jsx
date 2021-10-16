@@ -43,7 +43,7 @@ export class Home extends React.Component{
       mode: 'cors',
       headers: {
       	'Authorization': this.props.token,
-      }
+      },
       credentials: 'include',
     })
     .then(this.props.handleErrors)
