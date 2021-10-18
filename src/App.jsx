@@ -65,21 +65,7 @@ export class App extends React.Component {
   }
 
   logoutUser = () => {
-    fetch('https://alec-chat-api.herokuapp.com/logout', {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'Authorization': this.state.token,
-      },
-      credentials: 'include',
-    })
-    .then(this.handleErrors)
-    .then(response => {
-      if (response.status === 200){
-        this.userLoggedOut();
-      }
-    })
-    .catch(error => console.log(error))
+    window.localStorage.clear();
   }
 
   // This initial GET request allows for the user to persist after refreshing the window by asking the 
