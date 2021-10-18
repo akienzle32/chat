@@ -37,9 +37,9 @@ export class Login extends React.Component {
   	})
   	.then(data => {
   		if (data){
+  			this.props.loginAndSetUser(username, data.token);
  			window.localStorage.setItem('username', username);
  			window.localStorage.setItem('token', data.token);
- 			this.props.loginUser();
  		}
   	})
   	.catch(error => console.log(error));

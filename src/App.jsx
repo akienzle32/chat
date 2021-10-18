@@ -21,20 +21,6 @@ export class App extends React.Component {
     return(response);
   }
 
-  loginUser = () => {
-    this.setState({
-      loggedIn: true,
-    })
-  }
-
-  setUserDetails = (username, token) => {
-    this.setState({
-      username: username,
-      token: 'Token ' + token,
-    })
-  }
-
-/*
   loginAndSetUser = (username, token) => {
     this.setState({
       username: username,
@@ -42,7 +28,6 @@ export class App extends React.Component {
       token: 'Token ' + token,
     })
   }
-*/
 
   userLoggedOut = () => {
     this.setState(this.baseState);
@@ -69,12 +54,11 @@ export class App extends React.Component {
     let component;
     const { username, loggedIn, token } = this.state;
     if (!loggedIn){
-      component = <Login username={username}  token={token} loginUser={this.loginUser} 
+      component = <Login username={username}  token={token} loginAndSetUser={this.loginAndSetUser} 
       handleErrors={this.handleErrors} />
     }
     else {
-      component = <Home username={username} loggedIn={loggedIn} token={token} 
-      setUserDetails={this.setUserDetails} handleErrors={this.handleErrors}  />
+      component = <Home username={username} loggedIn={loggedIn} token={token} handleErrors={this.handleErrors}  />
     }
 
     return(component);
@@ -102,23 +86,7 @@ export class App extends React.Component {
   // This initial GET request allows for the user to persist after refreshing the window by asking the 
   // server to send back the user's details, if available. 
   checkLoginStatus = () => {
-    fetch('https://alec-chat-api.herokuapp.com/current-user', {
-      method: 'GET',
-      mode: 'cors',
-      credentials: 'include'
-    })
-    .then(this.handleErrors)
-    .then(response => {
-      if (response.status === 200)
-        return response.json();
-    })
-    .then(user => {
-      this.setState({
-        username: user.username,
-        loggedIn: true,
-      })
-    })
-    .catch(error => console.log(error))
+    
   }
 
   componentDidMount(){

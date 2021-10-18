@@ -14,12 +14,6 @@ export class Home extends React.Component{
   	}
   }
 
-  setUserFromLocalStorage = () => {
-  	const username = window.localStorage.getItem('username');
-  	const token = window.localStorage.getItem('token');
-  	this.props.setUserDetails(username, token);
-  }
-
   getChats = () => {
     fetch(`${process.env.REACT_APP_API}/chats`, {
       method: 'GET',
