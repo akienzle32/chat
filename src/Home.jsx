@@ -14,6 +14,12 @@ export class Home extends React.Component{
   	}
   }
 
+  getUserFromLocalStorage = () => {
+  	const username = localStorage.getItem('username');
+  	const token = localStorage.getItem('token');
+  	this.props.setUser(username, token);
+  }
+
   getChats = () => {
     fetch(`${process.env.REACT_APP_API}/chats`, {
       method: 'GET',
@@ -172,6 +178,7 @@ export class Home extends React.Component{
 
 
   componentDidMount(){
+  	this.getUserFromLocalStorage();
     this.getChats();
     this.getParticipants();
   }
