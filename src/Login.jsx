@@ -18,7 +18,7 @@ export class Login extends React.Component {
   	const formData = new FormData(loginForm);
   	const username = formData.get('username');
 
-  	fetch('https://alec-chat-api.herokuapp.com/api-token-auth/', {
+  	fetch(`${API_ROOT}/api-token-auth/`, {
   		method: 'POST',
   		mode: 'cors',
   		credentials: 'include',
@@ -37,7 +37,6 @@ export class Login extends React.Component {
   	})
   	.then(data => {
   		if (data){
-  			console.log(data);
  			this.props.loginAndSetUser(username, data.token);
  		}
   	})
@@ -55,7 +54,7 @@ export class Login extends React.Component {
   displayRegistrationForm = () => {
   	const displayForm = this.state.displayForm;
   	if (displayForm){
-  		return <Register toggleDisplayForm={this.toggleDisplayForm} handleErros={this.props.handleErrors} />
+  		return <Register toggleDisplayForm={this.toggleDisplayForm} handleErrors={this.props.handleErrors} />
   	}
   }
 
