@@ -18,7 +18,7 @@ export class Login extends React.Component {
   	const formData = new FormData(loginForm);
   	const username = formData.get('username');
 
-  	fetch(`${API_ROOT}/api-token-auth/`, {
+  	fetch(`${process.env.REACT_APP_API}/api-token-auth/`, {
   		method: 'POST',
   		mode: 'cors',
   		credentials: 'include',
