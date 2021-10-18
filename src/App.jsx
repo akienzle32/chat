@@ -49,7 +49,7 @@ export class App extends React.Component {
     return(navBar);
   }
 
-  // Depending upon authentications status, display either the Login or Home component.
+  // Depending upon the user's authentication status, display either the Login or Home component.
   displayLoginOrHomeComponent = () => {
     let component;
     const { username, loggedIn, token } = this.state;
@@ -71,8 +71,8 @@ export class App extends React.Component {
     })
   }
 
-  // This initial GET request allows for the user to persist after refreshing the window by asking the 
-  // server to send back the user's details, if available. 
+  // This initial GET request allows for the user to persist after refreshing the window by checking 
+  // to see if the user's details are currently stored. 
   checkLoginStatus = () => {
     const username = window.localStorage.getItem('username');
     const token = window.localStorage.getItem('token');

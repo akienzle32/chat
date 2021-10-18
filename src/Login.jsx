@@ -25,7 +25,7 @@ export class Login extends React.Component {
       	body: formData,
   	})
   	.then(response => {
-  		if (response.status === 404){
+  		if (response.status === 400){
   			alert('Your login credentials were not found.');
   		}
  		if (response.status === 200){
