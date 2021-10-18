@@ -9,24 +9,9 @@ export class App extends React.Component {
   	this.state = {
         username: "",
         loggedIn: false,
+        token: null,
   	}
     this.baseState = this.state;
-  }
-
-  // Function provided by Django for adding csrf tokens to AJAX requests; see https://docs.djangoproject.com/en/3.2/ref/csrf/ for details.
-  getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
   }
 
   handleErrors(response) {
@@ -36,10 +21,11 @@ export class App extends React.Component {
     return(response);
   }
 
-  loginAndSetUser = (username) => {
+  loginAndSetUser = (username, token) => {
     this.setState({
       username: username,
       loggedIn: true,
+      token: 'Token ' + token,
     })
   }
 
@@ -66,59 +52,34 @@ export class App extends React.Component {
   // Depending upon authentications status, display either the Login or Home component.
   displayLoginOrHomeComponent = () => {
     let component;
-    const { username, loggedIn } = this.state;
+    const { username, loggedIn, token } = this.state;
     if (!loggedIn){
-      component = <Login username={username} getCookie={this.getCookie}
-      loginAndSetUser={this.loginAndSetUser} handleErrors={this.handleErrors} />
+      component = <Login username={username}  token={token} loginAndSetUser={this.loginAndSetUser} 
+      handleErrors={this.handleErrors} />
     }
     else {
-      component = <Home username={username} loggedIn={loggedIn}
-      getCookie={this.getCookie} handleErrors={this.handleErrors}  />
+      component = <Home username={username} loggedIn={loggedIn} token={token} handleErrors={this.handleErrors}  />
     }
 
     return(component);
   }
 
   logoutUser = () => {
-    const csrftoken = this.getCookie('csrftoken');
-
-    fetch('/logout', {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'X-CSRFToken': csrftoken,
-      },
-      credentials: 'include',
+    window.localStorage.clear();
+    this.setState({
+      loggedIn: false,
     })
-    .then(this.handleErrors)
-    .then(response => {
-      if (response.status === 200){
-        this.userLoggedOut();
-      }
-    })
-    .catch(error => console.log(error))
   }
 
   // This initial GET request allows for the user to persist after refreshing the window by asking the 
   // server to send back the user's details, if available. 
   checkLoginStatus = () => {
-    fetch('/current-user', {
-      method: 'GET',
-      mode: 'cors',
-      credentials: 'include'
-    })
-    .then(this.handleErrors)
-    .then(response => {
-      if (response.status === 200)
-        return response.json();
-    })
-    .then(user => {
-      this.setState({
-        username: user.username,
-        loggedIn: true,
-      })
-    })
-    .catch(error => console.log(error))
+    const username = window.localStorage.getItem('username');
+    const token = window.localStorage.getItem('token');
+
+    if (username && token){
+      this.loginAndSetUser(username, token);
+    }
   }
 
   componentDidMount(){

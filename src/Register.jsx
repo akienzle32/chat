@@ -7,14 +7,10 @@ export const Register = (props) => {
   	event.preventDefault();
   	const newUserForm = event.target;
   	const formData = new FormData(newUserForm);
-  	const csrftoken = props.getCookie('csrftoken');
 
-  	fetch('/register', {
+  	fetch(`${process.env.REACT_APP_API}/register`, {
   		method: 'POST',
   		mode: 'cors',
-  		headers: {
-  			'X-CSRFToken': csrftoken, 
-  		},
   		credentials: 'include',
   		body: formData,
   	})

@@ -11,24 +11,18 @@ export class Login extends React.Component {
   	}
   }
 
+
   onSubmit = (event) => {
   	event.preventDefault();
   	const loginForm = event.target;
   	const formData = new FormData(loginForm);
-  	const csrftoken = this.props.getCookie('csrftoken'); // Django has trouble setting csrf tokens on dynamically added forms
-  	                                                     // (see https://docs.djangoproject.com/en/3.2/ref/csrf/), so I've worked 
-  	                                                     // around this problem by passing down the function to retrieve the cookie
-  	                                                     // rather than the cookie itself. 
+  	const username = formData.get('username');
 
-  	fetch('/login', {
+  	fetch(`${process.env.REACT_APP_API}/api-token-auth/`, {
   		method: 'POST',
   		mode: 'cors',
-      	headers: {
-        'X-CSRFToken': csrftoken,
-      	}, 
-      	credentials: 'include',
+  		credentials: 'include',
       	body: formData,
-
   	})
   	.then(response => {
   		if (response.status === 404){
@@ -41,9 +35,11 @@ export class Login extends React.Component {
  			this.props.handleErrors(response);
  		}
   	})
-  	.then(user => {
-  		if (user){
- 			this.props.loginAndSetUser(user.username);
+  	.then(data => {
+  		if (data){
+  			this.props.loginAndSetUser(username, data.token);
+ 			window.localStorage.setItem('username', username);
+ 			window.localStorage.setItem('token', data.token);
  		}
   	})
   	.catch(error => console.log(error));
@@ -60,7 +56,7 @@ export class Login extends React.Component {
   displayRegistrationForm = () => {
   	const displayForm = this.state.displayForm;
   	if (displayForm){
-  		return <Register toggleDisplayForm={this.toggleDisplayForm} getCookie={this.props.getCookie} />
+  		return <Register toggleDisplayForm={this.toggleDisplayForm} handleErrors={this.props.handleErrors} />
   	}
   }
 

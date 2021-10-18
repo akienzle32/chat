@@ -52,9 +52,12 @@ export class ChatRoom extends React.Component {
 		const url = window.location.href;
 		const chatId = this.extractFromUrl(url, 'id');
 
-		fetch('/messages/' + chatId, {	
+		fetch(`${process.env.REACT_APP_API}/messages/${chatId}`, {	
 			method: 'GET',
 			mode: 'cors',
+			headers: {
+				'Authorization': this.props.token
+			},
 			credentials: 'include',
 		})
 		.then(this.props.handleErrors)
@@ -78,10 +81,11 @@ export class ChatRoom extends React.Component {
 		const url = window.location.href;
 		const chatId = this.extractFromUrl(url, 'id');	
 
-		fetch('/messages/' + chatId, {	
+		fetch(`${process.env.REACT_APP_API}/messages/${chatId}`, {	
 			method: 'GET',
 			mode: 'cors',
 			headers: {
+				'Authorization': this.props.token,
 				'If-Modified-Since': new Date(Date.now() - 10000),
 			},
 			credentials: 'include',
@@ -117,11 +121,11 @@ export class ChatRoom extends React.Component {
 		formData.append('chat', chatId);
 		let jsonData = JSON.stringify(Object.fromEntries(formData));
 
-		fetch('/messages/' + chatId, {
+		fetch(`${process.env.REACT_APP_API}/messages/${chatId}`, {
 			method: 'POST',
 			mode: 'cors',
 			headers: {
-				'X-CSRFToken': this.props.csrftoken,
+				'Authorization': this.props.token,
 			},
 			credentials: 'include',
 			body: jsonData
@@ -149,11 +153,11 @@ export class ChatRoom extends React.Component {
 		const url = window.location.href;
 		const chatId = this.extractFromUrl(url, 'id');
 
-		fetch('/chats/' + chatId, {
+		fetch(`${process.env.REACT_APP_API}/chats/${chatId}`, {
 			method: 'PUT',
 			mode: 'cors',
 			headers: {
-				'X-CSRFToken': this.props.csrftoken,
+				'Authorization': this.props.token,
 			},
 			credentials: 'include',
 		})
