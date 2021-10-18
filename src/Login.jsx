@@ -38,8 +38,8 @@ export class Login extends React.Component {
   	.then(data => {
   		if (data){
  			this.props.loginAndSetUser(username, data.token);
- 			localStorage.setItem('username', username);
- 			localStorage.setItem('token', data.token);
+ 			window.localStorage.setItem('username', username);
+ 			window.localStorage.setItem('token', data.token);
  		}
   	})
   	.catch(error => console.log(error));

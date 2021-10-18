@@ -15,8 +15,8 @@ export class Home extends React.Component{
   }
 
   getFromLocalStorage = () => {
-  	const username = localStorage.getItem('username');
-  	const token = localStorage.getItem('token');
+  	const username = window.localStorage.getItem('username');
+  	const token = window.localStorage.getItem('token');
   	console.log(username);
   	console.log(token);
   }
