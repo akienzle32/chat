@@ -8,7 +8,7 @@ export const Register = (props) => {
   	const newUserForm = event.target;
   	const formData = new FormData(newUserForm);
 
-  	fetch('https://alec-chat-api.herokuapp.com/register', {
+  	fetch(`${process.env.REACT_APP_API}/register`, {
   		method: 'POST',
   		mode: 'cors',
   		credentials: 'include',

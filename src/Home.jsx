@@ -15,7 +15,7 @@ export class Home extends React.Component{
   }
 
   getChats = () => {
-    fetch('https://alec-chat-api.herokuapp.com/chats', {
+    fetch(`${process.env.REACT_APP_API}/chats`, {
       method: 'GET',
       mode: 'cors',
       headers: {
@@ -38,7 +38,7 @@ export class Home extends React.Component{
   }
 
   getParticipants = () => {
-    fetch('https://alec-chat-api.herokuapp.com/participants', {
+    fetch(`${process.env.REACT_APP_API}/participants`, {
       method: 'GET',
       mode: 'cors',
       headers: {
@@ -68,7 +68,7 @@ export class Home extends React.Component{
     data.append("chat", chatId);
     const jsonData = JSON.stringify(Object.fromEntries(data));
 
-    fetch('https://alec-chat-api.herokuapp.com/participants', {
+    fetch(`${process.env.REACT_APP_API}/participants`, {
       method: 'POST',
       mode: 'cors',
       headers: {
@@ -104,7 +104,7 @@ export class Home extends React.Component{
 
     let chatId;
 
-    fetch('https://alec-chat-api.herokuapp.com/chats', {
+    fetch(`${process.env.REACT_APP_API}/chats`, {
       method: 'POST',
       mode: 'cors',
       headers: {
@@ -148,7 +148,7 @@ export class Home extends React.Component{
 
   // Removes the user from the participant list of the selected chat.
   removeFromChat = (chatId) => {
-  	fetch('https://alec-chat-api.herokuapp.com/participants/' + chatId, {
+  	fetch(`${process.env.REACT_APP_API}/participants/${chatId}`, {
   		method: 'DELETE',
   		mode: 'cors',
       	headers: {
