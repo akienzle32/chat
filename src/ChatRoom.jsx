@@ -52,7 +52,7 @@ export class ChatRoom extends React.Component {
 		const url = window.location.href;
 		const chatId = this.extractFromUrl(url, 'id');
 
-		fetch('https://alec-chat-api.herokuapp.com/messages/' + chatId, {	
+		fetch(`${process.env.REACT_APP_API}/messages/${chatId}`, {	
 			method: 'GET',
 			mode: 'cors',
 			headers: {
@@ -81,7 +81,7 @@ export class ChatRoom extends React.Component {
 		const url = window.location.href;
 		const chatId = this.extractFromUrl(url, 'id');	
 
-		fetch('https://alec-chat-api.herokuapp.com/messages/' + chatId, {	
+		fetch(`${process.env.REACT_APP_API}/messages/${chatId}`, {	
 			method: 'GET',
 			mode: 'cors',
 			headers: {
@@ -121,7 +121,7 @@ export class ChatRoom extends React.Component {
 		formData.append('chat', chatId);
 		let jsonData = JSON.stringify(Object.fromEntries(formData));
 
-		fetch('https://alec-chat-api.herokuapp.com/messages/' + chatId, {
+		fetch(`${process.env.REACT_APP_API}/messages/${chatId}`, {
 			method: 'POST',
 			mode: 'cors',
 			headers: {
@@ -153,7 +153,7 @@ export class ChatRoom extends React.Component {
 		const url = window.location.href;
 		const chatId = this.extractFromUrl(url, 'id');
 
-		fetch('https://alec-chat-api.herokuapp.com/chats/' + chatId, {
+		fetch(`${process.env.REACT_APP_API}/chats/${chatId}`, {
 			method: 'PUT',
 			mode: 'cors',
 			headers: {
