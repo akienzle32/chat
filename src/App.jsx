@@ -21,6 +21,20 @@ export class App extends React.Component {
     return(response);
   }
 
+  loginUser = () => {
+    this.setState({
+      loggedIn: true,
+    })
+  }
+
+  setUserDetails = (username, token) => {
+    this.setState({
+      username: username,
+      token: 'Token ' + token,
+    })
+  }
+
+/*
   loginAndSetUser = (username, token) => {
     this.setState({
       username: username,
@@ -28,6 +42,7 @@ export class App extends React.Component {
       token: 'Token ' + token,
     })
   }
+*/
 
   userLoggedOut = () => {
     this.setState(this.baseState);
@@ -54,11 +69,12 @@ export class App extends React.Component {
     let component;
     const { username, loggedIn, token } = this.state;
     if (!loggedIn){
-      component = <Login username={username}  token={token} loginAndSetUser={this.loginAndSetUser} 
+      component = <Login username={username}  token={token} loginUser={this.loginUser} 
       handleErrors={this.handleErrors} />
     }
     else {
-      component = <Home username={username} loggedIn={loggedIn} token={token} handleErrors={this.handleErrors}  />
+      component = <Home username={username} loggedIn={loggedIn} token={token} 
+      setUserDetails={this.setUserDetails} handleErrors={this.handleErrors}  />
     }
 
     return(component);

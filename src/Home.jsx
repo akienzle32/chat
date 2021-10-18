@@ -14,11 +14,10 @@ export class Home extends React.Component{
   	}
   }
 
-  getFromLocalStorage = () => {
+  setUserFromLocalStorage = () => {
   	const username = window.localStorage.getItem('username');
   	const token = window.localStorage.getItem('token');
-  	console.log(username);
-  	console.log(token);
+  	this.props.setUserDetails(username, token);
   }
 
   getChats = () => {
@@ -179,7 +178,7 @@ export class Home extends React.Component{
 
 
   componentDidMount(){
-  	this.getFromLocalStorage();
+  	this.setUserFromLocalStorage();
     this.getChats();
     this.getParticipants();
   }
