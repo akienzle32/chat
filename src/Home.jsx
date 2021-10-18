@@ -172,7 +172,6 @@ export class Home extends React.Component{
 
 
   componentDidMount(){
-  	this.setUserFromLocalStorage();
     this.getChats();
     this.getParticipants();
   }
