@@ -92,11 +92,11 @@ export class App extends React.Component {
 
 	  return(
 	   <Router>
-	  	<div>
+      <div>
         {navBar}
       </div>
       {component}
-	  </Router>
+    </Router>
 	 );
   }
 }

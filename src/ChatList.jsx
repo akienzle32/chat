@@ -14,8 +14,8 @@ export const ChatList = (props) => {
   	for (let i = 0; i < chats.length; i++){
   		const usernameArray = [];
   		for (let j = 0; j < participants.length; j++){
-          if (chats[i].id === participants[j].chat && participants[j].name !== currentUser)
-  				  usernameArray.push(participants[j].name);
+        if (chats[i].id === participants[j].chat && participants[j].name !== currentUser)
+          usernameArray.push(participants[j].name);
   		}
   		let chatId = chats[i].id;
   		let chatName = chats[i].name;
@@ -29,7 +29,8 @@ export const ChatList = (props) => {
   }
 
 
-  // Sorts the mapped chats array by the last_modified column.
+  // Sorts the mapped chats array by the last_modified column. If the last_modified column is null
+  // (because the chat room was just created), then the chat will sorted to the top.
   const sortChats = (chatsAndPtcps) => {
   	const sortedChats = chatsAndPtcps.sort((chatA, chatB) =>
       { if (chatA.last_modified === chatB.last_modified)

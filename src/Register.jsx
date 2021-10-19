@@ -36,8 +36,8 @@ export const Register = (props) => {
   	.catch(error => console.log(error))
   }
 	return(
-		<div>
-		  <form id="registration-form" onSubmit={onSubmit}>
+	  <div>
+	  	<form id="registration-form" onSubmit={onSubmit}>
 			<label htmlFor="user" className="register-label">Enter a username: </label>
 			<input type="text" id="user" name="username"></input>
 			<br></br>
@@ -50,9 +50,8 @@ export const Register = (props) => {
   	        <label htmlFor="password2" className="register-label">Re-enter password: </label>      
   	        <input type="password" id="password2" name="password2"></input>      
   	        <br></br>      
-  	        <input id="submit-registration" type="submit"></input>  
-  	      </form>
-			
-		</div>
+  	        <input id="submit-registration" type="submit"></input>
+  	    </form>
+  	  </div>
 	);
 }
