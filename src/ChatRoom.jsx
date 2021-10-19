@@ -147,7 +147,7 @@ export class ChatRoom extends React.Component {
 
 	// This method is essentially a request for the server to update the last_modified column of the current
 	// chat, and is called every time a message is sent. Because timestamps for messages are added on the
-	// server side, the logic for updating this column is entirely located on the server (which explains why 
+	// server side, the logic for updating this column is entirely located on the backend (which explains why 
 	// the PUT request actually features an empty body).
 	patchChat = () => {
 		const url = window.location.href;

@@ -181,10 +181,10 @@ export class Home extends React.Component{
   	const { chats, participants } = this.state; 
 
   	return (
-  	 <div>
-  	    <Switch>
-     	  <Route path="/:name/:id">
-  		  	<ChatRoom username={username} participants={participants} 
+  	  <div>
+  	  	<Switch>
+  	  	  <Route path="/:name/:id">
+  	  	  	<ChatRoom username={username} participants={participants} 
   		  		handleErrors={handleErrors} loggedIn={loggedIn} token={token} 
   		  		addParticipant={this.addParticipant} updateChatState={this.updateChatState}   />;
   		  </Route>

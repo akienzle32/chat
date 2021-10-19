@@ -90,13 +90,13 @@ export class App extends React.Component {
     const navBar = this.displayNavBar();
     const component = this.displayLoginOrHomeComponent();
 
-	  return(
-	   <Router>
-	  	<div>
-        {navBar}
-      </div>
-      {component}
-	  </Router>
-	 );
+    return(
+      <Router>
+        <div>
+          {navBar}
+        </div>
+        {component}
+      </Router>
+    );
   }
 }
