@@ -84,24 +84,24 @@ export class StartChat extends React.Component {
     const { username, chats, participants } = this.props;
   	return(
   	  <div>
-		  <h1 className="title">Chat App</h1>
-			<div className="top-rounded-box" id="start-chat">
-    	  	  <h3 className="title">Start a new chat</h3>
-      			<div id="chat-form-container">
-        	  	<form id="chat-form" onSubmit={this.onSubmit}>
-                <div>
-    			  	    <input type="text" id="chat-name" name="chatname" placeholder="Enter a chatroom name..."></input>
-                    {ptcpInputFields}
-                    {subPtcpButton}
-                  <input type="button" className="ptcp-button" id="add-ptcp-button" value="+" 
-                      onClick={this.addInputBoxes} ref={this.bottomOfStartChat}></input>
-           		    <input type="submit" className="submit-button"></input>
-                </div>
-           		</form>
-      			</div>
-  			</div>
-  			<ChatList username={username} chats={chats} participants={participants} removeFromChat={this.props.removeFromChat} />
-  	  </div>
-  	);
+        <h1 className="title">Chat App</h1>
+        <div className="top-rounded-box" id="start-chat">
+          <h3 className="title">Start a new chat</h3>
+          <div id="chat-form-container">
+            <form id="chat-form" onSubmit={this.onSubmit}>
+              <div>
+                <input type="text" id="chat-name" name="chatname" placeholder="Enter a chatroom name..."></input>
+                {ptcpInputFields}
+                {subPtcpButton}
+                <input type="button" className="ptcp-button" id="add-ptcp-button" value="+" 
+                  onClick={this.addInputBoxes} ref={this.bottomOfStartChat}></input>
+                <input type="submit" className="submit-button"></input>
+              </div>
+            </form>
+          </div>
+        </div>
+        <ChatList username={username} chats={chats} participants={participants} removeFromChat={this.props.removeFromChat} />
+        </div>
+    );
   }
 }

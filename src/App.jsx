@@ -90,7 +90,7 @@ export class App extends React.Component {
     const navBar = this.displayNavBar();
     const component = this.displayLoginOrHomeComponent();
 
-	  return(
+    return(
       <Router>
         <div>
           {navBar}
