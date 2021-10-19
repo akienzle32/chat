@@ -91,12 +91,12 @@ export class App extends React.Component {
     const component = this.displayLoginOrHomeComponent();
 
 	  return(
-	   <Router>
-      <div>
-        {navBar}
-      </div>
-      {component}
-    </Router>
-	 );
+      <Router>
+        <div>
+          {navBar}
+        </div>
+        {component}
+      </Router>
+    );
   }
 }

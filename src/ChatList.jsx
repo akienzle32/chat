@@ -74,26 +74,23 @@ export const ChatList = (props) => {
     return(chatList);
   }
 
-
-
 	return(
-		<div>
-  		  <div className="bottom-rounded-box" id="my-chats">
-  		  	<h3 className="title">My chat rooms</h3>
-      		  <div>
-      		    <table className="chat-table">
-      		      <tbody>
-      		  	  	<tr>
-      		  	  	  <th>Name</th>
-      		  	  	  <th>Participants</th>
-                    <th></th>
-      		  	  	</tr>
-      		  		  {displayChats()}
-      		  	  </tbody>
-      		  	</table>
-            </div>
-          </div>
+    <div>
+      <div className="bottom-rounded-box" id="my-chats">
+        <h3 className="title">My chat rooms</h3>
+        <div>
+          <table className="chat-table">
+            <tbody>
+              <tr>
+                <th>Name</th>
+                <th>Participants</th>
+                <th></th>
+              </tr>
+              {displayChats()}
+            </tbody>
+          </table>
         </div>
-
+      </div>
+    </div>
 	 );
 }
