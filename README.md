@@ -3,7 +3,7 @@ in the lifecycle of a basic web application. It was designed with React, and all
 create named chat rooms to which they can add participants and send messages. The backend of 
 the app, developed with the Django REST Framework, is hosted here: 
 https://github.com/akienzle32/chat-drf. The app itself 
-can be accessed here: https://alec-chat-app.herokuapp.com/.
+can be at the following url: https://alec-chat-app.herokuapp.com/.
 
 
 
