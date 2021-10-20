@@ -29,12 +29,6 @@ export class App extends React.Component {
     })
   }
 
-/*
-  userLoggedOut = () => {
-    this.setState(this.baseState);
-  }
-*/
-
   displayNavBar = () => {
     let navBar = null;
     const loggedIn = this.state.loggedIn;
