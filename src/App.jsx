@@ -29,10 +29,6 @@ export class App extends React.Component {
     })
   }
 
-  userLoggedOut = () => {
-    this.setState(this.baseState);
-  }
-
   displayNavBar = () => {
     let navBar = null;
     const loggedIn = this.state.loggedIn;
@@ -66,9 +62,7 @@ export class App extends React.Component {
 
   logoutUser = () => {
     window.localStorage.clear();
-    this.setState({
-      loggedIn: false,
-    })
+    this.setState(this.baseState);
   }
 
   // This initial GET request allows for the user to persist after refreshing the window by checking 
