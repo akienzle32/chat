@@ -5,16 +5,6 @@ the app, developed with the Django REST Framework, is hosted here:
 https://github.com/akienzle32/chat-drf. The app itself 
 can be accessed at the following url: https://alec-chat-app.herokuapp.com/.
 
-The app has the following component structure:
-|-- App
-    |-- Login
-        |-- Register
-    |-- Home
-        |-- StartChat
-            |-- ChatList
-        |-- ChatRoom
-            |-- ParticipantList
-
 
 
 
