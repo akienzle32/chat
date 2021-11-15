@@ -6,7 +6,7 @@ https://github.com/akienzle32/chat-drf, while the app itself
 can be accessed at the following url: https://alec-chat-app.herokuapp.com/.
 
 If you'd like to get an idea of the app's functionality, enter the src directory and take a look at the code 
-for the individual components. These components have the following basic structure:
+for the individual components, which have the following structure:
 ```
 |-- App
     |-- Login
