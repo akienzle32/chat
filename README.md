@@ -2,10 +2,21 @@ This repository hosts the frontend of my chat app, which I started in order to g
 in the lifecycle of a basic web application. It was designed with React, and allows users to 
 create named chat rooms to which they can add participants and send messages. The backend of 
 the app, developed with the Django REST Framework, is hosted here: 
-https://github.com/akienzle32/chat-drf. The app itself 
+https://github.com/akienzle32/chat-drf, while the app itself 
 can be accessed at the following url: https://alec-chat-app.herokuapp.com/.
 
-
+If you'd like to get an idea of the app's functionality, enter the src directory and take a look at the code 
+for the individual components. These components have the following basic structure:
+```
+|-- App
+    |-- Login
+        |-- Register
+    |-- Home
+        |-- StartChat
+            |-- ChatList
+        |-- ChatRoom
+            |-- ParticipantList
+```
 
 
 
