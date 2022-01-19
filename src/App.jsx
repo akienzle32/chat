@@ -36,11 +36,13 @@ export class App extends React.Component {
 
     if (loggedIn){
       navBar = 
-      <ul className="nav-bar">
-        <li className="left-nav-element"><Link className="link" to="/">Home</Link></li>
-        <li className="right-nav-element"><button className="link" onClick={this.logoutUser}>Log out</button></li>
-        <li className="right-nav-element" id="username">Signed in as <b>{username}</b></li>
-      </ul>
+        <nav class="nav-bar">
+          <Link className="logo" to="/">Chat App</Link>
+          <ul className="nav-links">
+            <li className="nav-item username" id="username">Signed in as <b>{username}</b></li>
+            <li className="nav-item logout"><button className="logout-btn" onClick={this.logoutUser}>Log out</button></li>
+          </ul>
+        </nav>
     }
     return(navBar);
   }
@@ -76,7 +78,7 @@ export class App extends React.Component {
     }
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.checkLoginStatus();
   }
 

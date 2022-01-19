@@ -191,7 +191,6 @@ export class Home extends React.Component{
   		  <Route path="/">
  			<StartChat username={username} chats={chats} participants={participants} token={token}
  				onSubmit={this.addChat} removeFromChat={this.removeFromChat} />
- 			}
   		  </Route>
   		</Switch>
   	 </div>
