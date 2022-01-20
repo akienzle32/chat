@@ -11,7 +11,6 @@ export class StartChat extends React.Component {
     this.baseState = this.state; // Record the base state in order to revert to it after form submission.
     this.bottomOfStartChat = React.createRef();
   }
-
   // Function to pass text input up to the Home component, where the state of chats and participants 
   // is tracked. This function handles arrays of participants in order to support group chats.
   onSubmit = (event) => {
@@ -81,9 +80,10 @@ export class StartChat extends React.Component {
     else
       subPtcpButton = <input style={{visibility: "hidden"}} type="button" className="ptcp-button" id="sub-ptcp-button"></input>;
 
-    const { username, chats, participants } = this.props;
+    const { username, chats, participants, toggleChatModalBox } = this.props;
   	return(
-  	  <div>
+  	  <div className="inner-modal-box">
+        <button className="close-modal-box" onClick={toggleChatModalBox}>X</button>
         <div className="top-rounded-box" id="start-chat">
           <h3 className="title">Start a new chat</h3>
           <div id="chat-form-container">

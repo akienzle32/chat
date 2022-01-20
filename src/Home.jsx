@@ -189,10 +189,17 @@ export class Home extends React.Component{
   	.catch(error => console.log(error))
   }
 
-  openChatModalBox = () => {
-    this.setState({
-      newChatDisplay: "inline-block",
-    })
+  toggleChatModalBox = () => {
+    if (this.state.newChatDisplay === "none"){
+      this.setState({
+        newChatDisplay: "inline-block",
+      })
+    }
+    else {
+      this.setState({
+        newChatDisplay: "none",
+      })
+    }
   }
 
 
@@ -213,13 +220,13 @@ export class Home extends React.Component{
           <div className="left-bar">
             <div className="chats-title-container">
               <h3 className="chats-title">My chats</h3>
-              <button className="add-chat-btn" onClick={this.openChatModalBox}>+</button>
+              <button className="add-chat-btn" onClick={this.toggleChatModalBox}>+</button>
             </div>
             <ChatList username={username} chats={chats} participants={participants} removeFromChat={this.props.removeFromChat} />
           </div>
           <div className="start-chat-modal-box" style={{display: this.state.newChatDisplay}}>
               <StartChat username={username} chats={chats} participants={participants} token={token}
-              onSubmit={this.addChat} removeFromChat={this.removeFromChat} />
+              onSubmit={this.addChat} removeFromChat={this.removeFromChat} toggleChatModalBox={this.toggleChatModalBox} />
           </div>
           <Switch>
             <Route path="/:name/:id">

@@ -161,6 +161,15 @@ body {
   background-color: rgba(0,0,0,0.4);
 }
 
+.inner-modal-box {
+  margin-top: 50px;
+  margin-left: 450px;
+}
+
+.close-modal-box {
+  float: right;
+}
+
 a.logo {
     text-decoration: none;
     color: black;
