@@ -29,24 +29,6 @@ export class App extends React.Component {
     })
   }
 
-  displayNavBar = () => {
-    let navBar = null;
-    const loggedIn = this.state.loggedIn;
-    const username = this.state.username;
-
-    if (loggedIn){
-      navBar = 
-        <nav class="nav-bar">
-          <Link className="logo" to="/">Chat App</Link>
-          <ul className="nav-links">
-            <li className="nav-item username" id="username">Signed in as <b>{username}</b></li>
-            <li className="nav-item logout"><button className="logout-btn" onClick={this.logoutUser}>Log out</button></li>
-          </ul>
-        </nav>
-    }
-    return(navBar);
-  }
-
   // Depending upon the user's authentication status, display either the Login or Home component.
   displayLoginOrHomeComponent = () => {
     let component;
@@ -83,14 +65,11 @@ export class App extends React.Component {
   }
 
   render() {
-    const navBar = this.displayNavBar();
+    //const navBar = this.displayNavBar();
     const component = this.displayLoginOrHomeComponent();
 
     return(
       <Router>
-        <div>
-          {navBar}
-        </div>
         {component}
       </Router>
     );

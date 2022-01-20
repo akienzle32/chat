@@ -57,6 +57,7 @@ body {
   background-color: darkslateblue;
   margin: 0;
   padding: 0;
+  overflow: scroll;
 }
 
 .chats-title-container {
@@ -97,6 +98,17 @@ body {
   list-style-type: none;
   margin: 0;
   padding: 0;
+  align-items: center;
+  text-align: center;
+}
+
+.chat-link {
+  text-decoration: none;
+  color: black;
+}
+
+.chat-link:hover {
+  color: white;
 }
 
 .chat-item {
@@ -104,7 +116,7 @@ body {
   width: 98%;
   height: 80px;
   background-color: peachpuff;
-  color: white;
+  color: black;
   align-content: center;
   text-align: center;
   border: 3px;
@@ -116,9 +128,30 @@ body {
 .chat-item:hover {
   background-color: darkslateblue;
   cursor: pointer; 
+}
+
+.chat-info {
+  padding-top: 10px;
+}
+
+
+.remove-btn {
+  position: absolute;
+  height: 21px;
+  width: 21px;
+  top: 4px;
+  right: 3px;
+  background-color: darkslateblue;
+  border-style: solid;
+  border-color: darkslateblue;
+  border-radius: 50%;
+  border: 2px;
   color: white;
 }
 
+.remove-btn:hover {
+  background-color: darkslateblue;
+}
 
 a.logo {
     text-decoration: none;
@@ -303,7 +336,7 @@ label {
   margin-top: 5px;
   font-size: 12px;
 }
-
+/*
 #ptcp-list {
   height: 140px;
   width: 80px;
@@ -318,3 +351,4 @@ label {
   border: 6px solid #4169E1;
   border-radius: 30px;
 }
+*/

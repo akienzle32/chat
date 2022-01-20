@@ -1,7 +1,8 @@
 import React from 'react';
 import { ChatRoom } from './ChatRoom';
 import { StartChat } from './StartChat';
-import { Switch, Route } from 'react-router-dom';
+import { ChatList } from './ChatList';
+import { Switch, Route, Link } from 'react-router-dom';
 import './App.css';
 
 export class Home extends React.Component{
@@ -12,6 +13,24 @@ export class Home extends React.Component{
   		participants: [],
 
   	}
+  }
+
+  displayNavBar = () => {
+    let navBar = null;
+    const loggedIn = this.props.loggedIn;
+    const username = this.props.username;
+
+    if (loggedIn){
+      navBar = 
+        <nav class="nav-bar">
+          <Link className="logo" to="/">Chat App</Link>
+          <ul className="nav-links">
+            <li className="nav-item username" id="username">Signed in as <b>{username}</b></li>
+            <li className="nav-item logout"><button className="logout-btn" onClick={this.logoutUser}>Log out</button></li>
+          </ul>
+        </nav>
+    }
+    return(navBar);
   }
 
   getChats = () => {
@@ -179,18 +198,29 @@ export class Home extends React.Component{
   render(){
   	const { username, loggedIn, token, handleErrors } = this.props;
   	const { chats, participants } = this.state; 
+    const navBar = this.displayNavBar();
 
   	return (
       <div>
-  	  	<Switch>
-  	  	  <Route path="/:name/:id">
-  	  	  	<ChatRoom username={username} participants={participants} 
-  		  		handleErrors={handleErrors} loggedIn={loggedIn} token={token} 
-  		  		addParticipant={this.addParticipant} updateChatState={this.updateChatState}   />
-  		    </Route>
-          <StartChat username={username} chats={chats} participants={participants} token={token}
-          onSubmit={this.addChat} removeFromChat={this.removeFromChat} />
-        </Switch>
+        {navBar}
+        <div className="main-container">
+          <div className="left-bar">
+            <div className="chats-title-container">
+              <h3 className="chats-title">My chats</h3>
+              <button class="add-chat-btn">+</button>
+            </div>
+            <ChatList username={username} chats={chats} participants={participants} removeFromChat={this.props.removeFromChat} />
+          </div>
+          <Switch>
+            <Route path="/:name/:id">
+              <ChatRoom username={username} participants={participants} 
+              handleErrors={handleErrors} loggedIn={loggedIn} token={token} 
+              addParticipant={this.addParticipant} updateChatState={this.updateChatState}   />
+            </Route>
+            <StartChat username={username} chats={chats} participants={participants} token={token}
+            onSubmit={this.addChat} removeFromChat={this.removeFromChat} />
+          </Switch>
+        </div>
       </div>
   	);
   }
