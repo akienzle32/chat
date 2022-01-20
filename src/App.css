@@ -153,6 +153,14 @@ body {
   background-color: darkslateblue;
 }
 
+.start-chat-modal-box {
+  height: 100vh;
+  width: 100vw;
+  z-index: 1;
+  position: fixed;
+  background-color: rgba(0,0,0,0.4);
+}
+
 a.logo {
     text-decoration: none;
     color: black;

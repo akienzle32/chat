@@ -11,7 +11,7 @@ export class Home extends React.Component{
   	this.state = {
   		chats: [],
   		participants: [],
-
+      newChatDisplay: "none",
   	}
   }
 
@@ -25,7 +25,7 @@ export class Home extends React.Component{
         <nav class="nav-bar">
           <Link className="logo" to="/">Chat App</Link>
           <ul className="nav-links">
-            <li className="nav-item username" id="username">Signed in as <b>{username}</b></li>
+            <li className="nav-item username" id="username">Signed in as: <b>{username}</b></li>
             <li className="nav-item logout"><button className="logout-btn" onClick={this.logoutUser}>Log out</button></li>
           </ul>
         </nav>
@@ -189,6 +189,12 @@ export class Home extends React.Component{
   	.catch(error => console.log(error))
   }
 
+  openChatModalBox = () => {
+    this.setState({
+      newChatDisplay: "inline-block",
+    })
+  }
+
 
   componentDidMount(){
     this.getChats();
@@ -207,9 +213,13 @@ export class Home extends React.Component{
           <div className="left-bar">
             <div className="chats-title-container">
               <h3 className="chats-title">My chats</h3>
-              <button class="add-chat-btn">+</button>
+              <button className="add-chat-btn" onClick={this.openChatModalBox}>+</button>
             </div>
             <ChatList username={username} chats={chats} participants={participants} removeFromChat={this.props.removeFromChat} />
+          </div>
+          <div className="start-chat-modal-box" style={{display: this.state.newChatDisplay}}>
+              <StartChat username={username} chats={chats} participants={participants} token={token}
+              onSubmit={this.addChat} removeFromChat={this.removeFromChat} />
           </div>
           <Switch>
             <Route path="/:name/:id">
@@ -217,8 +227,6 @@ export class Home extends React.Component{
               handleErrors={handleErrors} loggedIn={loggedIn} token={token} 
               addParticipant={this.addParticipant} updateChatState={this.updateChatState}   />
             </Route>
-            <StartChat username={username} chats={chats} participants={participants} token={token}
-            onSubmit={this.addChat} removeFromChat={this.removeFromChat} />
           </Switch>
         </div>
       </div>
