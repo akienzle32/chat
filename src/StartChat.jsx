@@ -89,9 +89,6 @@ export class StartChat extends React.Component {
             <h3 className="chats-title">My chats</h3>
             <button class="add-chat-btn">+</button>
           </div>
-          <ul className="chat-list">
-            <li className="chat-item"></li>
-          </ul>
         </div>
         <div className="top-rounded-box" id="start-chat">
           <h3 className="title">Start a new chat</h3>
