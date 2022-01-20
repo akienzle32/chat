@@ -162,19 +162,105 @@ body {
 }
 
 .inner-modal-box {
-  margin-top: 50px;
-  margin-left: 450px;
+  margin-top: 75px;
+  margin-left: 500px;
+  width: 525px;
+  height: 150px;
+  position: relative;
+  padding: 15px;
+  background-color: #dad8e7;
+  border-style: solid;
+  border-color: darkslateblue;
+  border-width: 4px;
 }
 
-.close-modal-box {
-  float: right;
+.close-modal-box-btn {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  height: 22px;
+  width: 22px;
+  border-radius: 50%;
+  border-style: none;
+  background-color: darkslateblue;
+  color: white;
+}
+
+.close-modal-box-btn:hover {
+  background-color: #918ab9;
+  color: black;
+}
+
+.start-chat-title {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.chat-form-container {
+  margin-left: 160px;
+  position: relative;
+}
+
+.chat-input-flexbox {
+  display: flex;
+  flex-direction: column;
+  /*justify-content: space-between;*/
+  height: 50px
+}
+
+.ptcp-name {
+  width: 200px;
+}
+
+#chat-name {
+  width: 200px;
+}
+
+.ptpc-button {
+  border-radius: 50%;
+}
+
+.ptcp-button.add {
+  position: fixed;
+  top: 237px;
+  right: 523px;
+  border-radius: 50%;
+  border-style: none;
+  background-color: darkslateblue;
+  color: white;
+  font-size: 18px;
+  height: 24px;
+  width: 24px;
+}
+
+.ptcp-button.add:hover {
+  background-color: #918ab9;
+  color: black;
+}
+
+.ptcp-button.sub {
+  position: fixed;
+  top: 237px;
+  right: 498px;
+  border-radius: 50%;
+  border-radius: 50%;
+  border-style: none;
+  background-color: darkslateblue;
+  color: white;
+  font-size: 18px;
+  height: 24px;
+  width: 24px;
+}
+
+.ptcp-button.sub:hover {
+  background-color: #918ab9;
+  color: black;
 }
 
 a.logo {
     text-decoration: none;
     color: black;
 }
-
 
 table {
   width: 100%;
@@ -196,28 +282,9 @@ label {
   width: 150px;
 }
 
-.title {
-  text-align: center;
-}
-
 .link {
   text-decoration: none;
   color: black;
-}
-
-.ptcp-button {
-  height: 28px;
-  width: 25px;
-  float: right;
-  display: table;
-}
-
-.top-rounded-box {
-  background-color: #DCDCDC;
-  border: 7px solid #4169E1;
-  border-radius: 25px;
-  margin-left: 20px;
-  overflow: scroll;
 }
 
 .bottom-rounded-box {
@@ -233,14 +300,6 @@ label {
 .submit-button {
   visibility: hidden;
   display: none;
-}
-
-.ptcp-name {
-  width: 170px;
-  height: 22px;
-  font-size: 14px;
-  float: left;
-  display: table;
 }
 
 .chat-table {
@@ -276,22 +335,6 @@ label {
   margin-right: 15px;
 }
 
-#start-chat {
-  height: 92px;
-  width: 400px;
-  padding-bottom: 60px;
-  padding-right: 50px;
-  padding-left: 50px;
-}
-
-#chat-form-container {
-  margin-left: 110px;
-}
-
-#sub-ptcp-button {
-  margin-right: 58px;
-}
-
 #my-chats {
   height: 200px;
   width: 400px;
@@ -300,13 +343,6 @@ label {
   padding-bottom: 50px;
 }
 
-#chat-name {
-  width: 170px;
-  height: 22px;
-  font-size: 14px;
-  display: table;
-  margin-bottom: 4px;
-}
 
 #message-log {
   height: 200px;

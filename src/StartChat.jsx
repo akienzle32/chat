@@ -76,30 +76,28 @@ export class StartChat extends React.Component {
     const ptcpInputFields = this.displayInputBoxes();
     let subPtcpButton;
     if (ptcpInput.length > 1)
-      subPtcpButton = <input type="button" className="ptcp-button" id="sub-ptcp-button" value="–" onClick={this.removeInputBoxes}></input>;
+      subPtcpButton = <input type="button" className="ptcp-button sub" id="sub-ptcp-button" value="–" onClick={this.removeInputBoxes}></input>;
     else
       subPtcpButton = <input style={{visibility: "hidden"}} type="button" className="ptcp-button" id="sub-ptcp-button"></input>;
 
     const { username, chats, participants, toggleChatModalBox } = this.props;
   	return(
-  	  <div className="inner-modal-box">
-        <button className="close-modal-box" onClick={toggleChatModalBox}>X</button>
-        <div className="top-rounded-box" id="start-chat">
-          <h3 className="title">Start a new chat</h3>
-          <div id="chat-form-container">
+        <div className="inner-modal-box" id="start-chat">
+          <button className="close-modal-box-btn" onClick={toggleChatModalBox}>X</button>
+          <h3 className="start-chat-title">Start a new chat</h3>
+          <div className="chat-form-container">
             <form id="chat-form" onSubmit={this.onSubmit}>
-              <div>
+              <div className="chat-input-flexbox">
                 <input type="text" id="chat-name" name="chatname" placeholder="Enter a chatroom name..."></input>
                 {ptcpInputFields}
-                {subPtcpButton}
-                <input type="button" className="ptcp-button" id="add-ptcp-button" value="+" 
-                  onClick={this.addInputBoxes} ref={this.bottomOfStartChat}></input>
-                <input type="submit" className="submit-button"></input>
               </div>
+              {subPtcpButton}
+              <input type="button" className="ptcp-button add" id="add-ptcp-button" value="+" 
+                onClick={this.addInputBoxes} ref={this.bottomOfStartChat}></input>
+              <input type="submit" className="submit-button"></input>
             </form>
           </div>
         </div>
-      </div>
     );
   }
 }
