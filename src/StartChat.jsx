@@ -83,8 +83,16 @@ export class StartChat extends React.Component {
 
     const { username, chats, participants } = this.props;
   	return(
-  	  <div>
-        <h1 className="title">Chat App</h1>
+  	  <div className="main-container">
+        <div className="left-bar">
+          <div className="chats-title-container">
+            <h3 className="chats-title">My chats</h3>
+            <button class="add-chat-btn">+</button>
+          </div>
+          <ul className="chat-list">
+            <li className="chat-item"></li>
+          </ul>
+        </div>
         <div className="top-rounded-box" id="start-chat">
           <h3 className="title">Start a new chat</h3>
           <div id="chat-form-container">
@@ -101,7 +109,7 @@ export class StartChat extends React.Component {
           </div>
         </div>
         <ChatList username={username} chats={chats} participants={participants} removeFromChat={this.props.removeFromChat} />
-        </div>
+      </div>
     );
   }
 }

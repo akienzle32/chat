@@ -188,10 +188,8 @@ export class Home extends React.Component{
   		  		handleErrors={handleErrors} loggedIn={loggedIn} token={token} 
   		  		addParticipant={this.addParticipant} updateChatState={this.updateChatState}   />
   		    </Route>
-  		    <Route path="/">
           <StartChat username={username} chats={chats} participants={participants} token={token}
-            onSubmit={this.addChat} removeFromChat={this.removeFromChat} />
-          </Route>
+          onSubmit={this.addChat} removeFromChat={this.removeFromChat} />
         </Switch>
       </div>
   	);
