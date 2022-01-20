@@ -195,28 +195,30 @@ export class ChatRoom extends React.Component {
 
 		return(decodedChatName);
 	}
-
+	/*
+	<ParticipantList username={this.props.username} participants={this.props.participants} 
+	extractFromUrl={this.extractFromUrl} addParticipant={this.props.addParticipant} />
+	*/
 	render() {
 		const chatRoomName = this.displayChatRoomName();
 		const messages = this.displayMessages();
 	  	  return (
-			<div>
-		  	  <div><h1 className="title">{chatRoomName}</h1></div>
-		  	  <div className="lower-container">
-		  	  	<ParticipantList username={this.props.username} participants={this.props.participants} 
-		  	  		extractFromUrl={this.extractFromUrl} addParticipant={this.props.addParticipant} />
-			  	<div className="top-rounded-box" id="message-log">{messages}
-			  	  <div ref={this.bottomOfMessages} />
-			  	</div>
-			  	  <div className="bottom-rounded-box" id="new-message-box">
-					<form id='message-form' onSubmit={this.onSubmit}>
-				  	  <input type="text" id="message-input" name="content" placeholder="Text message..."></input>
-				  	  <input type='hidden' name='author'></input>
-				  	  <input type='hidden' name='chat'></input>
-				  	  <input type='submit' value='Send' className='submit-button'></input>
-					</form>	
-			  	</div>
-		  	  </div>	
+			<div className="main-chat-container">
+				<h1 className="title">{chatRoomName}</h1>
+					<div className="message-container">
+						<div className="message-log">
+							{messages}
+							<div ref={this.bottomOfMessages} />
+						</div>
+						<div className="text-box" id="new-message-box">
+							<form id='message-form' onSubmit={this.onSubmit}>
+							<input className="text-input" type="text" id="message-input" name="content" placeholder="Text message..."></input>
+							<input type='hidden' name='author'></input>
+							<input type='hidden' name='chat'></input>
+							<input type='submit' value='Send' className='submit-button'></input>
+							</form>	
+						</div>
+					</div>
 		 	</div>	
 	  	  );
 	  	}

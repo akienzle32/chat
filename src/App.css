@@ -257,14 +257,51 @@ body {
   color: black;
 }
 
+.main-chat-container {
+  position: fixed;
+  align-content: center;
+  text-align: center;
+  margin-left: 500px;
+  padding: 0;
+}
+
+.message-container {
+  height: 530px;
+  width: 750px;
+  background-color: darkslateblue;
+  padding-top: 8px;
+}
+
+.message-log {
+  margin: 10px;
+  display: inline-block;
+  height: 400px;
+  width: 700px;
+  padding: 0;
+  background-color: #918ab9;
+  overflow: scroll;
+}
+
+.text-box {
+  display: flex;
+  margin-left: 25px;
+  height: 85px;
+  width: 700px;
+  background-color: #918ab9;
+  overflow: scroll;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-input {
+  height: 25px;
+  width: 500px;
+  font-size: 18px;
+}
+
 a.logo {
     text-decoration: none;
     color: black;
-}
-
-table {
-  width: 100%;
-  text-align: left;
 }
 
 label {
@@ -287,6 +324,7 @@ label {
   color: black;
 }
 
+/*
 .bottom-rounded-box {
   background-color: #DCDCDC;
   border-left: 7px solid #4169E1;
@@ -296,7 +334,7 @@ label {
   margin-left: 20px;
   overflow: scroll;
 }
-
+*/
 .submit-button {
   visibility: hidden;
   display: none;
@@ -343,20 +381,7 @@ label {
   padding-bottom: 50px;
 }
 
-
-#message-log {
-  height: 200px;
-  width: 400px;
-  padding: 50px;
-  margin-right: 100px;
-}
-
-#new-message-box {
-  height: 50px;
-  width: 400px;
-  padding: 25px 50px;
-}
-
+/*
 #message-input {
   background-color: white;
   height: 20px;
@@ -368,6 +393,7 @@ label {
   margin: 0px;
   font-size: 16px
 }
+*/
 
 #message-author {
   margin-bottom: 5px;
