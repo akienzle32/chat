@@ -30,13 +30,16 @@ export const ParticipantList = (props) => {
 		const ptcpList = participantArray.join(', ');
 		return(ptcpList);
 	}
+	//<input type="text" id="ptcp-username" name="name" placeholder="Add participant..."></input>
 	return (
-	  <div id="ptcp-list">
-		{displayParticipants()}
-		<form id="new-ptcp-form" onSubmit={onSubmit}>
-			<input type="text" id="ptcp-username" name="name" placeholder="Add participant..."></input>
-			<input type="submit" value="Send" className="submit-button"></input>
-		</form>
+	  <div className="main-ptcp-container">
+		<div className="main-ptcp-list">
+			{displayParticipants()}
+			<button className="main-add-ptcp-btn">+</button>
+			<form id="new-ptcp-form" onSubmit={onSubmit}>
+				<input type="submit" value="Send" className="submit-button"></input>
+			</form>
+		</div>
 	  </div>
 	);
 }

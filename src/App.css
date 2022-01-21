@@ -299,6 +299,35 @@ body {
   font-size: 18px;
 }
 
+.main-ptcp-container {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  justify-content: center;
+}
+
+.main-ptcp-list {
+  margin-bottom: 10px;
+}
+
+.main-add-ptcp-btn {
+  border-radius: 50%;
+  background-color: darkslateblue;
+  border-style: none;
+  color: white;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  height: 25px;
+  width: 25px;
+  font-size: 21px;
+}
+
+.main-add-ptcp-btn:hover {
+  background-color: #918ab9;
+  color: white;
+  cursor: pointer;
+}
+
 a.logo {
     text-decoration: none;
     color: black;
@@ -324,17 +353,6 @@ label {
   color: black;
 }
 
-/*
-.bottom-rounded-box {
-  background-color: #DCDCDC;
-  border-left: 7px solid #4169E1;
-  border-right: 7px solid #4169E1;
-  border-bottom: 7px solid #4169E1;
-  border-radius: 25px;
-  margin-left: 20px;
-  overflow: scroll;
-}
-*/
 .submit-button {
   visibility: hidden;
   display: none;
