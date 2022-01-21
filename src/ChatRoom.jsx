@@ -206,7 +206,7 @@ export class ChatRoom extends React.Component {
 		const messages = this.displayMessages();
 	  	  return (
 			<div className="main-chat-container">
-				<h1 className="title">{chatRoomName}</h1>
+				<h1 className="main-chat-title">{chatRoomName}</h1>
 				<ParticipantList username={this.props.username} participants={this.props.participants} 
 				extractFromUrl={this.extractFromUrl} addParticipant={this.props.addParticipant} />
 					<div className="message-container">

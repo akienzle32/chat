@@ -1,7 +1,7 @@
 body {
   margin: 0;
   font-family:Arial, Helvetica, sans-serif;
-  background-color: #dad8e7;
+  background-color: #b5b1d0;
 }
 
 .nav-bar {
@@ -265,32 +265,36 @@ body {
   padding: 0;
 }
 
+.main-chat-title {
+  color: black;
+}
+
 .message-container {
-  height: 530px;
-  width: 750px;
-  background-color: darkslateblue;
-  padding-top: 8px;
+  height: 500px;
+  width: 720px;
+  background-color: #6c63a2;
+  display: flex;
+  flex-direction: column;
 }
 
 .message-log {
   margin: 10px;
-  margin-left: 25px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 400px;
   width: 700px;
   padding: 0;
-  background-color: #918ab9;
+  background-color: darkslateblue;
   overflow: scroll;
 }
 
 .text-box {
   display: flex;
-  margin-left: 25px;
   height: 85px;
+  margin: 10px;
   width: 700px;
-  background-color: #918ab9;
+  background-color:  darkslateblue;
   overflow: scroll;
   align-items: center;
   justify-content: center;
@@ -311,6 +315,7 @@ body {
 
 .main-ptcp-list {
   margin-bottom: 10px;
+  color: black;
 }
 
 .main-add-ptcp-btn {
@@ -340,26 +345,32 @@ body {
 }
 
 .message {
-  margin: 25px 35px;
+  margin: 5px 35px;
   color: white;
   display: inline-block;
   text-align: left;
 }
 
 .inner-message {
-  background-color: darkslateblue;
+  background-color: #6c63a2;
   width: max-content;
   height: 50px;
   padding-right: 10px;
   padding-left: 10px;
   border-radius: 10px;
+  color: white;
 }
 
 #message-author {
+  margin-left: 4px;
 }
 
 #message-content {
   display: inline-block
+}
+
+#message-timestamp {
+  margin-left: 3px;
 }
 
 a.logo {
