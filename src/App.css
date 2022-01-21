@@ -360,18 +360,6 @@ body {
   color: white;
 }
 
-#message-author {
-  margin-left: 4px;
-}
-
-#message-content {
-  display: inline-block
-}
-
-#message-timestamp {
-  margin-left: 3px;
-}
-
 a.logo {
     text-decoration: none;
     color: black;

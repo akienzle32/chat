@@ -182,15 +182,11 @@ export class ChatRoom extends React.Component {
 		if (loggedIn){
 		  messageList = messages.map(message => {
   			return  <div key={message.id} className="message" style={{alignItems: message.author === username ? "end" : "start"}}>
-						<div className="author">
-							<p id="message-author">{ message.author }</p>
-						</div>
-				  		<div className="inner-message">
-							<p id="message-content">{ message.content }</p>
-						</div>
-						<div className="timestamp">
-							<p id="message-timestamp">{ message.timestamp }</p>
-						</div>
+						<p id="message-author">{ message.author }</p>
+					<div className="inner-message">
+						<p id="message-content">{ message.content }</p>
+					</div>
+						<p id="message-timestamp">{ message.timestamp }</p>
 					</div>
   		  });
   		}
