@@ -215,9 +215,9 @@ export class ChatRoom extends React.Component {
 							{messages}
 							<div ref={this.bottomOfMessages} />
 						</div>
-						<div className="text-box" id="new-message-box">
+						<div className="text-container" id="new-message-box">
 							<form id='message-form' onSubmit={this.onSubmit}>
-							<input className="text-input" type="text" id="message-input" name="content" placeholder="Text message..."></input>
+							<input className="text-box" type="text" id="message-input" name="content" placeholder="Text message..."></input>
 							<input type='hidden' name='author'></input>
 							<input type='hidden' name='chat'></input>
 							<input type='submit' value='Send' className='submit-button'></input>

@@ -276,10 +276,20 @@ body {
   color: black;
 }
 
-.text-input {
+.text-box {
   height: 25px;
-  width: 500px;
+  width: 600px;
   font-size: 18px;
+  border-radius: 8px;
+  border-style: none;
+  padding-left: 10px;
+  background-color: #6c63a2;
+  color: white;
+  outline: none;
+}
+
+.text-box::placeholder {
+  color: #999999;
 }
 
 .main-ptcp-container {
@@ -321,26 +331,29 @@ body {
 }
 
 .message-log {
-  margin: 10px;
   height: 400px;
   width: 700px;
-  padding: 5px;
   background-color: darkslateblue;
   overflow: scroll;
   display: flex;
   flex-direction: column;
+  border-style: solid;
+  border-color: #6c63a2;
+  border-width: 10px;
 }
 
-.text-box {
+.text-container {
   display: flex;
-  height: 85px;
-  margin: 10px;
+  height: 65px;
   width: 700px;
   background-color:  darkslateblue;
   overflow: scroll;
   align-items: center;
   justify-content: center;
-  padding: 5px;
+  border-style: solid;
+  border-color: #6c63a2;
+  border-width: 10px;
+  border-top-width: 0;
 }
 
 .message {
