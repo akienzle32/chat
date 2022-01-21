@@ -72,10 +72,10 @@ export const ChatList = (props) => {
             <td><button onClick={() => handleClick(name, id)}>x</button></td>
   			   </tr>
       */
-      return <li className="chat-item">
+      return <li key={chat.id} className="chat-item">
               <button className="remove-btn" id="remove" onClick={() => handleClick(name, id)}>X</button>
               <div className="chat-info">
-                <Link className="chat-link" to={`${encodedName}/${id}`}><b>{name}</b>
+                <Link className="chat-link" to={`/${encodedName}/${id}`}><b>{name}</b>
                   <p className="ptcp-list">{users}</p>
                 </Link>
               </div>
@@ -85,24 +85,6 @@ export const ChatList = (props) => {
   	})
     return(chatList);
   }
-
-  /*
-        <div className="bottom-rounded-box" id="my-chats">
-        <h3 className="title">My chat rooms</h3>
-        <div>
-          <table className="chat-table">
-            <tbody>
-              <tr>
-                <th>Name</th>
-                <th>Participants</th>
-                <th></th>
-              </tr>
-              {displayChats()}
-            </tbody>
-          </table>
-        </div>
-      </div>
-  */
 
 	return(
     <div>

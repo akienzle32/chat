@@ -2,10 +2,10 @@ import React from 'react';
 import { ChatRoom } from './ChatRoom';
 import { StartChat } from './StartChat';
 import { ChatList } from './ChatList';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route, Link, withRouter } from 'react-router-dom';
 import './App.css';
 
-export class Home extends React.Component{
+class Home extends React.Component{
   constructor(props){
   	super(props);
   	this.state = {
@@ -13,24 +13,6 @@ export class Home extends React.Component{
   		participants: [],
       newChatDisplay: "none",
   	}
-  }
-
-  displayNavBar = () => {
-    let navBar = null;
-    const loggedIn = this.props.loggedIn;
-    const username = this.props.username;
-
-    if (loggedIn){
-      navBar = 
-        <nav class="nav-bar">
-          <Link className="logo" to="/">Chat App</Link>
-          <ul className="nav-links">
-            <li className="nav-item username" id="username">Signed in as: <b>{username}</b></li>
-            <li className="nav-item logout"><button className="logout-btn" onClick={this.logoutUser}>Log out</button></li>
-          </ul>
-        </nav>
-    }
-    return(navBar);
   }
 
   getChats = () => {
@@ -202,27 +184,32 @@ export class Home extends React.Component{
     }
   }
 
+  changeCurrentChat = () => {
+    const pathname = window.location.pathname;
+    this.setState({
+      pathname: pathname,
+    })
+  }
 
   componentDidMount(){
     this.getChats();
     this.getParticipants();
+    this.changeCurrentChat();
   }
 
   render(){
   	const { username, loggedIn, token, handleErrors } = this.props;
-  	const { chats, participants } = this.state; 
-    const navBar = this.displayNavBar();
+  	const { chats, participants } = this.state;
 
   	return (
       <div>
-        {navBar}
         <div className="main-container">
           <div className="left-bar">
             <div className="chats-title-container">
               <h3 className="chats-title">My chats</h3>
               <button className="add-chat-btn" onClick={this.toggleChatModalBox}>+</button>
             </div>
-            <ChatList username={username} chats={chats} participants={participants} removeFromChat={this.props.removeFromChat} />
+            <ChatList username={username} chats={chats} participants={participants} removeFromChat={this.removeFromChat} />
           </div>
           <div className="start-chat-modal-box" style={{display: this.state.newChatDisplay}}>
               <StartChat username={username} chats={chats} participants={participants} token={token}
@@ -230,9 +217,9 @@ export class Home extends React.Component{
           </div>
           <Switch>
             <Route path="/:name/:id">
-              <ChatRoom username={username} participants={participants} 
+              <ChatRoom key={this.props.location.pathname} username={username} participants={participants} 
               handleErrors={handleErrors} loggedIn={loggedIn} token={token} 
-              addParticipant={this.addParticipant} updateChatState={this.updateChatState}   />
+              addParticipant={this.addParticipant} updateChatState={this.updateChatState} />
             </Route>
           </Switch>
         </div>
@@ -240,3 +227,4 @@ export class Home extends React.Component{
   	);
   }
 }
+export default withRouter(Home);

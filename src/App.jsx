@@ -1,7 +1,7 @@
 import React from 'react';
 import { Login } from './Login';
-import { Home } from './Home';
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import Home from './Home';
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
 export class App extends React.Component {
   constructor(props){
@@ -12,6 +12,24 @@ export class App extends React.Component {
         token: null,
   	}
     this.baseState = this.state;
+  }
+
+  displayNavBar = () => {
+    let navBar = null;
+    const loggedIn = this.state.loggedIn;
+    const username = this.state.username;
+
+    if (loggedIn){
+      navBar = 
+        <nav className="nav-bar">
+          <Link className="logo" to="/">Chat App</Link>
+          <ul className="nav-links">
+            <li className="nav-item username" id="username">Signed in as: <b>{username}</b></li>
+            <li className="nav-item logout"><button className="logout-btn" onClick={this.logoutUser}>Log out</button></li>
+          </ul>
+        </nav>
+    }
+    return(navBar);
   }
 
   handleErrors(response) {
@@ -38,7 +56,12 @@ export class App extends React.Component {
       handleErrors={this.handleErrors} />
     }
     else {
-      component = <Home username={username} loggedIn={loggedIn} token={token} handleErrors={this.handleErrors}  />
+      component = 
+      <Switch>
+        <Route path="/">
+          <Home username={username} loggedIn={loggedIn} token={token} handleErrors={this.handleErrors}  />
+        </Route>
+      </Switch>
     }
 
     return(component);
@@ -65,11 +88,14 @@ export class App extends React.Component {
   }
 
   render() {
-    //const navBar = this.displayNavBar();
+    const navBar = this.displayNavBar();
     const component = this.displayLoginOrHomeComponent();
 
     return(
       <Router>
+        <div>
+          {navBar}
+        </div>
         {component}
       </Router>
     );

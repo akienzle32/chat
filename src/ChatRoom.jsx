@@ -1,5 +1,6 @@
 import React from 'react';
 import { ParticipantList } from './ParticipantList';
+import { withRouter } from 'react-router-dom';
 import './App.css';
 
 
@@ -106,7 +107,7 @@ export class ChatRoom extends React.Component {
 
 	componentDidUpdate() {
 		this.displayMessages();
-		this.scrollToBottom()
+		this.scrollToBottom();
 	}
 
 	// Function to POST new messages to the database. 
@@ -195,6 +196,7 @@ export class ChatRoom extends React.Component {
 
 		return(decodedChatName);
 	}
+
 	render() {
 		const chatRoomName = this.displayChatRoomName();
 		const messages = this.displayMessages();
@@ -221,4 +223,3 @@ export class ChatRoom extends React.Component {
 	  	  );
 	  	}
   	}
-
