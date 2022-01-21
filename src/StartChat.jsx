@@ -52,7 +52,7 @@ export class StartChat extends React.Component {
   displayInputBoxes(){
     const ptcpInput = this.state.ptcpInput;
     const inputList = ptcpInput.map((placeholder, index) => {
-      return <input key={index} type="text" className="ptcp-name" name="username" placeholder={ placeholder }></input>
+      return <input key={index} type="text" className="new-chat-input" name="username" placeholder={ placeholder }></input>
     })
     return(inputList);
   }
@@ -87,14 +87,15 @@ export class StartChat extends React.Component {
           <div className="chat-form-container">
             <form id="chat-form" onSubmit={this.onSubmit}>
               <div className="chat-input-flexbox">
-                <input type="text" id="chat-name" name="chatname" placeholder="Enter a chatroom name..."></input>
+                <input type="text" className="new-chat-input" id="chat-name" name="chatname" placeholder="Enter a chatroom name..."></input>
                 {ptcpInputFields}
               </div>
               {subPtcpButton}
               <input type="button" className="ptcp-button add" id="add-ptcp-button" value="+" 
-                onClick={this.addInputBoxes} ref={this.bottomOfStartChat}></input>
+                onClick={this.addInputBoxes}></input>
               <input type="submit" className="submit-button"></input>
             </form>
+            <div ref={this.bottomOfStartChat}></div>
           </div>
         </div>
     );

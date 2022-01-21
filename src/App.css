@@ -198,6 +198,7 @@ body {
 .close-modal-box-btn:hover {
   background-color: #918ab9;
   color: black;
+  cursor: pointer;
 }
 
 .start-chat-title {
@@ -211,59 +212,51 @@ body {
 }
 
 .chat-input-flexbox {
-  display: flex;
-  flex-direction: column;
-  /*justify-content: space-between;*/
-  height: 50px
+  display: inline-block;
+  height: 75px;
 }
 
-.ptcp-name {
+.new-chat-input {
   width: 200px;
+  height: 30px;
+  margin-bottom: 5px;
+  font-size: 16.5px;
+  background-color: darkslateblue;
+  color: white;
+  outline: none;
+  border-style: none;
+  border-radius: 3px;
 }
 
-#chat-name {
-  width: 200px;
+.new-chat-input::placeholder {
+  color: #999999;
 }
 
-.ptpc-button {
+.ptcp-button {
+  position: fixed;
   border-radius: 50%;
+  border-style: none;
+  background-color: darkslateblue;
+  color: white;
+  font-size: 18px;
+  height: 30px;
+  width: 30px;
+}
+
+.ptcp-button:hover {
+  background-color: #918ab9;
+  color: black;
+  cursor: pointer;
 }
 
 .ptcp-button.add {
-  position: fixed;
-  top: 237px;
+  top: 256px;
   right: 450px;
-  border-radius: 50%;
-  border-style: none;
-  background-color: darkslateblue;
-  color: white;
-  font-size: 18px;
-  height: 24px;
-  width: 24px;
-}
-
-.ptcp-button.add:hover {
-  background-color: #918ab9;
-  color: black;
 }
 
 .ptcp-button.sub {
-  position: fixed;
-  top: 237px;
-  right: 423px;
-  border-radius: 50%;
-  border-radius: 50%;
-  border-style: none;
-  background-color: darkslateblue;
-  color: white;
-  font-size: 18px;
-  height: 24px;
-  width: 24px;
-}
-
-.ptcp-button.sub:hover {
-  background-color: #918ab9;
-  color: black;
+  top: 256px;
+  right: 418px;
 }
 
 .main-chat-container {
