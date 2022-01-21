@@ -176,17 +176,24 @@ export class ChatRoom extends React.Component {
 	displayMessages() {
 		const messages = this.state.messages;
 		const loggedIn = this.props.loggedIn;
+		const username = this.props.username;
 		let messageList;
+		const leftAlignClass = "start";
+		const RightAlignClass = "end"; 
 
 		if (loggedIn){
 		  messageList = messages.map(message => {
-  			return  <div key={message.id} className="message">
-				  		<p id="message-author">{ message.author }</p>
+  			return  <div key={message.id} className="message" style={{alignItems: message.author === username ? "end" : "start"}}>
+						<div className="author">
+							<p id="message-author">{ message.author }</p>
+						</div>
 				  		<div className="inner-message">
 							<p id="message-content">{ message.content }</p>
 						</div>
-						<p id="message-timestamp">{ message.timestamp }</p>
-					  </div>
+						<div className="timestamp">
+							<p id="message-timestamp">{ message.timestamp }</p>
+						</div>
+					</div>
   		  });
   		}
   		return messageList;
