@@ -328,6 +328,14 @@ body {
   cursor: pointer;
 }
 
+.ptcp-text-box {
+  margin-left: 5px;
+  margin-bottom: 5px;
+  height: 19px;
+  width: 120px;
+  font-size: 14px;
+}
+
 a.logo {
     text-decoration: none;
     color: black;

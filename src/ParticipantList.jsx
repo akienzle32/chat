@@ -1,25 +1,32 @@
 import React from 'react';
 import './App.css';
 
-export const ParticipantList = (props) => {
+export class ParticipantList extends React.Component {
+	constructor(props){
+		super(props);
+		this.state = {
+			displayAddButton: null,
+			displayTextBox: "none",
+		};
+	}
 
-	const onSubmit = (event) => {
+	onSubmit = (event) => {
 		event.preventDefault();
 
 		const ptcpName = document.getElementById("ptcp-username").value;
 		const url = window.location.href;
-		const chatId = props.extractFromUrl(url, 'id');
+		const chatId = this.props.extractFromUrl(url, 'id');
 
-		props.addParticipant(ptcpName, chatId);
+		this.props.addParticipant(ptcpName, chatId);
 		document.getElementById("new-ptcp-form").reset();
 	}
 
-	const displayParticipants = () => {
-		const currentUser = props.username;
-		const participants = props.participants;
+	displayParticipants = () => {
+		const currentUser = this.props.username;
+		const participants = this.props.participants;
 
 		const url = window.location.href;
-		const chatId = parseInt(props.extractFromUrl(url, 'id'));
+		const chatId = parseInt(this.props.extractFromUrl(url, 'id'));
 
 		const participantArray = participants.reduce((prevVal, currVal) => {
 			if (currVal.chat === chatId && currVal.name !== currentUser){
@@ -30,17 +37,28 @@ export const ParticipantList = (props) => {
 		const ptcpList = participantArray.join(', ');
 		return(ptcpList);
 	}
-	//<input type="text" id="ptcp-username" name="name" placeholder="Add participant..."></input>
-	return (
-	  <div className="main-ptcp-container">
-		<div className="main-ptcp-list">
-			{displayParticipants()}
-			<button className="main-add-ptcp-btn">+</button>
-			<form id="new-ptcp-form" onSubmit={onSubmit}>
-				<input type="submit" value="Send" className="submit-button"></input>
-			</form>
+
+	onClick = () => {
+		this.setState({
+			displayAddButton: "none",
+			displayTextBox: null,
+		})
+	}
+
+	render() {
+		const { displayAddButton, displayTextBox } = this.state;
+		return (
+		<div className="main-ptcp-container">
+			<div className="main-ptcp-list">
+				{this.displayParticipants()}
+				<button style={{display: displayAddButton}} className="main-add-ptcp-btn" onClick={this.onClick}>+</button>
+				<input style={{display: displayTextBox}} type="text" className="ptcp-text-box" id="ptcp-username" name="name" placeholder="Add participant..."></input>
+				<form id="new-ptcp-form" onSubmit={this.onSubmit}>
+					<input type="submit" value="Send" className="submit-button"></input>
+				</form>
+			</div>
 		</div>
-	  </div>
-	);
+		);
+	}
 }
 
