@@ -65,13 +65,6 @@ export const ChatList = (props) => {
   		let name = chat.name;
       let encodedName = encodeURIComponent(name); // This variable is safe for use in a URL.
   		let id = chat.id;
-      /*
-  		return <tr key={id}>
-  				  <td><Link className="link" to={`${encodedName}/${id}`}>{name}</Link></td>
-  				  <td>{users}</td>
-            <td><button onClick={() => handleClick(name, id)}>x</button></td>
-  			   </tr>
-      */
       return <li key={chat.id} className="chat-item">
               <button className="remove-btn" id="remove" onClick={() => handleClick(name, id)}>X</button>
               <div className="chat-info">

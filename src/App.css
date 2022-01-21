@@ -132,6 +132,7 @@ body {
   position: relative;
   text-decoration: none;
 }
+
 .chat-item:hover {
   background-color: darkslateblue;
   cursor: pointer; 
@@ -170,7 +171,7 @@ body {
 
 .inner-modal-box {
   margin-top: 75px;
-  margin-left: 500px;
+  margin-left: 570px;
   width: 525px;
   height: 150px;
   position: relative;
@@ -179,6 +180,7 @@ body {
   border-style: solid;
   border-color: darkslateblue;
   border-width: 4px;
+  overflow: scroll;
 }
 
 .close-modal-box-btn {
@@ -230,7 +232,7 @@ body {
 .ptcp-button.add {
   position: fixed;
   top: 237px;
-  right: 523px;
+  right: 450px;
   border-radius: 50%;
   border-style: none;
   background-color: darkslateblue;
@@ -248,7 +250,7 @@ body {
 .ptcp-button.sub {
   position: fixed;
   top: 237px;
-  right: 498px;
+  right: 423px;
   border-radius: 50%;
   border-radius: 50%;
   border-style: none;
