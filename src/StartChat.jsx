@@ -32,9 +32,11 @@ export class StartChat extends React.Component {
   addInputBoxes = () => {
     const ptcpInput = this.state.ptcpInput;
     const extraInput = "Add another username... ";
+    const ptcpCount = this.state.ptcpCount;
     if (ptcpInput.length < 5)// I'm limiting group chats to five participants for now. 
       this.setState({
         ptcpInput: ptcpInput.concat(extraInput),
+        ptcpCount: ptcpCount+1,
     })
   }
 
@@ -57,6 +59,14 @@ export class StartChat extends React.Component {
     return(inputList);
   }
 
+  displaySubPtcpBtn(){
+    const ptcpCount = this.state.ptcpInput.length;
+    const display = ptcpCount > 1 ? null : "none";
+    const subPtcpButton = <input style={{display: display}} type="button" className="ptcp-button sub" id="sub-ptcp-button" value="–" onClick={this.removeInputBoxes}></input>;
+
+    return subPtcpButton;
+  }
+
   scrollToBottom(){
     this.bottomOfStartChat.current.scrollIntoView();
   }
@@ -71,15 +81,10 @@ export class StartChat extends React.Component {
   }
 
   render() {
-    const ptcpInput = this.state.ptcpInput;
     const ptcpInputFields = this.displayInputBoxes();
-    let subPtcpButton;
-    if (ptcpInput.length > 1)
-      subPtcpButton = <input type="button" className="ptcp-button sub" id="sub-ptcp-button" value="–" onClick={this.removeInputBoxes}></input>;
-    else
-      subPtcpButton = <input style={{visibility: "hidden"}} type="button" className="ptcp-button" id="sub-ptcp-button"></input>;
-
-    const { username, chats, participants, toggleChatModalBox } = this.props;
+    const subPtcpButton = this.displaySubPtcpBtn();
+    const { toggleChatModalBox } = this.props;
+    
   	return(
         <div className="inner-modal-box" id="start-chat">
           <button className="close-modal-box-btn" onClick={toggleChatModalBox}>X</button>
@@ -90,7 +95,7 @@ export class StartChat extends React.Component {
                 <input type="text" className="new-chat-input" id="chat-name" name="chatname" placeholder="Enter a chatroom name..."></input>
                 {ptcpInputFields}
               </div>
-              {subPtcpButton}
+                {subPtcpButton}
               <input type="button" className="ptcp-button add" id="add-ptcp-button" value="+" 
                 onClick={this.addInputBoxes}></input>
               <input type="submit" className="submit-button"></input>
