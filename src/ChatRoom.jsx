@@ -195,16 +195,14 @@ export class ChatRoom extends React.Component {
 
 		return(decodedChatName);
 	}
-	/*
-	<ParticipantList username={this.props.username} participants={this.props.participants} 
-	extractFromUrl={this.extractFromUrl} addParticipant={this.props.addParticipant} />
-	*/
 	render() {
 		const chatRoomName = this.displayChatRoomName();
 		const messages = this.displayMessages();
 	  	  return (
 			<div className="main-chat-container">
 				<h1 className="title">{chatRoomName}</h1>
+				<ParticipantList username={this.props.username} participants={this.props.participants} 
+				extractFromUrl={this.extractFromUrl} addParticipant={this.props.addParticipant} />
 					<div className="message-container">
 						<div className="message-log">
 							{messages}
