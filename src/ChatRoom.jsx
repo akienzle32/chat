@@ -180,8 +180,13 @@ export class ChatRoom extends React.Component {
 
 		if (loggedIn){
 		  messageList = messages.map(message => {
-  			return  <div key={message.id}><p id="message-author">{ message.author }</p><p id="message-content">{ message.content }</p>
-  					<p id="message-timestamp">{ message.timestamp }</p></div>
+  			return  <div key={message.id} className="message">
+				  		<p id="message-author">{ message.author }</p>
+				  		<div className="inner-message">
+							<p id="message-content">{ message.content }</p>
+						</div>
+						<p id="message-timestamp">{ message.timestamp }</p>
+					  </div>
   		  });
   		}
   		return messageList;

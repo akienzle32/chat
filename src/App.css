@@ -274,7 +274,10 @@ body {
 
 .message-log {
   margin: 10px;
-  display: inline-block;
+  margin-left: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   height: 400px;
   width: 700px;
   padding: 0;
@@ -334,6 +337,29 @@ body {
   height: 19px;
   width: 120px;
   font-size: 14px;
+}
+
+.message {
+  margin: 25px 35px;
+  color: white;
+  display: inline-block;
+  text-align: left;
+}
+
+.inner-message {
+  background-color: darkslateblue;
+  width: max-content;
+  height: 50px;
+  padding-right: 10px;
+  padding-left: 10px;
+  border-radius: 10px;
+}
+
+#message-author {
+}
+
+#message-content {
+  display: inline-block
 }
 
 a.logo {
@@ -419,7 +445,6 @@ label {
   margin: 0px;
   font-size: 16px
 }
-*/
 
 #message-author {
   margin-bottom: 5px;
@@ -441,7 +466,7 @@ label {
   margin-top: 5px;
   font-size: 12px;
 }
-/*
+
 #ptcp-list {
   height: 140px;
   width: 80px;
