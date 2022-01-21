@@ -1,6 +1,5 @@
 import React from 'react';
 import { ParticipantList } from './ParticipantList';
-import { withRouter } from 'react-router-dom';
 import './App.css';
 
 

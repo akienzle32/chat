@@ -1,5 +1,4 @@
 import React from 'react';
-import { ChatList } from './ChatList';
 
 export class StartChat extends React.Component {
 

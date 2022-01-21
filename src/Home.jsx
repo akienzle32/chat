@@ -2,7 +2,7 @@ import React from 'react';
 import { ChatRoom } from './ChatRoom';
 import { StartChat } from './StartChat';
 import { ChatList } from './ChatList';
-import { Switch, Route, Link, withRouter } from 'react-router-dom';
+import { Switch, Route, withRouter } from 'react-router-dom';
 import './App.css';
 
 class Home extends React.Component{
