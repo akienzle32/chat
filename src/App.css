@@ -309,7 +309,7 @@ body {
   background-color: darkslateblue;
   border-style: none;
   color: white;
-  margin-bottom: 5px;
+  margin-bottom: 12px;
   margin-left: 10px;
   height: 25px;
   width: 25px;
@@ -324,10 +324,21 @@ body {
 
 .ptcp-text-box {
   margin-left: 5px;
-  margin-bottom: 5px;
-  height: 19px;
+  margin-bottom: 10px;
+  padding-left: 5px;
+  height: 25px;
   width: 120px;
   font-size: 14px;
+  background-color: darkslateblue;
+  border-style: none;
+  border-radius: 5px;
+  outline: none;
+  color: white;
+}
+
+.ptcp-text-box::placeholder {
+  color: #b2b2b2
+  ;
 }
 
 .message-log {
@@ -357,7 +368,7 @@ body {
 }
 
 .message {
-  margin: 5px 25px;
+  margin: 5px 45px;
   color: white;
   display: flex;
   flex-direction: column;
