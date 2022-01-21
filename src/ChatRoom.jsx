@@ -178,8 +178,6 @@ export class ChatRoom extends React.Component {
 		const loggedIn = this.props.loggedIn;
 		const username = this.props.username;
 		let messageList;
-		const leftAlignClass = "start";
-		const RightAlignClass = "end"; 
 
 		if (loggedIn){
 		  messageList = messages.map(message => {
