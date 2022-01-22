@@ -232,22 +232,6 @@ body {
   color: #999999;
 }
 
-.ptcp-name {
-  width: 200px;
-  height: 30px;
-  margin-bottom: 5px;
-  font-size: 16.5px;
-  background-color: darkslateblue;
-  color: white;
-  outline: none;
-  border-style: none;
-  border-radius: 3px;
-}
-
-.ptcp-name::placeholder {
-  color: #999999;
-}
-
 .ptcp-button {
   position: fixed;
   border-radius: 50%;

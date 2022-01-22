@@ -14,12 +14,11 @@ export class StartChat extends React.Component {
   // is tracked. This function handles arrays of participants in order to support group chats.
   onSubmit = (event) => {
     event.preventDefault();
-
-    const chatName = document.getElementById("chat-name").value;
-    const htmlArray = document.getElementsByClassName("ptcp-name");
+    const htmlArray = document.getElementsByClassName("new-chat-input");
+    const chatName = htmlArray[0].value;
     let ptcpArray = [];
 
-    for (let i = 0; i < htmlArray.length; i++){
+    for (let i = 1; i < htmlArray.length; i++){
       const ptcpName = htmlArray[i].value;
       ptcpArray.push(ptcpName);
     }
@@ -54,7 +53,7 @@ export class StartChat extends React.Component {
   displayInputBoxes(){
     const ptcpInput = this.state.ptcpInput;
     const inputList = ptcpInput.map((placeholder, index) => {
-      return <input key={index} type="text" className="ptcp-name" name="username" placeholder={ placeholder }></input>
+      return <input key={index} type="text" className="new-chat-input" name="username" placeholder={ placeholder }></input>
     })
     return(inputList);
   }
