@@ -54,7 +54,7 @@ export class StartChat extends React.Component {
   displayInputBoxes(){
     const ptcpInput = this.state.ptcpInput;
     const inputList = ptcpInput.map((placeholder, index) => {
-      return <input key={index} type="text" className="new-chat-input" name="username" placeholder={ placeholder }></input>
+      return <input key={index} type="text" className="ptcp-name" name="username" placeholder={ placeholder }></input>
     })
     return(inputList);
   }
