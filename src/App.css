@@ -63,7 +63,7 @@ body {
 .left-bar {
   height: 100vh;
   width: 300px;
-  background-color: darkslateblue;
+  background-color: #6c63a2;
   margin: 0;
   padding: 0;
   overflow: scroll;
@@ -83,15 +83,12 @@ body {
 
 .add-chat-btn {
   display: inline-block;
-  background-color: darkslateblue;
+  background-color: #6c63a2;
   color: white;
   border: none;
   width: 40px;
   height: 40px;
   font-size: 25px;
-  border: 2px;
-  border-style: solid;
-  border-color: darkslateblue;
   border-radius: 50%;
   position: absolute;
   top: 10px;
@@ -128,15 +125,18 @@ body {
   color: black;
   align-content: center;
   text-align: center;
-  border: 3px;
+  border-bottom-width: 6px;
+  border-top: 0;
+  border-left-width: 3px;
+  border-right-width: 2px;
   border-style: solid;
-  border-color: darkslateblue;
+  border-color: #6c63a2;
   position: relative;
   text-decoration: none;
 }
 
 .chat-item:hover {
-  background-color: darkslateblue;
+  background-color: #6c63a2;
   cursor: pointer; 
 }
 
@@ -151,7 +151,7 @@ body {
   width: 21px;
   top: 4px;
   right: 3px;
-  background-color: darkslateblue;
+  background-color: #6c63a2;
   border-style: solid;
   border-color: darkslateblue;
   border-radius: 50%;
@@ -262,11 +262,20 @@ body {
 }
 
 .main-chat-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   position: fixed;
-  align-content: center;
-  text-align: center;
-  margin-left: 500px;
-  padding: 0;
+  width: 80%;
+  height: 100%;
+  background-color: #b5b1d0;
+  margin-left: 300px;
+  padding-bottom: 50px;
+}
+
+.message-container {
+  padding-bottom: 125px;
 }
 
 .main-chat-title {
@@ -350,6 +359,10 @@ body {
   border-width: 10px;
 }
 
+.message-log-home {
+  margin-top: 125px;
+}
+
 .text-container {
   display: flex;
   height: 65px;
@@ -395,14 +408,17 @@ body {
   color: white;
 }
 
-.home-message {
+.graphic-message {
+  display: flex;
+  flex-direction: column;
   background-color: #6c63a2;
-  width:fit-content;
+  width: fit-content;
   height: 150px;
-  padding-right: 10px;
-  padding-left: 10px;
+  padding-right: 20px;
+  padding-left: 20px;
   border-radius: 10px;
   color: white;
+  margin: 10px;
 }
 
 .home-subtitle {

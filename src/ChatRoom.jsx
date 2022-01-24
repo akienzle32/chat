@@ -23,13 +23,13 @@ export class ChatRoom extends React.Component {
 		this.initGetMessages();
 		this.timer = setInterval(this.getMessagesOnInterval, 5000);
 		this.scrollToBottom();
-		this.props.toggleBackgroundColor();
+		//this.props.toggleBackgroundColor();
 	}
 
 	// This method is needed in order to avoid continued GET requests after user navigates away from the page. 
 	componentWillUnmount() {
 		clearInterval(this.timer);
-		this.props.toggleBackgroundColor();
+		//this.props.toggleBackgroundColor();
 	}
 
 	// Function to extract either the chat name or the chat id from the url.

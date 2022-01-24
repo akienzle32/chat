@@ -12,7 +12,6 @@ class Home extends React.Component{
   		chats: [],
   		participants: [],
       newChatDisplay: "none",
-      backgroundColor: "darkslateblue",
       chatRoomMounted: false,
   	}
   }
@@ -193,29 +192,18 @@ class Home extends React.Component{
     })
   }
 
-  toggleBackgroundColor = (pathname) => {
-    const backgroundColor = this.state.backgroundColor;
-    const newBackgroundColor = backgroundColor === "darkslateblue" ? "#b5b1d0" : "darkslateblue";
-
-    this.setState({
-      backgroundColor: newBackgroundColor,
-    })
-  }
-
   displayHomeGraphic(pathname) {
     let component;
 
     if (pathname === '/'){
       component =           
         <div className="home-container">
-          <div className="message-container">
-            <div className="message-log-home">
-              <div className="message" style={{alignItems: "start"}}>
-                <div className="home-message"><p>The Chat App</p></div>
-              </div>
-              <div className="message" style={{alignItems: "end"}}>
-                <div className="home-message"><p className="home-subtitle">Designed by Alec Kienzle</p></div>
-              </div>
+          <div className="graphic-container">
+            <div className="graphic-message">
+              <div><p>The Chat App</p></div>
+            </div>
+            <div className="graphic-message" style={{marginLeft: "150px"}}>
+              <div><p className="home-subtitle">Designed by Alec Kienzle</p></div>
             </div>
           </div>
         </div>
@@ -234,11 +222,10 @@ class Home extends React.Component{
   	const { chats, participants } = this.state;
     const pathname = this.props.location.pathname;
     const graphic = this.displayHomeGraphic(pathname);
-    const backgroundColor = this.state.backgroundColor;
 
   	return (
       <div>
-        <div className="main-container" style={{backgroundColor: backgroundColor}}>
+        <div className="main-container">
           <div className="left-bar">
             <div className="chats-title-container">
               <h3 className="chats-title">My chats</h3>
