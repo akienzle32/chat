@@ -5,7 +5,7 @@ html {
 
 body {
   margin: 0;
-  font-family:Arial, Helvetica, sans-serif;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   background-color: #b5b1d0;
   height: 100%;
   overflow: auto;
@@ -46,6 +46,7 @@ body {
   background-color: #ffdab9;
   height: 90%;
   width: 90%;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .logout-btn:hover {
@@ -56,6 +57,7 @@ body {
 
 .main-container {
   display: flex;
+  background-color: darkslateblue;
 }
 
 .left-bar {
@@ -383,10 +385,27 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 70%;
-  margin-left: 50px;
-  margin-bottom: 100px;
-  font-size: 30px;
+  font-size: 50px;
+  margin-left: 200px;
+  margin-bottom: 180px;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.home-content {
+  color: white;
+}
+
+.home-message {
+  background-color: #6c63a2;
+  width:fit-content;
+  height: 150px;
+  padding-right: 10px;
+  padding-left: 10px;
+  border-radius: 10px;
+  color: white;
+}
+
+.home-subtitle {
 }
 
 a.logo {

@@ -12,6 +12,8 @@ class Home extends React.Component{
   		chats: [],
   		participants: [],
       newChatDisplay: "none",
+      backgroundColor: "darkslateblue",
+      chatRoomMounted: false,
   	}
   }
 
@@ -191,6 +193,36 @@ class Home extends React.Component{
     })
   }
 
+  toggleBackgroundColor = (pathname) => {
+    const backgroundColor = this.state.backgroundColor;
+    const newBackgroundColor = backgroundColor === "darkslateblue" ? "#b5b1d0" : "darkslateblue";
+
+    this.setState({
+      backgroundColor: newBackgroundColor,
+    })
+  }
+
+  displayHomeGraphic(pathname) {
+    let component;
+
+    if (pathname === '/'){
+      component =           
+        <div className="home-container">
+          <div className="message-container">
+            <div className="message-log-home">
+              <div className="message" style={{alignItems: "start"}}>
+                <div className="home-message"><p>The Chat App</p></div>
+              </div>
+              <div className="message" style={{alignItems: "end"}}>
+                <div className="home-message"><p className="home-subtitle">Designed by Alec Kienzle</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+    }
+    return component;
+  }
+
   componentDidMount(){
     this.getChats();
     this.getParticipants();
@@ -200,10 +232,13 @@ class Home extends React.Component{
   render(){
   	const { username, loggedIn, token, handleErrors } = this.props;
   	const { chats, participants } = this.state;
+    const pathname = this.props.location.pathname;
+    const graphic = this.displayHomeGraphic(pathname);
+    const backgroundColor = this.state.backgroundColor;
 
   	return (
       <div>
-        <div className="main-container">
+        <div className="main-container" style={{backgroundColor: backgroundColor}}>
           <div className="left-bar">
             <div className="chats-title-container">
               <h3 className="chats-title">My chats</h3>
@@ -215,17 +250,13 @@ class Home extends React.Component{
               <StartChat username={username} chats={chats} participants={participants} token={token}
               onSubmit={this.addChat} removeFromChat={this.removeFromChat} toggleChatModalBox={this.toggleChatModalBox} />
           </div>
-          <div className="home-container">
-            <div>
-              <p>The Chat App</p>
-              <p>Designed by Alec Kienzle</p>
-            </div>
-          </div>
+          {graphic}
           <Switch>
             <Route path="/:name/:id">
               <ChatRoom key={this.props.location.pathname} username={username} participants={participants} 
               handleErrors={handleErrors} loggedIn={loggedIn} token={token} 
-              addParticipant={this.addParticipant} updateChatState={this.updateChatState} />
+              addParticipant={this.addParticipant} updateChatState={this.updateChatState}
+              toggleBackgroundColor={this.toggleBackgroundColor} />
             </Route>
           </Switch>
         </div>

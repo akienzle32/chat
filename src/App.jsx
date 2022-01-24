@@ -15,7 +15,7 @@ export class App extends React.Component {
   }
 
   displayNavBar = () => {
-    let navBar = null;
+    let navBar;
     const loggedIn = this.state.loggedIn;
     const username = this.state.username;
 
