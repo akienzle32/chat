@@ -172,9 +172,9 @@ body {
 }
 
 .inner-modal-box {
-  margin-top: 75px;
-  margin-left: 570px;
-  width: 525px;
+  margin-top: 90px;
+  margin-left: 500px;
+  width: 560px;
   height: 150px;
   position: relative;
   padding: 15px;
@@ -209,7 +209,7 @@ body {
 }
 
 .chat-form-container {
-  margin-left: 160px;
+  margin-left: 175px;
   position: relative;
 }
 
@@ -243,6 +243,7 @@ body {
   font-size: 18px;
   height: 30px;
   width: 30px;
+  top: 272px;
 }
 
 .ptcp-button:hover {
@@ -252,13 +253,11 @@ body {
 }
 
 .ptcp-button.add {
-  top: 256px;
-  right: 450px;
+  right: 500px;
 }
 
 .ptcp-button.sub {
-  top: 256px;
-  right: 418px;
+  right: 465px;
 }
 
 .main-chat-container {
@@ -418,7 +417,7 @@ body {
   padding-left: 20px;
   border-radius: 10px;
   color: white;
-  margin: 10px;
+  margin: 30px 10px;
 }
 
 .home-subtitle {
