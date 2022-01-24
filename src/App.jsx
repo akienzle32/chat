@@ -22,7 +22,7 @@ export class App extends React.Component {
     if (loggedIn){
       navBar = 
         <nav className="nav-bar">
-          <Link className="logo" to="/">Chat App</Link>
+          <Link className="logo" to="/">CHAT APP</Link>
           <ul className="nav-links">
             <li className="nav-item username" id="username">Signed in as: <b>{username}</b></li>
             <li className="nav-item logout"><button className="logout-btn" onClick={this.logoutUser}>Log out</button></li>

@@ -215,6 +215,12 @@ class Home extends React.Component{
               <StartChat username={username} chats={chats} participants={participants} token={token}
               onSubmit={this.addChat} removeFromChat={this.removeFromChat} toggleChatModalBox={this.toggleChatModalBox} />
           </div>
+          <div className="home-container">
+            <div>
+              <p>The Chat App</p>
+              <p>Designed by Alec Kienzle</p>
+            </div>
+          </div>
           <Switch>
             <Route path="/:name/:id">
               <ChatRoom key={this.props.location.pathname} username={username} participants={participants} 
