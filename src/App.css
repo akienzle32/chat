@@ -167,7 +167,7 @@ body {
   height: 100vh;
   width: 100vw;
   z-index: 1;
-  position: fixed;
+  position: fixed; /* Maybe change */
   background-color: rgba(0,0,0,0.4);
 }
 
@@ -235,7 +235,7 @@ body {
 }
 
 .ptcp-button {
-  position: fixed;
+  position: fixed; /* Maybe change */
   border-radius: 50%;
   border-style: none;
   background-color: darkslateblue;

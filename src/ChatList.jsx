@@ -1,13 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export const ChatList = (props) => {
+export class ChatList extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      removeBtnDisplay = "none",
+    }
+  }
 
   // Maps chats to their participants.
-  const mapChats = () => {
-    const currentUser = props.username;
-  	const chats = props.chats;
-  	let participants = props.participants;
+  mapChats = () => {
+    const currentUser = this.props.username;
+  	const chats = this.props.chats;
+  	let participants = this.props.participants;
 
   	const chatsAndPtcps = [];
 
@@ -31,13 +37,13 @@ export const ChatList = (props) => {
 
   // Sorts the mapped chats array by the last_modified column. If the last_modified column is null
   // (because the chat room was just created), then the chat will sorted to the top.
-  const sortChats = (chatsAndPtcps) => {
+  sortChats = (chatsAndPtcps) => {
   	const sortedChats = chatsAndPtcps.sort((chatA, chatB) =>
       { if (chatA.last_modified === chatB.last_modified)
           return 0;
-        else if (chatA.last_modified === null)
+        else if (chatA.last_modified === null) // Refactor
           return -1;
-        else if (chatB.last_modified === null)
+        else if (chatB.last_modified === null) // Refactor
           return 1;
         else if (new Date(chatA.last_modified) < new Date(chatB.last_modified))
           return 1;
@@ -48,16 +54,21 @@ export const ChatList = (props) => {
   	return(sortedChats);
   }
 
-  const handleClick = (name, chatId) => {
-    const removeFromChat = props.removeFromChat;
+  handleClick = (name, chatId) => {
+    const removeFromChat = this.props.removeFromChat;
     let deleteButton = window.confirm('Are you sure you want remove yourself from the ' + name + ' chat room?');
     if (deleteButton){
       removeFromChat(chatId);
     }
   }
 
+  onHover = () => {
+    const display = null;
+    return display;
+  }
+
   // Displays chats and their participants, with each chat linking to the ChatRoom component.
-  const displayChats = () => {
+  displayChats = () => {
     const chatsAndPtcps = mapChats();
     const sortedChats = sortChats(chatsAndPtcps);
     const chatList = sortedChats.map(chat => {
@@ -79,11 +90,14 @@ export const ChatList = (props) => {
     return(chatList);
   }
 
-	return(
-    <div>
-      <ul className="chat-list">
-        {displayChats()}
-      </ul>
-    </div>
-	 );
+  render() {
+
+    return(
+      <div>
+        <ul className="chat-list">
+          {displayChats()}
+        </ul>
+      </div>
+    );
+  }
 }
