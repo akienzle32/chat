@@ -31,11 +31,11 @@ export class StartChat extends React.Component {
   addInputBoxes = () => {
     const ptcpInput = this.state.ptcpInput;
     const extraInput = "Add another username... ";
-    const ptcpCount = this.state.ptcpCount;
+    //const ptcpCount = this.state.ptcpCount;
     if (ptcpInput.length < 5)// I'm limiting group chats to five participants for now. 
       this.setState({
         ptcpInput: ptcpInput.concat(extraInput),
-        ptcpCount: ptcpCount+1,
+        //ptcpCount: ptcpCount+1,
     })
   }
 

@@ -1,19 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export class ChatList extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      removeBtnDisplay = "none",
-    }
-  }
+export const ChatList = (props) => {
 
   // Maps chats to their participants.
-  mapChats = () => {
-    const currentUser = this.props.username;
-  	const chats = this.props.chats;
-  	let participants = this.props.participants;
+  const mapChats = () => {
+    const currentUser = props.username;
+  	const chats = props.chats;
+  	let participants = props.participants;
 
   	const chatsAndPtcps = [];
 
@@ -37,13 +31,13 @@ export class ChatList extends React.Component {
 
   // Sorts the mapped chats array by the last_modified column. If the last_modified column is null
   // (because the chat room was just created), then the chat will sorted to the top.
-  sortChats = (chatsAndPtcps) => {
+  const sortChats = (chatsAndPtcps) => {
   	const sortedChats = chatsAndPtcps.sort((chatA, chatB) =>
       { if (chatA.last_modified === chatB.last_modified)
           return 0;
-        else if (chatA.last_modified === null) // Refactor
+        else if (!chatA.last_modified)
           return -1;
-        else if (chatB.last_modified === null) // Refactor
+        else if (!chatB.last_modified)
           return 1;
         else if (new Date(chatA.last_modified) < new Date(chatB.last_modified))
           return 1;
@@ -54,7 +48,7 @@ export class ChatList extends React.Component {
   	return(sortedChats);
   }
 
-  handleClick = (name, chatId) => {
+  const handleClick = (name, chatId) => {
     const removeFromChat = this.props.removeFromChat;
     let deleteButton = window.confirm('Are you sure you want remove yourself from the ' + name + ' chat room?');
     if (deleteButton){
@@ -62,24 +56,18 @@ export class ChatList extends React.Component {
     }
   }
 
-  onHover = () => {
-    const display = null;
-    return display;
-  }
-
   // Displays chats and their participants, with each chat linking to the ChatRoom component.
-  displayChats = () => {
+  const displayChats = () => {
     const chatsAndPtcps = mapChats();
     const sortedChats = sortChats(chatsAndPtcps);
     const chatList = sortedChats.map(chat => {
   		let users = chat.usernames.join(", ");
   		let name = chat.name;
       let encodedName = encodeURIComponent(name); // This variable is safe for use in a URL.
-  		let id = chat.id;
-      return <li key={chat.id} className="chat-item">
-              <button className="remove-btn" id="remove" onClick={() => handleClick(name, id)}>X</button>
+      return <li key={chat.id} className="chat-item" >
+              <button className="remove-btn" onClick={() => handleClick(name, chat.id)}>X</button>
               <div className="chat-info">
-                <Link className="chat-link" to={`/${encodedName}/${id}`}><b>{name}</b>
+                <Link className="chat-link" to={`/${encodedName}/${chat.id}`}><b>{name}</b>
                   <p className="ptcp-list">{users}</p>
                 </Link>
               </div>
@@ -89,9 +77,6 @@ export class ChatList extends React.Component {
   	})
     return(chatList);
   }
-
-  render() {
-
     return(
       <div>
         <ul className="chat-list">
@@ -99,5 +84,4 @@ export class ChatList extends React.Component {
         </ul>
       </div>
     );
-  }
 }
