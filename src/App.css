@@ -111,10 +111,18 @@ body {
 .chat-link {
   text-decoration: none;
   color: black;
+  height: 80px;
+  width: 150px;
 }
 
 .chat-link:hover {
   color: white;
+}
+
+.chat-name {
+  padding: 0;
+  padding-top: 10px;
+  margin: 0;
 }
 
 .chat-item {
@@ -134,10 +142,6 @@ body {
   position: relative;
   text-decoration: none;
 }
-.chat-info {
-  padding-top: 10px;
-}
-
 
 .remove-btn {
   position: absolute;

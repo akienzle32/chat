@@ -49,7 +49,7 @@ export const ChatList = (props) => {
   }
 
   const handleClick = (name, chatId) => {
-    const removeFromChat = this.props.removeFromChat;
+    const removeFromChat = props.removeFromChat;
     let deleteButton = window.confirm('Are you sure you want remove yourself from the ' + name + ' chat room?');
     if (deleteButton){
       removeFromChat(chatId);
@@ -67,7 +67,8 @@ export const ChatList = (props) => {
       return <li key={chat.id} className="chat-item" >
               <button className="remove-btn" onClick={() => handleClick(name, chat.id)}>X</button>
               <div className="chat-info">
-                <Link className="chat-link" to={`/${encodedName}/${chat.id}`}><b>{name}</b>
+                <Link className="chat-link" to={`/${encodedName}/${chat.id}`}>
+                  <p className="chat-name"><b>{name}</b></p>
                   <p className="ptcp-list">{users}</p>
                 </Link>
               </div>
