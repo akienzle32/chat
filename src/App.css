@@ -271,6 +271,11 @@ body {
   margin-left: 2px;
 }
 
+.ptcp-btn-container {
+  margin-top: 5px;
+  display: inline-block;
+}
+
 .main-chat-container {
   display: flex;
   justify-content: center;
@@ -443,9 +448,6 @@ body {
   border-radius: 10px;
   color: white;
   margin: 30px 10px;
-}
-
-.home-subtitle {
 }
 
 a.logo {
