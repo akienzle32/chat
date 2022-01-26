@@ -296,11 +296,14 @@ body {
 }
 
 .message-container {
-  padding-bottom: 125px;
+  margin-bottom: 50px;
 }
 
 .main-chat-title {
   color: black;
+  margin: 0;
+  padding: 0;
+  padding-bottom: 12px;
 }
 
 .text-box {
@@ -324,10 +327,12 @@ body {
   justify-content: space-between;
   align-content: center;
   justify-content: center;
+  margin-top: 0;
+  padding-top: 0;
 }
 
 .main-ptcp-list {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   color: black;
 }
 
