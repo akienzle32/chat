@@ -178,7 +178,7 @@ body {
   height: 100vh;
   width: 100vw;
   z-index: 1;
-  position: fixed; /* Maybe change */
+  position: fixed;
   background-color: rgba(0,0,0,0.4);
 }
 
@@ -232,6 +232,7 @@ body {
 .new-chat-input {
   width: 200px;
   height: 30px;
+  padding-top: 4px;
   margin-bottom: 5px;
   font-size: 16.5px;
   background-color: darkslateblue;
@@ -246,15 +247,14 @@ body {
 }
 
 .ptcp-button {
-  position: fixed; /* Maybe change */
+  display: inline-block;
   border-radius: 50%;
   border-style: none;
   background-color: darkslateblue;
   color: white;
-  font-size: 18px;
+  font-size: 19px;
   height: 30px;
   width: 30px;
-  top: 272px;
 }
 
 .ptcp-button:hover {
@@ -264,11 +264,11 @@ body {
 }
 
 .ptcp-button.add {
-  right: 500px;
+  margin-left: 10px;
 }
 
 .ptcp-button.sub {
-  right: 465px;
+  margin-left: 2px;
 }
 
 .main-chat-container {
@@ -277,7 +277,7 @@ body {
   flex-direction: column;
   align-items: center;
   width: 80%;
-  height: 80%;
+  height: 100%;
   background-color: #b5b1d0;
 }
 

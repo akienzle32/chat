@@ -93,10 +93,10 @@ export class StartChat extends React.Component {
               <div className="chat-input-flexbox">
                 <input type="text" className="new-chat-input" id="chat-name" name="chatname" placeholder="Enter a chatroom name..."></input>
                 {ptcpInputFields}
-              </div>
-                {subPtcpButton}
-              <input type="button" className="ptcp-button add" id="add-ptcp-button" value="+" 
+                <input type="button" className="ptcp-button add" id="add-ptcp-button" value="+" 
                 onClick={this.addInputBoxes}></input>
+                {subPtcpButton}
+              </div>
               <input type="submit" className="submit-button"></input>
             </form>
             <div ref={this.bottomOfStartChat}></div>
