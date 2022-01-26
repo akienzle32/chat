@@ -224,29 +224,27 @@ class Home extends React.Component{
     const graphic = this.displayHomeGraphic(pathname);
 
   	return (
-      <div>
-        <div className="main-container">
-          <div className="left-bar">
-            <div className="chats-title-container">
-              <h3 className="chats-title">My chats</h3>
-              <button className="add-chat-btn" onClick={this.toggleChatModalBox}>+</button>
-            </div>
-            <ChatList username={username} chats={chats} participants={participants} removeFromChat={this.removeFromChat} />
+      <div className="main-container">
+        <div className="left-bar">
+          <div className="chats-title-container">
+            <h3 className="chats-title">My chats</h3>
+            <button className="add-chat-btn" onClick={this.toggleChatModalBox}>+</button>
           </div>
-          <div className="start-chat-modal-box" style={{display: this.state.newChatDisplay}}>
-              <StartChat username={username} chats={chats} participants={participants} token={token}
-              onSubmit={this.addChat} removeFromChat={this.removeFromChat} toggleChatModalBox={this.toggleChatModalBox} />
-          </div>
-          {graphic}
-          <Switch>
-            <Route path="/:name/:id">
-              <ChatRoom key={this.props.location.pathname} username={username} participants={participants} 
-              handleErrors={handleErrors} loggedIn={loggedIn} token={token} 
-              addParticipant={this.addParticipant} updateChatState={this.updateChatState}
-              toggleBackgroundColor={this.toggleBackgroundColor} />
-            </Route>
-          </Switch>
+          <ChatList username={username} chats={chats} participants={participants} removeFromChat={this.removeFromChat} />
         </div>
+        <div className="start-chat-modal-box" style={{display: this.state.newChatDisplay}}>
+            <StartChat username={username} chats={chats} participants={participants} token={token}
+            onSubmit={this.addChat} removeFromChat={this.removeFromChat} toggleChatModalBox={this.toggleChatModalBox} />
+        </div>
+        {graphic}
+        <Switch>
+          <Route path="/:name/:id">
+            <ChatRoom key={this.props.location.pathname} username={username} participants={participants} 
+            handleErrors={handleErrors} loggedIn={loggedIn} token={token} 
+            addParticipant={this.addParticipant} updateChatState={this.updateChatState}
+            toggleBackgroundColor={this.toggleBackgroundColor} />
+          </Route>
+        </Switch>
       </div>
   	);
   }

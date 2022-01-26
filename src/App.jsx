@@ -20,7 +20,7 @@ export class App extends React.Component {
     const username = this.state.username;
 
     if (loggedIn){
-      navBar = 
+      navBar =
         <nav className="nav-bar">
           <Link className="logo" to="/">CHAT APP</Link>
           <ul className="nav-links">
@@ -95,8 +95,8 @@ export class App extends React.Component {
       <Router>
         <div>
           {navBar}
+          {component}
         </div>
-        {component}
       </Router>
     );
   }
