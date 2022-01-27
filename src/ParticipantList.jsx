@@ -38,20 +38,6 @@ export class ParticipantList extends React.Component {
 		return(ptcpList);
 	}
 
-	displayAddPtcpBox = () => {
-		this.setState({
-			displayAddBtn: "none",
-			displayTextBox: null,
-		})
-	}
-
-	removeAddPtcpBox = () => {
-		this.setState({
-			displayAddBtn: null,
-			displayTextBox: "none",
-		})
-	}
-
 	toggleAddPtcpBox = () => {
 		const displayAddBtn = this.state.displayAddBtn;
 
