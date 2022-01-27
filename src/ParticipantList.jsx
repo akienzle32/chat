@@ -5,8 +5,7 @@ export class ParticipantList extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			displayAddBtn: null,
-			displayTextBox: "none",
+			displayTextBox: false,
 		};
 	}
 
@@ -38,36 +37,47 @@ export class ParticipantList extends React.Component {
 		return(ptcpList);
 	}
 
-	toggleAddPtcpBox = () => {
-		const displayAddBtn = this.state.displayAddBtn;
+	displayBtnOrTextBox = () => {
+		let htmlNode;
+		const displayTextBox = this.state.displayTextBox;
 
-		if (displayAddBtn === "none"){
-			this.setState({
-				displayAddBtn: null,
-				displayTextBox: "none",
-			})
+		if (displayTextBox){
+			htmlNode = <input type="text" className="ptcp-text-box" id="ptcp-username" name="name" placeholder="Add participant..."></input>;
 		}
 		else {
-			this.setState({
-				displayAddBtn: "none",
-				displayTextBox: "inline-block",
-			})
+			htmlNode = <button className="main-add-ptcp-btn" onClick={this.toggleDisplayTextBox}>+</button>;
 		}
+		return htmlNode;
 	}
 
+	displayCancelBtn = () => {
+		let cancelBtn;
+		const displayTextBox = this.state.displayTextBox;
+
+		if (displayTextBox){
+			cancelBtn = <button className="remove-ptcp-box-btn" onClick={this.toggleDisplayTextBox}>X</button>;
+		}
+		return cancelBtn;
+	}
+
+	toggleDisplayTextBox = () => {
+		const oldDisplayTextBox = this.state.displayTextBox;
+
+		this.setState({
+				displayTextBox: oldDisplayTextBox ? false : true,
+		})
+	}
+
+	//<input type="submit" value="Send" className="submit-button"></input>
+
 	render() {
-		const { displayAddBtn, displayTextBox } = this.state;
 		return (
 		<div className="main-ptcp-container">
-			<div className="main-ptcp-list">
-				{this.displayParticipants()}
-				<button style={{display: displayAddBtn}} className="main-add-ptcp-btn" onClick={this.toggleAddPtcpBox}>+</button>
-				<input style={{display: displayTextBox}} type="text" className="ptcp-text-box" id="ptcp-username" name="name" placeholder="Add participant..."></input>
-				<button style={{display: displayTextBox}} className="remove-ptcp-box-btn" onClick={this.toggleAddPtcpBox}>X</button>
-				<form id="new-ptcp-form" onSubmit={this.onSubmit}>
-					<input type="submit" value="Send" className="submit-button"></input>
-				</form>
-			</div>
+			<div className="main-ptcp-list">{this.displayParticipants()}</div>
+			<form id="new-ptcp-form" onSubmit={this.onSubmit}>
+				{this.displayBtnOrTextBox()}
+			</form>
+				{this.displayCancelBtn()}
 		</div>
 		);
 	}
