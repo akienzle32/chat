@@ -53,6 +53,7 @@ body {
   height: 90%;
   width: 90%;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .logout-btn:hover {
@@ -101,6 +102,7 @@ body {
   position: absolute;
   top: 10px;
   right: 60px;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .add-chat-btn:hover {
@@ -149,6 +151,7 @@ body {
   border-color: #6c63a2;
   position: relative;
   text-decoration: none;
+  transition: background-color 0.2s, color 0.2s;
 }
 
 .remove-btn {
@@ -164,6 +167,7 @@ body {
   border: 2px;
   display: none;
   color: white;
+  transition: background-color 0.15s, color 0.15s;
 }
 
 .remove-btn:hover {
@@ -215,6 +219,7 @@ body {
   border-style: none;
   background-color: darkslateblue;
   color: white;
+  transition: background-color 0.15s, color 0.15s;
 }
 
 .close-modal-box-btn:hover {
@@ -264,6 +269,7 @@ body {
   font-size: 19px;
   height: 30px;
   width: 30px;
+  transition: background-color 0.15s, color 0.15s;
 }
 
 .ptcp-button:hover {
@@ -486,6 +492,32 @@ body {
 a.logo {
     text-decoration: none;
     color: black;
+    font-weight: bold;
+    margin-left: 15px;
+}
+
+.login-container {
+  background-color: darkslateblue;
+  color: white;
+  width: 50%;
+  height: 300px;
+  margin-left: 350px;
+  margin-top: 30px;
+  border-radius: 10px;
+}
+
+.login-title-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding-top: 35px;
+}
+
+.login-title {
+  margin: 0;
+  margin-bottom: 15px;
+  padding: 0;
 }
 
 label {
@@ -503,11 +535,6 @@ label {
   width: 150px;
 }
 
-.link {
-  text-decoration: none;
-  color: black;
-}
-
 .submit-button {
   visibility: hidden;
   display: none;
@@ -522,20 +549,60 @@ label {
   margin-right: 5px;
 }
 
-.register-div {
-  margin-left: 550px;
-  text-align: left;
+.login-input {
+  background-color: #918ab9;
+  border-style: none;
+  border-radius: 10px;
+  color: white;
+  outline: none;
+  padding: 2px 5px;
+  font-size: 15px;
+  font-weight: bold;
+  padding-left: 8px;
 }
 
-#submit-registration {
+.login-page-btn {
+  background-color: #918ab9;
+  color: white;
+  border-style: none;
+  border-radius: 10px;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.login-page-btn:hover {
+  color: black;
+  background-color: #dad8e7;
+}
+
+.login-page-btn.reveal {
+  color: white;
+  border-style: none;
+  border-radius: 10px;
+  width: 55px;
+}
+
+.login-page-btn.reveal:hover {
+  color: black;
+  background-color: #dad8e7;
+}
+
+.login-page-btn.submit {
   margin-top: 5px;
-  margin-left: 5px;
-
+  margin-left: 270px;
+  width: 60px;
 }
 
-#login-title {
-  margin-top: 50px;
-  text-align: center;
+.register-div {
+  text-align: left;
+  margin-top: 62px;
+  background-color: darkslateblue;
+  border-radius: 10px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 
 #home-link {
