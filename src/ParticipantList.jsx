@@ -5,7 +5,7 @@ export class ParticipantList extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			displayAddButton: null,
+			displayAddBtn: null,
 			displayTextBox: "none",
 		};
 	}
@@ -38,21 +38,46 @@ export class ParticipantList extends React.Component {
 		return(ptcpList);
 	}
 
-	onClick = () => {
+	displayAddPtcpBox = () => {
 		this.setState({
-			displayAddButton: "none",
+			displayAddBtn: "none",
 			displayTextBox: null,
 		})
 	}
 
+	removeAddPtcpBox = () => {
+		this.setState({
+			displayAddBtn: null,
+			displayTextBox: "none",
+		})
+	}
+
+	toggleAddPtcpBox = () => {
+		const displayAddBtn = this.state.displayAddBtn;
+
+		if (displayAddBtn === "none"){
+			this.setState({
+				displayAddBtn: null,
+				displayTextBox: "none",
+			})
+		}
+		else {
+			this.setState({
+				displayAddBtn: "none",
+				displayTextBox: null,
+			})
+		}
+	}
+
 	render() {
-		const { displayAddButton, displayTextBox } = this.state;
+		const { displayAddBtn, displayTextBox } = this.state;
 		return (
 		<div className="main-ptcp-container">
 			<div className="main-ptcp-list">
 				{this.displayParticipants()}
-				<button style={{display: displayAddButton}} className="main-add-ptcp-btn" onClick={this.onClick}>+</button>
+				<button style={{display: displayAddBtn}} className="main-add-ptcp-btn" onClick={this.toggleAddPtcpBox}>+</button>
 				<input style={{display: displayTextBox}} type="text" className="ptcp-text-box" id="ptcp-username" name="name" placeholder="Add participant..."></input>
+				<button style={{display: displayTextBox}} className="main-add-ptcp-btn" onClick={this.toggleAddPtcpBox}>x</button>
 				<form id="new-ptcp-form" onSubmit={this.onSubmit}>
 					<input type="submit" value="Send" className="submit-button"></input>
 				</form>
