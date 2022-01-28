@@ -68,8 +68,6 @@ export class ParticipantList extends React.Component {
 		})
 	}
 
-	//<input type="submit" value="Send" className="submit-button"></input>
-
 	render() {
 		return (
 		<div className="main-ptcp-container">

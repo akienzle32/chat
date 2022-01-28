@@ -127,11 +127,7 @@ class Home extends React.Component{
 
       const currentUser = this.props.username;
       const newPtcpArray = ptcpArray.concat(currentUser);
-      /*
-      for (let i = 0; i < newPtcpArray.length; i++){
-        this.addParticipant(newPtcpArray[i], chatId);
-      }
-      */
+
       newPtcpArray.forEach(ptcp => {
         this.addParticipant(ptcp, chatId);
       })

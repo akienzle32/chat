@@ -4,7 +4,6 @@ import './App.css';
 
 
 export class ChatRoom extends React.Component {
-
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -13,7 +12,6 @@ export class ChatRoom extends React.Component {
 		this.bottomOfMessages = React.createRef();
 	}
 
-	// Function to scroll the message-log div to the bottom. It is called by both componentDidMount() and componentDidUpdate(). 
 	scrollToBottom() {
 		this.bottomOfMessages.current.scrollIntoView({behavior: 'smooth'});
 	}
@@ -23,16 +21,14 @@ export class ChatRoom extends React.Component {
 		this.initGetMessages();
 		this.timer = setInterval(this.getMessagesOnInterval, 5000);
 		this.scrollToBottom();
-		//this.props.toggleBackgroundColor();
 	}
 
 	// This method is needed in order to avoid continued GET requests after user navigates away from the page. 
 	componentWillUnmount() {
 		clearInterval(this.timer);
-		//this.props.toggleBackgroundColor();
 	}
 
-	// Function to extract either the chat name or the chat id from the url.
+	// Helper function to extract either the chat name or the chat id from the url.
 	extractFromUrl(url, string) {
 		const cleanUrl = decodeURI(url);
 		const pathArray = cleanUrl.split('/');
@@ -149,8 +145,8 @@ export class ChatRoom extends React.Component {
 
 	// This method is essentially a request for the server to update the last_modified column of the current
 	// chat, and is called every time a message is sent. Because timestamps for messages are added on the
-	// server side, the logic for updating this column is entirely located on the backend (which explains why 
-	// the PUT request actually features an empty body).
+	// server side, the logic for updating this column is entirely located on the backend (thus the PUT
+	// request actually features an empty body).
 	patchChat = () => {
 		const url = window.location.href;
 		const chatId = this.extractFromUrl(url, 'id');
@@ -173,8 +169,6 @@ export class ChatRoom extends React.Component {
 		.catch(error => console.log(error))
 	}
 
-	// If the user is logged in, then for each message, display the username of the author, the message content itself, 
-	// and the message's timestamp. This method is called by both componentDidMount() and componentDidUpdate(). 
 	displayMessages() {
 		const messages = this.state.messages;
 		const loggedIn = this.props.loggedIn;
@@ -195,7 +189,6 @@ export class ChatRoom extends React.Component {
   		return messageList;
 	}
 
-	// Scrape the chat room name from the url. 
 	displayChatRoomName(){
 		const url = window.location.href;
 		const chatName = this.extractFromUrl(url, 'name');
@@ -207,7 +200,7 @@ export class ChatRoom extends React.Component {
 	render() {
 		const chatRoomName = this.displayChatRoomName();
 		const messages = this.displayMessages();
-	  	  return (
+	  	return (
 			<div className="main-chat-container">
 				<h1 className="main-chat-title">{chatRoomName}</h1>
 				<ParticipantList username={this.props.username} participants={this.props.participants} 
@@ -227,6 +220,6 @@ export class ChatRoom extends React.Component {
 						</div>
 					</div>
 		 	</div>	
-	  	  );
-	  	}
-  	}
+	  	);
+	}
+}
