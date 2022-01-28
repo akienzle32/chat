@@ -604,19 +604,3 @@ label {
   align-items: center;
   display: flex;
 }
-
-#home-link {
-  float: left;
-}
-
-#username {
-  margin-right: 15px;
-}
-
-#my-chats {
-  height: 200px;
-  width: 400px;
-  padding-left: 50px;
-  padding-right: 50px;
-  padding-bottom: 50px;
-}
