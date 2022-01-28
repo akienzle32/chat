@@ -201,7 +201,7 @@ export class ChatRoom extends React.Component {
 		const chatName = this.extractFromUrl(url, 'name');
 		const decodedChatName = decodeURIComponent(chatName);
 
-		return(decodedChatName);
+		return decodedChatName;
 	}
 
 	render() {

@@ -11,7 +11,6 @@ export class Login extends React.Component {
   	}
   }
 
-
   onSubmit = (event) => {
   	event.preventDefault();
   	const loginForm = event.target;
@@ -64,7 +63,6 @@ export class Login extends React.Component {
 
   render(){
   	const registrationForm = this.displayRegistrationForm();
-	const displayProperty = this.display
   	return(
 		<div className="login-container">
 			<div className="login-title-box">

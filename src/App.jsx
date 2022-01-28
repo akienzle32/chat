@@ -36,7 +36,7 @@ export class App extends React.Component {
     if (!response.ok){
       throw Error(response.statusText);
     }
-    return(response);
+    return response;
   }
 
   loginAndSetUser = (username, token) => {
@@ -64,7 +64,7 @@ export class App extends React.Component {
       </Switch>
     }
 
-    return(component);
+    return component;
   }
 
   logoutUser = () => {
@@ -93,10 +93,8 @@ export class App extends React.Component {
 
     return(
       <Router>
-        <div>
           {navBar}
           {component}
-        </div>
       </Router>
     );
   }

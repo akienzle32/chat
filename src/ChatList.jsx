@@ -25,27 +25,27 @@ export const ChatList = (props) => {
   		chatsAndPtcps.push(JSONelement);
   	}
 
-  	return(chatsAndPtcps);
+  	return chatsAndPtcps;
   }
 
 
   // Sorts the mapped chats array by the last_modified column. If the last_modified column is null
   // (because the chat room was just created), then the chat will sorted to the top.
   const sortChats = (chatsAndPtcps) => {
-  	const sortedChats = chatsAndPtcps.sort((chatA, chatB) =>
-      { if (chatA.last_modified === chatB.last_modified)
-          return 0;
-        else if (!chatA.last_modified)
-          return -1;
-        else if (!chatB.last_modified)
-          return 1;
-        else if (new Date(chatA.last_modified) < new Date(chatB.last_modified))
-          return 1;
-        else
-          return -1;
-      });
+  	const sortedChats = chatsAndPtcps.sort((chatA, chatB) => {
+      if (chatA.last_modified === chatB.last_modified)
+        return 0;
+      else if (!chatA.last_modified)
+        return -1;
+      else if (!chatB.last_modified)
+        return 1;
+      else if (new Date(chatA.last_modified) < new Date(chatB.last_modified))
+        return 1;
+      else
+        return -1;
+    });
 
-  	return(sortedChats);
+  	return sortedChats;
   }
 
   const handleClick = (name, chatId) => {
