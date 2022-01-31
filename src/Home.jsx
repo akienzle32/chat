@@ -233,8 +233,8 @@ class Home extends React.Component{
           <ChatList username={username} chats={chats} participants={participants} removeFromChat={this.removeFromChat} />
         </div>
         <div className="start-chat-modal-box" style={{display: this.state.newChatDisplay}}>
-            <StartChat username={username} chats={chats} participants={participants} token={token}
-            onSubmit={this.addChat} removeFromChat={this.removeFromChat} toggleChatModalBox={this.toggleChatModalBox} />
+          <StartChat username={username} chats={chats} participants={participants} token={token}
+          onSubmit={this.addChat} removeFromChat={this.removeFromChat} toggleChatModalBox={this.toggleChatModalBox} />
         </div>
         {graphic}
         <Switch>

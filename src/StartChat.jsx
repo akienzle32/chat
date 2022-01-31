@@ -6,8 +6,9 @@ export class StartChat extends React.Component {
     super(props);
     this.state = {
       ptcpInput: ["Enter a username... "],
+      ptcpNames: [],
+      chatName: '',
     }
-    this.baseState = this.state; // Record the base state in order to revert to it after form submission.
     this.bottomOfStartChat = React.createRef();
   }
   // Function to pass text input up to the Home component, where the state of chats and participants 
@@ -27,7 +28,16 @@ export class StartChat extends React.Component {
     
     this.props.onSubmit(chatName, ptcpArray);
     document.getElementById("chat-form").reset();
-    this.setState(this.baseState);
+    this.resetInputFields();
+    this.props.toggleChatModalBox();
+  }
+
+  resetInputFields = () => {
+    this.setState({
+      ptcpInput: ["Enter a username... "],
+      ptcpNames: [],
+      chatName: '',
+    })
   }
 
   addInputBoxes = () => {
@@ -50,10 +60,26 @@ export class StartChat extends React.Component {
     }
   }
 
+  handlePtcpChange = (event, index) => {
+    const prevState = this.state.ptcpNames;
+    let nextState = prevState;
+    nextState[index] = event.target.value;
+    this.setState({
+      ptcpNames: nextState,
+    })
+  }
+
+  handleChatChange = (event) => {
+    const chatName = event.target.value;
+    this.setState({
+      chatName: chatName,
+    })
+  }
+
   displayInputBoxes(){
     const ptcpInput = this.state.ptcpInput;
     const inputList = ptcpInput.map((placeholder, index) => {
-      return <input key={index} type="text" className="new-chat-input" name="username" placeholder={ placeholder }></input>
+      return <input key={index} type="text" className="new-chat-input" name="username" placeholder={ placeholder } onChange={(event) => this.handlePtcpChange(event, index)}></input>
     })
     return inputList;
   }
@@ -91,7 +117,7 @@ export class StartChat extends React.Component {
         <div className="chat-form-container">
           <form id="chat-form" onSubmit={this.onSubmit}>
             <div className="chat-input-flexbox">
-              <input type="text" className="new-chat-input" id="chat-name" name="chatname" placeholder="Enter a chatroom name..."></input>
+              <input type="text" className="new-chat-input" id="chat-name" name="chatname" placeholder="Enter a chatroom name..." onChange={this.handleChatChange}></input>
               {ptcpInputFields}
               <div className="ptcp-btn-container"><input type="button" className="ptcp-button add" id="add-ptcp-button" value="+"
               onClick={this.addInputBoxes}></input></div>
