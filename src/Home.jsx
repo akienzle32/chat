@@ -116,7 +116,10 @@ class Home extends React.Component{
       body: jsonData    
     })
     .then(response => {
-      return response.json();
+      if (response.status === 400)
+        alert("Invalid chat name");
+      else
+        return response.json();
     })
     .then(newChat => {
       chatId = newChat.id;
@@ -132,6 +135,7 @@ class Home extends React.Component{
         this.addParticipant(ptcp, chatId);
       })
     })
+    .catch(error => console.log(error));
   }
 
   // This method is passed down as a prop to the ChatRoom component and allows for the state of the chats

@@ -56,8 +56,13 @@ export class StartChat extends React.Component {
       const newInput = ptcpInput.slice(0, lastInput);
       this.setState({
         ptcpInput: newInput,
-      })
+      })  
     }
+    const ptcpNames = this.state.ptcpNames;
+    ptcpNames.pop();
+    this.setState({
+      ptcpNames: ptcpNames,
+    })
   }
 
   handlePtcpChange = (event, index) => {
