@@ -5,7 +5,7 @@ export class StartChat extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      ptcpInput: ["Enter a username... "],
+      ptcpInputBoxes: ["Enter a username... "],
       ptcpNames: [],
       chatName: '',
     }
@@ -34,28 +34,28 @@ export class StartChat extends React.Component {
 
   resetInputFields = () => {
     this.setState({
-      ptcpInput: ["Enter a username... "],
+      ptcpInputBoxes: ["Enter a username... "],
       ptcpNames: [],
       chatName: '',
     })
   }
 
   addInputBoxes = () => {
-    const ptcpInput = this.state.ptcpInput;
+    const ptcpInputBoxes = this.state.ptcpInputBoxes;
     const extraInput = "Add another username... ";
-    if (ptcpInput.length < 5)// I'm limiting group chats to five participants for now. 
+    if (ptcpInputBoxes.length < 5)// I'm limiting group chats to five participants for now. 
       this.setState({
-        ptcpInput: ptcpInput.concat(extraInput),
+        ptcpInputBoxes: ptcpInputBoxes.concat(extraInput),
     })
   }
 
   removeInputBoxes = () => {
-    const ptcpInput = this.state.ptcpInput;
-    if (ptcpInput.length > 1){
-      const lastInput = ptcpInput.length - 1;
-      const newInput = ptcpInput.slice(0, lastInput);
+    const ptcpInputBoxes = this.state.ptcpInputBoxes;
+    if (ptcpInputBoxes.length > 1){
+      const lastInput = ptcpInputBoxes.length - 1;
+      const newInput = ptcpInputBoxes.slice(0, lastInput);
       this.setState({
-        ptcpInput: newInput,
+        ptcpInputBoxes: newInput,
       })  
     }
     const ptcpNames = this.state.ptcpNames;
@@ -82,15 +82,15 @@ export class StartChat extends React.Component {
   }
 
   displayInputBoxes(){
-    const ptcpInput = this.state.ptcpInput;
-    const inputList = ptcpInput.map((placeholder, index) => {
+    const ptcpInputBoxes = this.state.ptcpInputBoxes;
+    const inputList = ptcpInputBoxes.map((placeholder, index) => {
       return <input key={index} type="text" className="new-chat-input" name="username" placeholder={ placeholder } onChange={(event) => this.handlePtcpChange(event, index)}></input>
     })
     return inputList;
   }
 
   displaySubPtcpBtn(){
-    const ptcpCount = this.state.ptcpInput.length;
+    const ptcpCount = this.state.ptcpInputBoxes.length;
     const display = ptcpCount > 1 ? null : "none";
     const subPtcpButton = <input style={{display: display}} type="button" className="ptcp-button sub" id="sub-ptcp-button" value="–" onClick={this.removeInputBoxes}></input>;
 
@@ -111,7 +111,7 @@ export class StartChat extends React.Component {
   }
 
   render() {
-    const ptcpInputFields = this.displayInputBoxes();
+    const ptcpInputBoxes = this.displayInputBoxes();
     const subPtcpButton = this.displaySubPtcpBtn();
     const { toggleChatModalBox } = this.props;
     
@@ -123,7 +123,7 @@ export class StartChat extends React.Component {
           <form id="chat-form" onSubmit={this.onSubmit}>
             <div className="chat-input-flexbox">
               <input type="text" className="new-chat-input" id="chat-name" name="chatname" placeholder="Enter a chatroom name..." onChange={this.handleChatChange}></input>
-              {ptcpInputFields}
+              {ptcpInputBoxes}
               <div className="ptcp-btn-container"><input type="button" className="ptcp-button add" id="add-ptcp-button" value="+"
               onClick={this.addInputBoxes}></input></div>
               {subPtcpButton}
