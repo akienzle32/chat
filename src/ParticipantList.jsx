@@ -6,13 +6,14 @@ export class ParticipantList extends React.Component {
 		super(props);
 		this.state = {
 			displayTextBox: false,
+			ptcpName: null,
 		};
 	}
 
 	onSubmit = (event) => {
 		event.preventDefault();
 
-		const ptcpName = document.getElementById("ptcp-username").value;
+		const ptcpName = this.state.ptcpName;
 		const url = window.location.href;
 		const chatId = this.props.extractFromUrl(url, 'id');
 
@@ -37,12 +38,18 @@ export class ParticipantList extends React.Component {
 		return(ptcpList);
 	}
 
+	handlePtcpInput = (event) => {
+		this.setState({
+			ptcpName: event.target.value,
+		})
+	}
+
 	displayBtnOrTextBox = () => {
 		let htmlNode;
 		const displayTextBox = this.state.displayTextBox;
 
 		if (displayTextBox){
-			htmlNode = <input type="text" className="ptcp-text-box" id="ptcp-username" name="name" placeholder="Add participant..."></input>;
+			htmlNode = <input type="text" className="ptcp-text-box" id="ptcp-username" name="name" onChange={this.handlePtcpInput}placeholder="Add participant..."></input>;
 		}
 		else {
 			htmlNode = <button className="main-add-ptcp-btn" onClick={this.toggleDisplayTextBox}>+</button>;
