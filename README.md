@@ -12,8 +12,8 @@ for the individual components, which have the following structure:
     |-- Login
         |-- Register
     |-- Home
+        |-- ChatList
         |-- StartChat
-            |-- ChatList
         |-- ChatRoom
             |-- ParticipantList
 ```
