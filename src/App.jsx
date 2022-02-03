@@ -1,7 +1,7 @@
 import React from 'react';
 import { Login } from './Login';
-import { Home } from './Home';
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import Home from './Home';
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
 export class App extends React.Component {
   constructor(props){
@@ -14,11 +14,29 @@ export class App extends React.Component {
     this.baseState = this.state;
   }
 
+  displayNavBar = () => {
+    let navBar;
+    const loggedIn = this.state.loggedIn;
+    const username = this.state.username;
+
+    if (loggedIn){
+      navBar =
+        <nav className="nav-bar">
+          <Link className="logo" to="/">CHAT APP</Link>
+          <ul className="nav-links">
+            <li className="nav-item username" id="username">Signed in as: <b>{username}</b></li>
+            <li className="nav-item logout"><button className="logout-btn" onClick={this.logoutUser}>Log out</button></li>
+          </ul>
+        </nav>
+    }
+    return(navBar);
+  }
+
   handleErrors(response) {
     if (!response.ok){
       throw Error(response.statusText);
     }
-    return(response);
+    return response;
   }
 
   loginAndSetUser = (username, token) => {
@@ -27,22 +45,6 @@ export class App extends React.Component {
       loggedIn: true,
       token: 'Token ' + token,
     })
-  }
-
-  displayNavBar = () => {
-    let navBar = null;
-    const loggedIn = this.state.loggedIn;
-    const username = this.state.username;
-
-    if (loggedIn){
-      navBar = 
-      <ul className="nav-bar">
-        <li className="left-nav-element"><Link className="link" to="/">Home</Link></li>
-        <li className="right-nav-element"><button className="link" onClick={this.logoutUser}>Log out</button></li>
-        <li className="right-nav-element" id="username">Signed in as <b>{username}</b></li>
-      </ul>
-    }
-    return(navBar);
   }
 
   // Depending upon the user's authentication status, display either the Login or Home component.
@@ -54,10 +56,15 @@ export class App extends React.Component {
       handleErrors={this.handleErrors} />
     }
     else {
-      component = <Home username={username} loggedIn={loggedIn} token={token} handleErrors={this.handleErrors}  />
+      component = 
+      <Switch>
+        <Route path="/">
+          <Home username={username} loggedIn={loggedIn} token={token} handleErrors={this.handleErrors}  />
+        </Route>
+      </Switch>
     }
 
-    return(component);
+    return component;
   }
 
   logoutUser = () => {
@@ -76,7 +83,7 @@ export class App extends React.Component {
     }
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.checkLoginStatus();
   }
 
@@ -86,10 +93,8 @@ export class App extends React.Component {
 
     return(
       <Router>
-        <div>
           {navBar}
-        </div>
-        {component}
+          {component}
       </Router>
     );
   }

@@ -4,7 +4,6 @@ import './App.css';
 
 
 export class ChatRoom extends React.Component {
-
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -13,7 +12,6 @@ export class ChatRoom extends React.Component {
 		this.bottomOfMessages = React.createRef();
 	}
 
-	// Function to scroll the message-log div to the bottom. It is called by both componentDidMount() and componentDidUpdate(). 
 	scrollToBottom() {
 		this.bottomOfMessages.current.scrollIntoView({behavior: 'smooth'});
 	}
@@ -30,7 +28,7 @@ export class ChatRoom extends React.Component {
 		clearInterval(this.timer);
 	}
 
-	// Function to extract either the chat name or the chat id from the url.
+	// Helper function to extract either the chat name or the chat id from the url.
 	extractFromUrl(url, string) {
 		const cleanUrl = decodeURI(url);
 		const pathArray = cleanUrl.split('/');
@@ -106,7 +104,7 @@ export class ChatRoom extends React.Component {
 
 	componentDidUpdate() {
 		this.displayMessages();
-		this.scrollToBottom()
+		this.scrollToBottom();
 	}
 
 	// Function to POST new messages to the database. 
@@ -147,8 +145,8 @@ export class ChatRoom extends React.Component {
 
 	// This method is essentially a request for the server to update the last_modified column of the current
 	// chat, and is called every time a message is sent. Because timestamps for messages are added on the
-	// server side, the logic for updating this column is entirely located on the backend (which explains why 
-	// the PUT request actually features an empty body).
+	// server side, the logic for updating this column is entirely located on the backend (thus the PUT
+	// request actually features an empty body).
 	patchChat = () => {
 		const url = window.location.href;
 		const chatId = this.extractFromUrl(url, 'id');
@@ -171,54 +169,57 @@ export class ChatRoom extends React.Component {
 		.catch(error => console.log(error))
 	}
 
-	// If the user is logged in, then for each message, display the username of the author, the message content itself, 
-	// and the message's timestamp. This method is called by both componentDidMount() and componentDidUpdate(). 
 	displayMessages() {
 		const messages = this.state.messages;
 		const loggedIn = this.props.loggedIn;
+		const username = this.props.username;
 		let messageList;
 
 		if (loggedIn){
 		  messageList = messages.map(message => {
-  			return  <div key={message.id}><p id="message-author">{ message.author }</p><p id="message-content">{ message.content }</p>
-  					<p id="message-timestamp">{ message.timestamp }</p></div>
+  			return  <div key={message.id} className="message" style={{alignItems: message.author === username ? "end" : "start"}}>
+						<p id="message-author">{ message.author }</p>
+					<div className="inner-message">
+						<p id="message-content">{ message.content }</p>
+					</div>
+						<p id="message-timestamp">{ message.timestamp }</p>
+					</div>
   		  });
   		}
   		return messageList;
 	}
 
-	// Scrape the chat room name from the url. 
 	displayChatRoomName(){
 		const url = window.location.href;
 		const chatName = this.extractFromUrl(url, 'name');
 		const decodedChatName = decodeURIComponent(chatName);
 
-		return(decodedChatName);
+		return decodedChatName;
 	}
 
 	render() {
 		const chatRoomName = this.displayChatRoomName();
 		const messages = this.displayMessages();
-	  	  return (
-			<div>
-		  	  <div><h1 className="title">{chatRoomName}</h1></div>
-		  	  <div className="lower-container">
-		  	  	<ParticipantList username={this.props.username} participants={this.props.participants} 
-		  	  		extractFromUrl={this.extractFromUrl} addParticipant={this.props.addParticipant} />
-			  	<div className="top-rounded-box" id="message-log">{messages}
-			  	  <div ref={this.bottomOfMessages} />
-			  	</div>
-			  	  <div className="bottom-rounded-box" id="new-message-box">
-					<form id='message-form' onSubmit={this.onSubmit}>
-				  	  <input type="text" id="message-input" name="content" placeholder="Text message..."></input>
-				  	  <input type='hidden' name='author'></input>
-				  	  <input type='hidden' name='chat'></input>
-				  	  <input type='submit' value='Send' className='submit-button'></input>
-					</form>	
-			  	</div>
-		  	  </div>	
+	  	return (
+			<div className="main-chat-container">
+				<h1 className="main-chat-title">{chatRoomName}</h1>
+				<ParticipantList username={this.props.username} participants={this.props.participants} 
+				extractFromUrl={this.extractFromUrl} addParticipant={this.props.addParticipant} />
+					<div className="message-container">
+						<div className="message-log">
+							{messages}
+							<div ref={this.bottomOfMessages} />
+						</div>
+						<div className="text-container" id="new-message-box">
+							<form id='message-form' onSubmit={this.onSubmit}>
+							<input className="text-box" type="text" id="message-input" name="content" placeholder="Text message..."></input>
+							<input type='hidden' name='author'></input>
+							<input type='hidden' name='chat'></input>
+							<input type='submit' value='Send' className='submit-button'></input>
+							</form>	
+						</div>
+					</div>
 		 	</div>	
-	  	  );
-	  	}
-  	}
-
+	  	);
+	}
+}

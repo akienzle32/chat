@@ -1,16 +1,18 @@
 import React from 'react';
 import { ChatRoom } from './ChatRoom';
 import { StartChat } from './StartChat';
-import { Switch, Route } from 'react-router-dom';
+import { ChatList } from './ChatList';
+import { Switch, Route, withRouter } from 'react-router-dom';
 import './App.css';
 
-export class Home extends React.Component{
+class Home extends React.Component{
   constructor(props){
   	super(props);
   	this.state = {
   		chats: [],
   		participants: [],
-
+      newChatDisplay: "none",
+      chatRoomMounted: false,
   	}
   }
 
@@ -114,7 +116,10 @@ export class Home extends React.Component{
       body: jsonData    
     })
     .then(response => {
-      return response.json();
+      if (response.status === 400)
+        alert("Invalid chat name");
+      else
+        return response.json();
     })
     .then(newChat => {
       chatId = newChat.id;
@@ -126,10 +131,11 @@ export class Home extends React.Component{
       const currentUser = this.props.username;
       const newPtcpArray = ptcpArray.concat(currentUser);
 
-      for (let i = 0; i < newPtcpArray.length; i++){
-        this.addParticipant(newPtcpArray[i], chatId);
-      }
+      newPtcpArray.forEach(ptcp => {
+        this.addParticipant(ptcp, chatId);
+      })
     })
+    .catch(error => console.log(error));
   }
 
   // This method is passed down as a prop to the ChatRoom component and allows for the state of the chats
@@ -170,31 +176,81 @@ export class Home extends React.Component{
   	.catch(error => console.log(error))
   }
 
+  toggleChatModalBox = () => {
+    if (this.state.newChatDisplay === "none"){
+      this.setState({
+        newChatDisplay: "inline-block",
+      })
+    }
+    else {
+      this.setState({
+        newChatDisplay: "none",
+      })
+    }
+  }
+
+  changeCurrentChat = () => {
+    const pathname = window.location.pathname;
+    this.setState({
+      pathname: pathname,
+    })
+  }
+
+  displayHomeGraphic(pathname) {
+    let component;
+
+    if (pathname === '/'){
+      component =           
+        <div className="home-container">
+          <div className="graphic-container">
+            <div className="graphic-message">
+              <div><p>The Chat App</p></div>
+            </div>
+            <div className="graphic-message" style={{marginLeft: "150px"}}>
+              <div><p className="home-subtitle">Designed by Alec Kienzle</p></div>
+            </div>
+          </div>
+        </div>
+    }
+    return component;
+  }
 
   componentDidMount(){
     this.getChats();
     this.getParticipants();
+    this.changeCurrentChat();
   }
 
   render(){
   	const { username, loggedIn, token, handleErrors } = this.props;
-  	const { chats, participants } = this.state; 
+  	const { chats, participants } = this.state;
+    const pathname = this.props.location.pathname;
+    const graphic = this.displayHomeGraphic(pathname);
 
   	return (
-  	  <div>
-  	  	<Switch>
-  	  	  <Route path="/:name/:id">
-  	  	  	<ChatRoom username={username} participants={participants} 
-  		  		handleErrors={handleErrors} loggedIn={loggedIn} token={token} 
-  		  		addParticipant={this.addParticipant} updateChatState={this.updateChatState}   />;
-  		  </Route>
-  		  <Route path="/">
- 			<StartChat username={username} chats={chats} participants={participants} token={token}
- 				onSubmit={this.addChat} removeFromChat={this.removeFromChat} />
- 			}
-  		  </Route>
-  		</Switch>
-  	 </div>
+      <div className="main-container">
+        <div className="left-bar">
+          <div className="chats-title-container">
+            <h3 className="chats-title">My chats</h3>
+            <button className="add-chat-btn" onClick={this.toggleChatModalBox}>+</button>
+          </div>
+          <ChatList username={username} chats={chats} participants={participants} removeFromChat={this.removeFromChat} />
+        </div>
+        <div className="start-chat-modal-box" style={{display: this.state.newChatDisplay}}>
+          <StartChat username={username} chats={chats} participants={participants} token={token}
+          onSubmit={this.addChat} removeFromChat={this.removeFromChat} toggleChatModalBox={this.toggleChatModalBox} />
+        </div>
+        {graphic}
+        <Switch>
+          <Route path="/:name/:id">
+            <ChatRoom key={this.props.location.pathname} username={username} participants={participants} 
+            handleErrors={handleErrors} loggedIn={loggedIn} token={token} 
+            addParticipant={this.addParticipant} updateChatState={this.updateChatState}
+            toggleBackgroundColor={this.toggleBackgroundColor} />
+          </Route>
+        </Switch>
+      </div>
   	);
   }
 }
+export default withRouter(Home);

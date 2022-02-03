@@ -1,62 +1,100 @@
 import React from 'react';
-import { ChatList } from './ChatList';
 
 export class StartChat extends React.Component {
 
   constructor(props){
     super(props);
     this.state = {
-      ptcpInput: ["Enter a username... "],
+      ptcpInputBoxes: ["Enter a username... "],
+      ptcpNames: [],
+      chatName: '',
     }
-    this.baseState = this.state; // Record the base state in order to revert to it after form submission.
     this.bottomOfStartChat = React.createRef();
   }
-
   // Function to pass text input up to the Home component, where the state of chats and participants 
   // is tracked. This function handles arrays of participants in order to support group chats.
   onSubmit = (event) => {
     event.preventDefault();
-
-    const chatName = document.getElementById("chat-name").value;
-    const htmlArray = document.getElementsByClassName("ptcp-name");
+    const htmlCollection = document.getElementsByClassName("new-chat-input");
+    let chatName;
     let ptcpArray = [];
 
-    for (let i = 0; i < htmlArray.length; i++){
-      const ptcpName = htmlArray[i].value;
-      ptcpArray.push(ptcpName);
-    }
-
+    [...htmlCollection].forEach((element, index) => {
+      if (index === 0)
+        chatName = element.value;
+      else
+        ptcpArray.push(element.value);
+    })
+    
     this.props.onSubmit(chatName, ptcpArray);
     document.getElementById("chat-form").reset();
-    this.setState(this.baseState);
+    this.resetInputFields();
+    this.props.toggleChatModalBox();
+  }
+
+  resetInputFields = () => {
+    this.setState({
+      ptcpInputBoxes: ["Enter a username... "],
+      ptcpNames: [],
+      chatName: '',
+    })
   }
 
   addInputBoxes = () => {
-    const ptcpInput = this.state.ptcpInput;
+    const ptcpInputBoxes = this.state.ptcpInputBoxes;
     const extraInput = "Add another username... ";
-    if (ptcpInput.length < 5)// I'm limiting group chats to five participants for now. 
+    if (ptcpInputBoxes.length < 5)// I'm limiting group chats to five participants for now. 
       this.setState({
-        ptcpInput: ptcpInput.concat(extraInput),
+        ptcpInputBoxes: ptcpInputBoxes.concat(extraInput),
     })
   }
 
   removeInputBoxes = () => {
-    const ptcpInput = this.state.ptcpInput;
-    if (ptcpInput.length > 1){
-      const lastInput = ptcpInput.length - 1;
-      const newInput = ptcpInput.slice(0, lastInput);
+    const ptcpInputBoxes = this.state.ptcpInputBoxes;
+    if (ptcpInputBoxes.length > 1){
+      const lastInput = ptcpInputBoxes.length - 1;
+      const newInput = ptcpInputBoxes.slice(0, lastInput);
       this.setState({
-        ptcpInput: newInput,
-      })
+        ptcpInputBoxes: newInput,
+      })  
     }
+    const ptcpNames = this.state.ptcpNames;
+    ptcpNames.pop();
+    this.setState({
+      ptcpNames: ptcpNames,
+    })
+  }
+
+  handlePtcpChange = (event, index) => {
+    const prevState = this.state.ptcpNames;
+    let nextState = prevState;
+    nextState[index] = event.target.value;
+    this.setState({
+      ptcpNames: nextState,
+    })
+  }
+
+  handleChatChange = (event) => {
+    const chatName = event.target.value;
+    this.setState({
+      chatName: chatName,
+    })
   }
 
   displayInputBoxes(){
-    const ptcpInput = this.state.ptcpInput;
-    const inputList = ptcpInput.map((placeholder, index) => {
-      return <input key={index} type="text" className="ptcp-name" name="username" placeholder={ placeholder }></input>
+    const ptcpInputBoxes = this.state.ptcpInputBoxes;
+    const inputList = ptcpInputBoxes.map((placeholder, index) => {
+      return <input key={index} type="text" className="new-chat-input" name="username" placeholder={ placeholder } onChange={(event) => this.handlePtcpChange(event, index)}></input>
     })
-    return(inputList);
+    return inputList;
+  }
+
+  displaySubPtcpBtn(){
+    const ptcpCount = this.state.ptcpInputBoxes.length;
+    const display = ptcpCount > 1 ? null : "none";
+    const subPtcpButton = <input style={{display: display}} type="button" className="ptcp-button sub" id="sub-ptcp-button" value="–" onClick={this.removeInputBoxes}></input>;
+
+    return subPtcpButton;
   }
 
   scrollToBottom(){
@@ -73,35 +111,28 @@ export class StartChat extends React.Component {
   }
 
   render() {
-    const ptcpInput = this.state.ptcpInput;
-    const ptcpInputFields = this.displayInputBoxes();
-    let subPtcpButton;
-    if (ptcpInput.length > 1)
-      subPtcpButton = <input type="button" className="ptcp-button" id="sub-ptcp-button" value="–" onClick={this.removeInputBoxes}></input>;
-    else
-      subPtcpButton = <input style={{visibility: "hidden"}} type="button" className="ptcp-button" id="sub-ptcp-button"></input>;
-
-    const { username, chats, participants } = this.props;
+    const ptcpInputBoxes = this.displayInputBoxes();
+    const subPtcpButton = this.displaySubPtcpBtn();
+    const { toggleChatModalBox } = this.props;
+    
   	return(
-  	  <div>
-        <h1 className="title">Chat App</h1>
-        <div className="top-rounded-box" id="start-chat">
-          <h3 className="title">Start a new chat</h3>
-          <div id="chat-form-container">
-            <form id="chat-form" onSubmit={this.onSubmit}>
-              <div>
-                <input type="text" id="chat-name" name="chatname" placeholder="Enter a chatroom name..."></input>
-                {ptcpInputFields}
-                {subPtcpButton}
-                <input type="button" className="ptcp-button" id="add-ptcp-button" value="+" 
-                  onClick={this.addInputBoxes} ref={this.bottomOfStartChat}></input>
-                <input type="submit" className="submit-button"></input>
-              </div>
-            </form>
-          </div>
+      <div className="inner-modal-box" id="start-chat">
+        <button className="close-modal-box-btn" onClick={toggleChatModalBox}>X</button>
+        <h3 className="start-chat-title">Start a new chat</h3>
+        <div className="chat-form-container">
+          <form id="chat-form" onSubmit={this.onSubmit}>
+            <div className="chat-input-flexbox">
+              <input type="text" className="new-chat-input" id="chat-name" name="chatname" placeholder="Enter a chatroom name..." onChange={this.handleChatChange}></input>
+              {ptcpInputBoxes}
+              <div className="ptcp-btn-container"><input type="button" className="ptcp-button add" id="add-ptcp-button" value="+"
+              onClick={this.addInputBoxes}></input></div>
+              {subPtcpButton}
+            </div>
+            <input type="submit" className="submit-button"></input>
+          </form>
+          <div ref={this.bottomOfStartChat}></div>
         </div>
-        <ChatList username={username} chats={chats} participants={participants} removeFromChat={this.props.removeFromChat} />
-        </div>
+      </div>
     );
   }
 }

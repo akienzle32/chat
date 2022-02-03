@@ -25,27 +25,27 @@ export const ChatList = (props) => {
   		chatsAndPtcps.push(JSONelement);
   	}
 
-  	return(chatsAndPtcps);
+  	return chatsAndPtcps;
   }
 
 
   // Sorts the mapped chats array by the last_modified column. If the last_modified column is null
   // (because the chat room was just created), then the chat will sorted to the top.
   const sortChats = (chatsAndPtcps) => {
-  	const sortedChats = chatsAndPtcps.sort((chatA, chatB) =>
-      { if (chatA.last_modified === chatB.last_modified)
-          return 0;
-        else if (chatA.last_modified === null)
-          return -1;
-        else if (chatB.last_modified === null)
-          return 1;
-        else if (new Date(chatA.last_modified) < new Date(chatB.last_modified))
-          return 1;
-        else
-          return -1;
-      });
+  	const sortedChats = chatsAndPtcps.sort((chatA, chatB) => {
+      if (chatA.last_modified === chatB.last_modified)
+        return 0;
+      else if (!chatA.last_modified)
+        return -1;
+      else if (!chatB.last_modified)
+        return 1;
+      else if (new Date(chatA.last_modified) < new Date(chatB.last_modified))
+        return 1;
+      else
+        return -1;
+    });
 
-  	return(sortedChats);
+  	return sortedChats;
   }
 
   const handleClick = (name, chatId) => {
@@ -64,33 +64,25 @@ export const ChatList = (props) => {
   		let users = chat.usernames.join(", ");
   		let name = chat.name;
       let encodedName = encodeURIComponent(name); // This variable is safe for use in a URL.
-  		let id = chat.id;
-  		return <tr key={id}>
-  				  <td><Link className="link" to={`${encodedName}/${id}`}>{name}</Link></td>
-  				  <td>{users}</td>
-            <td><button onClick={() => handleClick(name, id)}>x</button></td>
-  			   </tr>
+      return <li key={chat.id} className="chat-item" >
+              <button className="remove-btn" onClick={() => handleClick(name, chat.id)}>X</button>
+              <div className="chat-info">
+                <Link className="chat-link" to={`/${encodedName}/${chat.id}`}>
+                  <p className="chat-name"><b>{name}</b></p>
+                  <p className="ptcp-list">{users}</p>
+                </Link>
+              </div>
+            </li>
+
+
   	})
     return(chatList);
   }
-
-	return(
-    <div>
-      <div className="bottom-rounded-box" id="my-chats">
-        <h3 className="title">My chat rooms</h3>
-        <div>
-          <table className="chat-table">
-            <tbody>
-              <tr>
-                <th>Name</th>
-                <th>Participants</th>
-                <th></th>
-              </tr>
-              {displayChats()}
-            </tbody>
-          </table>
-        </div>
+    return(
+      <div>
+        <ul className="chat-list">
+          {displayChats()}
+        </ul>
       </div>
-    </div>
-	 );
+    );
 }

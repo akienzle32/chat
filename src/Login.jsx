@@ -11,7 +11,6 @@ export class Login extends React.Component {
   	}
   }
 
-
   onSubmit = (event) => {
   	event.preventDefault();
   	const loginForm = event.target;
@@ -65,24 +64,26 @@ export class Login extends React.Component {
   render(){
   	const registrationForm = this.displayRegistrationForm();
   	return(
-	  <div>
-	  	<h1 id="login-title">Welcome to the Chat App!</h1>
-	  	<h4 className="title">Please login.</h4>
-	  	<div style={{textAlign: 'center'}}>
-	  		<form id="login-form" onSubmit={this.onSubmit}>
-	  			<label htmlFor="username-input" className="login-label">Username: </label>
-	  			<input type="text" id="username-input" name="username"></input><br></br>
-	  			<label htmlFor="password-input" className="login-label">Password: </label>
-	  			<input type="password" id="password-input" name="password"></input><br></br>
-	  			<input type="submit" className="submit-button"></input>
-	  		</form>
-	  	</div>
-	  	<div>
-	  		<h4 style={{textAlign: 'center'}}>Don't have an account? Click <button className="link"
-	  	  	onClick={this.toggleDisplayForm}><b>HERE</b></button> to register.</h4>
-	  	  	<div className="register-div">{registrationForm}</div>
-	  	  </div>
-	  </div>
+		<div className="login-container">
+			<div className="login-title-box">
+				<h1 className="login-title">Welcome to the Chat App!</h1>
+				<h4 className="login-subtitle">Please login.</h4>
+			</div>
+			<div style={{textAlign: 'center'}}>
+				<form id="login-form" onSubmit={this.onSubmit}>
+					<label htmlFor="username-input" className="login-label">Username: </label>
+					<input className="login-input" type="text" id="username-input" name="username"></input><br></br>
+					<label htmlFor="password-input" className="login-label">Password: </label>
+					<input className="login-input" type="password" id="password-input" name="password"></input><br></br>
+					<input type="submit" className="submit-button"></input>
+				</form>
+			</div>
+			<div>
+				<h4 style={{textAlign: 'center'}}>Don't have an account? Click <button className="login-page-btn reveal"
+				onClick={this.toggleDisplayForm}><b>HERE</b></button> to register.</h4>
+			</div>
+			{registrationForm}
+		</div>
 	);
   }
 }

@@ -1,48 +1,90 @@
 import React from 'react';
 import './App.css';
 
-export const ParticipantList = (props) => {
+export class ParticipantList extends React.Component {
+	constructor(props){
+		super(props);
+		this.state = {
+			displayTextBox: false,
+			ptcpName: null,
+		};
+	}
 
-	const onSubmit = (event) => {
+	onSubmit = (event) => {
 		event.preventDefault();
 
-		const ptcpName = document.getElementById("ptcp-username").value;
+		const ptcpName = this.state.ptcpName;
 		const url = window.location.href;
-		const chatId = props.extractFromUrl(url, 'id');
+		const chatId = this.props.extractFromUrl(url, 'id');
 
-		props.addParticipant(ptcpName, chatId);
+		this.props.addParticipant(ptcpName, chatId);
 		document.getElementById("new-ptcp-form").reset();
 	}
 
-	const displayParticipants = () => {
-		const currentUser = props.username;
-		const participants = props.participants;
-		const participantArray = [];
+	displayParticipants = () => {
+		const currentUser = this.props.username;
+		const participants = this.props.participants;
 
 		const url = window.location.href;
-		const chatId = parseInt(props.extractFromUrl(url, 'id'));
+		const chatId = parseInt(this.props.extractFromUrl(url, 'id'));
 
-		for (let i = 0; i < participants.length; i++){
-			if (participants[i].chat === chatId){
-				let ptcpName = participants[i].name;
-				if (ptcpName === currentUser)
-					ptcpName = "me"; // In each individual chatroom, display the current user as "me"
-
-				participantArray.push(ptcpName);
+		const participantArray = participants.reduce((prevVal, currVal) => {
+			if (currVal.chat === chatId && currVal.name !== currentUser){
+				prevVal.push(currVal.name);
 			}
-		}
-		const ptcpList = participantArray.map((participant, index) => {return <li key={index}>{ participant }</li>})
+			return prevVal;
+		}, [])
+		const ptcpList = participantArray.join(', ');
 		return(ptcpList);
 	}
-	return (
-	  <div id="ptcp-list">
-		<p>Participants</p>
-		  <ul>{displayParticipants()}</ul>
-			<form id="new-ptcp-form" onSubmit={onSubmit}>
-			  <input type="text" id="ptcp-username" name="name" placeholder="Add participant..."></input>
-			  <input type="submit" value="Send" className="submit-button"></input>
+
+	handlePtcpInput = (event) => {
+		this.setState({
+			ptcpName: event.target.value,
+		})
+	}
+
+	displayBtnOrTextBox = () => {
+		let htmlNode;
+		const displayTextBox = this.state.displayTextBox;
+
+		if (displayTextBox){
+			htmlNode = <input type="text" className="ptcp-text-box" id="ptcp-username" name="name" onChange={this.handlePtcpInput}placeholder="Add participant..."></input>;
+		}
+		else {
+			htmlNode = <button className="main-add-ptcp-btn" onClick={this.toggleDisplayTextBox}>+</button>;
+		}
+		return htmlNode;
+	}
+
+	displayCancelBtn = () => {
+		let cancelBtn;
+		const displayTextBox = this.state.displayTextBox;
+
+		if (displayTextBox){
+			cancelBtn = <button className="remove-ptcp-box-btn" onClick={this.toggleDisplayTextBox}>X</button>;
+		}
+		return cancelBtn;
+	}
+
+	toggleDisplayTextBox = () => {
+		const oldDisplayTextBox = this.state.displayTextBox;
+
+		this.setState({
+				displayTextBox: oldDisplayTextBox ? false : true,
+		})
+	}
+
+	render() {
+		return (
+		<div className="main-ptcp-container">
+			<div className="main-ptcp-list">{this.displayParticipants()}</div>
+			<form id="new-ptcp-form" onSubmit={this.onSubmit}>
+				{this.displayBtnOrTextBox()}
 			</form>
-	  </div>
-	);
+				{this.displayCancelBtn()}
+		</div>
+		);
+	}
 }
 
