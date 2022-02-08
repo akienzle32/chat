@@ -70,6 +70,7 @@ export class App extends React.Component {
   logoutUser = () => {
     window.localStorage.clear();
     this.setState(this.baseState);
+    window.location.href = '../';
   }
 
   // This initial GET request allows for the user to persist after refreshing the window by checking 
